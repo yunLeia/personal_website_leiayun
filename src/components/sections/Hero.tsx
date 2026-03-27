@@ -20,7 +20,8 @@ export default function Hero() {
       <div className="flex items-center gap-4 mt-6">
         <a
           href={SITE.resume}
-          download
+          target="_blank"
+          rel="noopener noreferrer"
           className="text-[13px] font-medium text-white bg-[#111] px-4 py-2 no-underline transition-opacity duration-150 hover:opacity-70"
         >
           Resume
