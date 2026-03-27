@@ -91,7 +91,7 @@ export const SKILLS: SkillGroup[] = [
 
 export const CONTACTS: ContactLink[] = [
   { label: 'Email', href: 'mailto:sy3544@nyu.edu' },
-  { label: 'LinkedIn', href: 'https://linkedin.com/in/leiayun', external: true },
-  { label: 'GitHub', href: 'https://github.com/leiayun', external: true },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/leia-yun-s/', external: true },
+  { label: 'GitHub', href: 'https://github.com/leiassyun', external: true },
   { label: 'Resume', href: '/Leia_Yun_Resume.pdf' },
 ];
