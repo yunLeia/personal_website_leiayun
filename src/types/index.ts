@@ -1,57 +1,29 @@
-export interface NavLink {
-  label: string;
-  href: string;
-}
-
-export interface SocialLink {
-  label: string;
-  href: string;
-  icon: string;
-}
-
-export interface Project {
-  id: string;
-  title: string;
-  description: string;
-  tags: string[];
-  href?: string;
-  repo?: string;
-  image?: string;
-}
-
-export interface Experience {
-  id: string;
+export interface ExperienceItem {
   company: string;
+  team?: string;
+  date: string;
   role: string;
-  startDate: string;
-  endDate: string;
-  description: string;
-  highlights: string[];
+  bullets: string[];
 }
 
-export interface Skill {
-  category: string;
-  items: string[];
-}
-
-export interface HeroData {
-  greeting: string;
+export interface ProjectItem {
   name: string;
-  tagline: string;
-  cta: {
-    label: string;
-    href: string;
-  };
+  stack: string;
+  date: string;
+  desc: string;
+  metric: string;
+  metricSub: string;
 }
 
-export interface AboutData {
-  heading: string;
-  paragraphs: string[];
-  skills: Skill[];
+export interface SkillItem {
+  category: string;
+  values: string;
 }
 
-export interface ContactData {
-  heading: string;
-  subheading: string;
-  email: string;
+export interface ContactItem {
+  category: string;
+  label: string;
+  href: string;
+  external?: boolean;
+  download?: boolean;
 }
