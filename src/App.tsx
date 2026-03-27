@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <Nav />
-      <div className="max-w-[1100px] mx-auto px-6">
+      <div className="max-w-[1100px] mx-auto px-6 max-sm:px-5">
         <Hero />
         <Experience />
         <Skills />
