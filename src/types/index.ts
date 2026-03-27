@@ -1,29 +1,38 @@
+export interface Bullet {
+  text: string;
+  metric?: string;
+  keywords?: string[];
+}
+
+export interface SubTeam {
+  label: string;
+  bullets: Bullet[];
+}
+
 export interface ExperienceItem {
   company: string;
-  team?: string;
+  location: string;
   date: string;
   role: string;
-  bullets: string[];
+  skills: string[];
+  subTeams?: SubTeam[];
+  bullets?: Bullet[];
 }
 
-export interface ProjectItem {
+export interface ProjectRow {
   name: string;
-  stack: string;
-  date: string;
   desc: string;
   metric: string;
-  metricSub: string;
+  sub: string;
 }
 
-export interface SkillItem {
+export interface SkillGroup {
   category: string;
-  values: string;
+  values: string[];
 }
 
-export interface ContactItem {
-  category: string;
+export interface ContactLink {
   label: string;
   href: string;
   external?: boolean;
-  download?: boolean;
 }

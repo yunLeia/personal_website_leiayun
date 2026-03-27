@@ -5,26 +5,30 @@ export default function Skills() {
   const { ref, visible } = useFadeIn();
 
   return (
-    <div
+    <section
       ref={ref}
-      className={`mb-14 transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+      className={`mb-28 transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
     >
-      <div className="text-[11px] font-medium text-[#bbb] tracking-[0.1em] uppercase mb-6">
+      <div className="text-[12px] font-medium text-[#aaa] tracking-[0.1em] uppercase mb-10">
         Skills
       </div>
-      <div className="flex flex-col gap-2.5">
-        {SKILLS.map((skill) => (
-          <div
-            key={skill.category}
-            className="grid grid-cols-[72px_1fr] gap-4 items-baseline max-[480px]:grid-cols-1 max-[480px]:gap-0.5"
-          >
-            <span className="text-xs text-[#bbb]">{skill.category}</span>
-            <span className="text-[13px] text-[#666] font-light">
-              {skill.values}
+      <div className="flex flex-col gap-5">
+        {SKILLS.map((group) => (
+          <div key={group.category} className="flex flex-wrap items-baseline gap-x-1.5">
+            <span className="text-[13px] font-medium text-[#aaa] mr-3">
+              {group.category}
             </span>
+            {group.values.map((val, i) => (
+              <span key={val} className="text-[14px] text-[#555]">
+                {val}
+                {i < group.values.length - 1 && (
+                  <span className="text-[#ccc] mx-1.5">·</span>
+                )}
+              </span>
+            ))}
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 }

@@ -1,104 +1,97 @@
-import type { ExperienceItem, ProjectItem, SkillItem, ContactItem } from '../types';
+import type { ExperienceItem, ProjectRow, SkillGroup, ContactLink } from '../types';
 
 export const SITE = {
   name: 'Leia Yun',
-  tag: 'Product · Engineering · NYU CS',
-  tagline: 'I find the problem. I run the experiment. I ship the fix.',
-  email: 'sy3544@nyu.edu',
-  linkedin: 'https://linkedin.com/in/leiayun',
-  github: 'https://github.com/leiayun',
   resume: '/Leia_Yun_Resume.pdf',
+  email: 'sy3544@nyu.edu',
+  photo: '/images/leia.jpg',
 };
 
-export const EDUCATION = {
-  school: 'New York University',
-  college: 'College of Arts and Science',
-  degree: 'Bachelor of Arts in Computer Science and Data Science',
-  expected: 'Expected 2027',
-  gpa: '3.8 / 4.0',
-  orgs: 'LikeLion@NYU (Vice President), Tech@NYU (TrekTrack), Product Management Club',
-  coursework: 'Agile Software and DevOps, Operating System, Basic Algo, Natural Language Processing, Programming Tools for Data Scientist, Principle of Data Science, Linear Algebra, Discrete Math',
+export const HERO = {
+  lines: [
+    'Product person.',
+    'Engineer.',
+    'I find the problem.',
+    'I ship the fix.',
+  ],
+  tag: 'NYU CS · Seoul · New York',
+  bio: {
+    title: 'NYU Computer Science',
+    subtitle: 'Product + Engineering. Previously Planfit, Parachute.',
+  },
 };
 
 export const EXPERIENCE: ExperienceItem[] = [
   {
     company: 'Planfit',
-    team: 'Activation/Subscription Team',
-    date: 'Mar 2025 – Dec 2025',
-    role: 'Product Owner Intern',
-    bullets: [
-      'Owned 30+ full-cycle sprints, leading problem discovery, KPI definition, PRD writing, cross-functional execution, and technical QAs, while driving data-informed iterations through Amplitude/SQL analysis',
-      'Launched an end-to-end leaderboard features as the Sole Builder, leveraging AI-augmented workflows (Claude Code, MCPs, Figma Dev) to increase the engagement by 20% and generate 1,000+ user-created clubs',
-      'Conducted 30+ user interviews and market research, translating insights into prioritized product roadmaps',
+    location: 'Seoul, KR',
+    date: 'Mar–Dec 2025',
+    role: 'Product Owner Intern → Solver',
+    skills: ['Product Strategy', 'Complete Product Lifecycle', 'PRD Writing', 'Customer Discovery', 'A/B Testing', 'Data Analysis', 'User Interviews', 'Funnel Analysis', 'UX Optimization'],
+    subTeams: [
+      {
+        label: 'Activation Team',
+        bullets: [
+          { text: 'Shipped full-stack AI stretching recommendation (server + UI/UX) grounded in 30+ user interviews, 100+ surveys, 15+ A/B tests', metric: '+12% US activation', keywords: ['AI stretching recommendation', '30+ user interviews', '15+ A/B tests'] },
+          { text: 'Pioneered SuperClaude, Serena, CodeRabbit, Figma MCP — built playbooks, integrated into sprint workflows', keywords: ['SuperClaude', 'CodeRabbit', 'Figma MCP'] },
+        ],
+      },
+      {
+        label: 'Subscription Team — Solo Builder',
+        bullets: [
+          { text: 'Built competition leaderboard + real-time push notifications 0→1 with Claude Code', metric: '2,000+ clubs · +20% engagement', keywords: ['competition leaderboard', 'real-time push notifications', 'Claude Code'] },
+          { text: 'Designed and coded 30+ onboarding A/B experiments — copy, UI/UX segmented by country, platform, traffic source', metric: 'Trial CVR ↑', keywords: ['30+ onboarding A/B experiments'] },
+          { text: 'Owned experiment tracking end-to-end via Amplitude — funnel analysis, significance monitoring, iteration', keywords: ['Amplitude', 'funnel analysis'] },
+        ],
+      },
     ],
   },
   {
     company: 'Parachute',
-    date: 'Mar 2024 – Jun 2024',
+    location: 'Baltimore, MD',
+    date: 'Mar–Jun 2024',
     role: 'AI Engineering Intern',
+    skills: ['RAG', 'Python', 'ETL', 'LLM Benchmarking', 'Vector DBs'],
     bullets: [
-      'Developed a RAG-based resume processing system featuring Python ETL pipelines for automated data extraction, improving mentor-mentee matching speed by 18% by reducing manual parsing overhead',
+      { text: 'Designed RAG pipeline — benchmarked LLMs and vector DBs for production retrieval accuracy', keywords: ['RAG pipeline', 'LLMs', 'vector DBs'] },
+      { text: 'Built Python ETL pipelines for data parsing and normalization at scale', keywords: ['Python ETL pipelines'] },
+    ],
+  },
+  {
+    company: 'LikeLion @NYU',
+    location: 'New York, NY',
+    date: 'Jun 2024–Present',
+    role: 'Vice President',
+    skills: ['Leadership', 'Event Management', 'Community Building'],
+    bullets: [
+      { text: 'Scaled club from ground up — 50% membership growth, 4 projects shipped, 100+ participant hackathon', keywords: ['50% membership growth', '100+ participant hackathon'] },
     ],
   },
 ];
 
-export const PROJECTS: ProjectItem[] = [
+export const PROJECTS: ProjectRow[] = [
+  { name: 'Paywall A/B Engine', desc: 'Auto-running experiment loop — GPT → Django → Amplitude. Zero manual cycles.', metric: '+20% CTA', sub: 'Planfit Hackathon' },
+  { name: 'RAG Pipeline', desc: 'LLM + vector DB benchmarking for production retrieval. Python ETL at scale.', metric: 'Prod', sub: 'Parachute' },
+];
+
+export const SKILLS: SkillGroup[] = [
   {
-    name: 'Automated A/B Testing System',
-    stack: 'Make.com, GPT API, Django REST APIs, React Native, Amplitude',
-    date: 'May – Jun 2025',
-    desc: 'Full-stack A/B testing system that automatically rotates variants based on performance, driving localized paywall optimization.',
-    metric: '+15% CTR',
-    metricSub: '+10% conversion',
+    category: 'Product',
+    values: ['Amplitude', 'Figma', 'Linear', 'A/B Testing', 'SQL', 'User Research', 'PRD'],
   },
   {
-    name: 'CulinAI',
-    stack: 'JavaScript, Node.js, Replicate API, LLaVa, SDXL-Turbo',
-    date: 'Jan – May 2024',
-    desc: 'AI-powered recipe generation platform that converts user-uploaded images into personalized recipes to reduce food waste.',
-    metric: '<2s',
-    metricSub: 'latency',
+    category: 'Engineering',
+    values: ['Python', 'Django', 'React Native', 'TypeScript', 'Node.js', 'AWS'],
+  },
+  {
+    category: 'AI & Tools',
+    values: ['GPT API', 'RAG', 'Claude Code', 'Make.com', 'Figma MCP'],
   },
 ];
 
-export const SKILLS: SkillItem[] = [
-  {
-    category: 'Languages',
-    values: 'Java, JavaScript, Python, SQL, HTML/CSS, SwiftUI, React/Native, Django, Node.js',
-  },
-  {
-    category: 'Tools',
-    values: 'Linear, Amplitude, Figma, Make.com, Zapier, Firebase, AWS, Docker, Xcode, GitHub',
-  },
-];
-
-export const AWARDS = [
-  { name: 'NYU CAS Dean\'s List', date: 'May 2024' },
-  { name: 'Google: Troubleshooting and Debugging Techniques', date: 'Jan 2023' },
-];
-
-export const CONTACTS: ContactItem[] = [
-  {
-    category: 'Email',
-    label: 'sy3544@nyu.edu',
-    href: 'mailto:sy3544@nyu.edu',
-  },
-  {
-    category: 'LinkedIn',
-    label: 'linkedin.com/in/leiayun',
-    href: 'https://linkedin.com/in/leiayun',
-    external: true,
-  },
-  {
-    category: 'GitHub',
-    label: 'github.com/leiayun',
-    href: 'https://github.com/leiayun',
-    external: true,
-  },
-  {
-    category: 'Resume',
-    label: 'Download PDF',
-    href: '/Leia_Yun_Resume.pdf',
-    download: true,
-  },
+export const CONTACTS: ContactLink[] = [
+  { label: 'Email', href: 'mailto:sy3544@nyu.edu' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/leiayun', external: true },
+  { label: 'GitHub', href: 'https://github.com/leiayun', external: true },
+  { label: 'Resume', href: '/Leia_Yun_Resume.pdf' },
 ];
