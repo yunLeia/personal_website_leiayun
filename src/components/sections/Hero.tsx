@@ -23,7 +23,6 @@ export default function Hero() {
                 </span>
               ))}
             </h1>
-            <p className="text-[14px] max-sm:text-[13px] text-[#888] mt-8 max-sm:mt-6 tracking-normal">{HERO.tag}</p>
             <div className="flex items-center gap-5 mt-7 max-sm:mt-5 max-sm:flex-wrap max-sm:gap-4">
               <a
                 href={SITE.resume}

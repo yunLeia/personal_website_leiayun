@@ -14,17 +14,15 @@ export const HERO = {
     'I find the problem.',
     'I ship the fix.',
   ],
-  tag: 'NYU CS · Seoul · New York',
   bio: {
-    title: 'NYU Computer Science',
-    subtitle: 'Product + Engineering. Previously Planfit, Parachute.',
+    title: 'NYU Computer Science and Data Science',
+    subtitle: 'Product Owner Intern, AI Engineering Intern.',
   },
 };
 
 export const EXPERIENCE: ExperienceItem[] = [
   {
     company: 'Planfit',
-    location: 'Seoul, KR',
     date: 'Mar–Dec 2025',
     role: 'Product Owner Intern → Solver',
     skills: ['Product Strategy', 'Complete Product Lifecycle', 'PRD Writing', 'Customer Discovery', 'A/B Testing', 'Data Analysis', 'User Interviews', 'Funnel Analysis', 'UX Optimization'],
@@ -33,22 +31,22 @@ export const EXPERIENCE: ExperienceItem[] = [
         label: 'Activation Team',
         bullets: [
           { text: 'Shipped full-stack AI stretching recommendation (server + UI/UX) grounded in 30+ user interviews, 100+ surveys, 15+ A/B tests', metric: '+12% US activation', keywords: ['AI stretching recommendation', '30+ user interviews', '15+ A/B tests'] },
-          { text: 'Pioneered SuperClaude, Serena, CodeRabbit, Figma MCP — built playbooks, integrated into sprint workflows', keywords: ['SuperClaude', 'CodeRabbit', 'Figma MCP'] },
+          {
+            text: 'Pioneered adoption of AI tools (SuperClaude, Serena, CodeRabbit, Figma-Claude MCP), developing playbooks to integrate them into sprint workflows', keywords: ['Pioneered adoption of AI tools']
+          },
         ],
       },
       {
         label: 'Subscription Team — Solo Builder',
         bullets: [
-          { text: 'Built competition leaderboard + real-time push notifications 0→1 with Claude Code', metric: '2,000+ clubs · +20% engagement', keywords: ['competition leaderboard', 'real-time push notifications', 'Claude Code'] },
-          { text: 'Designed and coded 30+ onboarding A/B experiments — copy, UI/UX segmented by country, platform, traffic source', metric: 'Trial CVR ↑', keywords: ['30+ onboarding A/B experiments'] },
-          { text: 'Owned experiment tracking end-to-end via Amplitude — funnel analysis, significance monitoring, iteration', keywords: ['Amplitude', 'funnel analysis'] },
+          { text: 'Owned competition leaderboard + real-time push notifications feature 0 \→1', metric: '2,000+ clubs · +20% engagement', keywords: ['competition leaderboard', 'real-time push notifications', 'Claude Code'] },
+          { text: 'Executed 30+ A/B experiments in the onboarding funnel, optimizing copy and UI/UX across country, platform, and traffic segments', metric: 'Trial · Sub CVR 15% ↑', keywords: [' 30+ A/B experiments in the onboarding funnel'] },
         ],
       },
     ],
   },
   {
     company: 'Parachute',
-    location: 'Baltimore, MD',
     date: 'Mar–Jun 2024',
     role: 'AI Engineering Intern',
     skills: ['RAG', 'Python', 'ETL', 'LLM Benchmarking', 'Vector DBs'],
@@ -59,7 +57,6 @@ export const EXPERIENCE: ExperienceItem[] = [
   },
   {
     company: 'LikeLion @NYU',
-    location: 'New York, NY',
     date: 'Jun 2024–Present',
     role: 'Vice President',
     skills: ['Leadership', 'Event Management', 'Community Building'],
@@ -81,11 +78,15 @@ export const SKILLS: SkillGroup[] = [
   },
   {
     category: 'Engineering',
-    values: ['Python', 'Django', 'React Native', 'TypeScript', 'Node.js', 'AWS'],
+    values: ['Java', 'JavaScript', 'Python', 'SQL', 'HTML/CSS', 'SwiftUI', 'React', 'React Native', 'Django', 'Node.js', 'TypeScript'],
   },
   {
     category: 'AI & Tools',
-    values: ['GPT API', 'RAG', 'Claude Code', 'Make.com', 'Figma MCP'],
+    values: ['GPT API', 'RAG', 'Claude Code', 'Make.com', 'Figma MCP', 'Zapier'],
+  },
+  {
+    category: 'DevOps & Tools',
+    values: ['AWS', 'Firebase', 'Docker', 'Xcode', 'GitHub'],
   },
 ];
 

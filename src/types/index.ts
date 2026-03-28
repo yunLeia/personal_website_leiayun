@@ -11,7 +11,6 @@ export interface SubTeam {
 
 export interface ExperienceItem {
   company: string;
-  location: string;
   date: string;
   role: string;
   skills: string[];

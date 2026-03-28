@@ -74,7 +74,7 @@ export default function Experience() {
               <span className="text-[13px] max-sm:text-[12px] text-[#aaa]">{exp.date}</span>
             </div>
             <div className="text-[14px] max-sm:text-[13px] text-[#777] mb-4 max-sm:mb-3">
-              {exp.role} · {exp.location}
+              {exp.role}
             </div>
 
             {exp.subTeams && (
