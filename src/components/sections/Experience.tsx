@@ -19,20 +19,17 @@ function highlightKeywords(text: string, keywords?: string[]) {
 
 function BulletList({ bullets }: { bullets: Bullet[] }) {
   return (
-    <ul className="list-none flex flex-col gap-2">
+    <ul className="list-none flex flex-col gap-2.5">
       {bullets.map((b, i) => (
         <li
           key={i}
-          className="text-[14px] max-sm:text-[13px] leading-[1.65] text-[#555] font-light pl-4 relative before:content-['·'] before:absolute before:left-0 before:text-[#bbb] before:font-bold"
+          className="text-[14px] max-sm:text-[13px] leading-[1.65] text-[#555] font-light pl-4 relative before:content-['·'] before:absolute before:left-0 before:text-[#999] before:font-bold"
         >
-          <div className="flex justify-between gap-6 max-sm:flex-col max-sm:gap-1">
-            <span className="flex-1">{highlightKeywords(b.text, b.keywords)}</span>
-            {b.metric && (
-              <span className="text-[13px] max-sm:text-[12px] font-medium text-[#1a1a1a] whitespace-nowrap shrink-0 max-sm:pl-0 max-sm:text-[#555]">
-                {b.metric}
-              </span>
-            )}
-          </div>
+          {b.metric && (
+            <span className="font-medium text-[#1a1a1a]">{b.metric}</span>
+          )}
+          {b.metric && <span className="text-[#ccc] mx-1.5">|</span>}
+          <span>{highlightKeywords(b.text, b.keywords)}</span>
         </li>
       ))}
     </ul>
@@ -73,15 +70,15 @@ export default function Experience() {
               <span className="text-[16px] max-sm:text-[15px] font-semibold text-[#1a1a1a]">{exp.company}</span>
               <span className="text-[13px] max-sm:text-[12px] text-[#aaa]">{exp.date}</span>
             </div>
-            <div className="text-[14px] max-sm:text-[13px] text-[#777] mb-4 max-sm:mb-3">
+            <div className="text-[14px] max-sm:text-[13px] text-[#777] mb-5 max-sm:mb-4">
               {exp.role}
             </div>
 
             {exp.subTeams && (
-              <div className="flex flex-col gap-6 max-sm:gap-5">
+              <div className="flex flex-col gap-5 max-sm:gap-4">
                 {exp.subTeams.map((team) => (
-                  <div key={team.label}>
-                    <div className="text-[11px] max-sm:text-[10px] font-semibold text-[#aaa] tracking-[0.08em] uppercase mb-3 max-sm:mb-2">
+                  <div key={team.label} className="bg-[#e9e9e7] rounded-md px-5 py-4 max-sm:px-4 max-sm:py-3">
+                    <div className="text-[11px] max-sm:text-[10px] font-semibold text-[#999] tracking-[0.08em] uppercase mb-3 max-sm:mb-2">
                       {team.label}
                     </div>
                     <BulletList bullets={team.bullets} />
@@ -90,7 +87,11 @@ export default function Experience() {
               </div>
             )}
 
-            {exp.bullets && <BulletList bullets={exp.bullets} />}
+            {exp.bullets && (
+              <div className="bg-[#e9e9e7] rounded-md px-5 py-4 max-sm:px-4 max-sm:py-3">
+                <BulletList bullets={exp.bullets} />
+              </div>
+            )}
 
             <SkillTags skills={exp.skills} />
           </div>

@@ -32,7 +32,7 @@ export const EXPERIENCE: ExperienceItem[] = [
         bullets: [
           { text: 'Shipped full-stack AI stretching recommendation (server + UI/UX) grounded in 30+ user interviews, 100+ surveys, 15+ A/B tests', metric: '+12% US activation', keywords: ['AI stretching recommendation', '30+ user interviews', '15+ A/B tests'] },
           {
-            text: 'Pioneered adoption of AI tools (SuperClaude, Serena, CodeRabbit, Figma-Claude MCP), developing playbooks to integrate them into sprint workflows', keywords: ['Pioneered adoption of AI tools']
+            text: 'Pioneered adoption of AI tools (SuperClaude, Serena, CodeRabbit, Figma-Claude MCP), developing playbooks to integrate them into sprint workflows', metric: 'AI Integration in Sprint Flows', keywords: ['Pioneered adoption of AI tools']
           },
         ],
       },
@@ -73,23 +73,17 @@ export const PROJECTS: ProjectRow[] = [
 
 export const SKILLS: SkillGroup[] = [
   {
-    category: 'Product',
-    values: ['Amplitude', 'Figma', 'Linear', 'A/B Testing', 'SQL', 'User Research', 'PRD'],
+    category: 'Product & Growth', values: ['A/B Testing', 'User Research', 'PRD', 'Funnel Analysis', 'Amplitude']
   },
   {
-    category: 'Engineering',
-    values: ['Java', 'JavaScript', 'Python', 'SQL', 'HTML/CSS', 'SwiftUI', 'React', 'React Native', 'Django', 'Node.js', 'TypeScript'],
+    category: 'Language & Frameworkds',
+    values: ['JavaScript', 'TypeScript', 'React', 'React Native', 'Node.js', 'Django', 'Python', 'SQL', 'Java', 'HTML/CSS'],
   },
   {
     category: 'AI & Tools',
-    values: ['GPT API', 'RAG', 'Claude Code', 'Make.com', 'Figma MCP', 'Zapier'],
-  },
-  {
-    category: 'DevOps & Tools',
-    values: ['AWS', 'Firebase', 'Docker', 'Xcode', 'GitHub'],
+    values: ['GPT API', 'RAG', 'Claude Code', 'Figma MCP', 'Make.com', 'Zapier', 'AWS', 'Firebase', 'Docker', 'GitHub', 'Figma', 'Linear'],
   },
 ];
-
 export const CONTACTS: ContactLink[] = [
   { label: 'Email', href: 'mailto:sy3544@nyu.edu' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/leia-yun-s/', external: true },
