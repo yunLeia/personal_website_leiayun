@@ -1,21 +1,22 @@
-import Nav from './components/sections/Nav';
-import Hero from './components/sections/Hero';
-import Experience from './components/sections/Experience';
-import Skills from './components/sections/Skills';
-import Projects from './components/sections/Projects';
-import Contact from './components/sections/Contact';
+import { Routes, Route } from 'react-router';
+import Header from './components/layout/Header';
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import ExperiencePage from './pages/ExperiencePage';
+import ProjectsPage from './pages/ProjectsPage';
 
 function App() {
   return (
     <>
-      <Nav />
-      <div className="max-w-[1100px] mx-auto px-6 max-sm:px-5">
-        <Hero />
-        <Experience />
-        <Skills />
-        <Projects />
-        <Contact />
-      </div>
+      <Header />
+      <main className="max-w-[680px] mx-auto px-6 max-sm:px-5 pt-24 pb-16">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/experience" element={<ExperiencePage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+        </Routes>
+      </main>
     </>
   );
 }
