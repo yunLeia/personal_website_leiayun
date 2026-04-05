@@ -1,0 +1,106 @@
+<h2>Design Approach</h2>
+<p class="subtitle">Two approaches for your multi-page minimal portfolio. Both use white backgrounds, Inter font, and the same page structure.</p>
+
+<div class="cards">
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background: #fff; padding: 24px; font-family: Inter, sans-serif; border: 1px solid #eee; border-radius: 8px;">
+        <!-- Mockup A: Document style -->
+        <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 16px; border-bottom: 1px solid #e4e4e4; margin-bottom: 32px;">
+          <span style="font-size: 16px; font-weight: 500; color: #1a1a1a;">Leia Yun</span>
+          <div style="display: flex; gap: 20px; font-size: 13px; color: #555;">
+            <span>about</span>
+            <span>contact</span>
+            <span>resume</span>
+          </div>
+        </div>
+        <div style="margin-bottom: 24px;">
+          <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #999; margin-bottom: 8px;">Experience</div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+            <span style="font-size: 13px; color: #1a1a1a; font-weight: 500;">Planfit</span>
+            <span style="font-size: 12px; color: #888;">2025</span>
+          </div>
+          <div style="font-size: 12px; color: #777; margin-bottom: 4px;">Product Owner Intern → Solver</div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 6px; margin-top: 12px;">
+            <span style="font-size: 13px; color: #1a1a1a; font-weight: 500;">Parachute</span>
+            <span style="font-size: 12px; color: #888;">2024</span>
+          </div>
+          <div style="font-size: 12px; color: #777;">AI Engineering Intern</div>
+        </div>
+        <div style="font-size: 12px; color: #555; margin-bottom: 20px;">See more →</div>
+        <div style="border-top: 1px solid #e4e4e4; padding-top: 16px;">
+          <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #999; margin-bottom: 8px;">Projects</div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+            <span style="font-size: 13px; color: #1a1a1a; font-weight: 500;">Calmly</span>
+            <span style="font-size: 12px; color: #888;">AI Therapy</span>
+          </div>
+          <div style="font-size: 12px; color: #777;">Real-time AI therapy chatbot</div>
+        </div>
+        <div style="font-size: 12px; color: #555; margin-top: 12px;">See more →</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A: Document Style</h3>
+      <p>Ultra-clean, resume-like. Subtle section dividers with lines. Uppercase small labels for section titles. Very close to Laura's site — content-forward, no decoration.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Maximum clarity</li><li>Closest to reference</li><li>Timeless, professional</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Can feel plain</li><li>Less personality</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background: #fff; padding: 24px; font-family: Inter, sans-serif; border: 1px solid #eee; border-radius: 8px;">
+        <!-- Mockup B: Soft minimal -->
+        <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 16px; margin-bottom: 32px;">
+          <span style="font-size: 16px; font-weight: 500; color: #1a1a1a;">Leia Yun</span>
+          <div style="display: flex; gap: 20px; font-size: 13px; color: #555;">
+            <span>about</span>
+            <span>contact</span>
+            <span>resume</span>
+          </div>
+        </div>
+        <div style="margin-bottom: 24px;">
+          <div style="font-size: 14px; font-weight: 500; color: #1a1a1a; margin-bottom: 12px;">Experience</div>
+          <div style="background: #fafafa; border-radius: 8px; padding: 14px; margin-bottom: 8px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+              <span style="font-size: 13px; color: #1a1a1a; font-weight: 500;">Planfit</span>
+              <span style="font-size: 12px; color: #888;">2025</span>
+            </div>
+            <div style="font-size: 12px; color: #777;">Product Owner Intern → Solver</div>
+          </div>
+          <div style="background: #fafafa; border-radius: 8px; padding: 14px; margin-bottom: 8px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+              <span style="font-size: 13px; color: #1a1a1a; font-weight: 500;">Parachute</span>
+              <span style="font-size: 12px; color: #888;">2024</span>
+            </div>
+            <div style="font-size: 12px; color: #777;">AI Engineering Intern</div>
+          </div>
+        </div>
+        <div style="font-size: 12px; color: #555; margin-bottom: 20px;">See more →</div>
+        <div style="margin-top: 16px;">
+          <div style="font-size: 14px; font-weight: 500; color: #1a1a1a; margin-bottom: 12px;">Projects</div>
+          <div style="background: #fafafa; border-radius: 8px; padding: 14px; margin-bottom: 8px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+              <span style="font-size: 13px; color: #1a1a1a; font-weight: 500;">Calmly</span>
+              <span style="font-size: 12px; color: #888;">AI Therapy</span>
+            </div>
+            <div style="font-size: 12px; color: #777;">Real-time AI therapy chatbot</div>
+          </div>
+        </div>
+        <div style="font-size: 12px; color: #555; margin-top: 12px;">See more →</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B: Soft Minimal</h3>
+      <p>Still very clean, but uses subtle card backgrounds (#fafafa) to group items. No divider lines. Section titles are regular weight, not uppercase. Slightly warmer feel.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>More visual structure</li><li>Easier to scan</li><li>Bit more personality</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Slightly less "pure" minimal</li><li>More elements on page</li></ul></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p style="margin-top: 16px; color: #666; font-size: 14px;"><strong>My recommendation:</strong> Approach A (Document Style). It's closest to what you described — maximum clean, text-first, straight to content. The white background and simple typography do the heavy lifting.</p>
