@@ -1,33 +1,43 @@
-import { useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router';
+import { useState, useCallback } from 'react';
 import Header from './components/layout/Header';
-import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
-import ExperiencePage from './pages/ExperiencePage';
-import ProjectsPage from './pages/ProjectsPage';
+import ExperiencePreview from './components/home/ExperiencePreview';
+import ProjectsPreview from './components/home/ProjectsPreview';
+import Skills from './components/sections/Skills';
+import DetailPanel from './components/home/DetailPanel';
+import type { ExperienceItem, ProjectRow } from './types';
 
-function ScrollToTop() {
-  const { pathname } = useLocation();
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-  return null;
-}
+type PanelState = {
+  item: ExperienceItem | ProjectRow | null;
+  type: 'experience' | 'project' | null;
+};
 
 function App() {
+  const [panel, setPanel] = useState<PanelState>({ item: null, type: null });
+
+  const openExperience = useCallback((item: ExperienceItem) => {
+    setPanel({ item, type: 'experience' });
+  }, []);
+
+  const openProject = useCallback((item: ProjectRow) => {
+    setPanel({ item, type: 'project' });
+  }, []);
+
+  const close = useCallback(() => {
+    setPanel({ item: null, type: null });
+  }, []);
+
   return (
-    <>
-      <ScrollToTop />
-      <Header />
-      <main className="max-w-[680px] mx-auto px-6 max-sm:px-5 pt-24 pb-16">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/experience" element={<ExperiencePage />} />
-          <Route path="/projects" element={<ProjectsPage />} />
-        </Routes>
-      </main>
-    </>
+    <div className="min-h-screen px-8 sm:px-16 lg:px-24 pt-12 pb-8">
+      <div className="max-w-[720px] mx-auto">
+        <Header />
+        <main className="mt-16 max-sm:mt-10">
+          <ExperiencePreview onSelect={openExperience} />
+          <ProjectsPreview onSelect={openProject} />
+          <Skills />
+        </main>
+      </div>
+      <DetailPanel item={panel.item} type={panel.type} onClose={close} />
+    </div>
   );
 }
 

@@ -11,9 +11,11 @@ export interface SubTeam {
 
 export interface ExperienceItem {
   company: string;
+  url?: string;
   date: string;
   role: string;
   skills: string[];
+  chat?: string[];
   subTeams?: SubTeam[];
   bullets?: Bullet[];
 }
@@ -21,8 +23,8 @@ export interface ExperienceItem {
 export interface ProjectRow {
   name: string;
   desc: string;
-  metric: string;
   sub: string;
+  chat?: string[];
 }
 
 export interface SkillGroup {

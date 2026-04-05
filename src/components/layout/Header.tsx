@@ -1,50 +1,33 @@
-import { Link, useLocation } from 'react-router';
-import { SITE } from '../../lib/constants';
-
-const NAV_LINKS = [
-  { label: 'about', to: '/about' },
-  { label: 'contact', to: '/#contact' },
-  { label: 'resume', href: SITE.resume },
-];
+import { SITE, CONTACTS } from '../../lib/constants';
 
 export default function Header() {
-  const location = useLocation();
-
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-sm">
-      <div className="max-w-[680px] mx-auto px-6 max-sm:px-5 py-5 max-sm:py-4 flex justify-between items-center">
-        <Link
-          to="/"
-          className="text-[16px] font-medium text-[#1a1a1a] no-underline"
-        >
+    <header className="flex justify-between items-start animate-fade-in">
+      <div>
+        <div className="text-[24px] max-sm:text-[20px] font-semibold text-[#1a1a1a]">
           {SITE.name}
-        </Link>
-        <div className="flex gap-6 max-sm:gap-4">
-          {NAV_LINKS.map((link) =>
-            link.href ? (
-              <a
-                key={link.label}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[13px] text-[#555] no-underline transition-colors duration-150 hover:text-[#1a1a1a]"
-              >
-                {link.label} <span className="text-[11px]">&#8599;</span>
-              </a>
-            ) : (
-              <Link
-                key={link.label}
-                to={link.to!}
-                className={`text-[13px] no-underline transition-colors duration-150 hover:text-[#1a1a1a] ${
-                  location.pathname === link.to ? 'text-[#1a1a1a]' : 'text-[#555]'
-                }`}
-              >
-                {link.label}
-              </Link>
-            ),
-          )}
         </div>
+        <a
+          href={`mailto:${SITE.email}`}
+          className="text-[14px] max-sm:text-[13px] text-[#999] no-underline transition-colors duration-150 hover:text-[#1a1a1a]"
+        >
+          {SITE.email}
+        </a>
       </div>
+      <nav className="flex items-center gap-6 max-sm:gap-4 pt-2">
+        {CONTACTS.filter(l => l.label !== 'Email').map((link) => (
+          <a
+            key={link.label}
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[15px] max-sm:text-[13px] text-[#888] no-underline transition-colors duration-150 hover:text-[#1a1a1a]"
+          >
+            {link.label.toLowerCase()}
+            <span className="text-[10px] ml-0.5">&#8599;</span>
+          </a>
+        ))}
+      </nav>
     </header>
   );
 }
