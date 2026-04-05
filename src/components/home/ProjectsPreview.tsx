@@ -18,7 +18,7 @@ export default function ProjectsPreview({ onSelect }: Props) {
         PROJECTS.forEach((_, i) => {
           setTimeout(() => {
             setVisible(prev => { const n = [...prev]; n[i] = true; return n; });
-          }, i * 100);
+          }, i * 120);
         });
         observer.disconnect();
       },
@@ -29,23 +29,23 @@ export default function ProjectsPreview({ onSelect }: Props) {
   }, []);
 
   return (
-    <section ref={ref} className="mb-14">
-      <h2 className="text-[17px] max-sm:text-[16px] font-bold text-[#1a1a1a] mb-6">
-        PROJECTS
+    <section ref={ref} className="mb-20 max-sm:mb-14">
+      <h2 className="text-[13px] max-sm:text-[12px] font-medium text-[#86868b] uppercase tracking-[0.04em] mb-8 max-sm:mb-6">
+        Projects
       </h2>
       <div className="flex flex-col gap-1">
         {PROJECTS.map((proj, i) => (
           <button
             key={proj.name}
             onClick={() => onSelect(proj)}
-            className={`group w-full text-left bg-transparent border-0 font-[inherit] px-3 py-3 -mx-3 rounded-md cursor-pointer transition-all duration-300 hover:bg-[#fafafa] ${
-              visible[i] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
+            className={`group w-full text-left bg-transparent border-0 font-[inherit] px-4 py-4 -mx-4 rounded-xl cursor-pointer transition-all duration-300 hover:bg-[#f5f5f7] ${
+              visible[i] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
             }`}
           >
-            <div className="text-[15px] max-sm:text-[14px] text-[#1a1a1a] transition-colors duration-150 group-hover:text-[#555]">
-              <span className="font-medium">{proj.name}</span>
+            <div className="text-[17px] max-sm:text-[15px] font-semibold text-[#1d1d1f] tracking-tight transition-opacity duration-200 group-hover:opacity-70">
+              {proj.name}
             </div>
-            <div className="text-[14px] max-sm:text-[13px] text-[#999] mt-0.5">
+            <div className="text-[15px] max-sm:text-[13px] text-[#86868b] mt-1">
               {proj.sub.toLowerCase()}
             </div>
           </button>

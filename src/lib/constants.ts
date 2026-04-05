@@ -70,7 +70,7 @@ export const PROJECTS: ProjectRow[] = [
     'built an **automated a/b testing system**',
     'basically rotates variants on its own based on **performance**',
     'used it to **localize paywalls** + optimize flows',
-    '→ **+15% cta ctr**\n→ **+10% subscription conversion**',
+    'bumped **cta by ~15%** and **subscriptions by ~10%**',
   ] },
   { name: 'CulineAI', desc: 'AI recipe app that turns ingredient photos into recipes.', sub: 'Tech@NYU', chat: [
     'built an **ai recipe app**',

@@ -27,10 +27,10 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen px-8 sm:px-16 lg:px-24 pt-12 pb-8">
-      <div className="max-w-[720px] mx-auto">
+    <div className="min-h-screen px-6 sm:px-12 lg:px-24 pt-14 pb-12 max-sm:pb-24">
+      <div className="max-w-[680px] mx-auto">
         <Header />
-        <main className="mt-16 max-sm:mt-10">
+        <main className="mt-20 max-sm:mt-14">
           <ExperiencePreview onSelect={openExperience} />
           <ProjectsPreview onSelect={openProject} />
           <Skills />
