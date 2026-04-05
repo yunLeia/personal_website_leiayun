@@ -35,3 +35,8 @@ export interface ContactLink {
   href: string;
   external?: boolean;
 }
+
+export interface AboutContent {
+  intro: string[];
+  currently: string[];
+}

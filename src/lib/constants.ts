@@ -1,10 +1,23 @@
-import type { ExperienceItem, ProjectRow, SkillGroup, ContactLink } from '../types';
+import type { ExperienceItem, ProjectRow, SkillGroup, ContactLink, AboutContent } from '../types';
 
 export const SITE = {
   name: 'Leia Yun',
   resume: '/Leia_Yun_Resume.pdf',
   email: 'sy3544@nyu.edu',
   photo: '/images/leia.jpg',
+};
+
+export const ABOUT: AboutContent = {
+  intro: [
+    "Hi! I'm Leia — a CS and Data Science student at NYU.",
+    "I like building things that make people's lives a little easier. Most recently I was at Planfit, where I shipped AI features and ran way too many A/B tests.",
+    "Before that, I interned at Parachute building RAG pipelines, and I run LikeLion @NYU where we teach people to code and ship projects together.",
+  ],
+  currently: [
+    "Exploring product + engineering roles for 2026",
+    "Building side projects with LLMs",
+    "Trying to cook more and scroll less",
+  ],
 };
 
 export const HERO = {
