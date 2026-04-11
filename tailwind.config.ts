@@ -5,7 +5,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
+        sans: [
+          '-apple-system', 'BlinkMacSystemFont', 'SF Pro Text', 'SF Pro Display',
+          'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif',
+        ],
       },
       keyframes: {
         'fade-in': {
@@ -19,9 +22,6 @@ export default {
       },
       animation: {
         'fade-in': 'fade-in 0.6s ease-out forwards',
-      },
-      transitionDuration: {
-        '400': '400ms',
       },
     },
   },
