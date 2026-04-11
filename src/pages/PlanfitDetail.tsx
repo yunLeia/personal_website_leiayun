@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const c = {
   blueBg: '#eff6ff', blueText: '#1d4ed8',
   yellowBg: '#fffbeb', yellowText: '#b45309',
-  greenBg: '#f0fdf4', greenText: '#15803d',
+  greenBg: '#f0fdf4', greenText: '#15803d', greenBorder: '#bbf7d0',
 };
 
 // ─── Data ────────────────────────────────────────────────────────
@@ -27,21 +27,30 @@ const OVERVIEW = {
   ],
 };
 
-interface ThinkingCard { label: string; phrases: string[] }
-interface ExecStep { label: string; phrase: string }
+interface ThinkingStep { label: string; text: ReactNode }
+interface ExecStep { label: string; text: ReactNode }
 interface ImpactMetric { value: string; label: string }
 
 interface Project {
   num: string;
   title: string;
-  tags: { label: string; color: 'blue' | 'yellow' | 'green' }[];
-  heroStat: string;
-  heroInsight: string;
-  problemLines: ReactNode[];
-  thinking: ThinkingCard[];
+  // Hero
+  heroTagline: [string, string];
+  heroMetrics: string;
+  // Problem
+  problemHeadline: string;
+  problemBody: ReactNode;
+  // Thinking
+  thinkingHeadline: string;
+  thinking: ThinkingStep[];
+  // Execution
+  executionHeadline: string;
   execution: ExecStep[];
+  // Impact
+  impactHeadline: string;
   impact: ImpactMetric[];
-  impactTakeaway: string;
+  impactTakeaway: ReactNode;
+  // Tools
   tools: string[];
 }
 
@@ -49,103 +58,112 @@ const PROJECTS: Project[] = [
   {
     num: '01',
     title: 'Community Club',
-    tags: [
-      { label: '0→1', color: 'yellow' },
-      { label: 'Retention', color: 'blue' },
+    heroTagline: [
+      "Users don't want community.",
+      'They want a reason to come back.',
     ],
-    heroStat: '+20% Engagement',
-    heroInsight: "Users don't want community. They want competition.",
-    problemLines: [
-      <>Club feature existed — <B>nobody used it</B>.</>,
-      <>Join rate: <B>4.1%</B>. Revisit within 3 days: <B>3.2%</B>.</>,
-      <>VOC + 20 interviews → same friction: no value, no reason to return.</>,
-    ],
+    heroMetrics: '+20% Engagement · 2,000+ Clubs',
+    problemHeadline: 'Nobody used it.',
+    problemBody: (
+      <>
+        Club feature existed — <B>4.1%</B> join rate, <B>3.2%</B> revisit within 3 days. VOC and 20+ user interviews pointed to the same friction: users didn't know which club to pick, didn't see the value, and felt the social feed was one more thing to maintain.
+      </>
+    ),
+    thinkingHeadline: "The problem wasn't the feature. It was the concept.",
     thinking: [
-      { label: 'Observation', phrases: ['4.1% join rate', '3.2% revisit', 'Users saw it, didn\'t use it'] },
-      { label: 'Diagnosis', phrases: ['Not a visibility problem', 'Feed ≠ motivation', 'Nothing to come back for'] },
-      { label: 'Hypothesis', phrases: ['Competition > community', 'Auto-match by level', 'Surface rank post-workout'] },
+      { label: 'Observation', text: <>Users saw it. They just didn't use it. Low join and revisit rates — backed by interviews and behavioral data.</> },
+      { label: 'Diagnosis', text: <>A passive social feed gives users nothing to return for after a workout. The feature existed. The reason to care didn't.</> },
+      { label: 'Hypothesis', text: <>Users don't want community. They want <B>competition</B>. Auto-match by fitness level. Surface rankings right after workouts. Give them a reason to care about their rank.</> },
     ],
+    executionHeadline: 'So I rebuilt it around competition.',
     execution: [
-      { label: 'Concept Shift', phrase: 'Social feed → Competition system' },
-      { label: 'Challenge League', phrase: '122 signups vs. 27 — auto-matched by fitness level' },
-      { label: 'Post-Workout Trigger', phrase: 'Rankings surfaced at highest-motivation moment' },
-      { label: 'Build & Ship', phrase: 'End-to-end with Claude Code — no eng handoff' },
+      { label: 'Concept Shift', text: <>Social feed → competition-based system. Rewrote the product spec from scratch.</> },
+      { label: 'Challenge League', text: <>Auto-matched users by fitness level. Tested immediately: <Hi color="blue">122 signups vs. 27</Hi> for regular clubs in the same window.</> },
+      { label: 'Post-Workout Trigger', text: <>Surfaced rankings right after session completion — the highest-motivation moment.</> },
+      { label: 'Build & Ship', text: <>Ranking engine, push notification loop, Django admin — built end-to-end with Claude Code, SuperClaude, Figma MCP. No eng handoff.</> },
     ],
+    impactHeadline: 'And users came back.',
     impact: [
-      { value: '+20%', label: 'Engagement' },
-      { value: '+28%', label: 'US Tab' },
-      { value: '+75%', label: 'Invite Rate' },
-      { value: '2,000+', label: 'Clubs' },
+      { value: '+20%', label: 'Community engagement' },
+      { value: '+28%', label: 'US tab engagement' },
+      { value: '+75%', label: 'Friend invite rate' },
+      { value: '2,000+', label: 'User-generated clubs' },
     ],
-    impactTakeaway: 'Timing and structure drove retention — not feature visibility.',
-    tools: ['Claude Code', 'SuperClaude', 'Figma MCP', 'Django', 'React Native', 'Amplitude'],
+    impactTakeaway: <>Users returned when given a clear competitive context. Timing and structure drove retention — not feature visibility.</>,
+    tools: ['Claude Code', 'SuperClaude', 'Figma MCP', 'Django', 'React Native', 'Amplitude', 'SQL'],
   },
   {
     num: '02',
     title: 'Onboarding & Paywall',
-    tags: [
-      { label: 'Experimentation', color: 'blue' },
-      { label: 'Revenue', color: 'yellow' },
+    heroTagline: [
+      "The bottleneck wasn't ideas.",
+      'It was how fast we could test them.',
     ],
-    heroStat: '+7% Subscription CVR',
-    heroInsight: "The bottleneck wasn't ideas. It was experiment velocity.",
-    problemLines: [
-      <>Trial CVR stuck at <B>~15%</B>.</>,
-      <>Drop-offs clustered where users were asked to trust before trust was earned.</>,
-      <>Copy not localized. Paywall not personalized. Every test = full dev cycle.</>,
-    ],
+    heroMetrics: '+20% CTA · +7% Subscription CVR',
+    problemHeadline: 'Conversion was stuck.',
+    problemBody: (
+      <>
+        Trial CVR sat at <B>~15%</B>. Users completed onboarding but didn't convert. Funnel analysis on Amplitude revealed drop-offs weren't random — they clustered around moments where users were asked to trust the product before it had earned that trust. Copy wasn't localized. The paywall wasn't personalized. And every experiment required a full dev cycle to ship.
+      </>
+    ),
+    thinkingHeadline: "The problem wasn't the paywall. It was the speed.",
     thinking: [
-      { label: 'Observation', phrases: ['Drop-offs vary by segment', 'Platform × country × source', 'Not one break — many'] },
-      { label: 'Diagnosis', phrases: ['Users don\'t feel seen', 'Generic copy ≠ trust', 'One-size paywall fails globally'] },
-      { label: 'Hypothesis', phrases: ['Personalize by segment', 'Run experiments faster', 'Automate the loop'] },
+      { label: 'Observation', text: <>Drop-offs varied by platform, country, and traffic source. The funnel wasn't broken in one place — it was broken differently for each segment.</> },
+      { label: 'Diagnosis', text: <>Users didn't feel seen by the time they reached the paywall. Generic copy and a one-size-fits-all experience couldn't convert a diverse, global user base.</> },
+      { label: 'Hypothesis', text: <>If we <B>personalize by segment</B> and experiment fast enough, conversion will move. And if the loop runs itself — we can test continuously without slowing the team down.</> },
     ],
+    executionHeadline: 'So I built a machine that tests itself.',
     execution: [
-      { label: 'Funnel Mapping', phrase: 'Amplitude → drop-offs by platform, country, source' },
-      { label: '30+ Experiments', phrase: 'Copy, UI, flow — loss aversion, commitment devices' },
-      { label: 'Auto Paywall Engine', phrase: 'GPT → Django → Amplitude → auto-apply winner' },
-      { label: 'Segmented Deploy', phrase: 'Each segment gets the right variant' },
+      { label: 'Funnel Mapping', text: <>Mapped every drop-off via Amplitude by platform, country, and traffic source. Found where trust broke down.</> },
+      { label: '30+ A/B Experiments', text: <>Designed and directly coded variants — copy, UI/UX, flow — grounded in <Hi color="blue">loss aversion, personalization expectations, and commitment devices</Hi>.</> },
+      { label: 'Automated Paywall Engine', text: <>Built at Planfit Hackathon: GPT API generates localized copy → Django REST deploys in real-time → Amplitude detects significance → <Hi color="yellow">auto-applies the winner</Hi>. Zero manual cycles.</> },
+      { label: 'Segmented Execution', text: <>Each segment — country, platform, traffic source — got its own variant. Nothing was generic.</> },
     ],
+    impactHeadline: 'And the loop kept running.',
     impact: [
-      { value: '+20%', label: 'CTA Rate' },
-      { value: '+7%', label: 'Sub CVR' },
-      { value: '30+', label: 'Experiments' },
-      { value: 'Auto', label: 'Cycle' },
+      { value: '+20%', label: 'CTA click rate' },
+      { value: '+7%', label: 'Subscription CVR' },
+      { value: '30+', label: 'Experiments shipped' },
+      { value: '0', label: 'Manual deploy cycles' },
     ],
-    impactTakeaway: 'Automation meant the next experiment started the moment the last one ended.',
+    impactTakeaway: <>Conversion moved when users felt the product was built for them. Automation meant the next experiment started the moment the last one ended.</>,
     tools: ['GPT API', 'Django', 'Amplitude', 'Make.com', 'Claude Code', 'React Native', 'Figma'],
   },
   {
     num: '03',
     title: 'AI Stretching',
-    tags: [
-      { label: 'Activation', color: 'blue' },
-      { label: 'VOC', color: 'yellow' },
+    heroTagline: [
+      "Users weren't complaining about stretching.",
+      'They were telling me the logic was broken.',
     ],
-    heroStat: '+13% Completion',
-    heroInsight: 'The recommendation logic was broken. Not the feature.',
-    problemLines: [
-      <>Stretching completion low — <B>VOC kept coming</B>.</>,
-      <>Users asked for order changes, timing, swaps — surface-level requests.</>,
-      <>But the volume and pattern pointed deeper.</>,
-    ],
+    heroMetrics: '+13% Completion · +12% US Activation',
+    problemHeadline: 'The requests kept coming in.',
+    problemBody: (
+      <>
+        Change the order. Swap this exercise. Adjust the timing. On the surface, it looked like a list of small feature requests. <B>100+ VOC entries. 30+ user interviews.</B> The same friction, over and over.
+      </>
+    ),
+    thinkingHeadline: "The problem wasn't the features. It was the sequence.",
     thinking: [
-      { label: 'Observation', phrases: ['100+ VOC entries', '30+ interviews', 'Same friction every time'] },
-      { label: 'Diagnosis', phrases: ['Requests ≠ real problem', 'Sequence logic broken', 'Position switching mid-routine'] },
-      { label: 'Hypothesis', phrases: ['Fix sequence, not features', 'Map to muscles worked', 'Natural movement flow'] },
+      { label: 'Observation', text: <>Users kept asking to modify their stretching routine — wrong movements, no customization, no way to preview. High volume, consistent pattern.</> },
+      { label: 'Diagnosis', text: <>The recommendation logic didn't account for physical flow. Users were constantly switching positions mid-routine, making the experience feel disjointed. They weren't asking for features. They were telling me something deeper was wrong.</> },
+      { label: 'Hypothesis', text: <>Don't fix the surface complaints. <B>Fix the sequence logic.</B> If stretches map to muscles worked that day and follow natural movement flow, completion will increase on its own.</> },
     ],
+    executionHeadline: 'So I stopped fixing requests. I rewrote the logic.',
     execution: [
-      { label: 'VOC Analysis', phrase: '100+ entries → friction clusters, prioritized by impact' },
-      { label: 'V2 Rec Engine', phrase: 'Muscles worked × equipment × movement flow' },
-      { label: 'Key Failure', phrase: 'Removed warmup → −9.8% completion. Rolled back.' },
-      { label: 'Ship & Validate', phrase: '15+ A/B experiments across 30,000+ DAU' },
+      { label: 'VOC Analysis', text: <>Categorized 100+ entries and 30+ interview insights into friction clusters. Prioritized by impact — sequence logic first, customization second.</> },
+      { label: 'V2 Recommendation Engine', text: <>Built a system mapping stretches to muscles worked that day, accounting for equipment and movement flow. Full-stack — server logic, algorithm, UI/UX.</> },
+      { label: 'Key Failure', text: <>Removing cardio warmup <Hi color="yellow">dropped completion 9.8% at 98% significance</Hi>. Data revealed it acts as a psychological on-ramp — users needed a familiar entry point. Rolled back immediately.</> },
+      { label: 'Ship & Validate', text: <>Shipped add/delete/reorder and video preview. Validated through 15+ A/B experiments across 30,000+ DAU.</> },
     ],
+    impactHeadline: 'And the complaints stopped.',
     impact: [
-      { value: '+13%', label: 'Completion' },
-      { value: '+12%', label: 'US Activation' },
-      { value: '0', label: 'VOC in Sprint' },
-      { value: '30K+', label: 'DAU' },
+      { value: '+13%', label: 'Stretching completion' },
+      { value: '+12%', label: 'US activation' },
+      { value: '0', label: 'Stretching VOC in sprint' },
+      { value: '30K+', label: 'DAU on rec system' },
     ],
-    impactTakeaway: 'One root-cause fix cleared the backlog and moved activation.',
+    impactTakeaway: <>One root-cause fix cleared the VOC backlog and moved activation. Going deeper than the surface request drove broader product impact than any individual feature fix would have.</>,
     tools: ['Django', 'React Native', 'SQL', 'Amplitude', 'Claude Code', 'Figma'],
   },
 ];
@@ -153,25 +171,20 @@ const PROJECTS: Project[] = [
 // ─── Helpers ─────────────────────────────────────────────────────
 
 function B({ children }: { children: ReactNode }) {
-  return <strong className="font-semibold text-[#1d1d1f]">{children}</strong>;
+  return <strong className="font-semibold text-[#111]">{children}</strong>;
+}
+
+function Hi({ color, children }: { color: 'blue' | 'yellow'; children: ReactNode }) {
+  const bg = color === 'blue' ? c.blueBg : c.yellowBg;
+  const fg = color === 'blue' ? c.blueText : c.yellowText;
+  return <mark style={{ background: bg, color: fg, padding: '2px 6px', fontWeight: 600, borderRadius: 3 }}>{children}</mark>;
 }
 
 function ToolPill({ children }: { children: string }) {
   return (
-    <span className="text-[11px] text-[#6e6e73] font-medium bg-[#f5f5f7] border border-[#e8e8ed] rounded-sm px-2.5 py-1">
+    <span className="text-[11px] text-[#666] font-normal bg-[#f5f5f7] border border-[#e8e8ed] rounded-sm px-2.5 py-1">
       {children}
     </span>
-  );
-}
-
-function SectionLabel({ children, color }: { children: string; color?: string }) {
-  return (
-    <div className="flex items-center gap-3 mb-6">
-      <h3 className="text-[11px] font-bold uppercase tracking-[0.16em]" style={{ color: color || '#aeaeb2' }}>
-        {children}
-      </h3>
-      <span className="flex-1 h-px bg-[#e8e8ed]" />
-    </div>
   );
 }
 
@@ -181,110 +194,105 @@ function ProjectView({ project }: { project: Project }) {
   return (
     <div className="animate-fade-in">
 
-      {/* ── HERO — dark, stat + one line ── */}
-      <div className="bg-[#111] rounded-2xl px-8 py-12 sm:px-12 sm:py-16 mb-14 max-sm:px-6">
-        <div className="flex gap-2 mb-6">
-          {project.tags.map((t) => (
-            <span key={t.label} className="text-[10px] font-semibold uppercase tracking-[0.08em] text-white/40 border border-white/10 rounded-sm px-2.5 py-1">
-              {t.label}
-            </span>
-          ))}
+      {/* ── HERO ── */}
+      <div className="mb-12">
+        <p className="text-[36px] sm:text-[44px] font-light text-[#111] leading-[1.2] tracking-tight mb-12" style={{ fontFamily: "'Lora', serif" }}>
+          <span className="italic">{project.heroTagline[0]}</span>
+          <br />
+          <span className="italic">{project.heroTagline[1]}</span>
+        </p>
+        <div className="text-[15px] font-medium text-[#888] tracking-tight">
+          {project.heroMetrics}
         </div>
-        <div
-          className="text-[48px] sm:text-[64px] font-bold text-white leading-none tracking-tight mb-4"
-          style={{ fontFamily: "'Lora', serif" }}
-        >
-          {project.heroStat}
-        </div>
-        <p className="text-[17px] sm:text-[19px] text-white/60 leading-[1.5] max-w-[480px]">
-          {project.heroInsight}
+      </div>
+
+      {/* ── PROBLEM ── */}
+      <div className="mb-16">
+        <h3 className="text-[26px] font-bold text-[#111] tracking-tight mb-7 leading-[1.25]">
+          {project.problemHeadline}
+        </h3>
+        <p className="text-[15px] font-light text-[#555] leading-[1.85] max-w-[640px]">
+          {project.problemBody}
         </p>
       </div>
 
-      {/* ── PROBLEM — short lines ── */}
-      <div className="mb-14">
-        <SectionLabel>Problem</SectionLabel>
-        <div className="flex flex-col gap-3">
-          {project.problemLines.map((line, i) => (
-            <p key={i} className="text-[16px] text-[#6e6e73] leading-[1.7]">{line}</p>
-          ))}
-        </div>
-      </div>
+      {/* ── Divider ── */}
+      <div className="h-px bg-[#e8e8ed] mb-16" />
 
-      {/* ── THINKING — 3 cards, phrases only ── */}
-      <div className="mb-14">
-        <SectionLabel color={c.blueText}>Thinking</SectionLabel>
-        <div className="grid grid-cols-3 max-sm:grid-cols-1 gap-1.5">
-          {project.thinking.map((card) => (
-            <div key={card.label} className="bg-[#f5f5f7] border border-[#e8e8ed] px-5 py-5">
-              <div className="text-[11px] font-bold text-[#1d1d1f] uppercase tracking-[0.08em] mb-4">
-                {card.label}
-              </div>
-              <div className="flex flex-col gap-2">
-                {card.phrases.map((phrase, i) => (
-                  <div key={i} className="text-[14px] text-[#6e6e73] leading-[1.5]">
-                    {phrase}
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ── EXECUTION — short, keyword-driven ── */}
-      <div className="mb-14">
-        <SectionLabel color={c.yellowText}>Execution</SectionLabel>
-        <div className="flex flex-col gap-0.5">
-          {project.execution.map((step, i) => (
-            <div key={i} className="flex items-baseline gap-4 px-5 py-3.5 bg-white border border-[#e8e8ed]">
-              <span className="text-[12px] font-bold text-[#d2d2d7] shrink-0">
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <span className="text-[14px] font-semibold text-[#1d1d1f] shrink-0">
+      {/* ── THINKING ── */}
+      <div className="mb-16">
+        <h3 className="text-[26px] font-bold text-[#111] tracking-tight mb-7 leading-[1.25]">
+          {project.thinkingHeadline}
+        </h3>
+        <div className="grid grid-cols-3 max-sm:grid-cols-1 gap-4">
+          {project.thinking.map((step) => (
+            <div key={step.label} className="bg-[#fafafa] border border-[#eee] rounded-xl px-6 py-6">
+              <div className="text-[11px] font-semibold text-[#bbb] uppercase tracking-[0.14em] mb-3">
                 {step.label}
-              </span>
-              <span className="text-[14px] text-[#86868b]">
-                {step.phrase}
-              </span>
+              </div>
+              <p className="text-[15px] font-light text-[#555] leading-[1.85]">
+                {step.text}
+              </p>
             </div>
           ))}
         </div>
       </div>
 
-      {/* ── IMPACT — numbers biggest ── */}
-      <div className="mb-14">
-        <SectionLabel color={c.greenText}>Impact</SectionLabel>
-        <div className="grid grid-cols-4 max-sm:grid-cols-2 gap-1.5 mb-5">
+      {/* ── Divider ── */}
+      <div className="h-px bg-[#e8e8ed] mb-16" />
+
+      {/* ── EXECUTION ── */}
+      <div className="mb-16">
+        <h3 className="text-[26px] font-bold text-[#111] tracking-tight mb-7 leading-[1.25]">
+          {project.executionHeadline}
+        </h3>
+        <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-4">
+          {project.execution.map((step, i) => (
+            <div key={i} className="bg-white border border-[#eee] rounded-xl px-6 py-6">
+              <div className="flex items-baseline gap-3 mb-3">
+                <span className="text-[13px] font-bold text-[#d2d2d7]">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span className="text-[14px] font-semibold text-[#111]">
+                  {step.label}
+                </span>
+              </div>
+              <p className="text-[15px] font-light text-[#555] leading-[1.85]">
+                {step.text}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Divider ── */}
+      <div className="h-px bg-[#e8e8ed] mb-16" />
+
+      {/* ── IMPACT ── */}
+      <div className="mb-16">
+        <h3 className="text-[26px] font-bold text-[#111] tracking-tight mb-7 leading-[1.25]">
+          {project.impactHeadline}
+        </h3>
+        <div className="grid grid-cols-4 max-sm:grid-cols-2 gap-4 mb-8">
           {project.impact.map((m) => (
-            <div key={m.label} className="bg-[#f5f5f7] border border-[#e8e8ed] px-5 py-6 text-center">
-              <div
-                className="text-[36px] sm:text-[44px] font-bold text-[#1d1d1f] leading-none mb-2"
-                style={{ fontFamily: "'Lora', serif" }}
-              >
+            <div key={m.label} className="bg-[#fafafa] border border-[#eee] rounded-xl px-5 py-7 text-center">
+              <div className="text-[40px] sm:text-[52px] font-semibold text-[#111] leading-none mb-3" style={{ fontFamily: "'Lora', serif" }}>
                 {m.value}
               </div>
-              <div className="text-[11px] font-semibold text-[#aeaeb2] uppercase tracking-[0.06em]">
+              <div className="text-[11px] font-medium text-[#888] uppercase tracking-[0.08em]">
                 {m.label}
               </div>
             </div>
           ))}
         </div>
-        <p className="text-[15px] text-[#86868b] italic leading-[1.6]" style={{ fontFamily: "'Lora', serif" }}>
+        <p className="text-[15px] font-light text-[#555] italic leading-[1.8] max-w-[640px]" style={{ fontFamily: "'Lora', serif" }}>
           {project.impactTakeaway}
         </p>
       </div>
 
-      {/* ── SCREENSHOT PLACEHOLDER ── */}
-      <div className="mb-14">
-        <div className="w-full aspect-[16/9] rounded-xl bg-[#f5f5f7] border border-[#e8e8ed] flex items-center justify-center">
-          <span className="text-[13px] text-[#d2d2d7]">screenshot placeholder</span>
-        </div>
-      </div>
-
       {/* ── TOOLS ── */}
-      <div className="flex items-center gap-3 flex-wrap">
-        <span className="text-[11px] font-bold text-[#aeaeb2] uppercase tracking-[0.1em] shrink-0">Tools</span>
+      <div className="bg-[#fafafa] border border-[#eee] rounded-xl px-6 py-5 flex items-center gap-3 flex-wrap">
+        <span className="text-[11px] font-semibold text-[#bbb] uppercase tracking-[0.14em] shrink-0">Tools</span>
         {project.tools.map((t) => <ToolPill key={t}>{t}</ToolPill>)}
       </div>
     </div>
@@ -298,22 +306,22 @@ export default function PlanfitDetail() {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="max-w-[800px] mx-auto px-8 max-sm:px-5 pt-14 pb-24">
+      <div className="max-w-[1080px] mx-auto px-10 max-sm:px-5 pt-14 pb-24">
         <Link to="/" className="text-[14px] font-medium text-[#86868b] no-underline transition-opacity duration-200 hover:opacity-60">
           ← back
         </Link>
 
         {/* Overview */}
         <div className="mt-12 mb-14 animate-fade-in">
-          <h1 className="text-[32px] max-sm:text-[26px] font-bold tracking-tight text-[#1d1d1f] mb-6">
+          <h1 className="text-[32px] max-sm:text-[26px] font-bold tracking-tight text-[#111] mb-6">
             Planfit
           </h1>
           <div className="flex flex-col gap-2 mb-6">
-            <div className="text-[15px] text-[#6e6e73]"><span className="font-semibold text-[#1d1d1f]">Role:</span> {OVERVIEW.role}</div>
-            <div className="text-[15px] text-[#6e6e73]"><span className="font-semibold text-[#1d1d1f]">Team:</span> {OVERVIEW.team}</div>
-            <div className="text-[15px] text-[#6e6e73]"><span className="font-semibold text-[#1d1d1f]">Period:</span> {OVERVIEW.period}</div>
+            <div className="text-[15px] font-light text-[#555]"><span className="font-semibold text-[#111]">Role:</span> {OVERVIEW.role}</div>
+            <div className="text-[15px] font-light text-[#555]"><span className="font-semibold text-[#111]">Team:</span> {OVERVIEW.team}</div>
+            <div className="text-[15px] font-light text-[#555]"><span className="font-semibold text-[#111]">Period:</span> {OVERVIEW.period}</div>
           </div>
-          <p className="text-[16px] text-[#6e6e73] leading-[1.8] mb-6">{OVERVIEW.summary}</p>
+          <p className="text-[15px] font-light text-[#555] leading-[1.85] mb-6">{OVERVIEW.summary}</p>
           <div className="flex flex-wrap gap-2 mb-4">
             {OVERVIEW.skills.map((s) => <ToolPill key={s}>{s}</ToolPill>)}
           </div>
@@ -330,7 +338,7 @@ export default function PlanfitDetail() {
             <button
               key={p.title}
               onClick={() => setActive(i)}
-              className={`shrink-0 text-[12px] font-semibold tracking-[0.02em] px-5 py-2.5 cursor-pointer transition-all duration-200 rounded-sm ${
+              className={`shrink-0 text-[13px] font-medium tracking-[0.02em] px-5 py-2.5 cursor-pointer transition-all duration-200 rounded-sm ${
                 active === i
                   ? 'bg-[#1d1d1f] text-white border border-[#1d1d1f]'
                   : 'bg-white text-[#86868b] border border-[#d2d2d7] hover:bg-[#f5f5f7] hover:text-[#1d1d1f]'

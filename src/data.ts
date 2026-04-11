@@ -83,6 +83,8 @@ export const EXPERIENCE: ExperienceItem[] = [
     url: 'https://www.letsparachute.com',
     role: 'AI Engineering Intern',
     date: 'Mar–Jun 2024',
+    subtitle: 'Built resume classification, RAG pipeline, and ETL infrastructure for an AI career coaching platform — from zero AI infra.',
+    detailPath: '/work/parachute',
     subProjects: [
       {
         title: 'RAG Pipeline',

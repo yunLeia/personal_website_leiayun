@@ -23,8 +23,8 @@ export default function Home() {
   const activeKey = chat ? `${chat.title}-${chat.subtitle}` : null;
 
   return (
-    <div className="min-h-screen px-6 sm:px-12 lg:px-24 pt-14 pb-12 max-sm:pb-24">
-      <div className="max-w-[680px] mx-auto">
+    <div className="min-h-screen px-6 sm:px-10 pt-14 pb-12 max-sm:pb-24">
+      <div className="max-w-[1080px] mx-auto">
         <Header />
         <main className="mt-10">
           <Highlights />
