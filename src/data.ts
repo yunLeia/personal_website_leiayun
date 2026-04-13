@@ -34,6 +34,7 @@ export interface ExperienceItem {
   date: string;
   subtitle?: string;
   detailPath?: string;
+  tags?: string[];
   subProjects: SubProject[];
 }
 
@@ -45,6 +46,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     date: 'Mar–Dec 2025',
     subtitle: 'Owned 5 product tracks end-to-end — from problem discovery to deployment — across a fitness app serving 30,000+ DAU.',
     detailPath: '/work/planfit',
+    tags: ['0→1 Product', '30K+ DAU', '+15% Subscription', 'End-to-End Ownership', 'Claude Code', 'Amplitude'],
     subProjects: [
       {
         title: 'Paywall A/B Engine',
@@ -85,6 +87,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     date: 'Mar–Jun 2024',
     subtitle: 'Built resume classification, RAG pipeline, and ETL infrastructure for an AI career coaching platform — from zero AI infra.',
     detailPath: '/work/parachute',
+    tags: ['AI Infra from Zero', 'RAG Pipeline', 'Resume Classifier', 'LangChain', 'GPT API'],
     subProjects: [
       {
         title: 'RAG Pipeline',
@@ -96,29 +99,13 @@ export const EXPERIENCE: ExperienceItem[] = [
       },
     ],
   },
-  {
-    company: 'LikeLion @ NYU',
-    url: 'https://us.likelion.net/',
-    role: 'Vice President',
-    date: 'Jun 2024–Present',
-    subProjects: [
-      {
-        title: 'Hackathon',
-        metric: '100+ participants',
-        chat: [
-          'ran a **hackathon** with **100+ participants**',
-          'handled **sponsorships, logistics, judging** — the whole thing',
-          'one of the most rewarding things i\'ve done at nyu',
-        ],
-      },
-    ],
-  },
 ];
 
 // ─── Projects ────────────────────────────────────────────────────
 export interface ProjectItem {
   name: string;
   sub: string;
+  tags?: string[];
   chat: string[];
 }
 
@@ -126,6 +113,7 @@ export const PROJECTS: ProjectItem[] = [
   {
     name: 'CulineAI',
     sub: 'ai recipe app — multimodal models + prompt tuning',
+    tags: ['Multimodal AI', 'Food Waste Reduction', 'GPT-4V'],
     chat: [
       'built an **ai recipe app**',
       'you upload a photo of ingredients and it turns that into a **usable recipe**',
@@ -136,6 +124,7 @@ export const PROJECTS: ProjectItem[] = [
   {
     name: 'This Portfolio',
     sub: 'react + typescript + tailwind — interactive chat ui',
+    tags: ['Glassmorphism', 'Interactive Chat UI', 'Claude Code'],
     chat: [
       'you\'re looking at it right now :)',
       'built with **react + typescript + tailwind**',
