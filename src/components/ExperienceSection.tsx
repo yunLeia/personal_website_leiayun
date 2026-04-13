@@ -38,9 +38,9 @@ export default function ExperienceSection({ onSelect, activeKey }: Props) {
             <button
               key={exp.company}
               onClick={() => handleClick(exp)}
-              className={`group w-full text-left font-[inherit] px-6 py-5 rounded-xl cursor-pointer transition-all duration-300 bg-[#fafafa] border border-[#eee] hover:border-[#d2d2d7] hover:shadow-[0_2px_12px_rgba(0,0,0,0.04)] ${
+              className={`group w-full text-left font-[inherit] px-6 py-5 rounded-xl cursor-pointer transition-all duration-300 bg-white/55 backdrop-blur-[20px] border border-white/70 shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:border-white/90 hover:shadow-[0_4px_20px_rgba(0,0,0,0.06)] ${
                 visible[i] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
-              } ${activeKey === key ? 'border-[#d2d2d7] shadow-[0_2px_12px_rgba(0,0,0,0.04)]' : ''}`}
+              } ${activeKey === key ? 'border-white/90 shadow-[0_4px_20px_rgba(0,0,0,0.06)]' : ''}`}
             >
               <div className="flex items-baseline justify-between gap-4">
                 <div className="text-[16px] max-sm:text-[15px] text-[#111] tracking-tight transition-opacity duration-200 group-hover:opacity-70">
