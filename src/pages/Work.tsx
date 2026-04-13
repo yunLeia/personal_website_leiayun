@@ -17,10 +17,10 @@ function ProjectBlock({ project, index, onChat, onReadMore }: {
       {/* Image placeholder */}
       <div className="flex-1 w-full">
         <div
-          className="w-full aspect-[16/10] rounded-2xl bg-[#f5f5f7] flex items-center justify-center cursor-pointer transition-all duration-200 hover:bg-[#e8e8ed]"
+          className="w-full aspect-[16/10] rounded-2xl bg-white/20 backdrop-blur-[12px] border border-white/40 flex items-center justify-center cursor-pointer transition-all duration-200 hover:bg-white/30"
           onClick={onChat}
         >
-          <span className="text-[#d2d2d7] text-[13px]">screenshot</span>
+          <span className="text-black/20 text-[13px]">screenshot</span>
         </div>
       </div>
 
@@ -36,7 +36,7 @@ function ProjectBlock({ project, index, onChat, onReadMore }: {
         <div className="mt-5 flex gap-3">
           <button
             onClick={onChat}
-            className="text-[14px] font-medium px-5 py-2 rounded-full border border-[#d2d2d7] text-[#1d1d1f] cursor-pointer transition-all duration-200 hover:bg-[#f5f5f7] active:scale-[0.97]"
+            className="text-[14px] font-medium px-5 py-2 rounded-full bg-white/30 backdrop-blur-[12px] border border-white/50 text-[#1d1d1f] cursor-pointer transition-all duration-200 hover:bg-white/40 active:scale-[0.97]"
           >
             chat about this
           </button>
@@ -79,7 +79,12 @@ export default function Work() {
   const closeChat = useCallback(() => setChat(null), []);
 
   return (
-    <div className="min-h-screen px-6 sm:px-12 lg:px-24 pt-14 pb-12">
+    <div className="relative overflow-hidden min-h-screen px-6 sm:px-12 lg:px-24 pt-14 pb-12">
+      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+        <div className="absolute -top-[10%] -right-[10%] w-[500px] h-[500px] rounded-full bg-[rgba(100,140,180,0.25)] blur-[120px]" />
+        <div className="absolute bottom-[5%] -left-[10%] w-[450px] h-[450px] rounded-full bg-[rgba(120,155,190,0.2)] blur-[110px]" />
+        <div className="absolute top-[35%] left-[30%] w-[350px] h-[350px] rounded-full bg-[rgba(140,170,200,0.15)] blur-[90px]" />
+      </div>
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between animate-fade-in">
