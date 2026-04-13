@@ -182,7 +182,7 @@ function Hi({ color, children }: { color: 'blue' | 'yellow'; children: ReactNode
 
 function ToolPill({ children }: { children: string }) {
   return (
-    <span className="text-[11px] text-[#666] font-normal bg-[#f5f5f7] border border-[#e8e8ed] rounded-sm px-2.5 py-1">
+    <span className="text-[11px] text-[#666] font-normal bg-white/30 backdrop-blur-[8px] border border-white/50 rounded-sm px-2.5 py-1">
       {children}
     </span>
   );
@@ -211,13 +211,13 @@ function ProjectView({ project }: { project: Project }) {
         <h3 className="text-[26px] font-bold text-[#111] tracking-tight mb-7 leading-[1.25]">
           {project.problemHeadline}
         </h3>
-        <p className="text-[15px] font-light text-[#555] leading-[1.85] max-w-[640px]">
+        <p className="text-[15px] font-normal text-[#555] leading-[1.85] max-w-[640px]">
           {project.problemBody}
         </p>
       </div>
 
       {/* ── Divider ── */}
-      <div className="h-px bg-[#e8e8ed] mb-16" />
+      <div className="h-px bg-black/5 mb-16" />
 
       {/* ── THINKING ── */}
       <div className="mb-16">
@@ -226,11 +226,11 @@ function ProjectView({ project }: { project: Project }) {
         </h3>
         <div className="grid grid-cols-3 max-sm:grid-cols-1 gap-4">
           {project.thinking.map((step) => (
-            <div key={step.label} className="bg-[#fafafa] border border-[#eee] rounded-xl px-6 py-6">
+            <div key={step.label} className="bg-white/30 backdrop-blur-[16px] border border-white/50 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.5)] rounded-xl px-6 py-6">
               <div className="text-[11px] font-semibold text-[#bbb] uppercase tracking-[0.14em] mb-3">
                 {step.label}
               </div>
-              <p className="text-[15px] font-light text-[#555] leading-[1.85]">
+              <p className="text-[15px] font-normal text-[#555] leading-[1.85]">
                 {step.text}
               </p>
             </div>
@@ -239,7 +239,7 @@ function ProjectView({ project }: { project: Project }) {
       </div>
 
       {/* ── Divider ── */}
-      <div className="h-px bg-[#e8e8ed] mb-16" />
+      <div className="h-px bg-black/5 mb-16" />
 
       {/* ── EXECUTION ── */}
       <div className="mb-16">
@@ -248,7 +248,7 @@ function ProjectView({ project }: { project: Project }) {
         </h3>
         <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-4">
           {project.execution.map((step, i) => (
-            <div key={i} className="bg-white border border-[#eee] rounded-xl px-6 py-6">
+            <div key={i} className="bg-white/30 backdrop-blur-[16px] border border-white/50 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.5)] rounded-xl px-6 py-6">
               <div className="flex items-baseline gap-3 mb-3">
                 <span className="text-[13px] font-bold text-[#d2d2d7]">
                   {String(i + 1).padStart(2, '0')}
@@ -257,7 +257,7 @@ function ProjectView({ project }: { project: Project }) {
                   {step.label}
                 </span>
               </div>
-              <p className="text-[15px] font-light text-[#555] leading-[1.85]">
+              <p className="text-[15px] font-normal text-[#555] leading-[1.85]">
                 {step.text}
               </p>
             </div>
@@ -266,7 +266,7 @@ function ProjectView({ project }: { project: Project }) {
       </div>
 
       {/* ── Divider ── */}
-      <div className="h-px bg-[#e8e8ed] mb-16" />
+      <div className="h-px bg-black/5 mb-16" />
 
       {/* ── IMPACT ── */}
       <div className="mb-16">
@@ -275,7 +275,7 @@ function ProjectView({ project }: { project: Project }) {
         </h3>
         <div className="grid grid-cols-4 max-sm:grid-cols-2 gap-4 mb-8">
           {project.impact.map((m) => (
-            <div key={m.label} className="bg-[#fafafa] border border-[#eee] rounded-xl px-5 py-7 text-center">
+            <div key={m.label} className="bg-white/30 backdrop-blur-[16px] border border-white/50 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.5)] rounded-xl px-5 py-7 text-center">
               <div className="text-[40px] sm:text-[52px] font-semibold text-[#111] leading-none mb-3" style={{ fontFamily: "'Lora', serif" }}>
                 {m.value}
               </div>
@@ -285,13 +285,13 @@ function ProjectView({ project }: { project: Project }) {
             </div>
           ))}
         </div>
-        <p className="text-[15px] font-light text-[#555] italic leading-[1.8] max-w-[640px]" style={{ fontFamily: "'Lora', serif" }}>
+        <p className="text-[15px] font-normal text-[#555] italic leading-[1.8] max-w-[640px]" style={{ fontFamily: "'Lora', serif" }}>
           {project.impactTakeaway}
         </p>
       </div>
 
       {/* ── TOOLS ── */}
-      <div className="bg-[#fafafa] border border-[#eee] rounded-xl px-6 py-5 flex items-center gap-3 flex-wrap">
+      <div className="bg-white/30 backdrop-blur-[16px] border border-white/50 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.5)] rounded-xl px-6 py-5 flex items-center gap-3 flex-wrap">
         <span className="text-[11px] font-semibold text-[#bbb] uppercase tracking-[0.14em] shrink-0">Tools</span>
         {project.tools.map((t) => <ToolPill key={t}>{t}</ToolPill>)}
       </div>
@@ -305,7 +305,12 @@ export default function PlanfitDetail() {
   const [active, setActive] = useState(0);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
+      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+        <div className="absolute -top-[10%] -right-[10%] w-[500px] h-[500px] rounded-full bg-[rgba(100,140,180,0.25)] blur-[120px]" />
+        <div className="absolute bottom-[5%] -left-[10%] w-[450px] h-[450px] rounded-full bg-[rgba(120,155,190,0.2)] blur-[110px]" />
+        <div className="absolute top-[35%] left-[30%] w-[350px] h-[350px] rounded-full bg-[rgba(140,170,200,0.15)] blur-[90px]" />
+      </div>
       <div className="max-w-[1080px] mx-auto px-10 max-sm:px-5 pt-14 pb-24">
         <Link to="/" className="text-[14px] font-medium text-[#86868b] no-underline transition-opacity duration-200 hover:opacity-60">
           ← back
@@ -317,11 +322,11 @@ export default function PlanfitDetail() {
             Planfit
           </h1>
           <div className="flex flex-col gap-2 mb-6">
-            <div className="text-[15px] font-light text-[#555]"><span className="font-semibold text-[#111]">Role:</span> {OVERVIEW.role}</div>
-            <div className="text-[15px] font-light text-[#555]"><span className="font-semibold text-[#111]">Team:</span> {OVERVIEW.team}</div>
-            <div className="text-[15px] font-light text-[#555]"><span className="font-semibold text-[#111]">Period:</span> {OVERVIEW.period}</div>
+            <div className="text-[15px] font-normal text-[#555]"><span className="font-semibold text-[#111]">Role:</span> {OVERVIEW.role}</div>
+            <div className="text-[15px] font-normal text-[#555]"><span className="font-semibold text-[#111]">Team:</span> {OVERVIEW.team}</div>
+            <div className="text-[15px] font-normal text-[#555]"><span className="font-semibold text-[#111]">Period:</span> {OVERVIEW.period}</div>
           </div>
-          <p className="text-[15px] font-light text-[#555] leading-[1.85] mb-6">{OVERVIEW.summary}</p>
+          <p className="text-[15px] font-normal text-[#555] leading-[1.85] mb-6">{OVERVIEW.summary}</p>
           <div className="flex flex-wrap gap-2 mb-4">
             {OVERVIEW.skills.map((s) => <ToolPill key={s}>{s}</ToolPill>)}
           </div>
@@ -330,7 +335,7 @@ export default function PlanfitDetail() {
           </div>
         </div>
 
-        <div className="h-px bg-[#e8e8ed] mb-10" />
+        <div className="h-px bg-black/5 mb-10" />
 
         {/* Tabs */}
         <div className="flex gap-2 mb-14 overflow-x-auto">
@@ -341,7 +346,7 @@ export default function PlanfitDetail() {
               className={`shrink-0 text-[13px] font-medium tracking-[0.02em] px-5 py-2.5 cursor-pointer transition-all duration-200 rounded-sm ${
                 active === i
                   ? 'bg-[#1d1d1f] text-white border border-[#1d1d1f]'
-                  : 'bg-white text-[#86868b] border border-[#d2d2d7] hover:bg-[#f5f5f7] hover:text-[#1d1d1f]'
+                  : 'bg-white/30 backdrop-blur-[12px] text-[#86868b] border border-white/50 hover:bg-white/40 hover:text-[#1d1d1f]'
               }`}
             >
               {p.num} {p.title}

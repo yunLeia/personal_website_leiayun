@@ -32,7 +32,7 @@ function ProjectBlock({ project, index, onChat, onReadMore }: {
         <h3 className="mt-2 text-[24px] font-semibold text-[#1d1d1f] tracking-tight">
           {project.title.toLowerCase()}
         </h3>
-        <p className="mt-3 text-[15px] text-[#86868b] leading-[1.65]">{project.description}</p>
+        <p className="mt-3 text-[15px] text-[#666] leading-[1.65]">{project.description}</p>
         <div className="mt-5 flex gap-3">
           <button
             onClick={onChat}

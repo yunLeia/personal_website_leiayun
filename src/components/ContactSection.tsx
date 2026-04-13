@@ -1,11 +1,11 @@
 export default function ContactSection() {
   return (
     <section id="contact" className="mb-12">
-      <h2 className="text-[11px] font-semibold text-[#bbb] uppercase tracking-[0.14em] mb-6">
+      <h2 className="text-[11px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-6">
         Contact
       </h2>
-      <div className="bg-white/55 backdrop-blur-[20px] border border-white/70 shadow-[0_2px_12px_rgba(0,0,0,0.04)] rounded-xl px-6 py-5">
-        <p className="text-[15px] font-light text-[#555] leading-[1.6]">
+      <div className="bg-white/30 backdrop-blur-[16px] border border-white/50 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.5)] rounded-xl px-6 py-5">
+        <p className="text-[15px] font-normal text-[#555] leading-[1.6]">
           always happy to chat —{' '}
           <a
             href="mailto:sy3544@nyu.edu"

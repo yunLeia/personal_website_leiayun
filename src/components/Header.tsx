@@ -20,10 +20,10 @@ export default function Header() {
     <header className="animate-fade-in">
       <div className="flex justify-between items-start">
         <div>
-          <Link to="/" className="text-[28px] max-sm:text-[24px] font-bold tracking-tight text-[#111] no-underline">
+          <Link to="/" className="text-[32px] max-sm:text-[26px] font-bold tracking-tight text-[#111] no-underline">
             {SITE.name}
           </Link>
-          <div className="text-[15px] max-sm:text-[14px] font-light text-[#888] mt-0.5">
+          <div className="text-[15px] max-sm:text-[14px] font-normal text-[#666] mt-0.5">
             {SITE.tagline}
           </div>
         </div>
@@ -73,7 +73,7 @@ export default function Header() {
         <a
           href={SITE.resumePath}
           download
-          className="text-[13px] font-medium px-5 py-2 rounded-full bg-white/60 backdrop-blur-[12px] border border-white/70 text-[#111] no-underline transition-all duration-200 hover:bg-white/80 active:scale-[0.97]"
+          className="text-[13px] font-medium px-5 py-2 rounded-full bg-white/30 backdrop-blur-[12px] border border-white/50 text-[#111] no-underline transition-all duration-200 hover:bg-white/45 active:scale-[0.97]"
         >
           download resume
         </a>

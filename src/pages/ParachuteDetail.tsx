@@ -9,7 +9,7 @@ function B({ children }: { children: ReactNode }) {
 
 function ToolPill({ children }: { children: string }) {
   return (
-    <span className="text-[11px] text-[#666] font-normal bg-[#f5f5f7] border border-[#e8e8ed] rounded-sm px-2.5 py-1">
+    <span className="text-[11px] text-[#666] font-normal bg-white/30 backdrop-blur-[8px] border border-white/50 rounded-sm px-2.5 py-1">
       {children}
     </span>
   );
@@ -21,7 +21,7 @@ function SectionLabel({ children }: { children: string }) {
       <h3 className="text-[11px] font-semibold text-[#bbb] uppercase tracking-[0.14em]">
         {children}
       </h3>
-      <span className="flex-1 h-px bg-[#e8e8ed]" />
+      <span className="flex-1 h-px bg-black/5" />
     </div>
   );
 }
@@ -104,7 +104,12 @@ const RESULTS = [
 
 export default function ParachuteDetail() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
+      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+        <div className="absolute -top-[10%] -right-[10%] w-[500px] h-[500px] rounded-full bg-[rgba(100,140,180,0.25)] blur-[120px]" />
+        <div className="absolute bottom-[5%] -left-[10%] w-[450px] h-[450px] rounded-full bg-[rgba(120,155,190,0.2)] blur-[110px]" />
+        <div className="absolute top-[35%] left-[30%] w-[350px] h-[350px] rounded-full bg-[rgba(140,170,200,0.15)] blur-[90px]" />
+      </div>
       <div className="max-w-[1080px] mx-auto px-10 max-sm:px-5 pt-14 pb-24">
         <Link to="/" className="text-[14px] font-medium text-[#86868b] no-underline transition-opacity duration-200 hover:opacity-60">
           ← back
@@ -116,16 +121,16 @@ export default function ParachuteDetail() {
             Parachute
           </h1>
           <div className="flex flex-col gap-2 mb-6">
-            <div className="text-[15px] font-light text-[#555]"><span className="font-semibold text-[#111]">Role:</span> {OVERVIEW.role}</div>
-            <div className="text-[15px] font-light text-[#555]"><span className="font-semibold text-[#111]">Period:</span> {OVERVIEW.period}</div>
+            <div className="text-[15px] font-normal text-[#555]"><span className="font-semibold text-[#111]">Role:</span> {OVERVIEW.role}</div>
+            <div className="text-[15px] font-normal text-[#555]"><span className="font-semibold text-[#111]">Period:</span> {OVERVIEW.period}</div>
           </div>
-          <p className="text-[15px] font-light text-[#555] leading-[1.85] mb-6 max-w-[640px]">{OVERVIEW.summary}</p>
+          <p className="text-[15px] font-normal text-[#555] leading-[1.85] mb-6 max-w-[640px]">{OVERVIEW.summary}</p>
           <div className="flex flex-wrap gap-2">
             {OVERVIEW.tools.map((t) => <ToolPill key={t}>{t}</ToolPill>)}
           </div>
         </div>
 
-        <div className="h-px bg-[#e8e8ed] mb-14" />
+        <div className="h-px bg-black/5 mb-14" />
 
         {/* ── HERO ── */}
         <div className="mb-16 animate-fade-in">
@@ -145,12 +150,12 @@ export default function ParachuteDetail() {
           <h3 className="text-[26px] font-bold text-[#111] tracking-tight mb-7 leading-[1.25]">
             One wrong classification, one lost user.
           </h3>
-          <p className="text-[15px] font-light text-[#555] leading-[1.85] max-w-[640px]">
+          <p className="text-[15px] font-normal text-[#555] leading-[1.85] max-w-[640px]">
             Parachute needed an AI career coaching platform — starting with a resume classifier at the gate. No existing AI infrastructure, no training data, no baseline. And every misclassification meant blocking someone who genuinely needed help.
           </p>
         </div>
 
-        <div className="h-px bg-[#e8e8ed] mb-16" />
+        <div className="h-px bg-black/5 mb-16" />
 
         {/* ── TECHNICAL EXPLORATION ── */}
         <div className="mb-16">
@@ -160,22 +165,22 @@ export default function ParachuteDetail() {
           </h3>
           <div className="grid grid-cols-3 max-sm:grid-cols-1 gap-4 mb-8">
             {APPROACHES.map((a) => (
-              <div key={a.label} className="bg-[#fafafa] border border-[#eee] rounded-xl px-6 py-6">
+              <div key={a.label} className="bg-white/30 backdrop-blur-[16px] border border-white/50 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.5)] rounded-xl px-6 py-6">
                 <div className="text-[13px] font-semibold text-[#111] mb-3">
                   {a.label}
                 </div>
-                <p className="text-[15px] font-light text-[#555] leading-[1.85]">
+                <p className="text-[15px] font-normal text-[#555] leading-[1.85]">
                   {a.text}
                 </p>
               </div>
             ))}
           </div>
-          <p className="text-[15px] font-light text-[#555] leading-[1.85] max-w-[640px]">
+          <p className="text-[15px] font-normal text-[#555] leading-[1.85] max-w-[640px]">
             <B>Verdict:</B> Zero-shot was the safest baseline. But prompt-only has a hard ceiling — scaling requires fine-tuning (~89% with 3.5k examples) or embedding + ML (~93% with 400k).
           </p>
         </div>
 
-        <div className="h-px bg-[#e8e8ed] mb-16" />
+        <div className="h-px bg-black/5 mb-16" />
 
         {/* ── ARCHITECTURE DECISIONS ── */}
         <div className="mb-16">
@@ -185,11 +190,11 @@ export default function ParachuteDetail() {
           </h3>
           <div className="grid grid-cols-3 max-sm:grid-cols-1 gap-4">
             {ARCHITECTURE.map((a) => (
-              <div key={a.label} className="bg-white border border-[#eee] rounded-xl px-6 py-6">
+              <div key={a.label} className="bg-white/30 backdrop-blur-[16px] border border-white/50 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.5)] rounded-xl px-6 py-6">
                 <div className="text-[13px] font-semibold text-[#111] mb-3">
                   {a.label}
                 </div>
-                <p className="text-[15px] font-light text-[#555] leading-[1.85]">
+                <p className="text-[15px] font-normal text-[#555] leading-[1.85]">
                   {a.text}
                 </p>
               </div>
@@ -197,18 +202,18 @@ export default function ParachuteDetail() {
           </div>
         </div>
 
-        <div className="h-px bg-[#e8e8ed] mb-16" />
+        <div className="h-px bg-black/5 mb-16" />
 
         {/* ── IMPLEMENTATION ── */}
         <div className="mb-16">
           <SectionLabel>Implementation</SectionLabel>
           <div className="grid grid-cols-3 max-sm:grid-cols-1 gap-4">
             {IMPLEMENTATION.map((item) => (
-              <div key={item.label} className="bg-[#fafafa] border border-[#eee] rounded-xl px-6 py-6">
+              <div key={item.label} className="bg-white/30 backdrop-blur-[16px] border border-white/50 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.5)] rounded-xl px-6 py-6">
                 <div className="text-[13px] font-semibold text-[#111] mb-3">
                   {item.label}
                 </div>
-                <p className="text-[15px] font-light text-[#555] leading-[1.85]">
+                <p className="text-[15px] font-normal text-[#555] leading-[1.85]">
                   {item.text}
                 </p>
               </div>
@@ -216,7 +221,7 @@ export default function ParachuteDetail() {
           </div>
         </div>
 
-        <div className="h-px bg-[#e8e8ed] mb-16" />
+        <div className="h-px bg-black/5 mb-16" />
 
         {/* ── RESULTS ── */}
         <div className="mb-16">
