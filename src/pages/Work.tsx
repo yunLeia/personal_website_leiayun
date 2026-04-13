@@ -17,7 +17,7 @@ function ProjectBlock({ project, index, onChat, onReadMore }: {
       {/* Image placeholder */}
       <div className="flex-1 w-full">
         <div
-          className="w-full aspect-[16/10] rounded-2xl bg-white/20 backdrop-blur-[12px] border border-white/40 flex items-center justify-center cursor-pointer transition-all duration-200 hover:bg-white/30"
+          className="w-full aspect-[16/10] rounded-2xl bg-white/10 backdrop-blur-[12px] border border-white/25 flex items-center justify-center cursor-pointer transition-all duration-200 hover:bg-white/20"
           onClick={onChat}
         >
           <span className="text-black/20 text-[13px]">screenshot</span>
@@ -36,7 +36,7 @@ function ProjectBlock({ project, index, onChat, onReadMore }: {
         <div className="mt-5 flex gap-3">
           <button
             onClick={onChat}
-            className="text-[14px] font-medium px-5 py-2 rounded-full bg-white/30 backdrop-blur-[12px] border border-white/50 text-[#1d1d1f] cursor-pointer transition-all duration-200 hover:bg-white/40 active:scale-[0.97]"
+            className="text-[14px] font-medium px-5 py-2 rounded-full bg-white/15 backdrop-blur-[12px] border border-white/30 text-[#1d1d1f] cursor-pointer transition-all duration-200 hover:bg-white/25 active:scale-[0.97]"
           >
             chat about this
           </button>

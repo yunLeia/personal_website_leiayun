@@ -193,7 +193,7 @@ export default function DetailPanel({ chat, onClose }: DetailPanelProps) {
     <div ref={containerRef} className="fixed bottom-6 right-6 max-sm:bottom-4 max-sm:right-4 z-50">
       {/* Chat box */}
       <div
-        className={`absolute bottom-16 right-0 w-[400px] max-sm:w-[calc(100vw-32px)] max-sm:right-[-12px] max-h-[72vh] max-sm:max-h-[60vh] bg-white/30 backdrop-blur-[24px] border border-white/50 rounded-[20px] shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.5)] flex flex-col origin-bottom-right transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        className={`absolute bottom-16 right-0 w-[400px] max-sm:w-[calc(100vw-32px)] max-sm:right-[-12px] max-h-[72vh] max-sm:max-h-[60vh] bg-white/15 backdrop-blur-[24px] border border-white/30 rounded-[20px] shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.5)] flex flex-col origin-bottom-right transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           panelOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-2 pointer-events-none'
         }`}
       >

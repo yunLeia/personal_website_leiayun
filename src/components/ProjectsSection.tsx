@@ -29,9 +29,9 @@ export default function ProjectsSection({ onSelect, activeKey }: Props) {
                   subtitle: 'project details',
                 })
               }
-              className={`group w-full text-left font-[inherit] px-6 py-5 rounded-xl cursor-pointer transition-all duration-300 bg-white/30 backdrop-blur-[16px] border border-white/50 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.5)] hover:bg-white/40 hover:shadow-[0_4px_24px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.6)] ${
+              className={`group w-full text-left font-[inherit] px-6 py-5 rounded-xl cursor-pointer transition-all duration-300 bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] hover:bg-white/25 hover:shadow-[0_4px_24px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.6)] ${
                 visible[i] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
-              } ${activeKey === key ? 'bg-white/40 border-white/60 shadow-[0_4px_24px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.6)]' : ''}`}
+              } ${activeKey === key ? 'bg-white/25 border-white/40 shadow-[0_4px_24px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.6)]' : ''}`}
             >
               <div className="text-[16px] max-sm:text-[15px] font-semibold text-[#111] tracking-tight transition-opacity duration-200 group-hover:opacity-70">
                 {proj.name}
