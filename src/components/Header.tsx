@@ -73,7 +73,7 @@ export default function Header() {
         <a
           href={SITE.resumePath}
           download
-          className="text-[13px] font-medium px-5 py-2 rounded-full border border-[#ddd] text-[#111] no-underline transition-all duration-200 hover:bg-[#fafafa] active:scale-[0.97]"
+          className="text-[13px] font-medium px-5 py-2 rounded-full bg-white/60 backdrop-blur-[12px] border border-white/70 text-[#111] no-underline transition-all duration-200 hover:bg-white/80 active:scale-[0.97]"
         >
           download resume
         </a>
