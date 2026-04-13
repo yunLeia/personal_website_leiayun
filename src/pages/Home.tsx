@@ -1,6 +1,5 @@
 import { useState, useCallback } from 'react';
 import Header from '../components/Header';
-import Highlights from '../components/Highlights';
 import ExperienceSection from '../components/ExperienceSection';
 import ProjectsSection from '../components/ProjectsSection';
 import ContactSection from '../components/ContactSection';
@@ -27,7 +26,6 @@ export default function Home() {
       <div className="max-w-[1080px] mx-auto">
         <Header />
         <main className="mt-10">
-          <Highlights />
           <ExperienceSection onSelect={openChat} activeKey={activeKey} />
           <ProjectsSection onSelect={openChat} activeKey={activeKey} />
           <ContactSection />
