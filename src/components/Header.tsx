@@ -33,7 +33,7 @@ export default function Header() {
               <Link
                 key={link.label}
                 to={link.href}
-                className="text-[14px] max-sm:text-[12px] font-medium text-[#888] no-underline transition-opacity duration-200 hover:opacity-60 whitespace-nowrap"
+                className="text-[14px] max-sm:text-[12px] font-medium text-[#666] no-underline transition-opacity duration-200 hover:opacity-60 whitespace-nowrap"
               >
                 {link.label.toLowerCase()}
               </Link>
@@ -42,7 +42,7 @@ export default function Header() {
                 key={link.label}
                 href={link.href}
                 onClick={(e) => handleClick(e, link)}
-                className="text-[14px] max-sm:text-[12px] font-medium text-[#888] no-underline transition-opacity duration-200 hover:opacity-60 whitespace-nowrap"
+                className="text-[14px] max-sm:text-[12px] font-medium text-[#666] no-underline transition-opacity duration-200 hover:opacity-60 whitespace-nowrap"
               >
                 {link.label.toLowerCase()}
               </a>
@@ -54,7 +54,7 @@ export default function Header() {
               href={link.href}
               target={link.external ? '_blank' : undefined}
               rel={link.external ? 'noopener noreferrer' : undefined}
-              className="text-[14px] max-sm:text-[12px] font-medium text-[#888] no-underline transition-opacity duration-200 hover:opacity-60 whitespace-nowrap"
+              className="text-[14px] max-sm:text-[12px] font-medium text-[#666] no-underline transition-opacity duration-200 hover:opacity-60 whitespace-nowrap"
             >
               {link.label.toLowerCase()}
               {link.external && <span className="text-[10px] max-sm:text-[9px] ml-0.5">&#8599;</span>}
@@ -73,7 +73,7 @@ export default function Header() {
         <a
           href={SITE.resumePath}
           download
-          className="text-[13px] font-medium px-5 py-2 rounded-full bg-white/30 backdrop-blur-[12px] border border-white/50 text-[#111] no-underline transition-all duration-200 hover:bg-white/45 active:scale-[0.97]"
+          className="text-[13px] font-medium px-5 py-2 rounded-full bg-white/15 backdrop-blur-[12px] border border-white/30 text-[#111] no-underline transition-all duration-200 hover:bg-white/25 active:scale-[0.97]"
         >
           download resume
         </a>

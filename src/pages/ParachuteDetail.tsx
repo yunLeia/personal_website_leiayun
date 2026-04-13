@@ -9,7 +9,7 @@ function B({ children }: { children: ReactNode }) {
 
 function ToolPill({ children }: { children: string }) {
   return (
-    <span className="text-[11px] text-[#666] font-normal bg-white/30 backdrop-blur-[8px] border border-white/50 rounded-sm px-2.5 py-1">
+    <span className="text-[11px] text-[#666] font-normal bg-white/15 backdrop-blur-[8px] border border-white/30 rounded-sm px-2.5 py-1">
       {children}
     </span>
   );
@@ -121,10 +121,10 @@ export default function ParachuteDetail() {
             Parachute
           </h1>
           <div className="flex flex-col gap-2 mb-6">
-            <div className="text-[15px] font-normal text-[#555]"><span className="font-semibold text-[#111]">Role:</span> {OVERVIEW.role}</div>
-            <div className="text-[15px] font-normal text-[#555]"><span className="font-semibold text-[#111]">Period:</span> {OVERVIEW.period}</div>
+            <div className="text-[15px] font-normal text-[#444]"><span className="font-semibold text-[#111]">Role:</span> {OVERVIEW.role}</div>
+            <div className="text-[15px] font-normal text-[#444]"><span className="font-semibold text-[#111]">Period:</span> {OVERVIEW.period}</div>
           </div>
-          <p className="text-[15px] font-normal text-[#555] leading-[1.85] mb-6 max-w-[640px]">{OVERVIEW.summary}</p>
+          <p className="text-[15px] font-normal text-[#444] leading-[1.7] mb-6 max-w-[640px]">{OVERVIEW.summary}</p>
           <div className="flex flex-wrap gap-2">
             {OVERVIEW.tools.map((t) => <ToolPill key={t}>{t}</ToolPill>)}
           </div>
@@ -140,7 +140,7 @@ export default function ParachuteDetail() {
           <p className="text-[20px] sm:text-[24px] font-light text-[#111] leading-[1.35] tracking-tight italic mb-6" style={{ fontFamily: "'Lora', serif" }}>
             That means 1 in 4 real job seekers get rejected before they even start.
           </p>
-          <div className="text-[15px] font-medium text-[#888] tracking-tight">
+          <div className="text-[16px] font-medium text-[#555] tracking-tight">
             Resume Classifier · RAG Pipeline · Career Coach MVP
           </div>
         </div>
@@ -150,7 +150,7 @@ export default function ParachuteDetail() {
           <h3 className="text-[26px] font-bold text-[#111] tracking-tight mb-7 leading-[1.25]">
             One wrong classification, one lost user.
           </h3>
-          <p className="text-[15px] font-normal text-[#555] leading-[1.85] max-w-[640px]">
+          <p className="text-[15px] font-normal text-[#444] leading-[1.7] max-w-[640px]">
             Parachute needed an AI career coaching platform — starting with a resume classifier at the gate. No existing AI infrastructure, no training data, no baseline. And every misclassification meant blocking someone who genuinely needed help.
           </p>
         </div>
@@ -165,17 +165,17 @@ export default function ParachuteDetail() {
           </h3>
           <div className="grid grid-cols-3 max-sm:grid-cols-1 gap-4 mb-8">
             {APPROACHES.map((a) => (
-              <div key={a.label} className="bg-white/30 backdrop-blur-[16px] border border-white/50 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.5)] rounded-xl px-6 py-6">
+              <div key={a.label} className="bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-xl px-6 py-6">
                 <div className="text-[13px] font-semibold text-[#111] mb-3">
                   {a.label}
                 </div>
-                <p className="text-[15px] font-normal text-[#555] leading-[1.85]">
+                <p className="text-[15px] font-normal text-[#444] leading-[1.7]">
                   {a.text}
                 </p>
               </div>
             ))}
           </div>
-          <p className="text-[15px] font-normal text-[#555] leading-[1.85] max-w-[640px]">
+          <p className="text-[15px] font-normal text-[#444] leading-[1.7] max-w-[640px]">
             <B>Verdict:</B> Zero-shot was the safest baseline. But prompt-only has a hard ceiling — scaling requires fine-tuning (~89% with 3.5k examples) or embedding + ML (~93% with 400k).
           </p>
         </div>
@@ -190,11 +190,11 @@ export default function ParachuteDetail() {
           </h3>
           <div className="grid grid-cols-3 max-sm:grid-cols-1 gap-4">
             {ARCHITECTURE.map((a) => (
-              <div key={a.label} className="bg-white/30 backdrop-blur-[16px] border border-white/50 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.5)] rounded-xl px-6 py-6">
+              <div key={a.label} className="bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-xl px-6 py-6">
                 <div className="text-[13px] font-semibold text-[#111] mb-3">
                   {a.label}
                 </div>
-                <p className="text-[15px] font-normal text-[#555] leading-[1.85]">
+                <p className="text-[15px] font-normal text-[#444] leading-[1.7]">
                   {a.text}
                 </p>
               </div>
@@ -209,11 +209,11 @@ export default function ParachuteDetail() {
           <SectionLabel>Implementation</SectionLabel>
           <div className="grid grid-cols-3 max-sm:grid-cols-1 gap-4">
             {IMPLEMENTATION.map((item) => (
-              <div key={item.label} className="bg-white/30 backdrop-blur-[16px] border border-white/50 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.5)] rounded-xl px-6 py-6">
+              <div key={item.label} className="bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-xl px-6 py-6">
                 <div className="text-[13px] font-semibold text-[#111] mb-3">
                   {item.label}
                 </div>
-                <p className="text-[15px] font-normal text-[#555] leading-[1.85]">
+                <p className="text-[15px] font-normal text-[#444] leading-[1.7]">
                   {item.text}
                 </p>
               </div>
@@ -228,7 +228,7 @@ export default function ParachuteDetail() {
           <SectionLabel>Results</SectionLabel>
           <div className="grid grid-cols-4 max-sm:grid-cols-2 gap-4 mb-8">
             {RESULTS.map((r) => (
-              <div key={r.label} className="bg-white/30 backdrop-blur-[16px] border border-white/50 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.5)] rounded-xl px-5 py-7 text-center">
+              <div key={r.label} className="bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-xl px-5 py-7 text-center">
                 <div className="text-[40px] sm:text-[52px] font-semibold text-[#111] leading-none mb-3" style={{ fontFamily: "'Lora', serif" }}>
                   {r.value}
                 </div>
@@ -241,7 +241,7 @@ export default function ParachuteDetail() {
         </div>
 
         {/* ── TOOLS ── */}
-        <div className="bg-white/30 backdrop-blur-[16px] border border-white/50 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.5)] rounded-xl px-6 py-5 flex items-center gap-3 flex-wrap">
+        <div className="bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-xl px-6 py-5 flex items-center gap-3 flex-wrap">
           <span className="text-[11px] font-semibold text-[#bbb] uppercase tracking-[0.14em] shrink-0">Tools</span>
           {OVERVIEW.tools.map((t) => <ToolPill key={t}>{t}</ToolPill>)}
         </div>
