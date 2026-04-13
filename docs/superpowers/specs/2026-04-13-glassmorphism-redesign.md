@@ -2,59 +2,75 @@
 
 ## Overview
 
-Existing light minimalist portfolio → light glassmorphism style. Keep the current single-column layout and all component structure. Only change visual styling: background, card appearance, color tokens, and chat panel.
+Light minimalist portfolio → glassmorphism with cool-tone background, steel blue blobs, and frosted glass cards. Single-column layout preserved. Applied to all pages (Home, Work, PlanfitDetail, ParachuteDetail).
 
 ## Design Tokens
 
 ### Background
 - Page background: `#f0f2f5` (cool-tone light gray)
-- Blob colors (3 blobs, absolute positioned, blurred):
-  - Top-right: `rgba(100,140,180,0.1)` — 350px, blur 100px
-  - Bottom-left: `rgba(120,155,190,0.08)` — 280px, blur 90px
-  - Center: `rgba(140,170,200,0.06)` — 200px, blur 70px
+- Blobs (3 per page, fixed, pointer-events-none, -z-10):
+  - Top-right: `rgba(100,140,180,0.25)` — 500px, blur 120px
+  - Bottom-left: `rgba(120,155,190,0.2)` — 450px, blur 110px
+  - Center: `rgba(140,170,200,0.15)` — 350px, blur 90px
 
 ### Glass Card
-- Background: `rgba(255,255,255,0.55)`
-- Backdrop filter: `blur(20px)`
-- Border: `1px solid rgba(255,255,255,0.7)`
-- Border radius: `14px` (keep existing `rounded-xl`)
-- Box shadow: `0 2px 12px rgba(0,0,0,0.04)`
-- Hover: border `rgba(255,255,255,0.9)`, shadow `0 4px 20px rgba(0,0,0,0.06)`
+- Background: `bg-white/15`
+- Backdrop filter: `backdrop-blur-[16px]`
+- Border: `border border-white/30`
+- Box shadow: `shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)]`
+- Hover: `bg-white/25`, shadow `0_4px_24px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.6)`
+- Active/selected: `bg-white/25 border-white/40`
 
-### Typography Colors (light background)
-- Primary text: `rgba(0,0,0,0.85)` — headings, names
-- Secondary text: `rgba(0,0,0,0.6)` — body, descriptions
-- Tertiary text: `rgba(0,0,0,0.4)` — dates, labels, subtitles
-- Muted text: `rgba(0,0,0,0.3)` — section headers, timestamps
+### Glass Button (secondary)
+- Background: `bg-white/15`
+- Backdrop filter: `backdrop-blur-[12px]`
+- Border: `border border-white/30`
+- Hover: `bg-white/25`
 
-### Buttons
-- Primary: keep dark background `#1d1d1f`, white text (unchanged)
-- Secondary: glass style — `rgba(255,255,255,0.6)` bg, `blur(12px)`, border `rgba(0,0,0,0.08)`
+### Glass ToolPill
+- Background: `bg-white/15`
+- Backdrop filter: `backdrop-blur-[8px]`
+- Border: `border border-white/30`
 
-### Chat Panel (DetailPanel)
-- Panel background: `rgba(255,255,255,0.55)`, `blur(24px)`
-- Border: `1px solid rgba(255,255,255,0.7)`
-- Box shadow: `0 8px 32px rgba(0,0,0,0.08)`
-- Message bubbles: `rgba(255,255,255,0.5)` with subtle border
-- Avatar button: glass circle matching card style
+### Glass Chat Panel (DetailPanel)
+- Panel: `bg-white/15 backdrop-blur-[24px] border border-white/30`
+- Bubbles: `bg-white/50 backdrop-blur-[12px] border border-white/60`
+- Close button: `bg-white/50 backdrop-blur-[8px] border border-white/60`
+- Typing dots: `bg-black/15`
+- Avatar ring: `ring-white/70`
 
-## Files to Modify
+### Typography
+- Primary text: `#1d1d1f` — headings, names, bold
+- Secondary text: `#444` — body copy, descriptions (font-normal weight)
+- Tertiary text: `#555` — hero metrics
+- Labels: `#999` — section headers, dates (11px uppercase tracking-[0.14em])
+- Nav links: `#666` — navigation, tagline
+- Chat text: `#666` — bubble content
 
-1. **`src/index.css`** — Change body background to `#f0f2f5`
-2. **`src/pages/Home.tsx`** — Add background blobs (3 absolute-positioned divs)
-3. **`src/components/Header.tsx`** — Update button secondary style to glass
-4. **`src/components/ExperienceSection.tsx`** — Glass card styles on experience items
-5. **`src/components/ProjectsSection.tsx`** — Glass card styles on project items
-6. **`src/components/ContactSection.tsx`** — Glass card style on contact card
-7. **`src/components/DetailPanel.tsx`** — Glass panel + glass message bubbles
-8. **`tailwind.config.ts`** — (optional) add glass utility if reuse warrants it
+### Typography Sizes
+- Header name: `32px` (mobile: 26px), font-bold
+- Header tagline: `15px` (mobile: 14px), font-normal
+- Nav links: `14px` (mobile: 12px), font-medium
+- Buttons: `13px`, font-medium
+- Section labels: `11px`, font-semibold, uppercase
+- Experience role: `17px` (mobile: 15px)
+- Card subtitle: `15px` (mobile: 14px), font-normal
+- Body text: `15px`, font-normal, leading-[1.7]
+- Detail hero: `36-44px` Lora serif, italic
+- Detail headings: `26px`, font-bold
+- Impact numbers: `40-52px` Lora serif
 
-## What Does NOT Change
+### Dividers
+- `h-px bg-black/5` (replaces old `bg-[#e8e8ed]`)
 
-- Page layout structure (single column, max-w-1080px)
-- Component hierarchy and props
-- Router configuration
-- Data layer (data.ts)
-- Animations (fade-in, stagger reveal, bubble-in)
-- Typography sizes and font families
-- Mobile responsive breakpoints
+## Pages Modified
+- `src/index.css` — body background
+- `src/pages/Home.tsx` — blobs
+- `src/pages/Work.tsx` — blobs, glass buttons/placeholders
+- `src/pages/PlanfitDetail.tsx` — blobs, glass cards/tabs/pills
+- `src/pages/ParachuteDetail.tsx` — blobs, glass cards/pills
+- `src/components/Header.tsx` — glass secondary button, nav colors
+- `src/components/ExperienceSection.tsx` — glass cards
+- `src/components/ProjectsSection.tsx` — glass cards
+- `src/components/ContactSection.tsx` — glass card
+- `src/components/DetailPanel.tsx` — glass panel, bubbles, close button
