@@ -228,7 +228,7 @@ export default function ParachuteDetail() {
           <SectionLabel>Results</SectionLabel>
           <div className="grid grid-cols-4 max-sm:grid-cols-2 gap-4 mb-8">
             {RESULTS.map((r) => (
-              <div key={r.label} className="bg-[#fafafa] border border-[#eee] rounded-xl px-5 py-7 text-center">
+              <div key={r.label} className="bg-white/30 backdrop-blur-[16px] border border-white/50 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.5)] rounded-xl px-5 py-7 text-center">
                 <div className="text-[40px] sm:text-[52px] font-semibold text-[#111] leading-none mb-3" style={{ fontFamily: "'Lora', serif" }}>
                   {r.value}
                 </div>
@@ -241,7 +241,7 @@ export default function ParachuteDetail() {
         </div>
 
         {/* ── TOOLS ── */}
-        <div className="bg-[#fafafa] border border-[#eee] rounded-xl px-6 py-5 flex items-center gap-3 flex-wrap">
+        <div className="bg-white/30 backdrop-blur-[16px] border border-white/50 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.5)] rounded-xl px-6 py-5 flex items-center gap-3 flex-wrap">
           <span className="text-[11px] font-semibold text-[#bbb] uppercase tracking-[0.14em] shrink-0">Tools</span>
           {OVERVIEW.tools.map((t) => <ToolPill key={t}>{t}</ToolPill>)}
         </div>
