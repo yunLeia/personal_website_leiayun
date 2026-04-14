@@ -63,7 +63,7 @@ export default function ParachuteDetail() {
         <div className="absolute bottom-[5%] -left-[10%] w-[450px] h-[450px] rounded-full bg-[rgba(120,155,190,0.2)] blur-[110px]" />
         <div className="absolute top-[35%] left-[30%] w-[350px] h-[350px] rounded-full bg-[rgba(140,170,200,0.15)] blur-[90px]" />
       </div>
-      <div className="max-w-[1080px] mx-auto px-10 max-sm:px-5 pt-14 pb-24">
+      <div className="max-w-[1080px] mx-auto px-10 max-sm:px-5 pt-28 max-sm:pt-24 pb-24">
         <Link to="/" className="text-[14px] font-medium text-[#86868b] no-underline transition-opacity duration-200 hover:opacity-60">
           ← back
         </Link>
@@ -77,7 +77,7 @@ export default function ParachuteDetail() {
             <div className="text-[15px] font-normal text-[#444]"><span className="font-semibold text-[#111]">Role:</span> {OVERVIEW.role}</div>
             <div className="text-[15px] font-normal text-[#444]"><span className="font-semibold text-[#111]">Period:</span> {OVERVIEW.period}</div>
           </div>
-          <p className="text-[15px] font-normal text-[#444] leading-[1.7] max-w-[640px]">{OVERVIEW.summary}</p>
+          <p className="text-[15px] font-normal text-[#444] leading-[1.7]">{OVERVIEW.summary}</p>
         </div>
 
         <div className="h-px bg-black/5 mb-16" />

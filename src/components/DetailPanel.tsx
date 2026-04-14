@@ -186,6 +186,12 @@ export default function DetailPanel({ chat, onClose }: DetailPanelProps) {
     return () => window.removeEventListener('keydown', handler);
   }, [onClose, isOpen, greetingOpen]);
 
+  useEffect(() => {
+    const handler = () => setGreetingOpen(true);
+    window.addEventListener('open-greeting', handler);
+    return () => window.removeEventListener('open-greeting', handler);
+  }, []);
+
   const panelOpen = isOpen || greetingOpen;
   const panelType = isOpen ? chat!.subtitle : 'about me';
 

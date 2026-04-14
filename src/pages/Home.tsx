@@ -1,5 +1,4 @@
 import { useState, useCallback } from 'react';
-import Nav from '../components/Nav';
 import Header from '../components/Header';
 import ExperienceSection from '../components/ExperienceSection';
 import ProjectsSection from '../components/ProjectsSection';
@@ -23,7 +22,7 @@ export default function Home() {
   const activeKey = chat ? `${chat.title}-${chat.subtitle}` : null;
 
   return (
-    <div className="min-h-screen px-8 sm:px-12 max-sm:px-5 pt-8 max-sm:pt-6 pb-12 max-sm:pb-24 relative overflow-hidden">
+    <div className="min-h-screen px-8 sm:px-12 max-sm:px-5 pt-20 max-sm:pt-16 pb-12 max-sm:pb-24 relative overflow-hidden">
       {/* Background blobs */}
       <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
         <div className="absolute -top-[10%] -right-[10%] w-[500px] h-[500px] rounded-full bg-[rgba(100,140,180,0.25)] blur-[120px]" />
@@ -31,7 +30,6 @@ export default function Home() {
         <div className="absolute top-[35%] left-[30%] w-[350px] h-[350px] rounded-full bg-[rgba(140,170,200,0.15)] blur-[90px]" />
       </div>
 
-      <Nav />
       <div className="max-w-[1080px] mx-auto">
         <Header />
         <main>

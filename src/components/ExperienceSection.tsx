@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { EXPERIENCE } from '../data';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { useTagReveal } from '../hooks/useTagReveal';
 import type { PanelChat } from './DetailPanel';
 
 interface Props {
@@ -19,7 +18,6 @@ function ExperienceCard({
   onClick: () => void;
 }) {
   const { ref, visible } = useScrollReveal();
-  const tagRevealed = useTagReveal(exp.tags?.length ?? 0, visible);
 
   return (
     <div ref={ref}>
@@ -57,7 +55,7 @@ function ExperienceCard({
         )}
         {exp.tags && (
           <div className="flex flex-wrap gap-2 mt-4 max-sm:mt-3">
-            {exp.tags.map((tag, j) => (
+            {exp.tags.map((tag) => (
               <span
                 key={tag}
                 className="text-[11px] max-sm:text-[10px] font-medium text-[#888] bg-white/20 backdrop-blur-[6px] border border-white/25 rounded-full px-3 py-1"
@@ -89,7 +87,7 @@ export default function ExperienceSection({ onSelect, activeKey }: Props) {
   }
 
   return (
-    <section className="min-h-[85vh] max-sm:min-h-0 flex flex-col justify-center py-16 max-sm:py-10">
+    <section id="experience" className="min-h-[85vh] max-sm:min-h-0 flex flex-col justify-center py-16 max-sm:py-10 scroll-mt-20">
       <h2 className="text-[12px] max-sm:text-[11px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-10 max-sm:mb-6">
         Experience
       </h2>
