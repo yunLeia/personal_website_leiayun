@@ -43,9 +43,9 @@ export const EXPERIENCE: ExperienceItem[] = [
     url: 'https://planfit.ai/en',
     role: 'Product Owner Intern → Solver',
     date: 'Mar–Dec 2025',
-    subtitle: 'Owned 5 product tracks end-to-end — from problem discovery to deployment — across a fitness app serving 30,000+ DAU.',
+    subtitle: 'Owned 5 product tracks end-to-end — from problem discovery to deployment — across a fitness app with 4M+ users worldwide.',
     detailPath: '/work/planfit',
-    tags: ['0→1 Product', '30K+ DAU', '+15% Subscription', 'End-to-End Ownership', 'Claude Code', 'Amplitude'],
+    tags: ['0→1 Product', '4M+ Users', '+15% Subscription', 'End-to-End Ownership', 'Claude Code', 'Amplitude'],
     subProjects: [
       {
         title: 'Paywall A/B Engine',
@@ -127,7 +127,7 @@ export const PROJECTS: ProjectItem[] = [
   {
     name: 'CulinAI',
     sub: 'an AI-powered site that generates recipes from a photo of your fridge or food items.',
-    tags: ['Multimodal AI', 'Food Waste Reduction', 'LLaVA'],
+    tags: ['Multimodal AI', 'Food Waste Reduction', 'LLaVA', 'SDXL-Turbo'],
     detailPath: '/work/culinai',
     cover: '/images/culinai-cover.png',
     chat: [
@@ -142,8 +142,8 @@ export const PROJECTS: ProjectItem[] = [
 // ─── About (greeting bubbles) ────────────────────────────────────
 export const ABOUT_INTRO = [
   "hi! i'm leia — cs + data science @ nyu",
-  "i like building products + figuring out why users behave the way they do",
-  "most recently at planfit — ai features + a lot of experiments",
+  "i build products and turn user behavior into data-driven decisions",
+  "most recently at planfit, i owned features end-to-end and ran 40+ experiments to improve activation and conversion",
   "click anything if you're curious :)",
 ];
 

@@ -30,6 +30,8 @@ export interface PlanfitProject {
   slug: string;
   title: string;
   summary: string;
+  image?: string;
+  imageZoom?: number;
   heroTagline: [string, string];
   heroMetrics: string;
   problemHeadline: string;
@@ -49,9 +51,9 @@ export interface PlanfitProject {
 export const PLANFIT_OVERVIEW = {
   role: 'Product Owner Intern → Solver',
   team: 'Activation · Subscription',
-  period: 'Mar – Dec 2025 · Seoul, KR',
+  period: 'Mar – Dec 2025',
   summary:
-    'Planfit is an AI-powered fitness app serving 30,000+ daily active users across the US and Korea. As a Solver, I owned problems end-to-end — user research, PRD, design, development, QA, and post-launch analysis — without handing off to other functions.',
+    'Planfit is an AI-powered fitness app with 4M+ users worldwide. As a Solver, I owned problems end-to-end — user research, PRD, design, development, QA, and post-launch analysis — without handing off to other functions.',
   skills: [
     'End-to-end product ownership', 'Cross-functional execution',
     'Experimentation', 'Vibe coding', 'AI-augmented workflow',
@@ -70,6 +72,8 @@ export const PLANFIT_PROJECTS: PlanfitProject[] = [
     slug: 'community-club',
     title: 'Community Club',
     summary: 'Redesigned the club feature from a passive social feed into a competition-based system, lifting community engagement +20% and generating 2,000+ user-created clubs.',
+    image: '/images/planfit-community-club.png',
+    imageZoom: 1.15,
     heroTagline: [
       "Users don't want community.",
       'They want a reason to come back.',
@@ -102,18 +106,19 @@ export const PLANFIT_PROJECTS: PlanfitProject[] = [
       { value: '2,000+', label: 'User-generated clubs' },
     ],
     impactTakeaway: <>Users returned when given a clear competitive context. Timing and structure drove retention — not feature visibility.</>,
-    tools: ['Claude Code', 'SuperClaude', 'Figma MCP', 'Django', 'React Native', 'Amplitude', 'SQL'],
+    tools: ['0→1 Product', 'User Research', 'Problem Discovery', 'Figma MCP', 'Amplitude'],
   },
   {
     num: '02',
     slug: 'onboarding-paywall',
     title: 'Onboarding & Paywall',
     summary: 'Built an automated experimentation engine that runs 30+ A/B tests across segments, lifting CTA click rate +20% and subscription CVR +7% — with zero manual deploy cycles.',
+    image: '/images/planfit-onboarding-paywall.png',
     heroTagline: [
       "The bottleneck wasn't ideas.",
       'It was how fast we could test them.',
     ],
-    heroMetrics: '+20% CTA · +7% Subscription CVR',
+    heroMetrics: '+20% CTA · +7% Trial CVR',
     problemHeadline: 'Conversion was stuck.',
     problemBody: (
       <>
@@ -141,18 +146,20 @@ export const PLANFIT_PROJECTS: PlanfitProject[] = [
       { value: '0', label: 'Manual deploy cycles' },
     ],
     impactTakeaway: <>Conversion moved when users felt the product was built for them. Automation meant the next experiment started the moment the last one ended.</>,
-    tools: ['GPT API', 'Django', 'Amplitude', 'Make.com', 'Claude Code', 'React Native', 'Figma'],
+    tools: ['A/B Testing', 'Funnel Analysis', 'Reference Research', 'GPT API', 'Make.com', 'Django'],
   },
   {
     num: '03',
     slug: 'ai-stretching',
-    title: 'AI Stretching',
+    title: 'AI Stretching Recommendation',
     summary: 'Rewrote the stretching recommendation logic to account for muscle mapping and movement flow, lifting completion +13% and US activation +12% — clearing the entire VOC backlog.',
+    image: '/images/planfit-ai-stretching.png',
+    imageZoom: 1.1,
     heroTagline: [
       "Users weren't complaining about stretching.",
       'They were telling me the logic was broken.',
     ],
-    heroMetrics: '+13% Completion · +12% US Activation',
+    heroMetrics: '+13% Subscription · +12% US Activation',
     problemHeadline: 'The requests kept coming in.',
     problemBody: (
       <>
@@ -180,6 +187,6 @@ export const PLANFIT_PROJECTS: PlanfitProject[] = [
       { value: '30K+', label: 'DAU on rec system' },
     ],
     impactTakeaway: <>One root-cause fix cleared the VOC backlog and moved activation. Going deeper than the surface request drove broader product impact than any individual feature fix would have.</>,
-    tools: ['Django', 'React Native', 'SQL', 'Amplitude', 'Claude Code', 'Figma'],
+    tools: ['VOC Analysis', 'User Interviews', 'Recommendation Logic', 'Django', 'React Native'],
   },
 ];

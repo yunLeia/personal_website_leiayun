@@ -25,24 +25,25 @@ const OVERVIEW = {
   role: 'AI Engineering Intern',
   period: 'Mar – Jun 2024',
   summary:
-    'Parachute is an AI-powered career coaching startup. I built the foundational AI infrastructure — resume classification, RAG pipeline, and ETL systems — from zero existing AI infra.',
+    'Parachute is an AI-powered career coaching startup. I built the foundational AI infrastructure — resume classification and RAG pipeline — from zero existing AI infra.',
 };
 
 const WORK_ITEMS = [
   {
+    num: '01',
+    meta: '~73% accuracy · 3 strategies benchmarked',
     title: 'Resume Classifier',
     description: 'Built a Streamlit prototype — PDF upload → PyPDF extraction → GPT classification. Benchmarked 3 prompting strategies (structured JSON, zero-shot, instruction-guided). Zero-shot won at ~73% accuracy; recommended fine-tuning path for production.',
-    tools: ['GPT API', 'Streamlit', 'PyPDF', 'Pydantic'],
+    tools: ['Prompt Engineering', 'Benchmarking', 'GPT API', 'Streamlit', 'PyPDF'],
+    image: '/images/parachute-resume-classifier.png',
   },
   {
+    num: '02',
+    meta: 'Full RAG architecture for chatbot MVP',
     title: 'RAG Pipeline',
     description: 'Designed the full query-response architecture for the career coaching chatbot MVP. Document chunking → FAISS embedding → retrieval → GPT generation. Chose FAISS over Pinecone (no hosted cost for MVP scale) and LangChain for chain composition.',
-    tools: ['LangChain', 'FAISS', 'GPT API', 'Python'],
-  },
-  {
-    title: 'ETL Pipeline',
-    description: 'Automated resume ingestion → text parsing → structured field extraction. Replaced the manual workflow that was bottlenecking mentor-mentee matching, resulting in 18% faster matching.',
-    tools: ['Python', 'PyPDF', 'Pydantic'],
+    tools: ['System Design', 'Architecture', 'LangChain', 'FAISS', 'GPT API'],
+    image: '/images/parachute-rag.png',
   },
 ];
 
@@ -71,7 +72,14 @@ export default function ParachuteDetail() {
         {/* Overview */}
         <div className="mt-12 mb-14 animate-fade-in">
           <h1 className="text-[32px] max-sm:text-[26px] font-bold tracking-tight text-[#111] mb-6">
-            Parachute
+            <a
+              href="https://www.letsparachute.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#111] no-underline hover:underline underline-offset-[6px] decoration-[#d2d2d7] hover:decoration-[#111] transition-colors duration-200"
+            >
+              Parachute
+            </a>
           </h1>
           <div className="flex flex-col gap-2 mb-6">
             <div className="text-[15px] font-normal text-[#444]"><span className="font-semibold text-[#111]">Role:</span> {OVERVIEW.role}</div>
@@ -93,16 +101,25 @@ export default function ParachuteDetail() {
               return (
                 <Reveal key={item.title}>
                   <div className={`flex flex-col ${reversed ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-10 md:gap-14`}>
-                    <div className="flex-1 w-full">
-                      <div className="w-full aspect-[16/10] rounded-2xl bg-white/10 backdrop-blur-[12px] border border-white/25 flex items-center justify-center">
-                        <span className="text-black/20 text-[13px]">screenshot</span>
+                    <div className="w-full md:flex-[2]">
+                      <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden border border-white/25 bg-[#F0F3F7]">
+                        {item.image ? (
+                          <img src={item.image} alt={item.title} className="w-full h-full object-contain" />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center">
+                            <span className="text-black/20 text-[13px]">screenshot</span>
+                          </div>
+                        )}
                       </div>
                     </div>
-                    <div className="flex-1">
-                      <h3 className="text-[24px] max-sm:text-[20px] font-semibold text-[#1d1d1f] tracking-tight">
-                        {item.title.toLowerCase()}
+                    <div className="md:flex-[3]">
+                      <p className="text-[13px] font-medium text-[#666]">
+                        {item.num} &middot; {item.meta}
+                      </p>
+                      <h3 className="mt-3 text-[28px] max-sm:text-[22px] font-bold text-[#111] tracking-tight leading-[1.2]">
+                        {item.title}
                       </h3>
-                      <p className="mt-3 text-[15px] text-[#444] leading-[1.7]">{item.description}</p>
+                      <p className="mt-4 text-[15px] text-[#333] leading-[1.65]">{item.description}</p>
                       <div className="flex flex-wrap gap-2 mt-5">
                         {item.tools.map((t) => <ToolPill key={t}>{t}</ToolPill>)}
                       </div>

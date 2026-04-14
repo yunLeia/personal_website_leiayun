@@ -91,7 +91,6 @@ export default function IndigoDetail() {
           <p className="text-[14px] text-[#999] mb-6">{OVERVIEW.event}</p>
           <div className="flex flex-col gap-2 mb-6">
             <div className="text-[15px] font-normal text-[#444]"><span className="font-semibold text-[#111]">Role:</span> {OVERVIEW.role}</div>
-            <div className="text-[15px] font-normal text-[#444]"><span className="font-semibold text-[#111]">Duration:</span> {OVERVIEW.duration}</div>
           </div>
           <p className="text-[15px] font-normal text-[#444] leading-[1.7] mb-6">{OVERVIEW.summary}</p>
           <div className="flex gap-3">

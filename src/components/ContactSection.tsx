@@ -20,10 +20,10 @@ export default function ContactSection() {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[14px] max-sm:text-[13px] font-medium text-[#666] no-underline transition-opacity duration-200 hover:opacity-60"
+              className="text-[18px] max-sm:text-[15px] font-medium text-[#444] no-underline transition-opacity duration-200 hover:opacity-60"
             >
               {link.label.toLowerCase()}
-              <span className="text-[10px] ml-0.5">&#8599;</span>
+              <span className="text-[12px] ml-0.5">&#8599;</span>
             </a>
           ))}
         </div>

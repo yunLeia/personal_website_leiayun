@@ -128,7 +128,7 @@ function ChatMessages({ messages, chatKey }: { messages: string[]; chatKey: stri
 function AboutGreeting() {
   const bubbles: ReactNode[] = ABOUT_INTRO.map((text, i) => (
     <Bubble key={i} className={i === ABOUT_INTRO.length - 1 ? 'max-w-[70%]' : ''}>
-      <div className={`${i === 0 ? 'text-[14px] max-sm:text-[13px] text-[#1d1d1f]' : 'text-[15px] max-sm:text-[14px] text-[#666]'} leading-[1.6]`}>
+      <div className="text-[14px] max-sm:text-[13px] text-[#333] leading-[1.6]">
         {text}
       </div>
     </Bubble>
