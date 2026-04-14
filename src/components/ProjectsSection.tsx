@@ -52,6 +52,8 @@ function ProjectCard({
             <img
               src={proj.cover}
               alt={proj.name}
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
             />
           </div>

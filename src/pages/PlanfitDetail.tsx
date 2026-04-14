@@ -23,6 +23,8 @@ function ProjectBlock({ project, index, onReadMore }: {
               <img
                 src={project.image}
                 alt={project.title}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-contain"
                 style={{
                   transform: project.imageZoom ? `scale(${project.imageZoom})` : undefined,

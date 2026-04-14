@@ -64,7 +64,7 @@ export const PLANFIT_PROJECTS: PlanfitProject[] = [
     slug: 'community-club',
     title: 'Community Club',
     summary: 'Redesigned the club feature from a passive social feed into a competition-based system, lifting community engagement +20% and generating 2,000+ user-created clubs.',
-    image: '/images/planfit-community-club.png',
+    image: '/images/planfit-community-club.webp',
     imageZoom: 1.15,
     heroTagline: [
       "Users don't want community.",
@@ -105,7 +105,7 @@ export const PLANFIT_PROJECTS: PlanfitProject[] = [
     slug: 'onboarding-paywall',
     title: 'Onboarding & Paywall',
     summary: 'Built an automated experimentation engine that runs 30+ A/B tests across segments, lifting CTA click rate +20% and subscription CVR +7% — with zero manual deploy cycles.',
-    image: '/images/planfit-onboarding-paywall.png',
+    image: '/images/planfit-onboarding-paywall.webp',
     heroTagline: [
       "The bottleneck wasn't ideas.",
       'It was how fast we could test them.',
@@ -145,7 +145,7 @@ export const PLANFIT_PROJECTS: PlanfitProject[] = [
     slug: 'ai-stretching',
     title: 'AI Stretching Recommendation',
     summary: 'Rewrote the stretching recommendation logic to account for muscle mapping and movement flow, lifting completion +13% and US activation +12% — clearing the entire VOC backlog.',
-    image: '/images/planfit-ai-stretching.png',
+    image: '/images/planfit-ai-stretching.webp',
     imageZoom: 1.1,
     heroTagline: [
       "Users weren't complaining about stretching.",

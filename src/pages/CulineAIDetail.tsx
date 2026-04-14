@@ -127,7 +127,7 @@ export default function CulineAIDetail() {
           <div className="flex flex-col md:flex-row md:items-start gap-8 md:gap-12">
             <div className="flex-1 w-full">
               <div className="w-full rounded-2xl overflow-hidden bg-white/10 backdrop-blur-[12px] border border-white/25">
-                <img src="/images/culinai-upload.png" alt="CulinAI upload interface" className="w-full h-auto block" />
+                <img src="/images/culinai-upload.webp" alt="CulinAI upload interface" loading="lazy" decoding="async" className="w-full h-auto block" />
               </div>
             </div>
             <div className="flex-1">

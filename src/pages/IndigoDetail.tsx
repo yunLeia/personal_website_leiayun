@@ -144,7 +144,7 @@ export default function IndigoDetail() {
             Turn sounds into grounded, actionable guidance.
           </h2>
           <div className="w-full rounded-2xl overflow-hidden bg-white/10 backdrop-blur-[12px] border border-white/25">
-            <img src="/images/indigo-solution.png" alt="Solution — Listen, Understand, Act" className="w-full h-auto block" />
+            <img src="/images/indigo-solution.webp" alt="Solution — Listen, Understand, Act" loading="lazy" decoding="async" className="w-full h-auto block" />
           </div>
         </Reveal>
 
@@ -164,7 +164,7 @@ export default function IndigoDetail() {
           <div className="flex flex-col md:flex-row md:items-start gap-8 md:gap-12">
             <div className="flex-1 w-full">
               <div className="w-full rounded-2xl overflow-hidden bg-white/10 backdrop-blur-[12px] border border-white/25">
-                <img src="/images/indigo-pipeline.png" alt="End-to-end audio pipeline" className="w-full h-auto block" />
+                <img src="/images/indigo-pipeline.webp" alt="End-to-end audio pipeline" loading="lazy" decoding="async" className="w-full h-auto block" />
               </div>
             </div>
             <div className="flex-1">
@@ -206,7 +206,7 @@ export default function IndigoDetail() {
           <div className="flex flex-col md:flex-row-reverse md:items-start gap-8 md:gap-12">
             <div className="flex-1 w-full">
               <div className="w-full rounded-2xl overflow-hidden bg-white/10 backdrop-blur-[12px] border border-white/25">
-                <img src="/images/indigo-gemini-roles.png" alt="Gemini used in three roles" className="w-full h-auto block" />
+                <img src="/images/indigo-gemini-roles.webp" alt="Gemini used in three roles" loading="lazy" decoding="async" className="w-full h-auto block" />
               </div>
             </div>
             <div className="flex-1">

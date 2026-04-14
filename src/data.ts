@@ -3,7 +3,7 @@ export const SITE = {
   name: 'Leia Yun',
   email: 'sy3544@nyu.edu',
   resumePath: '/Leia_Yun_Resume.pdf',
-  photo: '/images/leia.png',
+  photo: '/images/leia.webp',
   tagline: 'pm & builder — turning ideas into impact',
 };
 
@@ -109,7 +109,7 @@ export const PROJECTS: ProjectItem[] = [
     sub: 'real-time audio awareness for deaf & hard-of-hearing users — gemini + google adk',
     tags: ['Accessibility', 'Gemini 2.5 Flash', 'Google ADK', 'Hackathon'],
     detailPath: '/work/indigo',
-    cover: '/images/indigo-cover.png',
+    cover: '/images/indigo-cover.webp',
     chat: [
       'built a **real-time audio awareness app** for deaf and hard-of-hearing users',
       'your phone listens, classifies sounds with **gemini 2.5 flash**, and sends **actionable alerts** to your watch',
@@ -122,7 +122,7 @@ export const PROJECTS: ProjectItem[] = [
     sub: 'an AI-powered site that generates recipes from a photo of your fridge or food items.',
     tags: ['Multimodal AI', 'Food Waste Reduction', 'LLaVA', 'SDXL-Turbo'],
     detailPath: '/work/culinai',
-    cover: '/images/culinai-cover.png',
+    cover: '/images/culinai-cover.webp',
     chat: [
       'built an **ai recipe app**',
       'you upload a photo of ingredients and it turns that into a **usable recipe**',

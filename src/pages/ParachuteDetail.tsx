@@ -17,7 +17,7 @@ const WORK_ITEMS = [
     title: 'Resume Classifier',
     description: 'Built a Streamlit prototype — PDF upload → PyPDF extraction → GPT classification. Benchmarked 3 prompting strategies (structured JSON, zero-shot, instruction-guided). Zero-shot won at ~73% accuracy; recommended fine-tuning path for production.',
     tools: ['Prompt Engineering', 'Benchmarking', 'GPT API', 'Streamlit', 'PyPDF'],
-    image: '/images/parachute-resume-classifier.png',
+    image: '/images/parachute-resume-classifier.webp',
   },
   {
     num: '02',
@@ -25,7 +25,7 @@ const WORK_ITEMS = [
     title: 'RAG Pipeline',
     description: 'Designed the full query-response architecture for the career coaching chatbot MVP. Document chunking → FAISS embedding → retrieval → GPT generation. Chose FAISS over Pinecone (no hosted cost for MVP scale) and LangChain for chain composition.',
     tools: ['System Design', 'Architecture', 'LangChain', 'FAISS', 'GPT API'],
-    image: '/images/parachute-rag.png',
+    image: '/images/parachute-rag.webp',
   },
 ];
 
@@ -82,7 +82,7 @@ export default function ParachuteDetail() {
                     <div className="w-full md:flex-[2]">
                       <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden border border-white/25 bg-[#F0F3F7]">
                         {item.image ? (
-                          <img src={item.image} alt={item.title} className="w-full h-full object-contain" />
+                          <img src={item.image} alt={item.title} loading="lazy" decoding="async" className="w-full h-full object-contain" />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center">
                             <span className="text-black/20 text-[13px]">screenshot</span>
