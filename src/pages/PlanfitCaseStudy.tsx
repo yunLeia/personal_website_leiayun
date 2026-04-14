@@ -1,26 +1,6 @@
-import { type ReactNode } from 'react';
 import { Link, useParams, Navigate } from 'react-router-dom';
-import { useScrollReveal } from '../hooks/useScrollReveal';
 import { PLANFIT_PROJECTS, type PlanfitProject } from './planfitData';
-
-// ─── Helpers ─────────────────────────────────────────────────────
-
-function ToolPill({ children }: { children: string }) {
-  return (
-    <span className="text-[11px] text-[#666] font-normal bg-white/15 backdrop-blur-[8px] border border-white/30 rounded-full px-3 py-1">
-      {children}
-    </span>
-  );
-}
-
-function Reveal({ children, className = '' }: { children: ReactNode; className?: string }) {
-  const { ref, visible } = useScrollReveal();
-  return (
-    <div ref={ref} className={`transition-all duration-600 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'} ${className}`}>
-      {children}
-    </div>
-  );
-}
+import { Reveal, ToolPill, BackgroundBlobs } from '../components/shared';
 
 // ─── Case Study View ────────────────────────────────────────────
 
@@ -133,19 +113,21 @@ function CaseStudyView({ project }: { project: PlanfitProject }) {
 
 // ─── Page ────────────────────────────────────────────────────────
 
+// Gate: case studies are hidden behind a password. Direct URL access is
+// redirected back to the Planfit overview until the content is ready to
+// publish. Remove this line to re-enable the case studies.
+const CASE_STUDIES_PUBLISHED = false;
+
 export default function PlanfitCaseStudy() {
   const { slug } = useParams<{ slug: string }>();
   const project = PLANFIT_PROJECTS.find((p) => p.slug === slug);
 
+  if (!CASE_STUDIES_PUBLISHED) return <Navigate to="/work/planfit" replace />;
   if (!project) return <Navigate to="/work/planfit" replace />;
 
   return (
     <div className="min-h-screen">
-      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-        <div className="absolute -top-[10%] -right-[10%] w-[500px] h-[500px] rounded-full bg-[rgba(100,140,180,0.25)] blur-[120px]" />
-        <div className="absolute bottom-[5%] -left-[10%] w-[450px] h-[450px] rounded-full bg-[rgba(120,155,190,0.2)] blur-[110px]" />
-        <div className="absolute top-[35%] left-[30%] w-[350px] h-[350px] rounded-full bg-[rgba(140,170,200,0.15)] blur-[90px]" />
-      </div>
+      <BackgroundBlobs />
       <div className="max-w-[1080px] mx-auto px-10 max-sm:px-5 pt-28 max-sm:pt-24 pb-24">
         <Link to="/work/planfit" className="text-[14px] font-medium text-[#86868b] no-underline transition-opacity duration-200 hover:opacity-60">
           ← back to planfit

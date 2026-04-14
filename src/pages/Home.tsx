@@ -1,12 +1,23 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Header from '../components/Header';
 import ExperienceSection from '../components/ExperienceSection';
 import ProjectsSection from '../components/ProjectsSection';
 import ContactSection from '../components/ContactSection';
 import DetailPanel, { type PanelChat } from '../components/DetailPanel';
+import { BackgroundBlobs } from '../components/shared';
 
 export default function Home() {
+  const location = useLocation();
   const [chat, setChat] = useState<PanelChat | null>(null);
+
+  useEffect(() => {
+    const state = location.state as { openGreeting?: boolean } | null;
+    if (state?.openGreeting) {
+      window.dispatchEvent(new CustomEvent('open-greeting'));
+      window.history.replaceState({}, '');
+    }
+  }, [location.state]);
 
   const openChat = useCallback(
     (incoming: PanelChat) => {
@@ -23,12 +34,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen px-8 sm:px-12 max-sm:px-5 pt-20 max-sm:pt-16 pb-12 max-sm:pb-24 relative overflow-hidden">
-      {/* Background blobs */}
-      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-        <div className="absolute -top-[10%] -right-[10%] w-[500px] h-[500px] rounded-full bg-[rgba(100,140,180,0.25)] blur-[120px]" />
-        <div className="absolute bottom-[5%] -left-[10%] w-[450px] h-[450px] rounded-full bg-[rgba(120,155,190,0.2)] blur-[110px]" />
-        <div className="absolute top-[35%] left-[30%] w-[350px] h-[350px] rounded-full bg-[rgba(140,170,200,0.15)] blur-[90px]" />
-      </div>
+      <BackgroundBlobs />
 
       <div className="max-w-[1080px] mx-auto">
         <Header />

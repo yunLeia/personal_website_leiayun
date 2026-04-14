@@ -54,14 +54,6 @@ export const PLANFIT_OVERVIEW = {
   period: 'Mar – Dec 2025',
   summary:
     'Planfit is an AI-powered fitness app with 4M+ users worldwide. As a Solver, I owned problems end-to-end — user research, PRD, design, development, QA, and post-launch analysis — without handing off to other functions.',
-  skills: [
-    'End-to-end product ownership', 'Cross-functional execution',
-    'Experimentation', 'Vibe coding', 'AI-augmented workflow',
-  ],
-  tools: [
-    'Amplitude', 'Linear', 'Figma', 'Django', 'React Native',
-    'Claude Code', 'SuperClaude', 'Figma MCP', 'CodeRabbit', 'SQL', 'Serena',
-  ],
 };
 
 // ─── Projects ───────────────────────────────────────────────────

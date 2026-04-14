@@ -192,6 +192,7 @@ export default function DetailPanel({ chat, onClose }: DetailPanelProps) {
     return () => window.removeEventListener('open-greeting', handler);
   }, []);
 
+
   const panelOpen = isOpen || greetingOpen;
   const panelType = isOpen ? chat!.subtitle : 'about me';
 

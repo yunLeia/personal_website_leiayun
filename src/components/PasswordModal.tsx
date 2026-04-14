@@ -13,8 +13,8 @@ export default function PasswordModal({ onClose }: Props) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      <div className="absolute inset-0 bg-black/20 backdrop-blur-[8px]" onClick={onClose} />
+    <div className="fixed inset-0 z-50 flex items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="password-modal-title">
+      <div className="absolute inset-0 bg-black/20 backdrop-blur-[8px]" onClick={onClose} aria-hidden="true" />
       <div className="relative bg-white/60 backdrop-blur-[24px] border border-white/50 rounded-2xl shadow-[0_8px_60px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.5)] max-w-md w-full mx-6 p-8 animate-[bubble-in_0.25s_ease-out]">
         <button
           onClick={onClose}
@@ -23,9 +23,9 @@ export default function PasswordModal({ onClose }: Props) {
         >
           &times;
         </button>
-        <h3 className="text-[20px] font-semibold text-[#1d1d1f] tracking-tight">Enter password</h3>
+        <h3 id="password-modal-title" className="text-[20px] font-semibold text-[#1d1d1f] tracking-tight">Enter password</h3>
         <p className="mt-2 text-[14px] text-[#666] leading-[1.6]">
-          This case study is gated. If you were given a link, it may include the password automatically.
+          This case study is gated. Please contact Leia to request the password.
         </p>
         <input
           type="password"

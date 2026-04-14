@@ -12,13 +12,6 @@ export const SOCIAL_LINKS = [
   { label: 'GitHub', href: 'https://github.com/leiassyun' },
 ];
 
-// ─── Highlights (3 numbers) ─────────────────────────────────────
-export const HIGHLIGHTS = [
-  { value: '+15%', label: 'subscription lift' },
-  { value: '2K+', label: 'clubs launched' },
-  { value: '3', label: 'products shipped' },
-];
-
 // ─── Experience ──────────────────────────────────────────────────
 export interface SubProject {
   title: string;
@@ -43,7 +36,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     url: 'https://planfit.ai/en',
     role: 'Product Owner Intern → Solver',
     date: 'Mar–Dec 2025',
-    subtitle: 'Owned 5 product tracks end-to-end — from problem discovery to deployment — across a fitness app with 4M+ users worldwide.',
+    subtitle: 'Owned 5 product tracks end-to-end — from problem discovery to deployment.',
     detailPath: '/work/planfit',
     tags: ['0→1 Product', '4M+ Users', '+15% Subscription', 'End-to-End Ownership', 'Claude Code', 'Amplitude'],
     subProjects: [
@@ -84,7 +77,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     url: 'https://www.letsparachute.com',
     role: 'AI Engineering Intern',
     date: 'Mar–Jun 2024',
-    subtitle: 'Built resume classification, RAG pipeline, and ETL infrastructure for an AI career coaching platform — from zero AI infra.',
+    subtitle: 'Built resume classification and RAG pipeline for an AI career coaching platform — from zero AI infra.',
     detailPath: '/work/parachute',
     tags: ['AI Infra from Zero', 'RAG Pipeline', 'Resume Classifier', 'LangChain', 'GPT API'],
     subProjects: [
@@ -145,61 +138,6 @@ export const ABOUT_INTRO = [
   "i build products and turn user behavior into data-driven decisions",
   "most recently at planfit, i owned features end-to-end and ran 40+ experiments to improve activation and conversion",
   "click anything if you're curious :)",
-];
-
-// ─── Work page (detailed /work) ─────────────────────────────────
-export interface WorkProject {
-  company: string;
-  year: string;
-  title: string;
-  description: string;
-  hasCase: boolean;
-  chat: string[];
-}
-
-export const WORK_PROJECTS: WorkProject[] = [
-  {
-    company: 'Planfit',
-    year: '2025',
-    title: 'Paywall A/B Engine',
-    description:
-      'Designed and built an automated paywall experimentation system using GPT + Django + Amplitude. The engine auto-rotates creative variants based on statistical significance, eliminating manual experiment cycles and boosting CTA conversion by ~15%.',
-    hasCase: true,
-    chat: [
-      'built an **automated a/b testing system**',
-      'basically rotates variants on its own based on **performance**',
-      'used it to **localize paywalls** + optimize flows',
-      'bumped **cta by ~15%** and **subscriptions by ~10%**',
-    ],
-  },
-  {
-    company: 'Planfit',
-    year: '2025',
-    title: 'Competition Leaderboard',
-    description:
-      'Took a social fitness feature from concept to launch — from user interviews and competitive analysis through full-stack implementation. The leaderboard grew to 2K+ clubs and lifted activation by ~12% in the US market.',
-    hasCase: true,
-    chat: [
-      'took this from **concept to launch**',
-      'started with **user interviews** and **competitive analysis**',
-      'then did **full-stack implementation** myself',
-      'grew to **2k+ clubs** and lifted activation **~12%**',
-    ],
-  },
-  {
-    company: 'NYU / Personal',
-    year: '2024',
-    title: 'CulineAI — AI Recipe App',
-    description:
-      'Built an AI-powered recipe app that turns ingredient photos into step-by-step recipes to reduce food waste. Used multimodal models and prompt engineering to produce practical, usable outputs.',
-    hasCase: false,
-    chat: [
-      'built an **ai recipe app**',
-      'you upload a photo of ingredients and it turns that into a **usable recipe**',
-      'used **multimodal models + prompt tuning** to make outputs actually useful',
-      'the goal was to help **reduce food waste**',
-    ],
-  },
 ];
 
 // ─── Nav ─────────────────────────────────────────────────────────
