@@ -49,11 +49,11 @@ export interface PlanfitProject {
 // ─── Overview ───────────────────────────────────────────────────
 
 export const PLANFIT_OVERVIEW = {
-  role: 'Product Owner Intern → Solver',
+  role: 'Product Manager Intern → Builder',
   team: 'Activation · Subscription',
   period: 'Mar – Dec 2025',
   summary:
-    'Planfit is an AI-powered fitness app with 4M+ users worldwide. As a Solver, I owned problems end-to-end — user research, PRD, design, development, QA, and post-launch analysis — without handing off to other functions.',
+    'Planfit is an AI-powered fitness app with 4M+ users worldwide. As a Builder, I owned problems end-to-end — user research, PRD, design, development, QA, and post-launch analysis — without handing off to other functions.',
 };
 
 // ─── Projects ───────────────────────────────────────────────────

@@ -58,16 +58,42 @@ export default function Nav() {
                   }`}
                 >
                   <div className="bg-white/50 backdrop-blur-[20px] border border-white/50 rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.5)] py-2 min-w-[160px]">
-                    {item.items!.map((sub) => (
-                      <Link
-                        key={sub.label}
-                        to={sub.href}
-                        role="menuitem"
-                        className="block text-[13px] font-medium text-[#444] no-underline px-4 py-2 hover:bg-white/40 transition-colors whitespace-nowrap"
-                      >
-                        {sub.label}
-                      </Link>
-                    ))}
+                    {item.items!.map((sub) => {
+                      const isHash = sub.href.startsWith('#');
+                      const className =
+                        'block text-[13px] font-medium text-[#444] no-underline px-4 py-2 hover:bg-white/40 transition-colors whitespace-nowrap';
+                      if (isHash) {
+                        return (
+                          <a
+                            key={sub.label}
+                            href={sub.href}
+                            role="menuitem"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setOpenKey(null);
+                              if (location.pathname !== '/') {
+                                navigate('/' + sub.href);
+                              } else {
+                                document.querySelector(sub.href)?.scrollIntoView({ behavior: 'smooth' });
+                              }
+                            }}
+                            className={className}
+                          >
+                            {sub.label}
+                          </a>
+                        );
+                      }
+                      return (
+                        <Link
+                          key={sub.label}
+                          to={sub.href}
+                          role="menuitem"
+                          className={className}
+                        >
+                          {sub.label}
+                        </Link>
+                      );
+                    })}
                   </div>
                 </div>
               )}

@@ -32,9 +32,26 @@ export interface ExperienceItem {
 
 export const EXPERIENCE: ExperienceItem[] = [
   {
+    company: 'TikTok',
+    url: 'https://lifeattiktok.com/',
+    role: 'Client Solutions Manager Intern',
+    date: 'May 2026–Present',
+    subtitle: 'Partnering with Sales and cross-functional teams on campaign optimization and competitive strategy for advertisers.',
+    tags: ['Global Business Solutions', 'Campaign Optimization', 'Competitive Analysis', 'Cross-functional'],
+    subProjects: [
+      {
+        title: 'Overview',
+        chat: [
+          'this is my current role — **client solutions manager intern** at tiktok',
+          "i'm currently working on it, so more to share soon :)",
+        ],
+      },
+    ],
+  },
+  {
     company: 'Planfit',
     url: 'https://planfit.ai/en',
-    role: 'Product Owner Intern → Solver',
+    role: 'Product Manager Intern → Builder',
     date: 'Mar–Dec 2025',
     subtitle: 'Owned 5 product tracks end-to-end — from problem discovery to deployment.',
     detailPath: '/work/planfit',
@@ -158,6 +175,7 @@ export const NAV_ITEMS: NavItem[] = [
     label: 'Experience',
     href: '#experience',
     items: [
+      { label: 'TikTok', href: '#experience' },
       { label: 'Planfit', href: '/work/planfit' },
       { label: 'Parachute', href: '/work/parachute' },
     ],
