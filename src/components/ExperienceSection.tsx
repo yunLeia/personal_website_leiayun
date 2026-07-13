@@ -29,7 +29,14 @@ function ExperienceCard({
       >
         <div className="flex items-baseline justify-between gap-4">
           <div className="text-[20px] max-sm:text-[16px] text-[#1d1d1f] tracking-tight transition-opacity duration-200 group-hover:opacity-70">
-            {exp.role.toLowerCase()} at{' '}
+            {exp.role.includes('Intern') ? (
+              <>
+                <span className="font-bold">{exp.role.replace(/ ?Intern$/, '')}</span>
+                {' Intern'}
+              </>
+            ) : (
+              <span className="font-bold">{exp.role}</span>
+            )}{' '}at{' '}
             {exp.url ? (
               <a
                 href={exp.url}
@@ -81,7 +88,7 @@ export default function ExperienceSection({ onSelect, activeKey }: Props) {
       onSelect({
         messages: allChat,
         title: exp.company,
-        subtitle: `${exp.role.toLowerCase()} · ${exp.date.toLowerCase()}`,
+        subtitle: `${exp.role} · ${exp.date}`,
       });
     }
   }
@@ -94,7 +101,7 @@ export default function ExperienceSection({ onSelect, activeKey }: Props) {
 
       <div className="flex flex-col gap-5 max-sm:gap-3">
         {EXPERIENCE.map((exp) => {
-          const key = `${exp.company}-${exp.role.toLowerCase()} · ${exp.date.toLowerCase()}`;
+          const key = `${exp.company}-${exp.role} · ${exp.date}`;
           return (
             <ExperienceCard
               key={exp.company}

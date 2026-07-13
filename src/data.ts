@@ -36,8 +36,8 @@ export const EXPERIENCE: ExperienceItem[] = [
     url: 'https://lifeattiktok.com/',
     role: 'Client Solutions Manager Intern',
     date: 'May 2026–Present',
-    subtitle: 'Partnering with Sales and cross-functional teams on campaign optimization and competitive strategy for advertisers.',
-    tags: ['Global Business Solutions', 'Campaign Optimization', 'Competitive Analysis', 'Cross-functional'],
+    subtitle: 'Built AI-powered workflows for internal teams and enterprise clients.',
+    tags: ['AI Workflow Automation', 'Internal Tooling', 'Cross-functional Builder', '170+ Daily Adoption'],
     subProjects: [
       {
         title: 'Overview',
@@ -51,7 +51,7 @@ export const EXPERIENCE: ExperienceItem[] = [
   {
     company: 'Planfit',
     url: 'https://planfit.ai/en',
-    role: 'Product Manager Intern → Builder',
+    role: 'AI Product Engineer Intern',
     date: 'Mar–Dec 2025',
     subtitle: 'Owned 5 product tracks end-to-end — from problem discovery to deployment.',
     detailPath: '/work/planfit',
@@ -92,7 +92,7 @@ export const EXPERIENCE: ExperienceItem[] = [
   {
     company: 'Parachute',
     url: 'https://www.letsparachute.com',
-    role: 'AI Engineering Intern',
+    role: 'AI Engineer Intern',
     date: 'Mar–Jun 2024',
     subtitle: 'Built resume classification and RAG pipeline for an AI career coaching platform — from zero AI infra.',
     detailPath: '/work/parachute',
