@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PLANFIT_OVERVIEW, PLANFIT_PROJECTS } from './planfitData';
 import PasswordModal from '../components/PasswordModal';
+import { trackCaseStudyClick } from '../lib/analytics';
 import { Reveal, ToolPill, BackgroundBlobs } from '../components/shared';
 
 // ─── Project block (Work-page style) ────────────────────────────
@@ -115,7 +116,10 @@ export default function PlanfitDetail() {
           </h2>
           <div className="space-y-24 max-sm:space-y-16">
             {PLANFIT_PROJECTS.map((project, i) => (
-              <ProjectBlock key={project.slug} project={project} index={i} onReadMore={() => setModalOpen(true)} />
+              <ProjectBlock key={project.slug} project={project} index={i} onReadMore={() => {
+                setModalOpen(true);
+                trackCaseStudyClick(project.slug);
+              }} />
             ))}
           </div>
         </div>
