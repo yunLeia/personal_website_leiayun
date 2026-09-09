@@ -3,6 +3,41 @@ import { Reveal, ToolPill, BackgroundBlobs, BackLink } from '../components/share
 
 const tiktok = EXPERIENCE.find((experience) => experience.company === 'TikTok')!;
 
+// ─── Data ────────────────────────────────────────────────────────
+
+const WORK_ITEMS = [
+  {
+    num: '01',
+    meta: '8 datasets · reports in 1 minute',
+    title: 'Internal Marketing Diagnostic Tool',
+    description: 'Built the Korea team\'s first internal marketing diagnostic tool, integrating 8 datasets into a Python service that generates account-level hygiene reports in 1 minute — replacing a 15+ query, one-hour manual process and enabling daily team use.',
+    tools: ['Python', 'Data Pipelines', 'Automation', 'Internal Tooling'],
+  },
+  {
+    num: '02',
+    meta: '3,000+ creatives per account · 20+ enterprise clients',
+    title: 'Ad Creative Audit Pipeline',
+    description: 'Designed a multi-stage LLM pipeline to label 3,000+ ad creatives per account and audit best practices, decomposing analysis into focused prompts to generate optimization recommendations for 20+ enterprise clients.',
+    tools: ['LLM Pipelines', 'Prompt Engineering', 'Ad Analytics'],
+  },
+  {
+    num: '03',
+    meta: '100+ employees adopted · ranked #1 & #2 org-wide',
+    title: 'AI Learning Series & Internal Guide',
+    description: 'Created an all-in-one internal AI guide of use cases and prompts adopted by 100+ employees, and led a two-session AI Learning Series that ranked 1st and 2nd among the organization\'s internal Masterclasses that year.',
+    tools: ['Technical Enablement', 'Workshop Facilitation', 'Content Design'],
+  },
+];
+
+const RESULTS = [
+  { value: 'Top 2', label: 'Masterclass ranking, org-wide' },
+  { value: '4.95', label: 'Avg feedback score (of 5)' },
+  { value: '100+', label: 'Employees using AI guide' },
+  { value: '20+', label: 'Enterprise clients served' },
+];
+
+// ─── Page ────────────────────────────────────────────────────────
+
 export default function TikTokDetail() {
   return (
     <div className="min-h-screen">
@@ -30,34 +65,49 @@ export default function TikTokDetail() {
 
         <div className="h-px bg-black/5 mb-16" />
 
-        <div className="mb-8 animate-fade-in">
-          <h2 className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-12">
-            Case Studies
+        {/* What I Built */}
+        <Reveal className="mb-16">
+          <h2 className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-10">
+            What I Built
           </h2>
-          <Reveal>
-            <div className="flex flex-col md:flex-row items-center gap-10 md:gap-14">
-              <div className="w-full md:flex-[2]">
-                <div className="w-full aspect-[16/10] rounded-2xl border border-white/25 bg-[#F0F3F7] flex flex-col items-center justify-center px-6 text-center">
-                  <span className="text-[52px] max-sm:text-[44px] font-semibold tracking-tight text-[#111] leading-none">170+</span>
-                  <span className="mt-4 text-[12px] font-medium text-[#888] uppercase tracking-[0.14em]">Daily adoption</span>
-                </div>
-              </div>
-              <div className="w-full md:flex-[3]">
-                <p className="text-[13px] font-medium text-[#666]">01 &middot; Internal teams &amp; enterprise clients</p>
-                <h3 className="mt-3 text-[28px] max-sm:text-[22px] font-bold text-[#111] tracking-tight leading-[1.2]">
-                  AI-Powered Workflows
-                </h3>
-                <p className="mt-4 text-[15px] text-[#333] leading-[1.65]">
-                  Built AI-powered workflows for internal teams and enterprise clients, with a focus on workflow automation and internal tooling.
+          <div className="grid grid-cols-3 max-sm:grid-cols-1 gap-5">
+            {WORK_ITEMS.map((item) => (
+              <div key={item.title} className="bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-2xl p-7 max-sm:p-6 flex flex-col">
+                <p className="text-[13px] font-medium text-[#666] mb-3">
+                  {item.num} &middot; {item.meta}
                 </p>
-                <div className="flex flex-wrap gap-2 mt-5">
-                  {tiktok.tags?.map((tag) => <ToolPill key={tag}>{tag}</ToolPill>)}
+                <h3 className="text-[19px] font-semibold text-[#111] tracking-tight leading-[1.25] mb-3">
+                  {item.title}
+                </h3>
+                <p className="text-[14px] text-[#444] leading-[1.65] mb-5 flex-1">{item.description}</p>
+                <div className="flex flex-wrap gap-2">
+                  {item.tools.map((t) => <ToolPill key={t}>{t}</ToolPill>)}
                 </div>
-                <p className="mt-6 text-[14px] text-[#86868b]">Detailed case study coming soon.</p>
               </div>
-            </div>
-          </Reveal>
-        </div>
+            ))}
+          </div>
+        </Reveal>
+
+        <div className="h-px bg-black/5 mb-16" />
+
+        {/* Results */}
+        <Reveal className="mb-16">
+          <h2 className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-10">
+            Results
+          </h2>
+          <div className="grid grid-cols-4 max-sm:grid-cols-2 gap-4">
+            {RESULTS.map((r) => (
+              <div key={r.label} className="bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-2xl px-5 py-7 text-center">
+                <div className="text-[40px] sm:text-[52px] font-semibold text-[#111] leading-none mb-3" style={{ fontFamily: "'Lora', serif" }}>
+                  {r.value}
+                </div>
+                <div className="text-[11px] font-medium text-[#888] uppercase tracking-[0.08em]">
+                  {r.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
       </div>
     </div>
   );
