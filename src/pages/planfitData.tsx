@@ -49,7 +49,7 @@ export interface PlanfitProject {
 // ─── Overview ───────────────────────────────────────────────────
 
 export const PLANFIT_OVERVIEW = {
-  role: 'Product Manager Intern → Builder',
+  role: 'Product Engineer Intern',
   team: 'Activation · Subscription',
   period: 'Mar – Dec 2025',
   summary:

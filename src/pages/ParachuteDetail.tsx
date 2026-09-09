@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom';
-import { Reveal, ToolPill, BackgroundBlobs } from '../components/shared';
+import { Reveal, ToolPill, BackgroundBlobs, BackLink } from '../components/shared';
 
 // ─── Data ────────────────────────────────────────────────────────
 
@@ -43,9 +42,7 @@ export default function ParachuteDetail() {
     <div className="min-h-screen">
       <BackgroundBlobs />
       <div className="max-w-[1080px] mx-auto px-10 max-sm:px-5 pt-28 max-sm:pt-24 pb-24">
-        <Link to="/" className="text-[14px] font-medium text-[#86868b] no-underline transition-opacity duration-200 hover:opacity-60">
-          ← back
-        </Link>
+        <BackLink />
 
         {/* Overview */}
         <div className="mt-12 mb-14 animate-fade-in">

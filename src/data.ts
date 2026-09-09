@@ -4,7 +4,7 @@ export const SITE = {
   email: 'sy3544@nyu.edu',
   resumePath: '/Leia_Yun_Resume.pdf',
   photo: '/images/leia.webp',
-  tagline: 'pm & builder — turning ideas into impact',
+  tagline: 'ai & product engineer — turning ideas into impact',
 };
 
 export const SOCIAL_LINKS = [
@@ -33,16 +33,17 @@ export interface ExperienceItem {
 export const EXPERIENCE: ExperienceItem[] = [
   {
     company: 'TikTok',
+    detailPath: '/work/tiktok',
     url: 'https://lifeattiktok.com/',
-    role: 'Client Solutions Manager Intern',
-    date: 'May 2026–Present',
+    role: 'AI Engineer Intern',
+    date: 'May-Aug 2026',
     subtitle: 'Built AI-powered workflows for internal teams and enterprise clients.',
     tags: ['AI Workflow Automation', 'Internal Tooling', 'Cross-functional Builder', '170+ Daily Adoption'],
     subProjects: [
       {
         title: 'Overview',
         chat: [
-          'this is my current role — **client solutions manager intern** at tiktok',
+          'this is my current role — **ai engineer intern** at tiktok',
           "i'm currently working on it, so more to share soon :)",
         ],
       },
@@ -51,7 +52,7 @@ export const EXPERIENCE: ExperienceItem[] = [
   {
     company: 'Planfit',
     url: 'https://planfit.ai/en',
-    role: 'AI Product Engineer Intern',
+    role: 'Product Engineer Intern',
     date: 'Mar–Dec 2025',
     subtitle: 'Owned 5 product tracks end-to-end — from problem discovery to deployment.',
     detailPath: '/work/planfit',
@@ -122,11 +123,23 @@ export interface ProjectItem {
 
 export const PROJECTS: ProjectItem[] = [
   {
+    name: 'Gatheroll',
+    sub: "everyone's camera roll from one event, in one album — scan a QR, dump your photos, and the system sorts out which ones belong.",
+    tags: ['Full-Stack + AI', 'Computer Vision', 'pgvector', 'Next.js'],
+    detailPath: '/work/gatheroll',
+    chat: [
+      'built **gatheroll** — everyone\'s camera roll from one event, in one shared album',
+      'scan a qr, dump your photos, and the system figures out which ones belong to the night',
+      'thumbnails get scored **locally** before anything leaves your phone',
+      'uses **clip/siglip embeddings + perceptual hashing** to cluster moments and catch duplicates',
+    ],
+  },
+  {
     name: 'myIndigo',
     sub: 'real-time audio awareness for deaf & hard-of-hearing users — gemini + google adk',
     tags: ['Accessibility', 'Gemini 2.5 Flash', 'Google ADK', 'Hackathon'],
     detailPath: '/work/indigo',
-    cover: '/images/indigo-cover.webp',
+    cover: '/images/myindigo-cover.webp',
     chat: [
       'built a **real-time audio awareness app** for deaf and hard-of-hearing users',
       'your phone listens, classifies sounds with **gemini 2.5 flash**, and sends **actionable alerts** to your watch',
@@ -184,6 +197,7 @@ export const NAV_ITEMS: NavItem[] = [
     label: 'Projects',
     href: '#projects',
     items: [
+      { label: 'Gatheroll', href: '/work/gatheroll' },
       { label: 'myIndigo', href: '/work/indigo' },
       { label: 'CulinAI', href: '/work/culinai' },
     ],

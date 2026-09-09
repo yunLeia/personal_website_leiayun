@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { PLANFIT_OVERVIEW, PLANFIT_PROJECTS } from './planfitData';
 import PasswordModal from '../components/PasswordModal';
-import { Reveal, ToolPill, BackgroundBlobs } from '../components/shared';
+import { trackCaseStudyClick } from '../lib/analytics';
+import { Reveal, ToolPill, BackgroundBlobs, BackLink } from '../components/shared';
 
 // ─── Project block (Work-page style) ────────────────────────────
 
@@ -82,9 +82,7 @@ export default function PlanfitDetail() {
     <div className="min-h-screen">
       <BackgroundBlobs />
       <div className="max-w-[1080px] mx-auto px-10 max-sm:px-5 pt-28 max-sm:pt-24 pb-24">
-        <Link to="/" className="text-[14px] font-medium text-[#86868b] no-underline transition-opacity duration-200 hover:opacity-60">
-          ← back
-        </Link>
+        <BackLink />
 
         {/* Overview */}
         <div className="mt-12 mb-14 animate-fade-in">
@@ -115,7 +113,10 @@ export default function PlanfitDetail() {
           </h2>
           <div className="space-y-24 max-sm:space-y-16">
             {PLANFIT_PROJECTS.map((project, i) => (
-              <ProjectBlock key={project.slug} project={project} index={i} onReadMore={() => setModalOpen(true)} />
+              <ProjectBlock key={project.slug} project={project} index={i} onReadMore={() => {
+                setModalOpen(true);
+                trackCaseStudyClick(project.slug);
+              }} />
             ))}
           </div>
         </div>
