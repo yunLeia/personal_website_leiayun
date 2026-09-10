@@ -10,7 +10,7 @@ export default function Header() {
   return (
     <header id="about" className="animate-fade-in min-h-[85vh] max-sm:min-h-[70vh] flex flex-col justify-center">
       <div>
-        <Link to="/" className="text-[48px] max-sm:text-[36px] font-semibold tracking-tight text-[#111] no-underline leading-[1.1]">
+        <Link to="/" className="text-[48px] max-sm:text-[36px] font-medium tracking-tight text-[#111] no-underline leading-[1.1]">
           {SITE.name}
         </Link>
         <div className="text-[18px] max-sm:text-[16px] font-normal text-[#666] mt-2">
@@ -21,7 +21,7 @@ export default function Header() {
           <a
             href="#experience"
             onClick={scrollToExperience}
-            className="bg-[#111] text-white text-[15px] max-sm:text-[14px] font-medium px-7 max-sm:px-5 py-3 max-sm:py-2.5 rounded-full no-underline transition-all duration-200 hover:bg-[#333] active:scale-[0.97]"
+            className="bg-[#111] text-white text-[15px] max-sm:text-[14px] font-medium px-7 max-sm:px-5 py-3 max-sm:py-2.5 rounded-full no-underline transition-all duration-200 shadow-[0_3px_3px_rgba(0,0,0,0.03),0_8px_7px_rgba(0,0,0,0.04),0_17px_14px_rgba(0,0,0,0.05),0_35px_29px_rgba(0,0,0,0.06)] hover:bg-[#333] active:scale-[0.97]"
           >
             view work
           </a>

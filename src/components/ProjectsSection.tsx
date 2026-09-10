@@ -23,9 +23,9 @@ function ProjectCard({
     <div ref={ref}>
       <button
         onClick={onClick}
-        className={`group w-full text-left font-[inherit] overflow-hidden rounded-[20px] max-sm:rounded-2xl cursor-pointer transition-all duration-300 bg-black/[0.03] hover:bg-black/[0.05] ${
+        className={`group w-full text-left font-[inherit] overflow-hidden rounded-[24px] max-sm:rounded-2xl cursor-pointer transition-all duration-300 bg-black/[0.04] hover:bg-black/[0.07] ${
           visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-        } ${isActive ? 'bg-black/[0.06]' : ''}`}
+        } ${isActive ? 'bg-black/[0.08]' : ''}`}
       >
         <div className="px-8 pt-8 pb-6 max-sm:px-6 max-sm:pt-5 max-sm:pb-5">
           <div className="text-[20px] max-sm:text-[16px] font-semibold text-[#111] tracking-tight transition-opacity duration-200 group-hover:opacity-70">
