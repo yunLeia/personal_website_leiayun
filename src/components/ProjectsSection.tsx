@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { PROJECTS } from '../data';
 import type { PanelChat } from './DetailPanel';
+import { SectionHeader } from './HomeUI';
 
 interface Props {
   onSelect: (chat: PanelChat) => void;
@@ -17,10 +18,10 @@ function ProjectRow({
   return (
     <button
       onClick={onClick}
-      className="group w-full text-left font-[inherit] py-5 border-t border-black/[0.08] first:border-t-0 cursor-pointer flex items-start gap-4"
+      className="group w-full text-left font-[inherit] py-4 border-t border-black/[0.08] first:border-t-0 cursor-pointer flex max-sm:flex-col items-start gap-4"
     >
-      {proj.cover && (
-        <div className="w-14 h-14 rounded-lg overflow-hidden shrink-0 bg-black/[0.04]">
+      <div className="w-12 h-12 rounded-lg overflow-hidden shrink-0 bg-black/[0.04]">
+        {proj.cover && (
           <img
             src={proj.cover}
             alt={proj.name}
@@ -28,21 +29,15 @@ function ProjectRow({
             decoding="async"
             className="w-full h-full object-cover object-top"
           />
-        </div>
-      )}
-      <div className="flex-1 min-w-0">
-        <div className="text-[15px] font-semibold text-[#1a1a1a] tracking-tight transition-opacity duration-150 group-hover:opacity-60">
-          {proj.name}
-        </div>
-        <div className="text-[13px] font-normal text-[#666] mt-1.5 leading-[1.6] max-w-[440px]">
-          {proj.sub}
-        </div>
-        {proj.tags && (
-          <div className="text-[12px] text-[#999] mt-2">
-            {proj.tags.join(' · ')}
-          </div>
         )}
       </div>
+      <div className="w-[170px] max-sm:w-full shrink-0">
+        <div className="text-[14px] font-semibold text-[#1a1a1a] transition-opacity duration-150 group-hover:opacity-60">
+          {proj.name}
+        </div>
+        {proj.tags && <div className="text-[12px] text-[#999] mt-0.5">{proj.tags[0]}</div>}
+      </div>
+      <div className="text-[13px] text-[#666] leading-[1.6] flex-1">{proj.sub}</div>
     </button>
   );
 }
@@ -64,9 +59,7 @@ export default function ProjectsSection({ onSelect }: Props) {
 
   return (
     <section id="projects" className="py-8 scroll-mt-20">
-      <h2 className="text-[11px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-2">
-        Projects
-      </h2>
+      <SectionHeader num="02" title="Projects" />
 
       <div className="flex flex-col">
         {PROJECTS.map((proj) => (

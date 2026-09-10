@@ -1,4 +1,5 @@
 import { SITE, SOCIAL_LINKS } from '../data';
+import { SectionHeader } from './HomeUI';
 
 const ICONS: Record<string, React.ReactNode> = {
   LinkedIn: (
@@ -15,7 +16,8 @@ const ICONS: Record<string, React.ReactNode> = {
 
 export default function ContactSection() {
   return (
-    <footer id="contact" className="mt-16 max-sm:mt-12 mb-10 pt-8 border-t border-black/[0.08] scroll-mt-20">
+    <footer id="contact" className="mt-8 mb-10 pt-8 border-t border-black/[0.08] scroll-mt-20">
+      <SectionHeader num="03" title="Contact" />
       <p className="text-[14px] font-normal text-[#999] leading-[1.6]">
         always happy to chat:{' '}
         <a

@@ -43,7 +43,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#f7f6f2] px-8 sm:px-12 max-sm:px-5 pt-14 max-sm:pt-10 pb-12 max-sm:pb-24 relative">
       <PaperGrain />
-      <div className="max-w-[560px] mx-auto relative z-10">
+      <div className="max-w-[820px] mx-auto relative z-10">
         <Header />
         <main>
           <ExperienceSection onSelect={openChat} activeKey={activeKey} />
