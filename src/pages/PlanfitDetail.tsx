@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { PLANFIT_OVERVIEW, PLANFIT_PROJECTS } from './planfitData';
 import PasswordModal from '../components/PasswordModal';
 import { trackCaseStudyClick } from '../lib/analytics';
-import { Reveal, ToolPill, BackgroundBlobs, BackLink } from '../components/shared';
+import { Reveal, ToolPill, BackLink } from '../components/shared';
 
 // ─── Project block (Work-page style) ────────────────────────────
 
@@ -18,7 +18,7 @@ function ProjectBlock({ project, index, onReadMore }: {
       <div className={`flex flex-col ${reversed ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-10 md:gap-14`}>
         {/* Image */}
         <div className="w-full md:flex-[2]">
-          <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden border border-white/25 bg-[#F0F3F7]">
+          <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden border border-black/5 bg-[#F0F3F7]">
             {project.image ? (
               <img
                 src={project.image}
@@ -80,7 +80,6 @@ export default function PlanfitDetail() {
 
   return (
     <div className="min-h-screen">
-      <BackgroundBlobs />
       <div className="max-w-[1080px] mx-auto px-10 max-sm:px-5 pt-28 max-sm:pt-24 pb-24">
         <BackLink />
 

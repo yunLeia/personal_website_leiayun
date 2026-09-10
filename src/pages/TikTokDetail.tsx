@@ -1,5 +1,5 @@
 import { EXPERIENCE } from '../data';
-import { Reveal, ToolPill, BackgroundBlobs, BackLink } from '../components/shared';
+import { Reveal, ToolPill, BackLink } from '../components/shared';
 
 const tiktok = EXPERIENCE.find((experience) => experience.company === 'TikTok')!;
 
@@ -41,7 +41,6 @@ const RESULTS = [
 export default function TikTokDetail() {
   return (
     <div className="min-h-screen">
-      <BackgroundBlobs />
       <div className="max-w-[1080px] mx-auto px-10 max-sm:px-5 pt-28 max-sm:pt-24 pb-24">
         <BackLink />
 
@@ -72,7 +71,7 @@ export default function TikTokDetail() {
           </h2>
           <div className="grid grid-cols-3 max-sm:grid-cols-1 gap-5">
             {WORK_ITEMS.map((item) => (
-              <div key={item.title} className="bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-2xl p-7 max-sm:p-6 flex flex-col">
+              <div key={item.title} className="bg-black/[0.03] rounded-2xl p-7 max-sm:p-6 flex flex-col">
                 <p className="text-[13px] font-medium text-[#666] mb-3">
                   {item.num} &middot; {item.meta}
                 </p>
@@ -97,7 +96,7 @@ export default function TikTokDetail() {
           </h2>
           <div className="grid grid-cols-4 max-sm:grid-cols-2 gap-4">
             {RESULTS.map((r) => (
-              <div key={r.label} className="bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-2xl px-5 py-7 text-center">
+              <div key={r.label} className="bg-black/[0.03] rounded-2xl px-5 py-7 text-center">
                 <div className="text-[40px] sm:text-[52px] font-semibold text-[#111] leading-none mb-3" style={{ fontFamily: "'Lora', serif" }}>
                   {r.value}
                 </div>

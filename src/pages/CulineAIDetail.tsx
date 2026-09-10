@@ -1,4 +1,4 @@
-import { Reveal, ToolPill, BackgroundBlobs, BackLink } from '../components/shared';
+import { Reveal, ToolPill, BackLink } from '../components/shared';
 
 // ─── Data ────────────────────────────────────────────────────────
 
@@ -45,7 +45,6 @@ const DECISIONS = [
 export default function CulineAIDetail() {
   return (
     <div className="min-h-screen">
-      <BackgroundBlobs />
       <div className="max-w-[1080px] mx-auto px-10 max-sm:px-5 pt-28 max-sm:pt-24 pb-24">
         <BackLink />
 
@@ -82,7 +81,7 @@ export default function CulineAIDetail() {
             Most people already have food at home. They just don't know how to turn it into a meal.
           </h2>
           <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-5 max-sm:gap-4">
-            <div className="bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-2xl p-7 max-sm:p-6">
+            <div className="bg-black/[0.03] rounded-2xl p-7 max-sm:p-6">
               <h3 className="text-[18px] font-semibold text-[#111] tracking-tight mb-3">
                 The Problem
               </h3>
@@ -95,7 +94,7 @@ export default function CulineAIDetail() {
                 <li>• Planning meals feels harder than cooking them</li>
               </ul>
             </div>
-            <div className="bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-2xl p-7 max-sm:p-6">
+            <div className="bg-black/[0.03] rounded-2xl p-7 max-sm:p-6">
               <h3 className="text-[18px] font-semibold text-[#111] tracking-tight mb-3">
                 Why CulinAI
               </h3>
@@ -123,7 +122,7 @@ export default function CulineAIDetail() {
           </h2>
           <div className="flex flex-col md:flex-row md:items-start gap-8 md:gap-12">
             <div className="flex-1 w-full">
-              <div className="w-full rounded-2xl overflow-hidden bg-white/10 backdrop-blur-[12px] border border-white/25">
+              <div className="w-full rounded-2xl overflow-hidden border border-black/5">
                 <img src="/images/culinai-upload.webp" alt="CulinAI upload interface" loading="lazy" decoding="async" className="w-full h-auto block" />
               </div>
             </div>
@@ -158,7 +157,7 @@ export default function CulineAIDetail() {
           </h2>
           <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-5">
             {DECISIONS.map((d) => (
-              <div key={d.title} className="bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-2xl p-7 max-sm:p-6 flex flex-col">
+              <div key={d.title} className="bg-black/[0.03] rounded-2xl p-7 max-sm:p-6 flex flex-col">
                 <h3 className="text-[18px] font-semibold text-[#111] tracking-tight mb-3">{d.title}</h3>
                 <p className="text-[15px] font-normal text-[#444] leading-[1.65] mb-5 flex-1">{d.description}</p>
                 <div className="text-[11px] font-semibold text-[#999] uppercase tracking-[0.14em]">

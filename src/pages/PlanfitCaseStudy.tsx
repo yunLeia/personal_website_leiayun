@@ -1,6 +1,6 @@
 import { Link, useParams, Navigate } from 'react-router-dom';
 import { PLANFIT_PROJECTS, type PlanfitProject } from './planfitData';
-import { Reveal, ToolPill, BackgroundBlobs } from '../components/shared';
+import { Reveal, ToolPill } from '../components/shared';
 
 // ─── Case Study View ────────────────────────────────────────────
 
@@ -38,7 +38,7 @@ function CaseStudyView({ project }: { project: PlanfitProject }) {
         </h2>
         <div className="grid grid-cols-3 max-sm:grid-cols-1 gap-4">
           {project.thinking.map((step) => (
-            <div key={step.label} className="bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-2xl px-6 py-6">
+            <div key={step.label} className="bg-black/[0.03] rounded-2xl px-6 py-6">
               <div className="text-[11px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3">
                 {step.label}
               </div>
@@ -59,7 +59,7 @@ function CaseStudyView({ project }: { project: PlanfitProject }) {
         </h2>
         <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-4">
           {project.execution.map((step, i) => (
-            <div key={i} className="bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-2xl px-6 py-6">
+            <div key={i} className="bg-black/[0.03] rounded-2xl px-6 py-6">
               <div className="flex items-baseline gap-3 mb-3">
                 <span className="text-[13px] font-bold text-[#d2d2d7]">
                   {String(i + 1).padStart(2, '0')}
@@ -85,7 +85,7 @@ function CaseStudyView({ project }: { project: PlanfitProject }) {
         </h2>
         <div className="grid grid-cols-4 max-sm:grid-cols-2 gap-4 mb-8">
           {project.impact.map((m) => (
-            <div key={m.label} className="bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-2xl px-5 py-7 text-center">
+            <div key={m.label} className="bg-black/[0.03] rounded-2xl px-5 py-7 text-center">
               <div className="text-[40px] sm:text-[52px] font-semibold text-[#111] leading-none mb-3" style={{ fontFamily: "'Lora', serif" }}>
                 {m.value}
               </div>
@@ -102,7 +102,7 @@ function CaseStudyView({ project }: { project: PlanfitProject }) {
 
       {/* ── TOOLS ── */}
       <Reveal>
-        <div className="bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-2xl px-6 py-5 flex items-center gap-3 flex-wrap">
+        <div className="bg-black/[0.03] rounded-2xl px-6 py-5 flex items-center gap-3 flex-wrap">
           <span className="text-[11px] font-semibold text-[#999] uppercase tracking-[0.14em] shrink-0">Tools</span>
           {project.tools.map((t) => <ToolPill key={t}>{t}</ToolPill>)}
         </div>
@@ -127,7 +127,6 @@ export default function PlanfitCaseStudy() {
 
   return (
     <div className="min-h-screen">
-      <BackgroundBlobs />
       <div className="max-w-[1080px] mx-auto px-10 max-sm:px-5 pt-28 max-sm:pt-24 pb-24">
         <Link to="/work/planfit" className="text-[14px] font-medium text-[#86868b] no-underline transition-opacity duration-200 hover:opacity-60">
           ← back to planfit

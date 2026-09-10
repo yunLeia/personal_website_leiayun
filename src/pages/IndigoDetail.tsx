@@ -1,4 +1,4 @@
-import { Reveal, ToolPill, BackgroundBlobs, BackLink } from '../components/shared';
+import { Reveal, ToolPill, BackLink } from '../components/shared';
 
 // ─── Data ────────────────────────────────────────────────────────
 
@@ -54,7 +54,6 @@ const DECISIONS = [
 export default function IndigoDetail() {
   return (
     <div className="min-h-screen">
-      <BackgroundBlobs />
       <div className="max-w-[1080px] mx-auto px-10 max-sm:px-5 pt-28 max-sm:pt-24 pb-24">
         <BackLink />
 
@@ -81,7 +80,7 @@ export default function IndigoDetail() {
               href={OVERVIEW.links.pitchDeck}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[14px] font-medium px-5 py-2 rounded-full bg-white/15 backdrop-blur-[12px] border border-white/30 text-[#1d1d1f] no-underline transition-all duration-200 hover:bg-white/25 active:scale-[0.97]"
+              className="text-[14px] font-medium px-5 py-2 rounded-full bg-black/[0.05] text-[#1d1d1f] no-underline transition-all duration-200 hover:bg-black/[0.08] active:scale-[0.97]"
             >
               pitch deck &#8599;
             </a>
@@ -100,7 +99,7 @@ export default function IndigoDetail() {
           </h2>
           <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-5 max-sm:gap-4">
             {/* The Problem */}
-            <div className="bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-2xl p-7 max-sm:p-6">
+            <div className="bg-black/[0.03] rounded-2xl p-7 max-sm:p-6">
               <h3 className="text-[18px] font-semibold text-[#111] tracking-tight mb-3">
                 The Problem
               </h3>
@@ -116,7 +115,7 @@ export default function IndigoDetail() {
             </div>
 
             {/* Who It's For */}
-            <div className="bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-2xl p-7 max-sm:p-6">
+            <div className="bg-black/[0.03] rounded-2xl p-7 max-sm:p-6">
               <h3 className="text-[18px] font-semibold text-[#111] tracking-tight mb-3">
                 Who It's For
               </h3>
@@ -140,7 +139,7 @@ export default function IndigoDetail() {
           <h2 className="text-[26px] max-sm:text-[22px] font-bold text-[#111] tracking-tight leading-[1.2] mb-10">
             Turn sounds into grounded, actionable guidance.
           </h2>
-          <div className="w-full rounded-2xl overflow-hidden bg-white/10 backdrop-blur-[12px] border border-white/25">
+          <div className="w-full rounded-2xl overflow-hidden border border-black/5">
             <img src="/images/indigo-solution.webp" alt="Solution — Listen, Understand, Act" loading="lazy" decoding="async" className="w-full h-auto block" />
           </div>
         </Reveal>
@@ -160,7 +159,7 @@ export default function IndigoDetail() {
           </p>
           <div className="flex flex-col md:flex-row md:items-start gap-8 md:gap-12">
             <div className="flex-1 w-full">
-              <div className="w-full rounded-2xl overflow-hidden bg-white/10 backdrop-blur-[12px] border border-white/25">
+              <div className="w-full rounded-2xl overflow-hidden border border-black/5">
                 <img src="/images/indigo-pipeline.webp" alt="End-to-end audio pipeline" loading="lazy" decoding="async" className="w-full h-auto block" />
               </div>
             </div>
@@ -202,7 +201,7 @@ export default function IndigoDetail() {
           </p>
           <div className="flex flex-col md:flex-row-reverse md:items-start gap-8 md:gap-12">
             <div className="flex-1 w-full">
-              <div className="w-full rounded-2xl overflow-hidden bg-white/10 backdrop-blur-[12px] border border-white/25">
+              <div className="w-full rounded-2xl overflow-hidden border border-black/5">
                 <img src="/images/indigo-gemini-roles.webp" alt="Gemini used in three roles" loading="lazy" decoding="async" className="w-full h-auto block" />
               </div>
             </div>
@@ -246,7 +245,7 @@ export default function IndigoDetail() {
           </h2>
           <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-5">
             {DECISIONS.map((d) => (
-              <div key={d.title} className="bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-2xl p-7 max-sm:p-6">
+              <div key={d.title} className="bg-black/[0.03] rounded-2xl p-7 max-sm:p-6">
                 <h3 className="text-[18px] font-semibold text-[#111] tracking-tight mb-3">{d.title}</h3>
                 <p className="text-[15px] font-normal text-[#444] leading-[1.65]">{d.description}</p>
               </div>

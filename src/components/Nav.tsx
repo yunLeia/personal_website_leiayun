@@ -25,8 +25,8 @@ export default function Nav() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-40 backdrop-blur-[12px] border-b ${
-        isHome ? 'bg-[#151515]/70 border-white/10' : 'bg-white/40 border-white/30'
+      className={`fixed top-0 left-0 right-0 z-40 border-b ${
+        isHome ? 'bg-[#151515] border-white/10' : 'bg-[#f0f2f5] border-black/5'
       }`}
     >
       <div className="max-w-[1080px] mx-auto flex items-center justify-end gap-8 max-sm:gap-4 px-8 max-sm:px-5 py-4">
@@ -65,16 +65,16 @@ export default function Nav() {
                   }`}
                 >
                   <div
-                    className={`backdrop-blur-[20px] border rounded-xl py-2 min-w-[160px] ${
+                    className={`border rounded-xl py-2 min-w-[160px] ${
                       isHome
-                        ? 'bg-[#1c1c1e] border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)]'
-                        : 'bg-white/50 border-white/50 shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.5)]'
+                        ? 'bg-[#1c1c1e] border-white/10 shadow-[0_8px_24px_rgba(0,0,0,0.4)]'
+                        : 'bg-white border-black/10 shadow-[0_8px_24px_rgba(0,0,0,0.1)]'
                     }`}
                   >
                     {item.items!.map((sub) => {
                       const isHash = sub.href.startsWith('#');
                       const className = `block text-[13px] font-medium no-underline px-4 py-2 transition-colors whitespace-nowrap ${
-                        isHome ? 'text-white/70 hover:bg-white/10' : 'text-[#444] hover:bg-white/40'
+                        isHome ? 'text-white/70 hover:bg-white/10' : 'text-[#444] hover:bg-black/5'
                       }`;
                       if (isHash) {
                         return (

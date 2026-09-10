@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Reveal, BackgroundBlobs, BackLink } from '../components/shared';
+import { Reveal, BackLink } from '../components/shared';
 
 // ─── Data ────────────────────────────────────────────────────────
 
@@ -51,7 +51,7 @@ const BUILT = [
 // ─── Shared card / heading classes ──────────────────────────────
 
 const CARD =
-  'bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-2xl';
+  'bg-black/[0.03] rounded-2xl';
 const EYEBROW = 'text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3';
 const H2 = 'text-[26px] max-sm:text-[22px] font-bold text-[#111] tracking-tight leading-[1.2]';
 
@@ -120,7 +120,6 @@ function FlowStepper() {
 export default function GatherollDetail() {
   return (
     <div className="min-h-screen">
-      <BackgroundBlobs />
       <div className="max-w-[1080px] mx-auto px-10 max-sm:px-5 pt-28 max-sm:pt-24 pb-24">
         <BackLink />
 
@@ -150,7 +149,7 @@ export default function GatherollDetail() {
               href={OVERVIEW.links.demo}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[14px] font-medium px-5 py-2 rounded-full bg-white/15 backdrop-blur-[12px] border border-white/30 text-[#1d1d1f] no-underline transition-all duration-200 hover:bg-white/25 active:scale-[0.97]"
+              className="text-[14px] font-medium px-5 py-2 rounded-full bg-black/[0.05] text-[#1d1d1f] no-underline transition-all duration-200 hover:bg-black/[0.08] active:scale-[0.97]"
             >
               live demo &#8599;
             </a>
