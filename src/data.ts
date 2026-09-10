@@ -123,15 +123,15 @@ export interface ProjectItem {
 
 export const PROJECTS: ProjectItem[] = [
   {
-    name: 'Gatheroll',
-    sub: "everyone's camera roll from one event, in one album — scan a QR, dump your photos, and the system sorts out which ones belong.",
-    tags: ['Full-Stack + AI', 'Computer Vision', 'pgvector', 'Next.js'],
+    name: 'GatheRoll',
+    sub: "everyone's photos from one event, in one shared album — scan a QR, bulk-add your photos, and GatheRoll handles the rest.",
+    tags: ['0→1 Product', 'Computer Vision', 'Next.js', 'FastAPI'],
     detailPath: '/work/gatheroll',
     chat: [
-      'built **gatheroll** — everyone\'s camera roll from one event, in one shared album',
-      'scan a qr, dump your photos, and the system figures out which ones belong to the night',
-      'thumbnails get scored **locally** before anything leaves your phone',
-      'uses **clip/siglip embeddings + perceptual hashing** to cluster moments and catch duplicates',
+      'built **GatheRoll** — everyone\'s photos from one event, in one shared album',
+      'scan a qr, bulk-add your photos, and GatheRoll checks them automatically',
+      'high-confidence photos share instantly — only the uncertain ones need a quick review',
+      "realized the real cost wasn't selecting photos, it was reviewing all of them before sharing",
     ],
   },
   {
@@ -197,7 +197,7 @@ export const NAV_ITEMS: NavItem[] = [
     label: 'Projects',
     href: '#projects',
     items: [
-      { label: 'Gatheroll', href: '/work/gatheroll' },
+      { label: 'GatheRoll', href: '/work/gatheroll' },
       { label: 'myIndigo', href: '/work/indigo' },
       { label: 'CulinAI', href: '/work/culinai' },
     ],
