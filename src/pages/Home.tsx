@@ -5,7 +5,6 @@ import ExperienceSection from '../components/ExperienceSection';
 import ProjectsSection from '../components/ProjectsSection';
 import ContactSection from '../components/ContactSection';
 import DetailPanel, { type PanelChat } from '../components/DetailPanel';
-import { BackgroundBlobs } from '../components/shared';
 
 export default function Home() {
   const location = useLocation();
@@ -34,8 +33,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen px-8 sm:px-12 max-sm:px-5 pt-20 max-sm:pt-16 pb-12 max-sm:pb-24 relative overflow-hidden">
-      <BackgroundBlobs />
-
       <div className="max-w-[1080px] mx-auto">
         <Header />
         <main>

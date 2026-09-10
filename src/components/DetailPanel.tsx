@@ -24,7 +24,7 @@ function TypingIndicator() {
 
 function Bubble({ children, className = '' }: { children: ReactNode; className?: string }) {
   return (
-    <div className={`bg-white/50 backdrop-blur-[12px] border border-white/60 rounded-2xl rounded-bl-md px-4 py-3 max-w-[88%] ${className}`}>
+    <div className={`bg-black/[0.04] rounded-2xl rounded-bl-md px-4 py-3 max-w-[88%] ${className}`}>
       {children}
     </div>
   );
@@ -200,7 +200,7 @@ export default function DetailPanel({ chat, onClose }: DetailPanelProps) {
     <div ref={containerRef} className="fixed bottom-6 right-6 max-sm:bottom-4 max-sm:right-4 z-50">
       {/* Chat box */}
       <div
-        className={`absolute bottom-16 right-0 w-[400px] max-sm:w-[calc(100vw-32px)] max-sm:right-[-12px] max-h-[72vh] max-sm:max-h-[60vh] bg-white/15 backdrop-blur-[24px] border border-white/30 rounded-[20px] shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.5)] flex flex-col origin-bottom-right transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        className={`absolute bottom-16 right-0 w-[400px] max-sm:w-[calc(100vw-32px)] max-sm:right-[-12px] max-h-[72vh] max-sm:max-h-[60vh] bg-white rounded-[20px] shadow-[0_4px_24px_rgba(0,0,0,0.08)] flex flex-col origin-bottom-right transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           panelOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-2 pointer-events-none'
         }`}
       >
@@ -214,7 +214,7 @@ export default function DetailPanel({ chat, onClose }: DetailPanelProps) {
           </div>
           <button
             onClick={() => { if (isOpen) onClose(); else setGreetingOpen(false); }}
-            className="w-7 h-7 flex items-center justify-center rounded-full bg-white/50 backdrop-blur-[8px] border border-white/60 cursor-pointer transition-all duration-200 hover:bg-white/70 text-[#666] text-[14px] leading-none"
+            className="w-7 h-7 flex items-center justify-center rounded-full bg-black/[0.05] cursor-pointer transition-all duration-200 hover:bg-black/[0.08] text-[#666] text-[14px] leading-none"
           >
             &times;
           </button>

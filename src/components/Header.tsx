@@ -10,7 +10,7 @@ export default function Header() {
   return (
     <header id="about" className="animate-fade-in min-h-[85vh] max-sm:min-h-[70vh] flex flex-col justify-center">
       <div>
-        <Link to="/" className="text-[48px] max-sm:text-[36px] font-bold tracking-tight text-[#111] no-underline leading-[1.1]">
+        <Link to="/" className="text-[48px] max-sm:text-[36px] font-semibold tracking-tight text-[#111] no-underline leading-[1.1]">
           {SITE.name}
         </Link>
         <div className="text-[18px] max-sm:text-[16px] font-normal text-[#666] mt-2">
@@ -29,7 +29,7 @@ export default function Header() {
             href={SITE.resumePath}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[15px] max-sm:text-[14px] font-medium px-7 max-sm:px-5 py-3 max-sm:py-2.5 rounded-full bg-white/15 backdrop-blur-[12px] border border-white/30 text-[#111] no-underline transition-all duration-200 hover:bg-white/25 active:scale-[0.97]"
+            className="text-[15px] max-sm:text-[14px] font-medium px-7 max-sm:px-5 py-3 max-sm:py-2.5 rounded-full bg-black/[0.04] text-[#111] no-underline transition-all duration-200 hover:bg-black/[0.07] active:scale-[0.97]"
           >
             open resume
           </a>
