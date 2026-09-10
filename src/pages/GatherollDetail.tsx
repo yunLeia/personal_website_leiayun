@@ -66,7 +66,7 @@ function DemoMedia() {
         {!errored ? (
           <img
             src="/images/gatheroll-demo.gif"
-            alt="GatheRoll demo — scan a QR, bulk-add your photos, watch them sort"
+            alt="GatheRoll demo: scan a QR, bulk-add your photos, watch them sort"
             loading="lazy"
             className="w-full h-full object-cover"
             onError={() => setErrored(true)}
@@ -171,7 +171,7 @@ export default function GatherollDetail() {
         <Reveal className="mb-20 max-sm:mb-14">
           <div className={EYEBROW}>Key Product Insight</div>
           <h2 className={`${H2} mb-8`}>
-            The real cost wasn't selecting photos — it was reviewing all of them before sharing.
+            Reviewing the whole batch before sharing was the expensive part.
           </h2>
           <div className={`p-7 max-sm:p-6 mb-6 ${CARD}`}>
             <div className="flex flex-col gap-4">

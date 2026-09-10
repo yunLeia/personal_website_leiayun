@@ -3,11 +3,11 @@ import { Reveal, ToolPill, BackLink } from '../components/shared';
 // ─── Data ────────────────────────────────────────────────────────
 
 const OVERVIEW = {
-  event: 'NYC Build With AI Hackathon @ NYU Tandon — March 2026',
+  event: 'NYC Build With AI Hackathon @ NYU Tandon · March 2026',
   role: 'Full-Stack + AI Engineer',
   duration: '36 hours',
   summary:
-    'Real-time audio awareness for deaf and hard-of-hearing users. Your phone listens, classifies sounds with Gemini 2.5 Flash, and sends actionable alerts to your Apple Watch — not transcriptions, but instructions.',
+    'Real-time audio awareness for deaf and hard-of-hearing users. Your phone listens, classifies sounds with Gemini 2.5 Flash, and sends actionable alerts to your Apple Watch: instructions, not transcriptions.',
   links: {
     pitchDeck: 'https://www.figma.com/deck/ebsg6XMvEQVfHLcYQmva4Z/myIndigo_Google?node-id=1-133&viewport=-124%2C-31%2C0.59&t=TTdyLd0Ns68gQfd3-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1',
     github: 'https://github.com/yunLeia/indigo-ai-agent',
@@ -95,7 +95,7 @@ export default function IndigoDetail() {
             Context
           </div>
           <h2 className="text-[26px] max-sm:text-[22px] font-bold text-[#111] tracking-tight leading-[1.2] mb-10">
-            Critical sounds go unheard — and that's both a safety and accessibility problem.
+            Critical sounds go unheard, and that's both a safety and accessibility problem.
           </h2>
           <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-5 max-sm:gap-4">
             {/* The Problem */}
@@ -104,7 +104,7 @@ export default function IndigoDetail() {
                 The Problem
               </h3>
               <p className="text-[15px] font-normal text-[#444] leading-[1.65] mb-5">
-                Critical sounds in daily life go unheard — alarms, announcements, doorbells, laughter.
+                Critical sounds in daily life go unheard: alarms, announcements, doorbells, laughter.
               </p>
               <ul className="space-y-2 text-[14px] text-[#666] leading-[1.6]">
                 <li>• Limited access to information</li>
@@ -121,11 +121,11 @@ export default function IndigoDetail() {
               </h3>
               <div className="mb-4">
                 <div className="text-[14px] font-semibold text-[#111] mb-1">Primary</div>
-                <div className="text-[14px] text-[#444] leading-[1.6]">Deaf &amp; hard-of-hearing users — for whom detection is both an accessibility and safety need.</div>
+                <div className="text-[14px] text-[#444] leading-[1.6]">Deaf &amp; hard-of-hearing users, for whom detection is both an accessibility and safety need.</div>
               </div>
               <div>
                 <div className="text-[14px] font-semibold text-[#111] mb-1">Extended</div>
-                <div className="text-[14px] text-[#444] leading-[1.6]">Older adults — ~1/3 of 65+ experience hearing loss and miss household alerts.</div>
+                <div className="text-[14px] text-[#444] leading-[1.6]">Older adults: ~1/3 of 65+ experience hearing loss and miss household alerts.</div>
               </div>
             </div>
           </div>
@@ -140,7 +140,7 @@ export default function IndigoDetail() {
             Turn sounds into grounded, actionable guidance.
           </h2>
           <div className="w-full rounded-2xl overflow-hidden border border-black/5">
-            <img src="/images/indigo-solution.webp" alt="Solution — Listen, Understand, Act" loading="lazy" decoding="async" className="w-full h-auto block" />
+            <img src="/images/indigo-solution.webp" alt="Solution: Listen, Understand, Act" loading="lazy" decoding="async" className="w-full h-auto block" />
           </div>
         </Reveal>
 

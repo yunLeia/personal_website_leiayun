@@ -3,7 +3,7 @@ import { Reveal, ToolPill, BackLink } from '../components/shared';
 // ─── Data ────────────────────────────────────────────────────────
 
 const OVERVIEW = {
-  event: 'Tech@NYU — TechTrek',
+  event: 'Tech@NYU · TechTrek',
   role: 'PM and AI Engineer',
   summary:
     'CulinAI is an AI-powered site that allows users to generate recipes by uploading a photo of their fridge or food items.',
@@ -19,7 +19,7 @@ const FLOW_STEPS = [
   },
   {
     label: 'Recognize',
-    text: 'LLaVA extracts ingredients directly from the image — one multimodal pass instead of a separate vision + LLM pipeline.',
+    text: 'LLaVA extracts ingredients directly from the image in one multimodal pass, instead of a separate vision + LLM pipeline.',
   },
   {
     label: 'Generate',
@@ -99,7 +99,7 @@ export default function CulineAIDetail() {
                 Why CulinAI
               </h3>
               <p className="text-[15px] font-normal text-[#444] leading-[1.65] mb-5">
-                Cook from what you already have — not what a recipe expects.
+                Cook with what you already have, not what a recipe expects.
               </p>
               <ul className="space-y-2 text-[14px] text-[#666] leading-[1.6]">
                 <li>• Generate recipes from available ingredients</li>

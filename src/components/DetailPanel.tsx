@@ -97,7 +97,7 @@ function WannaKnowMore() {
         <div className="animate-[bubble-in_0.3s_ease-out]">
           <Bubble>
             <div className="text-[14px] max-sm:text-[13px] text-white/70 leading-[1.6]">
-              always happy to chat —{' '}
+              always happy to chat:{' '}
               <a href={`mailto:${SITE.email}`} className="text-white font-medium underline underline-offset-[3px] decoration-white/30 hover:decoration-white transition-colors duration-200">
                 {SITE.email}
               </a>

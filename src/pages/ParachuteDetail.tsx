@@ -6,7 +6,7 @@ const OVERVIEW = {
   role: 'AI Engineering Intern',
   period: 'Mar – Jun 2024',
   summary:
-    'Parachute is an AI-powered career coaching startup. I built the foundational AI infrastructure — resume classification and RAG pipeline — from zero existing AI infra.',
+    'Parachute is an AI-powered career coaching startup. I built the foundational AI infrastructure (resume classification and RAG pipeline) from zero existing AI infra.',
 };
 
 const WORK_ITEMS = [
@@ -14,7 +14,7 @@ const WORK_ITEMS = [
     num: '01',
     meta: '~73% accuracy · 3 strategies benchmarked',
     title: 'Resume Classifier',
-    description: 'Built a Streamlit prototype — PDF upload → PyPDF extraction → GPT classification. Benchmarked 3 prompting strategies (structured JSON, zero-shot, instruction-guided). Zero-shot won at ~73% accuracy; recommended fine-tuning path for production.',
+    description: 'Built a Streamlit prototype: PDF upload → PyPDF extraction → GPT classification. Benchmarked 3 prompting strategies (structured JSON, zero-shot, instruction-guided). Zero-shot won at ~73% accuracy; recommended fine-tuning path for production.',
     tools: ['Prompt Engineering', 'Benchmarking', 'GPT API', 'Streamlit', 'PyPDF'],
     image: '/images/parachute-resume-classifier.webp',
   },

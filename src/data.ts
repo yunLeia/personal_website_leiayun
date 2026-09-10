@@ -4,7 +4,7 @@ export const SITE = {
   email: 'sy3544@nyu.edu',
   resumePath: '/Leia_Yun_Resume.pdf',
   photo: '/images/leia.webp',
-  tagline: 'ai & product engineer — turning ideas into impact',
+  tagline: 'ai & product engineer, turning ideas into impact',
 };
 
 export const SOCIAL_LINKS = [
@@ -43,7 +43,7 @@ export const EXPERIENCE: ExperienceItem[] = [
       {
         title: 'Overview',
         chat: [
-          'this is my current role — **ai engineer intern** at tiktok',
+          "this is my current role: **ai engineer intern** at tiktok",
           "i'm currently working on it, so more to share soon :)",
         ],
       },
@@ -54,7 +54,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     url: 'https://planfit.ai/en',
     role: 'Product Engineer Intern',
     date: 'Mar–Dec 2025',
-    subtitle: 'Owned 5 product tracks end-to-end — from problem discovery to deployment.',
+    subtitle: 'Owned 5 product tracks end-to-end, from problem discovery to deployment.',
     detailPath: '/work/planfit',
     tags: ['0→1 Product', '4M+ Users', '+15% Subscription', 'End-to-End Ownership', 'Claude Code', 'Amplitude'],
     subProjects: [
@@ -95,7 +95,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     url: 'https://www.letsparachute.com',
     role: 'AI Engineer Intern',
     date: 'Mar–Jun 2024',
-    subtitle: 'Built resume classification and RAG pipeline for an AI career coaching platform — from zero AI infra.',
+    subtitle: 'Built resume classification and RAG pipeline for an AI career coaching platform, starting from zero AI infra.',
     detailPath: '/work/parachute',
     tags: ['AI Infra from Zero', 'RAG Pipeline', 'Resume Classifier', 'LangChain', 'GPT API'],
     subProjects: [
@@ -124,19 +124,19 @@ export interface ProjectItem {
 export const PROJECTS: ProjectItem[] = [
   {
     name: 'GatheRoll',
-    sub: "everyone's photos from one event, in one shared album — scan a QR, bulk-add your photos, and GatheRoll handles the rest.",
+    sub: "everyone's photos from one event, in one shared album. Scan a QR, bulk-add your photos, and GatheRoll handles the rest.",
     tags: ['0→1 Product', 'Computer Vision', 'Next.js', 'FastAPI'],
     detailPath: '/work/gatheroll',
     chat: [
-      'built **GatheRoll** — everyone\'s photos from one event, in one shared album',
+      "built **GatheRoll**, everyone's photos from one event, in one shared album",
       'scan a qr, bulk-add your photos, and GatheRoll checks them automatically',
-      'high-confidence photos share instantly — only the uncertain ones need a quick review',
+      'high-confidence photos share instantly, only the uncertain ones need a quick review',
       "realized the real cost wasn't selecting photos, it was reviewing all of them before sharing",
     ],
   },
   {
     name: 'myIndigo',
-    sub: 'real-time audio awareness for deaf & hard-of-hearing users — gemini + google adk',
+    sub: 'real-time audio awareness for deaf & hard-of-hearing users, built with gemini + google adk',
     tags: ['Accessibility', 'Gemini 2.5 Flash', 'Google ADK', 'Hackathon'],
     detailPath: '/work/indigo',
     cover: '/images/myindigo-cover.webp',
@@ -164,7 +164,7 @@ export const PROJECTS: ProjectItem[] = [
 
 // ─── About (greeting bubbles) ────────────────────────────────────
 export const ABOUT_INTRO = [
-  "hi! i'm leia — cs + data science @ nyu",
+  "hi! i'm leia, cs + data science @ nyu",
   "i build products and turn user behavior into data-driven decisions",
   "most recently at planfit, i owned features end-to-end and ran 40+ experiments to improve activation and conversion",
   "click anything if you're curious :)",

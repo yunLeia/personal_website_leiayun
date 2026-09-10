@@ -10,7 +10,7 @@ const WORK_ITEMS = [
     num: '01',
     meta: '8 datasets · reports in 1 minute',
     title: 'Internal Marketing Diagnostic Tool',
-    description: 'Built the Korea team\'s first internal marketing diagnostic tool, integrating 8 datasets into a Python service that generates account-level hygiene reports in 1 minute — replacing a 15+ query, one-hour manual process and enabling daily team use.',
+    description: "Built the Korea team's first internal marketing diagnostic tool, integrating 8 datasets into a Python service that generates account-level hygiene reports in 1 minute, replacing a 15+ query, one-hour manual process and enabling daily team use.",
     tools: ['Python', 'Data Pipelines', 'Automation', 'Internal Tooling'],
   },
   {

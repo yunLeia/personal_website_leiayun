@@ -17,7 +17,7 @@ export default function ContactSection() {
   return (
     <footer id="contact" className="mt-32 max-sm:mt-20 mb-10 pt-16 max-sm:pt-12 border-t border-white/10 scroll-mt-20">
       <p className="text-[18px] max-sm:text-[15px] font-normal text-white/40 leading-[1.6]">
-        always happy to chat —{' '}
+        always happy to chat:{' '}
         <a
           href={`mailto:${SITE.email}`}
           className="text-white/70 font-medium no-underline hover:text-white transition-colors duration-200"
