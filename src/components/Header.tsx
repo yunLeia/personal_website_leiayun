@@ -7,6 +7,10 @@ export default function Header() {
     document.querySelector('#experience')?.scrollIntoView({ behavior: 'smooth' });
   }
 
+  const taglineWords = SITE.tagline.split(' ');
+  const taglineLead = taglineWords.slice(0, -1).join(' ');
+  const taglineAccent = taglineWords.slice(-1);
+
   return (
     <header id="about" className="animate-fade-in min-h-[85vh] max-sm:min-h-[70vh] flex flex-col justify-center">
       <div>
@@ -14,7 +18,10 @@ export default function Header() {
           {SITE.name}
         </Link>
         <div className="text-[18px] max-sm:text-[16px] font-normal text-[#666] mt-2">
-          {SITE.tagline}
+          {taglineLead}{' '}
+          <span className="font-medium bg-clip-text text-transparent bg-gradient-to-r from-[#4F7CFF] to-[#9B5FFF]">
+            {taglineAccent}
+          </span>
         </div>
 
         <div className="flex gap-3 mt-10 max-sm:mt-8">
