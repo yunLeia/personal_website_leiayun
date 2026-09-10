@@ -15,12 +15,12 @@ const ICONS: Record<string, React.ReactNode> = {
 
 export default function ContactSection() {
   return (
-    <footer id="contact" className="mt-32 max-sm:mt-20 mb-10 pt-16 max-sm:pt-12 border-t border-white/10 scroll-mt-20">
-      <p className="text-[18px] max-sm:text-[15px] font-normal text-white/40 leading-[1.6]">
+    <footer id="contact" className="mt-16 max-sm:mt-12 mb-10 pt-8 border-t border-black/[0.08] scroll-mt-20">
+      <p className="text-[14px] font-normal text-[#999] leading-[1.6]">
         always happy to chat:{' '}
         <a
           href={`mailto:${SITE.email}`}
-          className="text-white/70 font-medium no-underline hover:text-white transition-colors duration-200"
+          className="text-[#1a1a1a] font-medium underline decoration-dotted underline-offset-[3px] hover:decoration-solid transition-all duration-150"
         >
           {SITE.email}
         </a>
@@ -33,9 +33,9 @@ export default function ContactSection() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={link.label}
-            className="inline-flex items-center gap-2 text-[17px] max-sm:text-[15px] font-medium text-white/70 no-underline transition-opacity duration-200 hover:opacity-60"
+            className="inline-flex items-center gap-2 text-[14px] font-medium text-[#666] no-underline transition-opacity duration-200 hover:opacity-60"
           >
-            <span className="text-white/70">{ICONS[link.label]}</span>
+            <span className="text-[#666]">{ICONS[link.label]}</span>
             {link.label.toLowerCase()}
           </a>
         ))}

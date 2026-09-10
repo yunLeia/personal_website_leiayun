@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom';
 import { SITE } from '../data';
+import HalftonePhoto from './HalftonePhoto';
+
+const LINK = 'text-[#1a1a1a] underline decoration-dotted decoration-1 underline-offset-[3px] hover:decoration-solid transition-all duration-150';
 
 export default function Header() {
   function scrollToExperience(e: React.MouseEvent) {
@@ -7,33 +10,50 @@ export default function Header() {
     document.querySelector('#experience')?.scrollIntoView({ behavior: 'smooth' });
   }
 
-  return (
-    <header id="about" className="animate-fade-in min-h-[85vh] max-sm:min-h-[70vh] flex flex-col justify-center">
-      <div>
-        <Link to="/" className="text-[48px] max-sm:text-[36px] font-medium tracking-tight text-white no-underline leading-[1.1]">
-          {SITE.name}
-        </Link>
-        <div className="text-[18px] max-sm:text-[16px] font-normal text-white/60 mt-2">
-          {SITE.tagline}
-        </div>
+  function scrollToContact(e: React.MouseEvent) {
+    e.preventDefault();
+    document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+  }
 
-        <div className="flex gap-3 mt-10 max-sm:mt-8">
-          <a
-            href="#experience"
-            onClick={scrollToExperience}
-            className="bg-white text-[#151515] text-[15px] max-sm:text-[14px] font-medium px-7 max-sm:px-5 py-3 max-sm:py-2.5 rounded-full no-underline transition-all duration-200 hover:bg-white/90 active:scale-[0.97]"
-          >
-            view work
+  return (
+    <header id="about" className="animate-fade-in pt-6 max-sm:pt-2 pb-4">
+      <HalftonePhoto src={SITE.photo} alt={SITE.name} size={112} cell={4} className="rounded-full mb-6" />
+
+      <Link to="/" className="inline-flex items-center gap-2 no-underline mb-5">
+        <span className="text-[17px] font-semibold tracking-tight text-[#1a1a1a]">{SITE.name}</span>
+        <span className="flex gap-[3px]">
+          <span className="w-[6px] h-[6px] bg-[#c96f4a]" />
+          <span className="w-[6px] h-[6px] bg-[#999]" />
+        </span>
+      </Link>
+
+      <div className="flex flex-col gap-4 max-w-[480px]">
+        <p className="text-[14px] text-[#4a4a4a] leading-[1.7]">
+          {SITE.tagline}. I'm a CS + Data Science student at NYU who builds products and turns user
+          behavior into data-driven decisions.
+        </p>
+        <p className="text-[14px] text-[#4a4a4a] leading-[1.7]">
+          Most recently at{' '}
+          <a href="#experience" onClick={scrollToExperience} className={LINK}>
+            Planfit
           </a>
-          <a
-            href={SITE.resumePath}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[15px] max-sm:text-[14px] font-medium px-7 max-sm:px-5 py-3 max-sm:py-2.5 rounded-full bg-white/[0.08] text-white no-underline transition-all duration-200 hover:bg-white/[0.12] active:scale-[0.97]"
-          >
-            open resume
+          , I owned features end-to-end and ran 40+ experiments to improve activation and conversion.
+        </p>
+        <p className="text-[14px] text-[#4a4a4a] leading-[1.7]">
+          See{' '}
+          <a href="#experience" onClick={scrollToExperience} className={LINK}>
+            my work
           </a>
-        </div>
+          , open my{' '}
+          <a href={SITE.resumePath} target="_blank" rel="noopener noreferrer" className={LINK}>
+            resume
+          </a>
+          , or{' '}
+          <a href="#contact" onClick={scrollToContact} className={LINK}>
+            say hi
+          </a>
+          .
+        </p>
       </div>
     </header>
   );

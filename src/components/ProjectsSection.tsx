@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import { PROJECTS } from '../data';
-import { useScrollReveal } from '../hooks/useScrollReveal';
 import type { PanelChat } from './DetailPanel';
 
 interface Props {
@@ -8,62 +7,47 @@ interface Props {
   activeKey: string | null;
 }
 
-function ProjectCard({
+function ProjectRow({
   proj,
-  isActive,
   onClick,
 }: {
   proj: (typeof PROJECTS)[number];
-  isActive: boolean;
   onClick: () => void;
 }) {
-  const { ref, visible } = useScrollReveal();
-
   return (
-    <div ref={ref}>
-      <button
-        onClick={onClick}
-        className={`group w-full text-left font-[inherit] overflow-hidden rounded-[24px] max-sm:rounded-2xl cursor-pointer transition-all duration-300 bg-white/[0.04] border border-white/[0.06] hover:bg-white/[0.07] ${
-          visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-        } ${isActive ? 'bg-white/[0.08]' : ''}`}
-      >
-        <div className="px-8 pt-8 pb-6 max-sm:px-6 max-sm:pt-5 max-sm:pb-5">
-          <div className="text-[20px] max-sm:text-[16px] font-semibold text-white tracking-tight transition-opacity duration-200 group-hover:opacity-70">
-            {proj.name}
-          </div>
-          <div className="text-[16px] max-sm:text-[14px] font-normal text-white/60 mt-3 max-sm:mt-2 leading-[1.65] max-w-[720px]">
-            {proj.sub}
-          </div>
-          {proj.tags && (
-            <div className="flex flex-wrap gap-2 mt-4 max-sm:mt-3">
-              {proj.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="text-[11px] max-sm:text-[10px] font-medium text-white/50 bg-white/[0.06] rounded-full px-3 py-1"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
+    <button
+      onClick={onClick}
+      className="group w-full text-left font-[inherit] py-5 border-t border-black/[0.08] first:border-t-0 cursor-pointer flex items-start gap-4"
+    >
+      {proj.cover && (
+        <div className="w-14 h-14 rounded-lg overflow-hidden shrink-0 bg-black/[0.04]">
+          <img
+            src={proj.cover}
+            alt={proj.name}
+            loading="lazy"
+            decoding="async"
+            className="w-full h-full object-cover object-top"
+          />
         </div>
-        {proj.cover && (
-          <div className="w-full aspect-[16/9] overflow-hidden border-t border-white/[0.06]">
-            <img
-              src={proj.cover}
-              alt={proj.name}
-              loading="lazy"
-              decoding="async"
-              className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
-            />
+      )}
+      <div className="flex-1 min-w-0">
+        <div className="text-[15px] font-semibold text-[#1a1a1a] tracking-tight transition-opacity duration-150 group-hover:opacity-60">
+          {proj.name}
+        </div>
+        <div className="text-[13px] font-normal text-[#666] mt-1.5 leading-[1.6] max-w-[440px]">
+          {proj.sub}
+        </div>
+        {proj.tags && (
+          <div className="text-[12px] text-[#999] mt-2">
+            {proj.tags.join(' · ')}
           </div>
         )}
-      </button>
-    </div>
+      </div>
+    </button>
   );
 }
 
-export default function ProjectsSection({ onSelect, activeKey }: Props) {
+export default function ProjectsSection({ onSelect }: Props) {
   const navigate = useNavigate();
 
   function handleClick(proj: (typeof PROJECTS)[number]) {
@@ -79,23 +63,19 @@ export default function ProjectsSection({ onSelect, activeKey }: Props) {
   }
 
   return (
-    <section id="projects" className="min-h-[85vh] max-sm:min-h-0 flex flex-col justify-center py-16 max-sm:py-10 scroll-mt-20">
-      <h2 className="text-[12px] max-sm:text-[11px] font-semibold text-white/40 uppercase tracking-[0.14em] mb-10 max-sm:mb-6">
+    <section id="projects" className="py-8 scroll-mt-20">
+      <h2 className="text-[11px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-2">
         Projects
       </h2>
 
-      <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-5 max-sm:gap-3">
-        {PROJECTS.map((proj) => {
-          const key = `${proj.name}-${proj.sub}`;
-          return (
-            <ProjectCard
-              key={proj.name}
-              proj={proj}
-              isActive={activeKey === key}
-              onClick={() => handleClick(proj)}
-            />
-          );
-        })}
+      <div className="flex flex-col">
+        {PROJECTS.map((proj) => (
+          <ProjectRow
+            key={proj.name}
+            proj={proj}
+            onClick={() => handleClick(proj)}
+          />
+        ))}
       </div>
     </section>
   );
