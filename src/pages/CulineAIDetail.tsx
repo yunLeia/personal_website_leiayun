@@ -75,7 +75,7 @@ export default function CulineAIDetail() {
 
         {/* Context */}
         <Reveal className="mb-20 max-sm:mb-14">
-          <div className="text-[11px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3">
+          <div className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3">
             Context
           </div>
           <h2 className="text-[26px] max-sm:text-[22px] font-bold text-[#111] tracking-tight leading-[1.2] mb-10">
@@ -115,7 +115,7 @@ export default function CulineAIDetail() {
 
         {/* Pipeline */}
         <Reveal className="mb-20 max-sm:mb-14">
-          <div className="text-[11px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3">
+          <div className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3">
             How It Works
           </div>
           <h2 className="text-[26px] max-sm:text-[22px] font-bold text-[#111] tracking-tight leading-[1.2] mb-10">
@@ -150,7 +150,7 @@ export default function CulineAIDetail() {
 
         {/* Key Decisions */}
         <Reveal className="mb-16">
-          <div className="text-[11px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3">
+          <div className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3">
             Key Decisions
           </div>
           <h2 className="text-[26px] max-sm:text-[22px] font-bold text-[#111] tracking-tight leading-[1.2] mb-10">

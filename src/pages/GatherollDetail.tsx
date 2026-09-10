@@ -52,7 +52,7 @@ const BUILT = [
 
 const CARD =
   'bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-2xl';
-const EYEBROW = 'text-[11px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3';
+const EYEBROW = 'text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3';
 const H2 = 'text-[26px] max-sm:text-[22px] font-bold text-[#111] tracking-tight leading-[1.2]';
 
 // ─── Small components ────────────────────────────────────────────
@@ -205,8 +205,8 @@ export default function GatherollDetail() {
             {DECISIONS.map((d) => (
               <div key={d.num} className={`p-7 max-sm:p-6 flex flex-col ${CARD}`}>
                 <p className="text-[13px] font-medium text-[#666] mb-3">{d.num}</p>
-                <h3 className="text-[17px] font-semibold text-[#111] tracking-tight leading-[1.3] mb-3">{d.title}</h3>
-                <p className="text-[14px] text-[#444] leading-[1.65]">{d.description}</p>
+                <h3 className="text-[18px] font-semibold text-[#111] tracking-tight mb-3">{d.title}</h3>
+                <p className="text-[15px] text-[#444] leading-[1.65]">{d.description}</p>
               </div>
             ))}
           </div>

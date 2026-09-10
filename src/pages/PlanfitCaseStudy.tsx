@@ -21,9 +21,9 @@ function CaseStudyView({ project }: { project: PlanfitProject }) {
 
       {/* ── PROBLEM ── */}
       <Reveal className="mb-16">
-        <h3 className="text-[26px] font-bold text-[#111] tracking-tight mb-7 leading-[1.25]">
+        <h2 className="text-[26px] font-bold text-[#111] tracking-tight mb-7 leading-[1.25]">
           {project.problemHeadline}
-        </h3>
+        </h2>
         <p className="text-[15px] font-normal text-[#444] leading-[1.7] max-w-[640px]">
           {project.problemBody}
         </p>
@@ -33,9 +33,9 @@ function CaseStudyView({ project }: { project: PlanfitProject }) {
 
       {/* ── THINKING ── */}
       <Reveal className="mb-16">
-        <h3 className="text-[26px] font-bold text-[#111] tracking-tight mb-7 leading-[1.25]">
+        <h2 className="text-[26px] font-bold text-[#111] tracking-tight mb-7 leading-[1.25]">
           {project.thinkingHeadline}
-        </h3>
+        </h2>
         <div className="grid grid-cols-3 max-sm:grid-cols-1 gap-4">
           {project.thinking.map((step) => (
             <div key={step.label} className="bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-2xl px-6 py-6">
@@ -54,9 +54,9 @@ function CaseStudyView({ project }: { project: PlanfitProject }) {
 
       {/* ── EXECUTION ── */}
       <Reveal className="mb-16">
-        <h3 className="text-[26px] font-bold text-[#111] tracking-tight mb-7 leading-[1.25]">
+        <h2 className="text-[26px] font-bold text-[#111] tracking-tight mb-7 leading-[1.25]">
           {project.executionHeadline}
-        </h3>
+        </h2>
         <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-4">
           {project.execution.map((step, i) => (
             <div key={i} className="bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-2xl px-6 py-6">
@@ -80,9 +80,9 @@ function CaseStudyView({ project }: { project: PlanfitProject }) {
 
       {/* ── IMPACT ── */}
       <Reveal className="mb-16">
-        <h3 className="text-[26px] font-bold text-[#111] tracking-tight mb-7 leading-[1.25]">
+        <h2 className="text-[26px] font-bold text-[#111] tracking-tight mb-7 leading-[1.25]">
           {project.impactHeadline}
-        </h3>
+        </h2>
         <div className="grid grid-cols-4 max-sm:grid-cols-2 gap-4 mb-8">
           {project.impact.map((m) => (
             <div key={m.label} className="bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-2xl px-5 py-7 text-center">

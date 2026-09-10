@@ -76,10 +76,10 @@ export default function TikTokDetail() {
                 <p className="text-[13px] font-medium text-[#666] mb-3">
                   {item.num} &middot; {item.meta}
                 </p>
-                <h3 className="text-[19px] font-semibold text-[#111] tracking-tight leading-[1.25] mb-3">
+                <h3 className="text-[18px] font-semibold text-[#111] tracking-tight mb-3">
                   {item.title}
                 </h3>
-                <p className="text-[14px] text-[#444] leading-[1.65] mb-5 flex-1">{item.description}</p>
+                <p className="text-[15px] text-[#444] leading-[1.65] mb-5 flex-1">{item.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {item.tools.map((t) => <ToolPill key={t}>{t}</ToolPill>)}
                 </div>

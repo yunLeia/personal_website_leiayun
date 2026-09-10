@@ -92,7 +92,7 @@ export default function IndigoDetail() {
 
         {/* Context — Problem / Target */}
         <Reveal className="mb-20 max-sm:mb-14">
-          <div className="text-[11px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3">
+          <div className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3">
             Context
           </div>
           <h2 className="text-[26px] max-sm:text-[22px] font-bold text-[#111] tracking-tight leading-[1.2] mb-10">
@@ -134,7 +134,7 @@ export default function IndigoDetail() {
 
         {/* The Solution (full-width image) */}
         <Reveal className="mb-20 max-sm:mb-14">
-          <div className="text-[11px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3">
+          <div className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3">
             The Solution
           </div>
           <h2 className="text-[26px] max-sm:text-[22px] font-bold text-[#111] tracking-tight leading-[1.2] mb-10">
@@ -149,7 +149,7 @@ export default function IndigoDetail() {
 
         {/* Real-time audio pipeline */}
         <Reveal className="mb-20 max-sm:mb-14">
-          <div className="text-[11px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3">
+          <div className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3">
             Real-time Audio Pipeline
           </div>
           <h2 className="text-[26px] max-sm:text-[22px] font-bold text-[#111] tracking-tight leading-[1.2] mb-3">
@@ -191,7 +191,7 @@ export default function IndigoDetail() {
 
         {/* System Design */}
         <Reveal className="mb-20 max-sm:mb-14">
-          <div className="text-[11px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3">
+          <div className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3">
             System Design
           </div>
           <h2 className="text-[26px] max-sm:text-[22px] font-bold text-[#111] tracking-tight leading-[1.2] mb-3">
@@ -238,7 +238,7 @@ export default function IndigoDetail() {
 
         {/* Key Decisions */}
         <Reveal className="mb-16">
-          <div className="text-[11px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3">
+          <div className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3">
             Key Decisions
           </div>
           <h2 className="text-[26px] max-sm:text-[22px] font-bold text-[#111] tracking-tight leading-[1.2] mb-10">
