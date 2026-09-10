@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Reveal, BackLink } from '../components/shared';
+import Outline from '../components/Outline';
 
 // ─── Data ────────────────────────────────────────────────────────
 
@@ -120,11 +121,12 @@ function FlowStepper() {
 export default function GatherollDetail() {
   return (
     <div className="min-h-screen">
+      <Outline />
       <div className="max-w-[1080px] mx-auto px-10 max-sm:px-5 pt-28 max-sm:pt-24 pb-24">
         <BackLink />
 
         {/* Overview */}
-        <div className="mt-12 mb-14 animate-fade-in">
+        <div id="overview" data-outline="Overview" className="mt-12 mb-14 animate-fade-in">
           <h1 className="text-[32px] max-sm:text-[26px] font-bold tracking-tight text-[#111] mb-2">
             GatheRoll
           </h1>
@@ -159,7 +161,7 @@ export default function GatherollDetail() {
         <div className="h-px bg-black/5 mb-16" />
 
         {/* Problem */}
-        <Reveal className="mb-14">
+        <Reveal className="mb-14" id="problem" outline="Problem">
           <div className={EYEBROW}>Problem</div>
           <h2 className={`${H2} mb-6`}>Sharing photos is easy. Getting everyone to actually do it isn't.</h2>
           <p className="text-[15px] text-[#444] leading-[1.7] max-w-[640px]">{PROBLEM}</p>
@@ -168,7 +170,7 @@ export default function GatherollDetail() {
         <div className="h-px bg-black/5 mb-16" />
 
         {/* Key Product Insight */}
-        <Reveal className="mb-20 max-sm:mb-14">
+        <Reveal className="mb-20 max-sm:mb-14" id="insight" outline="Key Insight">
           <div className={EYEBROW}>Key Product Insight</div>
           <h2 className={`${H2} mb-8`}>
             Reviewing the whole batch before sharing was the expensive part.
@@ -197,7 +199,7 @@ export default function GatherollDetail() {
         <div className="h-px bg-black/5 mb-16" />
 
         {/* 3 Product Decisions */}
-        <Reveal className="mb-20 max-sm:mb-14">
+        <Reveal className="mb-20 max-sm:mb-14" id="decisions" outline="Decisions">
           <div className={EYEBROW}>3 Product Decisions</div>
           <h2 className={`${H2} mb-10`}>Every decision traded one failure mode for a cheaper one.</h2>
           <div className="grid grid-cols-3 max-sm:grid-cols-1 gap-5">
@@ -214,7 +216,7 @@ export default function GatherollDetail() {
         <div className="h-px bg-black/5 mb-16" />
 
         {/* Product Flow */}
-        <Reveal className="mb-20 max-sm:mb-14">
+        <Reveal className="mb-20 max-sm:mb-14" id="flow" outline="Product Flow">
           <div className={EYEBROW}>Product Flow</div>
           <h2 className={`${H2} mb-10`}>From QR scan to a shared album.</h2>
           <div className={`p-8 max-sm:p-6 mb-6 ${CARD}`}>
@@ -226,7 +228,7 @@ export default function GatherollDetail() {
         <div className="h-px bg-black/5 mb-16" />
 
         {/* Built End-to-End */}
-        <Reveal className="mb-16">
+        <Reveal className="mb-16" id="built" outline="Built End-to-End">
           <div className={EYEBROW}>Built End-to-End</div>
           <div className={`p-7 max-sm:p-6 ${CARD}`}>
             <div className="grid grid-cols-3 max-sm:grid-cols-1 gap-6">

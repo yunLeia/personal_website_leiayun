@@ -1,4 +1,5 @@
 import { Reveal, ToolPill, BackLink } from '../components/shared';
+import Outline from '../components/Outline';
 
 // ─── Data ────────────────────────────────────────────────────────
 
@@ -45,11 +46,12 @@ const DECISIONS = [
 export default function CulineAIDetail() {
   return (
     <div className="min-h-screen">
+      <Outline />
       <div className="max-w-[1080px] mx-auto px-10 max-sm:px-5 pt-28 max-sm:pt-24 pb-24">
         <BackLink />
 
         {/* Overview */}
-        <div className="mt-12 mb-14 animate-fade-in">
+        <div id="overview" data-outline="Overview" className="mt-12 mb-14 animate-fade-in">
           <h1 className="text-[32px] max-sm:text-[26px] font-bold tracking-tight text-[#111] mb-2">
             CulinAI
           </h1>
@@ -73,7 +75,7 @@ export default function CulineAIDetail() {
         <div className="h-px bg-black/5 mb-16" />
 
         {/* Context */}
-        <Reveal className="mb-20 max-sm:mb-14">
+        <Reveal className="mb-20 max-sm:mb-14" id="context" outline="Context">
           <div className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3">
             Context
           </div>
@@ -113,7 +115,7 @@ export default function CulineAIDetail() {
         <div className="h-px bg-black/5 mb-16" />
 
         {/* Pipeline */}
-        <Reveal className="mb-20 max-sm:mb-14">
+        <Reveal className="mb-20 max-sm:mb-14" id="pipeline" outline="How It Works">
           <div className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3">
             How It Works
           </div>
@@ -148,7 +150,7 @@ export default function CulineAIDetail() {
         <div className="h-px bg-black/5 mb-16" />
 
         {/* Key Decisions */}
-        <Reveal className="mb-16">
+        <Reveal className="mb-16" id="decisions" outline="Key Decisions">
           <div className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3">
             Key Decisions
           </div>

@@ -1,6 +1,7 @@
 import { Link, useParams, Navigate } from 'react-router-dom';
 import { PLANFIT_PROJECTS, type PlanfitProject } from './planfitData';
 import { Reveal, ToolPill } from '../components/shared';
+import Outline from '../components/Outline';
 
 // ─── Case Study View ────────────────────────────────────────────
 
@@ -8,7 +9,7 @@ function CaseStudyView({ project }: { project: PlanfitProject }) {
   return (
     <div>
       {/* ── HERO ── */}
-      <Reveal className="mb-12">
+      <Reveal className="mb-12" id="overview" outline="Overview">
         <p className="text-[36px] sm:text-[44px] font-light text-[#111] leading-[1.2] tracking-tight mb-12" style={{ fontFamily: "'Lora', serif" }}>
           <span className="italic">{project.heroTagline[0]}</span>
           <br />
@@ -20,7 +21,7 @@ function CaseStudyView({ project }: { project: PlanfitProject }) {
       </Reveal>
 
       {/* ── PROBLEM ── */}
-      <Reveal className="mb-16">
+      <Reveal className="mb-16" id="problem" outline="Problem">
         <h2 className="text-[26px] font-bold text-[#111] tracking-tight mb-7 leading-[1.25]">
           {project.problemHeadline}
         </h2>
@@ -32,7 +33,7 @@ function CaseStudyView({ project }: { project: PlanfitProject }) {
       <div className="h-px bg-black/5 mb-16" />
 
       {/* ── THINKING ── */}
-      <Reveal className="mb-16">
+      <Reveal className="mb-16" id="thinking" outline="Thinking">
         <h2 className="text-[26px] font-bold text-[#111] tracking-tight mb-7 leading-[1.25]">
           {project.thinkingHeadline}
         </h2>
@@ -53,7 +54,7 @@ function CaseStudyView({ project }: { project: PlanfitProject }) {
       <div className="h-px bg-black/5 mb-16" />
 
       {/* ── EXECUTION ── */}
-      <Reveal className="mb-16">
+      <Reveal className="mb-16" id="execution" outline="Execution">
         <h2 className="text-[26px] font-bold text-[#111] tracking-tight mb-7 leading-[1.25]">
           {project.executionHeadline}
         </h2>
@@ -79,7 +80,7 @@ function CaseStudyView({ project }: { project: PlanfitProject }) {
       <div className="h-px bg-black/5 mb-16" />
 
       {/* ── IMPACT ── */}
-      <Reveal className="mb-16">
+      <Reveal className="mb-16" id="impact" outline="Impact">
         <h2 className="text-[26px] font-bold text-[#111] tracking-tight mb-7 leading-[1.25]">
           {project.impactHeadline}
         </h2>
@@ -127,6 +128,7 @@ export default function PlanfitCaseStudy() {
 
   return (
     <div className="min-h-screen">
+      <Outline />
       <div className="max-w-[1080px] mx-auto px-10 max-sm:px-5 pt-28 max-sm:pt-24 pb-24">
         <Link to="/work/planfit" className="text-[14px] font-medium text-[#86868b] no-underline transition-opacity duration-200 hover:opacity-60">
           ← back to planfit

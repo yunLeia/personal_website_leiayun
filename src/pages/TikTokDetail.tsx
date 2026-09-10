@@ -1,5 +1,6 @@
 import { EXPERIENCE } from '../data';
 import { Reveal, ToolPill, BackLink } from '../components/shared';
+import Outline from '../components/Outline';
 
 const tiktok = EXPERIENCE.find((experience) => experience.company === 'TikTok')!;
 
@@ -41,10 +42,11 @@ const RESULTS = [
 export default function TikTokDetail() {
   return (
     <div className="min-h-screen">
+      <Outline />
       <div className="max-w-[1080px] mx-auto px-10 max-sm:px-5 pt-28 max-sm:pt-24 pb-24">
         <BackLink />
 
-        <div className="mt-12 mb-14 animate-fade-in">
+        <div id="overview" data-outline="Overview" className="mt-12 mb-14 animate-fade-in">
           <h1 className="text-[32px] max-sm:text-[26px] font-bold tracking-tight text-[#111] mb-6">
             <a
               href={tiktok.url}
@@ -65,7 +67,7 @@ export default function TikTokDetail() {
         <div className="h-px bg-black/5 mb-16" />
 
         {/* What I Built */}
-        <Reveal className="mb-16">
+        <Reveal className="mb-16" id="what-i-built" outline="What I Built">
           <h2 className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-10">
             What I Built
           </h2>
@@ -90,7 +92,7 @@ export default function TikTokDetail() {
         <div className="h-px bg-black/5 mb-16" />
 
         {/* Results */}
-        <Reveal className="mb-16">
+        <Reveal className="mb-16" id="results" outline="Results">
           <h2 className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-10">
             Results
           </h2>

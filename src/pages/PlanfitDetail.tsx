@@ -3,6 +3,7 @@ import { PLANFIT_OVERVIEW, PLANFIT_PROJECTS } from './planfitData';
 import PasswordModal from '../components/PasswordModal';
 import { trackCaseStudyClick } from '../lib/analytics';
 import { Reveal, ToolPill, BackLink } from '../components/shared';
+import Outline from '../components/Outline';
 
 // ─── Project block (Work-page style) ────────────────────────────
 
@@ -14,7 +15,7 @@ function ProjectBlock({ project, index, onReadMore }: {
   const reversed = index % 2 !== 0;
 
   return (
-    <Reveal>
+    <Reveal id={`case-study-${project.slug}`} outline={project.title}>
       <div className={`flex flex-col ${reversed ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-10 md:gap-14`}>
         {/* Image */}
         <div className="w-full md:flex-[2]">
@@ -80,11 +81,12 @@ export default function PlanfitDetail() {
 
   return (
     <div className="min-h-screen">
+      <Outline />
       <div className="max-w-[1080px] mx-auto px-10 max-sm:px-5 pt-28 max-sm:pt-24 pb-24">
         <BackLink />
 
         {/* Overview */}
-        <div className="mt-12 mb-14 animate-fade-in">
+        <div id="overview" data-outline="Overview" className="mt-12 mb-14 animate-fade-in">
           <h1 className="text-[32px] max-sm:text-[26px] font-bold tracking-tight text-[#111] mb-6">
             <a
               href="https://planfit.ai/en"
