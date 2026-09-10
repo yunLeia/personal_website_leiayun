@@ -20,16 +20,6 @@ export function SectionHeader({ num, title, action }: { num: string; title: stri
   );
 }
 
-export function DotRow({ title, trailing }: { title: ReactNode; trailing: ReactNode }) {
-  return (
-    <div className="flex items-baseline gap-2">
-      <span className="whitespace-nowrap">{title}</span>
-      <span className="flex-1 border-b border-dotted border-black/25 translate-y-[-4px]" />
-      <span className="text-[#999] text-[12px] whitespace-nowrap">{trailing}</span>
-    </div>
-  );
-}
-
 export function ExternalArrow() {
-  return <span className="text-[#999] text-[12px] ml-[3px]">&#8599;</span>;
+  return <span className="text-[#999] text-[12px] ml-[3px] opacity-60 group-hover:opacity-100 transition-opacity duration-150">&#8599;</span>;
 }

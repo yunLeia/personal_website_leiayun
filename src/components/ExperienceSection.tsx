@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { EXPERIENCE } from '../data';
 import type { PanelChat } from './DetailPanel';
-import { SectionHeader, DotRow, ExternalArrow } from './HomeUI';
+import { SectionHeader, ExternalArrow } from './HomeUI';
 
 interface Props {
   onSelect: (chat: PanelChat) => void;
@@ -18,38 +18,33 @@ function ExperienceRow({
   return (
     <button
       onClick={onClick}
-      className="group w-full text-left font-[inherit] py-4 border-t border-black/[0.08] first:border-t-0 cursor-pointer"
+      className="group w-full text-left font-[inherit] grid grid-cols-[minmax(0,1fr)_max-content] items-start gap-4 py-3 border-t border-black/[0.08] first:border-t-0 cursor-pointer hover:bg-black/[0.015] transition-colors duration-150 -mx-2 px-2"
     >
-      <DotRow
-        title={
-          exp.url ? (
-            <a
-              href={exp.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="font-semibold text-[#1a1a1a] hover:opacity-60 transition-opacity duration-150"
-            >
-              {exp.company}
-              <ExternalArrow />
-            </a>
-          ) : (
-            <span className="font-semibold text-[#1a1a1a]">{exp.company}</span>
-          )
-        }
-        trailing={exp.date.toLowerCase()}
-      />
-      <div className="text-[13px] text-[#666] mt-1">{exp.role}</div>
-      {exp.subtitle && (
-        <div className="text-[13px] font-normal text-[#888] mt-1.5 leading-[1.6] max-w-[480px]">
-          {exp.subtitle}
-        </div>
-      )}
-      {exp.tags && (
-        <div className="text-[12px] text-[#aaa] mt-1.5">
-          {exp.tags.join(' · ')}
-        </div>
-      )}
+      <div className="min-w-0">
+        {exp.url ? (
+          <a
+            href={exp.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="text-[14px] font-medium text-[#1e1d1b] hover:opacity-70 transition-opacity duration-150"
+          >
+            {exp.company}
+            <ExternalArrow />
+          </a>
+        ) : (
+          <span className="text-[14px] font-medium text-[#1e1d1b]">{exp.company}</span>
+        )}
+        <div className="text-[14px] text-[#8a8a86]">{exp.role}</div>
+        {exp.subtitle && (
+          <div className="text-[13px] font-normal text-[#8a8a86] mt-1 leading-[1.6] max-w-[420px]">
+            {exp.subtitle}
+          </div>
+        )}
+      </div>
+      <span className="text-[14px] text-[#8a8a86] [font-variant-numeric:tabular-nums]">
+        {exp.date.toLowerCase()}
+      </span>
     </button>
   );
 }

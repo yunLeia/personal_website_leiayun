@@ -18,9 +18,9 @@ function ProjectRow({
   return (
     <button
       onClick={onClick}
-      className="group w-full text-left font-[inherit] py-4 border-t border-black/[0.08] first:border-t-0 cursor-pointer flex max-sm:flex-col items-start gap-4"
+      className="group w-full text-left font-[inherit] py-3 border-t border-black/[0.08] first:border-t-0 cursor-pointer flex max-sm:flex-col items-start gap-3 -mx-2 px-2 hover:bg-black/[0.015] transition-colors duration-150"
     >
-      <div className="w-12 h-12 rounded-lg overflow-hidden shrink-0 bg-black/[0.04]">
+      <div className="w-10 h-10 rounded-lg overflow-hidden shrink-0 bg-black/[0.04]">
         {proj.cover && (
           <img
             src={proj.cover}
@@ -31,13 +31,13 @@ function ProjectRow({
           />
         )}
       </div>
-      <div className="w-[170px] max-sm:w-full shrink-0">
-        <div className="text-[14px] font-semibold text-[#1a1a1a] transition-opacity duration-150 group-hover:opacity-60">
+      <div className="w-[150px] max-sm:w-full shrink-0">
+        <div className="text-[14px] font-medium text-[#1e1d1b] transition-opacity duration-150 group-hover:opacity-70">
           {proj.name}
         </div>
-        {proj.tags && <div className="text-[12px] text-[#999] mt-0.5">{proj.tags[0]}</div>}
+        {proj.tags && <div className="text-[12px] text-[#8a8a86] mt-0.5">{proj.tags[0]}</div>}
       </div>
-      <div className="text-[13px] text-[#666] leading-[1.6] flex-1">{proj.sub}</div>
+      <div className="text-[13px] text-[#8a8a86] leading-[1.6] flex-1">{proj.sub}</div>
     </button>
   );
 }
