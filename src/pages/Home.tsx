@@ -32,7 +32,7 @@ export default function Home() {
   const activeKey = chat ? `${chat.title}-${chat.subtitle}` : null;
 
   return (
-    <div className="min-h-screen px-8 sm:px-12 max-sm:px-5 pt-20 max-sm:pt-16 pb-12 max-sm:pb-24 relative overflow-hidden">
+    <div className="min-h-screen bg-[#151515] px-8 sm:px-12 max-sm:px-5 pt-20 max-sm:pt-16 pb-12 max-sm:pb-24 relative overflow-hidden">
       <div className="max-w-[1080px] mx-auto">
         <Header />
         <main>

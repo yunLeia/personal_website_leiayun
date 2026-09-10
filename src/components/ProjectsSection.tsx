@@ -23,15 +23,15 @@ function ProjectCard({
     <div ref={ref}>
       <button
         onClick={onClick}
-        className={`group w-full text-left font-[inherit] overflow-hidden rounded-[24px] max-sm:rounded-2xl cursor-pointer transition-all duration-300 bg-black/[0.04] hover:bg-black/[0.07] ${
+        className={`group w-full text-left font-[inherit] overflow-hidden rounded-[24px] max-sm:rounded-2xl cursor-pointer transition-all duration-300 bg-white/[0.04] border border-white/[0.06] hover:bg-white/[0.07] ${
           visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-        } ${isActive ? 'bg-black/[0.08]' : ''}`}
+        } ${isActive ? 'bg-white/[0.08]' : ''}`}
       >
         <div className="px-8 pt-8 pb-6 max-sm:px-6 max-sm:pt-5 max-sm:pb-5">
-          <div className="text-[20px] max-sm:text-[16px] font-semibold text-[#111] tracking-tight transition-opacity duration-200 group-hover:opacity-70">
+          <div className="text-[20px] max-sm:text-[16px] font-semibold text-white tracking-tight transition-opacity duration-200 group-hover:opacity-70">
             {proj.name}
           </div>
-          <div className="text-[16px] max-sm:text-[14px] font-normal text-[#444] mt-3 max-sm:mt-2 leading-[1.65] max-w-[720px]">
+          <div className="text-[16px] max-sm:text-[14px] font-normal text-white/60 mt-3 max-sm:mt-2 leading-[1.65] max-w-[720px]">
             {proj.sub}
           </div>
           {proj.tags && (
@@ -39,7 +39,7 @@ function ProjectCard({
               {proj.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="text-[11px] max-sm:text-[10px] font-medium text-[#888] bg-black/[0.05] rounded-full px-3 py-1"
+                  className="text-[11px] max-sm:text-[10px] font-medium text-white/50 bg-white/[0.06] rounded-full px-3 py-1"
                 >
                   {tag}
                 </span>
@@ -48,7 +48,7 @@ function ProjectCard({
           )}
         </div>
         {proj.cover && (
-          <div className="w-full aspect-[16/9] overflow-hidden border-t border-black/[0.04]">
+          <div className="w-full aspect-[16/9] overflow-hidden border-t border-white/[0.06]">
             <img
               src={proj.cover}
               alt={proj.name}
@@ -80,7 +80,7 @@ export default function ProjectsSection({ onSelect, activeKey }: Props) {
 
   return (
     <section id="projects" className="min-h-[85vh] max-sm:min-h-0 flex flex-col justify-center py-16 max-sm:py-10 scroll-mt-20">
-      <h2 className="text-[12px] max-sm:text-[11px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-10 max-sm:mb-6">
+      <h2 className="text-[12px] max-sm:text-[11px] font-semibold text-white/40 uppercase tracking-[0.14em] mb-10 max-sm:mb-6">
         Projects
       </h2>
 

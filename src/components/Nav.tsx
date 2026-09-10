@@ -6,6 +6,7 @@ export default function Nav() {
   const location = useLocation();
   const navigate = useNavigate();
   const [openKey, setOpenKey] = useState<string | null>(null);
+  const isHome = location.pathname === '/';
 
   function handleItemClick(e: React.MouseEvent, item: NavItem) {
     e.preventDefault();
@@ -23,7 +24,11 @@ export default function Nav() {
   }
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-40 backdrop-blur-[12px] bg-white/40 border-b border-white/30">
+    <nav
+      className={`fixed top-0 left-0 right-0 z-40 backdrop-blur-[12px] border-b ${
+        isHome ? 'bg-[#151515]/70 border-white/10' : 'bg-white/40 border-white/30'
+      }`}
+    >
       <div className="max-w-[1080px] mx-auto flex items-center justify-end gap-8 max-sm:gap-4 px-8 max-sm:px-5 py-4">
         {NAV_ITEMS.map((item: NavItem) => {
           const hasDropdown = !!item.items?.length;
@@ -43,7 +48,9 @@ export default function Nav() {
                 aria-haspopup={hasDropdown || undefined}
                 aria-expanded={hasDropdown ? isOpen : undefined}
                 aria-controls={hasDropdown ? menuId : undefined}
-                className="text-[14px] max-sm:text-[12px] font-medium text-[#666] no-underline transition-opacity duration-200 hover:opacity-60 whitespace-nowrap"
+                className={`text-[14px] max-sm:text-[12px] font-medium no-underline transition-opacity duration-200 hover:opacity-60 whitespace-nowrap ${
+                  isHome ? 'text-white/60' : 'text-[#666]'
+                }`}
               >
                 {item.label.toLowerCase()}
               </a>
@@ -57,11 +64,18 @@ export default function Nav() {
                     isOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-1 pointer-events-none'
                   }`}
                 >
-                  <div className="bg-white/50 backdrop-blur-[20px] border border-white/50 rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.5)] py-2 min-w-[160px]">
+                  <div
+                    className={`backdrop-blur-[20px] border rounded-xl py-2 min-w-[160px] ${
+                      isHome
+                        ? 'bg-[#1c1c1e] border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)]'
+                        : 'bg-white/50 border-white/50 shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.5)]'
+                    }`}
+                  >
                     {item.items!.map((sub) => {
                       const isHash = sub.href.startsWith('#');
-                      const className =
-                        'block text-[13px] font-medium text-[#444] no-underline px-4 py-2 hover:bg-white/40 transition-colors whitespace-nowrap';
+                      const className = `block text-[13px] font-medium no-underline px-4 py-2 transition-colors whitespace-nowrap ${
+                        isHome ? 'text-white/70 hover:bg-white/10' : 'text-[#444] hover:bg-white/40'
+                      }`;
                       if (isHash) {
                         return (
                           <a
