@@ -7,10 +7,6 @@ export default function Header() {
     document.querySelector('#experience')?.scrollIntoView({ behavior: 'smooth' });
   }
 
-  const taglineWords = SITE.tagline.split(' ');
-  const taglineLead = taglineWords.slice(0, -1).join(' ');
-  const taglineAccent = taglineWords.slice(-1);
-
   return (
     <header id="about" className="animate-fade-in min-h-[85vh] max-sm:min-h-[70vh] flex flex-col justify-center">
       <div>
@@ -18,17 +14,14 @@ export default function Header() {
           {SITE.name}
         </Link>
         <div className="text-[18px] max-sm:text-[16px] font-normal text-white/60 mt-2">
-          {taglineLead}{' '}
-          <span className="font-medium bg-clip-text text-transparent bg-gradient-to-r from-[#6E93FF] to-[#B285FF]">
-            {taglineAccent}
-          </span>
+          {SITE.tagline}
         </div>
 
         <div className="flex gap-3 mt-10 max-sm:mt-8">
           <a
             href="#experience"
             onClick={scrollToExperience}
-            className="bg-white text-[#151515] text-[15px] max-sm:text-[14px] font-medium px-7 max-sm:px-5 py-3 max-sm:py-2.5 rounded-full no-underline transition-all duration-200 shadow-[0_2px_3px_rgba(0,0,0,0.2),0_8px_16px_rgba(0,0,0,0.15)] hover:bg-white/90 active:scale-[0.97]"
+            className="bg-white text-[#151515] text-[15px] max-sm:text-[14px] font-medium px-7 max-sm:px-5 py-3 max-sm:py-2.5 rounded-full no-underline transition-all duration-200 hover:bg-white/90 active:scale-[0.97]"
           >
             view work
           </a>
