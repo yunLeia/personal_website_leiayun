@@ -109,25 +109,67 @@ export default function HalftonePhoto({ src, alt, size = 200, cell = 5, classNam
 
       const range = Math.max(hi - lo, 1);
 
-      // Pass 2: draw, using the stretched contrast and a gamma curve that
-      // favors mid/dark tones so features stay legible at small sizes.
-      ctx.clearRect(0, 0, px, px);
-      ctx.fillStyle = '#191919';
-
+      // Pass 2: compute each cell's dot radius from the stretched contrast
+      // (gamma favors mid/dark tones so features stay legible at small
+      // sizes), but don't draw yet — stray wisps (e.g. loose hair strands
+      // over the shoulder) render as small disconnected speckle clusters
+      // that read as noise rather than hair, so first find which dots
+      // belong to a large enough connected blob to be a real feature.
+      const radiusOf = new Float32Array(cols * rows);
       for (let cy = 0; cy < rows; cy++) {
         for (let cx = 0; cx < cols; cx++) {
           const idx = cy * cols + cx;
           if (!cellIsSubject[idx]) continue;
           const stretched = Math.min(1, Math.max(0, (cellAvg[idx] - lo) / range));
           const darkness = Math.pow(1 - stretched, 0.85);
-          const radius = (c / 2) * Math.sqrt(darkness) * 1.1;
-          if (radius > 0.35) {
-            const x = cx * c;
-            const y = cy * c;
-            ctx.beginPath();
-            ctx.arc(x + c / 2, y + c / 2, radius, 0, Math.PI * 2);
-            ctx.fill();
+          radiusOf[idx] = (c / 2) * Math.sqrt(darkness) * 1.1;
+        }
+      }
+
+      const MIN_CLUSTER = 6;
+      const labelVisited = new Uint8Array(cols * rows);
+      const keep = new Uint8Array(cols * rows);
+      for (let start = 0; start < cols * rows; start++) {
+        if (labelVisited[start] || radiusOf[start] <= 0.35) continue;
+        const component: number[] = [];
+        const queue = [start];
+        labelVisited[start] = 1;
+        while (queue.length) {
+          const idx = queue.pop()!;
+          component.push(idx);
+          const x = idx % cols;
+          const y = (idx - x) / cols;
+          for (let dy = -1; dy <= 1; dy++) {
+            for (let dx = -1; dx <= 1; dx++) {
+              if (dx === 0 && dy === 0) continue;
+              const nx = x + dx;
+              const ny = y + dy;
+              if (nx < 0 || nx >= cols || ny < 0 || ny >= rows) continue;
+              const nIdx = ny * cols + nx;
+              if (!labelVisited[nIdx] && radiusOf[nIdx] > 0.35) {
+                labelVisited[nIdx] = 1;
+                queue.push(nIdx);
+              }
+            }
           }
+        }
+        if (component.length >= MIN_CLUSTER) {
+          for (const idx of component) keep[idx] = 1;
+        }
+      }
+
+      ctx.clearRect(0, 0, px, px);
+      ctx.fillStyle = '#191919';
+
+      for (let cy = 0; cy < rows; cy++) {
+        for (let cx = 0; cx < cols; cx++) {
+          const idx = cy * cols + cx;
+          if (!keep[idx]) continue;
+          const x = cx * c;
+          const y = cy * c;
+          ctx.beginPath();
+          ctx.arc(x + c / 2, y + c / 2, radiusOf[idx], 0, Math.PI * 2);
+          ctx.fill();
         }
       }
     };
