@@ -68,11 +68,22 @@ export default function HalftonePhoto({ src, alt, size = 200, cell = 5, classNam
       }
 
       const c = cell * dpr;
-      ctx.clearRect(0, 0, px, px);
-      ctx.fillStyle = '#191919';
 
-      for (let y = 0; y < px; y += c) {
-        for (let x = 0; x < px; x += c) {
+      // Pass 1: per-cell average luminance for subject cells, plus the
+      // subject's actual min/max so we can auto-level contrast — skin
+      // midtones cluster in a narrow range, so stretching it out makes
+      // eyes/brows/mouth read as distinct dots instead of a gray blob.
+      const cols = Math.ceil(px / c);
+      const rows = Math.ceil(px / c);
+      const cellAvg = new Float32Array(cols * rows);
+      const cellIsSubject = new Uint8Array(cols * rows);
+      let lo = 255;
+      let hi = 0;
+
+      for (let cy = 0; cy < rows; cy++) {
+        for (let cx = 0; cx < cols; cx++) {
+          const y = cy * c;
+          const x = cx * c;
           let sum = 0;
           let count = 0;
           let bgCount = 0;
@@ -85,11 +96,34 @@ export default function HalftonePhoto({ src, alt, size = 200, cell = 5, classNam
               count++;
             }
           }
-          if (bgCount / count > 0.5) continue;
           const avg = sum / count;
-          const darkness = 1 - avg / 255;
-          const radius = (c / 2) * Math.sqrt(darkness) * 1.05;
-          if (radius > 0.4) {
+          const idx = cy * cols + cx;
+          cellAvg[idx] = avg;
+          if (bgCount / count <= 0.5) {
+            cellIsSubject[idx] = 1;
+            if (avg < lo) lo = avg;
+            if (avg > hi) hi = avg;
+          }
+        }
+      }
+
+      const range = Math.max(hi - lo, 1);
+
+      // Pass 2: draw, using the stretched contrast and a gamma curve that
+      // favors mid/dark tones so features stay legible at small sizes.
+      ctx.clearRect(0, 0, px, px);
+      ctx.fillStyle = '#191919';
+
+      for (let cy = 0; cy < rows; cy++) {
+        for (let cx = 0; cx < cols; cx++) {
+          const idx = cy * cols + cx;
+          if (!cellIsSubject[idx]) continue;
+          const stretched = Math.min(1, Math.max(0, (cellAvg[idx] - lo) / range));
+          const darkness = Math.pow(1 - stretched, 0.85);
+          const radius = (c / 2) * Math.sqrt(darkness) * 1.1;
+          if (radius > 0.35) {
+            const x = cx * c;
+            const y = cy * c;
             ctx.beginPath();
             ctx.arc(x + c / 2, y + c / 2, radius, 0, Math.PI * 2);
             ctx.fill();

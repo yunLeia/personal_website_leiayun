@@ -64,7 +64,7 @@ export default function Header() {
           </div>
         </div>
 
-        <HalftonePhoto src={SITE.photo} alt={SITE.name} size={112} cell={4} className="rounded-lg shrink-0 max-sm:mx-auto" />
+        <HalftonePhoto src={SITE.photo} alt={SITE.name} size={128} cell={3} className="rounded-lg shrink-0 max-sm:mx-auto" />
       </div>
 
       <div className="border border-black/10 rounded-lg divide-x divide-black/10 flex mt-2">
