@@ -40,7 +40,7 @@ export default function Outline() {
   return (
     <nav
       aria-label="Page outline"
-      className="hidden 2xl:block fixed left-10 top-1/2 -translate-y-1/2 w-[170px] z-30"
+      className="hidden min-[1440px]:block fixed left-6 top-1/2 -translate-y-1/2 w-[140px] z-30"
     >
       <ul className="flex flex-col gap-3">
         {items.map((item) => {
