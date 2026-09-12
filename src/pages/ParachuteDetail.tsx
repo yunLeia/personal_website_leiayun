@@ -69,23 +69,11 @@ export default function ParachuteDetail() {
             What I Built
           </h2>
           <div className="space-y-24 max-sm:space-y-16">
-            {WORK_ITEMS.map((item, i) => {
-              const reversed = i % 2 !== 0;
+            {WORK_ITEMS.map((item) => {
               return (
                 <Reveal key={item.title}>
-                  <div className={`flex flex-col ${reversed ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-10 md:gap-14`}>
-                    <div className="w-full md:flex-[2]">
-                      <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden border border-black/5 bg-[#F0F3F7]">
-                        {item.image ? (
-                          <img src={item.image} alt={item.title} loading="lazy" decoding="async" className="w-full h-full object-contain" />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center">
-                            <span className="text-black/20 text-[13px]">screenshot</span>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                    <div className="md:flex-[3]">
+                  <div className="section-with-media">
+<div className="md:flex-[3]">
                       <p className="text-[13px] font-medium text-[#666]">
                         {item.num} &middot; {item.meta}
                       </p>
@@ -97,7 +85,18 @@ export default function ParachuteDetail() {
                         {item.tools.map((t) => <ToolPill key={t}>{t}</ToolPill>)}
                       </div>
                     </div>
-                  </div>
+<div className="section-media">
+                      <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden border border-black/5 bg-[#F0F3F7]">
+                        {item.image ? (
+                          <img src={item.image} alt={item.title} loading="lazy" decoding="async" className="w-full h-full object-contain" />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center">
+                            <span className="text-black/20 text-[13px]">screenshot</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+</div>
                 </Reveal>
               );
             })}

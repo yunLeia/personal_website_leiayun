@@ -61,7 +61,7 @@ function DemoMedia() {
   const [errored, setErrored] = useState(false);
 
   return (
-    <div className="mb-6">
+    <div className="section-media mt-6">
       <div className={`w-full aspect-video overflow-hidden ${CARD} flex items-center justify-center`}>
         {!errored ? (
           <img
@@ -133,7 +133,6 @@ export default function GatherollDetail() {
           </h2>
           <p className="text-[15px] font-normal text-[#444] leading-[1.7] mb-6">{OVERVIEW.subtext}</p>
 
-          <DemoMedia />
 
           <div className="flex gap-3">
             <a
@@ -153,6 +152,7 @@ export default function GatherollDetail() {
               live demo &#8599;
             </a>
           </div>
+          <DemoMedia />
         </div>
 
         <div className="h-px bg-black/5 mb-16" />

@@ -6,41 +6,15 @@ import { Reveal, ToolPill } from '../components/shared';
 
 // ─── Project block (Work-page style) ────────────────────────────
 
-function ProjectBlock({ project, index, onReadMore }: {
+function ProjectBlock({ project, onReadMore }: {
   project: (typeof PLANFIT_PROJECTS)[number];
-  index: number;
   onReadMore: () => void;
 }) {
-  const reversed = index % 2 !== 0;
 
   return (
     <Reveal id={`case-study-${project.slug}`} outline={project.title}>
-      <div className={`flex flex-col ${reversed ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-10 md:gap-14`}>
-        {/* Image */}
-        <div className="w-full md:flex-[2]">
-          <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden border border-black/5 bg-[#F0F3F7]">
-            {project.image ? (
-              <img
-                src={project.image}
-                alt={project.title}
-                loading="lazy"
-                decoding="async"
-                className="w-full h-full object-contain"
-                style={{
-                  transform: project.imageZoom ? `scale(${project.imageZoom})` : undefined,
-                  filter: 'blur(2.5px)',
-                }}
-              />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center">
-                <span className="text-black/20 text-[13px]">screenshot</span>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Text */}
-        <div className="md:flex-[3]">
+      <div className="section-with-media">
+<div className="md:flex-[3]">
           <p className="text-[13px] font-medium text-[#666]">
             {project.num} &middot; {project.heroMetrics}
           </p>
@@ -68,7 +42,28 @@ function ProjectBlock({ project, index, onReadMore }: {
             </button>
           </div>
         </div>
-      </div>
+<div className="section-media">
+          <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden border border-black/5 bg-[#F0F3F7]">
+            {project.image ? (
+              <img
+                src={project.image}
+                alt={project.title}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-contain"
+                style={{
+                  transform: project.imageZoom ? `scale(${project.imageZoom})` : undefined,
+                  filter: 'blur(2.5px)',
+                }}
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center">
+                <span className="text-black/20 text-[13px]">screenshot</span>
+              </div>
+            )}
+          </div>
+        </div>
+</div>
     </Reveal>
   );
 }
@@ -110,8 +105,8 @@ export default function PlanfitDetail() {
             Case Studies
           </h2>
           <div className="space-y-24 max-sm:space-y-16">
-            {PLANFIT_PROJECTS.map((project, i) => (
-              <ProjectBlock key={project.slug} project={project} index={i} onReadMore={() => {
+            {PLANFIT_PROJECTS.map((project) => (
+              <ProjectBlock key={project.slug} project={project} onReadMore={() => {
                 setModalOpen(true);
                 trackCaseStudyClick(project.slug);
               }} />

@@ -119,13 +119,8 @@ export default function CulineAIDetail() {
           <h2 className="text-[26px] max-sm:text-[22px] font-bold text-[#111] tracking-tight leading-[1.2] mb-10">
             Photo in, recipe out.
           </h2>
-          <div className="flex flex-col md:flex-row md:items-start gap-8 md:gap-12">
-            <div className="flex-1 w-full">
-              <div className="w-full rounded-2xl overflow-hidden border border-black/5">
-                <img src="/images/culinai-upload.webp" alt="CulinAI upload interface" loading="lazy" decoding="async" className="w-full h-auto block" />
-              </div>
-            </div>
-            <div className="flex-1">
+          <div className="section-with-media">
+<div className="flex-1">
               <div className="flex flex-col gap-5">
                 {FLOW_STEPS.map((step) => (
                   <div key={step.label}>
@@ -141,7 +136,12 @@ export default function CulineAIDetail() {
                 <ToolPill>JavaScript</ToolPill>
               </div>
             </div>
-          </div>
+<div className="section-media">
+              <div className="w-full rounded-2xl overflow-hidden border border-black/5">
+                <img src="/images/culinai-upload.webp" alt="CulinAI upload interface" loading="lazy" decoding="async" className="w-full h-auto block" />
+              </div>
+            </div>
+</div>
         </Reveal>
 
         <div className="h-px bg-black/5 mb-16" />

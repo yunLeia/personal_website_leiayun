@@ -138,7 +138,7 @@ export default function IndigoDetail() {
           <h2 className="text-[26px] max-sm:text-[22px] font-bold text-[#111] tracking-tight leading-[1.2] mb-10">
             Turn sounds into grounded, actionable guidance.
           </h2>
-          <div className="w-full rounded-2xl overflow-hidden border border-black/5">
+          <div className="section-media overflow-hidden">
             <img src="/images/indigo-solution.webp" alt="Solution: Listen, Understand, Act" loading="lazy" decoding="async" className="w-full h-auto block" />
           </div>
         </Reveal>
@@ -156,13 +156,8 @@ export default function IndigoDetail() {
           <p className="text-[16px] max-sm:text-[15px] font-normal text-[#666] leading-[1.5] mb-10">
             End-to-end real-time audio pipeline.
           </p>
-          <div className="flex flex-col md:flex-row md:items-start gap-8 md:gap-12">
-            <div className="flex-1 w-full">
-              <div className="w-full rounded-2xl overflow-hidden border border-black/5">
-                <img src="/images/indigo-pipeline.webp" alt="End-to-end audio pipeline" loading="lazy" decoding="async" className="w-full h-auto block" />
-              </div>
-            </div>
-            <div className="flex-1">
+          <div className="section-with-media">
+<div className="flex-1">
               <div className="flex flex-col gap-5">
                 {FLOW_STEPS.map((step) => (
                   <div key={step.label}>
@@ -182,7 +177,12 @@ export default function IndigoDetail() {
                 <ToolPill>Web Audio API</ToolPill>
               </div>
             </div>
-          </div>
+<div className="section-media">
+              <div className="section-media overflow-hidden">
+                <img src="/images/indigo-pipeline.webp" alt="End-to-end audio pipeline" loading="lazy" decoding="async" className="w-full h-auto block" />
+              </div>
+            </div>
+</div>
         </Reveal>
 
         <div className="h-px bg-black/5 mb-16" />
@@ -198,13 +198,8 @@ export default function IndigoDetail() {
           <p className="text-[16px] max-sm:text-[15px] font-normal text-[#666] leading-[1.5] mb-10">
             Orchestrated via agents.
           </p>
-          <div className="flex flex-col md:flex-row-reverse md:items-start gap-8 md:gap-12">
-            <div className="flex-1 w-full">
-              <div className="w-full rounded-2xl overflow-hidden border border-black/5">
-                <img src="/images/indigo-gemini-roles.webp" alt="Gemini used in three roles" loading="lazy" decoding="async" className="w-full h-auto block" />
-              </div>
-            </div>
-            <div className="flex-1">
+          <div className="section-with-media">
+<div className="flex-1">
               <div className="flex flex-col gap-5">
                 <div>
                   <div className="text-[16px] font-semibold text-[#111] tracking-tight mb-2">Gemini 2.5 Flash is used across</div>
@@ -229,7 +224,12 @@ export default function IndigoDetail() {
                 <ToolPill>Python</ToolPill>
               </div>
             </div>
-          </div>
+<div className="section-media">
+              <div className="section-media overflow-hidden">
+                <img src="/images/indigo-gemini-roles.webp" alt="Gemini used in three roles" loading="lazy" decoding="async" className="w-full h-auto block" />
+              </div>
+            </div>
+</div>
         </Reveal>
 
         <div className="h-px bg-black/5 mb-16" />
