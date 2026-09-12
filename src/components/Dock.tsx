@@ -62,7 +62,7 @@ export default function Dock() {
       </DockIcon>
 
       <DockIcon label="On the Shelf" onClick={() => scrollTo('#shelf')}>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m7 3 5 7 5-7M7 3H3l6 10m8-10h4l-6 10"/><circle cx="12" cy="16" r="5"/><path d="m12 13 .8 1.8 2 .2-1.5 1.3.5 2-1.8-1-1.8 1 .5-2-1.5-1.3 2-.2z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="15" cy="4" r="2"/><path d="m5 10 4-3 4 2 3 4h4M13 9l-3 6 4 3v4M10 15l-4 4H2"/></svg>
       </DockIcon>
 
       <DockIcon label="Contact" onClick={() => scrollTo('#contact')}>

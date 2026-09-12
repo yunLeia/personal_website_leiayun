@@ -256,11 +256,11 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 .name-letter { position: relative; display: inline-block; cursor: default; isolation: isolate; flex: none; transition: width 380ms cubic-bezier(.22,1,.36,1); }
 .name-word-start { margin-left: .28em; }
 .name-type { display: inline-block; white-space: nowrap; transition: opacity 180ms ease, transform 320ms cubic-bezier(.22,1,.36,1); }
-.name-art { position: absolute; height: 1.26em; width: auto; max-width: none; left: 50%; top: 50%; object-fit: contain; opacity: 0; transform: translate(-50%,-50%) scale(.94) rotate(-3deg); pointer-events: none; transition: opacity 180ms ease, transform 380ms cubic-bezier(.22,1,.36,1); }
+.name-art { position: absolute; height: 1.26em; width: auto; max-width: none; left: 50%; top: 50%; object-fit: contain; opacity: 0; transform: translate(-50%,-50%) scale(.94) rotate(var(--name-tilt, -4deg)); pointer-events: none; transition: opacity 180ms ease, transform 380ms cubic-bezier(.22,1,.36,1); }
 .name-letter[data-illustrated="true"] { z-index: 2; }
 .name-letter[data-illustrated="true"] .name-type { opacity: 0; transform: scale(.96); }
 .name-art[data-visible="true"] { opacity: 1; transform: translate(-50%,-50%) scale(1) rotate(var(--name-tilt, -4deg)); animation: name-sticker-arrive 480ms cubic-bezier(.22,1,.36,1) both; }
-@keyframes name-sticker-arrive { 0% { transform: translate(-50%,calc(-50% + 3px)) scale(.92) rotate(-3deg); } 70% { transform: translate(-50%,-50%) scale(1.015) rotate(.4deg); } 100% { transform: translate(-50%,-50%) scale(1) rotate(var(--name-tilt, -4deg)); } }
+@keyframes name-sticker-arrive { 0% { transform: translate(-50%,calc(-50% + 3px)) scale(.92) rotate(var(--name-tilt, -4deg)); } 70% { transform: translate(-50%,-50%) scale(1.015) rotate(var(--name-tilt, -4deg)); } 100% { transform: translate(-50%,-50%) scale(1) rotate(var(--name-tilt, -4deg)); } }
 @media (max-width: 440px) { .intro-aside .resume-link, .intro-aside .linkedin-link { width: 100%; padding-inline: 10px; } }
 @media (prefers-reduced-motion: reduce) {
   .animated-name .name-art { display: none; }
@@ -279,8 +279,6 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 .medal-item:hover img, .medal-item:focus-visible img { filter: drop-shadow(4px 9px 5px #00000028); }
 .medal-item:focus-visible { outline: 1px dashed var(--muted); outline-offset: -2px; border-radius: 4px; }
 .medal-shelf-edge { position: absolute; left: 0; right: 0; top: -5px; z-index: 3; height: 10px; background: linear-gradient(#f2f2ef, #d6d6d2 45%, #e4e4df 60%, #bdbdb8); border-top: 1px solid #d5d5d2; border-radius: 2px; box-shadow: 0 4px 6px -3px #0004; pointer-events: none; }
-.medal-hint { margin: 0; text-align: center; font: 10px 'Geist Mono', monospace; color: var(--muted); }
-.medal-hint span { margin-left: 6px; }
 .medal-caption { min-height: 74px; padding-top: 19px; text-align: center; }
 .medal-caption p { font-size: 14px; color: var(--copy); margin: 0 0 4px; }
 .medal-caption span { font-family: 'Geist Mono', monospace; color: var(--muted); font-size: 11px; }
@@ -305,3 +303,5 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 .name-letter:nth-child(2n) { --name-tilt: 5deg; }
 .name-letter:nth-child(3n) { --name-tilt: -7deg; }
 @media (prefers-reduced-motion: reduce) { .medal-item img { transform: none; transition: none; } }
+
+.medal-caption .medal-distance { display: block; margin-bottom: 8px; font-size: 10px; letter-spacing: .04em; }

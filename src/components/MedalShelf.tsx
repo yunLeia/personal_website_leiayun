@@ -2,10 +2,10 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import { SectionHeader } from './HomeUI';
 
 const MEDALS = [
-  { image: 'mapo', title: 'Mapo Seo Yun-bok Marathon', detail: 'Seoul · April 19, 2025' },
-  { image: 'seoul-10k', title: 'Ilgan Sports Seoul Marathon', detail: '10K finisher · September 7, 2025' },
-  { image: 'seoul-october', title: 'Ilgan Sports Marathon', detail: 'Yeouido, Seoul · October 12, 2025' },
-  { image: 'brooklyn', title: 'NYCRUNS Brooklyn Experience', detail: 'Half Marathon · Brooklyn, New York' },
+  { image: 'mapo', title: 'Mapo Seo Yun-bok Marathon', distance: '6.2 miles · 10K', detail: 'Seoul · April 19, 2025' },
+  { image: 'seoul-10k', title: 'Ilgan Sports Seoul Marathon', distance: '6.2 miles · 10K', detail: 'Seoul · September 7, 2025' },
+  { image: 'seoul-october', title: "Jungnang Mayor’s Cup Rose Marathon", distance: '6.2 miles · 10K', detail: 'Seoul · October 12, 2025' },
+  { image: 'brooklyn', title: 'NYCRUNS Brooklyn Experience Half Marathon', distance: '13.1 miles · Half marathon', detail: 'Brooklyn · April 25, 2026' },
 ];
 
 export default function MedalShelf() {
@@ -66,7 +66,7 @@ export default function MedalShelf() {
           delete event.currentTarget.dataset.dragging;
         }} onPointerLeave={() => { if (!drag.current.moved) drag.current.down = false; }}>
           {MEDALS.map((medal, index) => (
-            <button key={medal.image} type="button" className="medal-item" aria-pressed={selected === index} aria-label={`Show ${medal.title}, ${medal.detail}`} onClick={() => {
+            <button key={medal.image} type="button" className="medal-item" aria-pressed={selected === index} aria-label={`Show ${medal.title}, ${medal.distance}, ${medal.detail}`} onClick={() => {
               if (drag.current.moved) { drag.current.moved = false; return; }
               center(index);
             }} onPointerMove={(event) => {
@@ -87,10 +87,10 @@ export default function MedalShelf() {
         </div>
       </div>
       <div className="medal-caption" aria-live="polite" aria-atomic="true">
+        <span className="medal-distance">{MEDALS[selected].distance}</span>
         <p>{MEDALS[selected].title}</p>
         <span>{MEDALS[selected].detail}</span>
       </div>
-      <p className="medal-hint">Drag to explore <span aria-hidden="true">↔</span></p>
     </section>
   );
 }
