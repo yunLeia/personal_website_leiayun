@@ -4,7 +4,7 @@ import { SectionHeader } from './HomeUI';
 const MEDALS = [
   { image: 'mapo', title: 'Mapo Seo Yun-bok Marathon', distance: '6.2 miles · 10K', detail: 'Seoul · April 19, 2025' },
   { image: 'seoul-10k', title: 'Ilgan Sports Seoul Marathon', distance: '6.2 miles · 10K', detail: 'Seoul · September 7, 2025' },
-  { image: 'seoul-october', title: "Jungnang Mayor’s Cup Rose Marathon", distance: '6.2 miles · 10K', detail: 'Seoul · October 12, 2025' },
+  { image: 'jungnang-rose', title: "Jungnang Mayor’s Cup Rose Marathon", distance: '6.2 miles · 10K', detail: 'Seoul · October 12, 2025' },
   { image: 'brooklyn', title: 'NYCRUNS Brooklyn Experience Half Marathon', distance: '13.1 miles · Half marathon', detail: 'Brooklyn · April 25, 2026' },
 ];
 
