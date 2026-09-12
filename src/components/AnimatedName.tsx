@@ -22,6 +22,7 @@ export default function AnimatedName() {
     void document.fonts.ready.then(measure);
     const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
     reduced.current = preference.matches;
+    introComplete.current = preference.matches;
     const update = () => {
       reduced.current = preference.matches;
       if (preference.matches) {
@@ -43,11 +44,11 @@ export default function AnimatedName() {
       observer?.disconnect();
       LETTERS.forEach((_, index) => {
         const show = (variant: number | null) => setVariants((current) => current.map((value, i) => i === index ? variant : value));
-        timers.current.push(setTimeout(() => show(0), 500 + index * 60));
-        timers.current.push(setTimeout(() => show(1), 1250 + index * 60));
-        timers.current.push(setTimeout(() => show(null), 2000 + index * 60));
+        timers.current.push(setTimeout(() => show(0), 450 + index * 35));
+        timers.current.push(setTimeout(() => show(1), 1550 + index * 35));
+        timers.current.push(setTimeout(() => show(null), 2650 + index * 35));
       });
-      introTimers.push(setTimeout(() => { introComplete.current = true; }, 2600));
+      introTimers.push(setTimeout(() => { introComplete.current = true; }, 3150));
     };
     Promise.all([...images, document.fonts.ready]).then(() => {
       if (cancelled || !heading.current) return;

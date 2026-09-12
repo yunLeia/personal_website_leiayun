@@ -203,5 +203,6 @@ export const NAV_ITEMS: NavItem[] = [
       { label: 'CulinAI', href: '/work/culinai' },
     ],
   },
+  { label: 'Shelf', href: '#shelf' },
   { label: 'Contact', href: '#contact' },
 ];

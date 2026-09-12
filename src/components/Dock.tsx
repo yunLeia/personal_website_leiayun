@@ -1,9 +1,5 @@
 import { SITE } from '../data';
-
-interface Props {
-  onAvatarClick: () => void;
-  avatarActive: boolean;
-}
+import HalftonePhoto from './HalftonePhoto';
 
 function Tooltip({ label }: { label: string }) {
   return (
@@ -31,7 +27,7 @@ function scrollTo(id: string) {
   document.querySelector(id)?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
 }
 
-export default function Dock({ onAvatarClick, avatarActive }: Props) {
+export default function Dock() {
   return (
     <nav
       aria-label="Primary"
@@ -39,14 +35,12 @@ export default function Dock({ onAvatarClick, avatarActive }: Props) {
     >
       <button
         type="button"
-        onClick={onAvatarClick}
-        aria-label="About Leia"
-        className={`group relative w-9 h-9 rounded-full overflow-hidden shrink-0 transition-all duration-150 cursor-pointer ${
-          avatarActive ? 'ring-2 ring-black/20' : 'hover:ring-2 hover:ring-black/10'
-        }`}
+        onClick={() => window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })}
+        aria-label="Back to top"
+        className="group relative w-9 h-9 rounded-full overflow-hidden shrink-0 cursor-pointer hover:ring-2 hover:ring-black/10"
       >
-        <Tooltip label="About" />
-        <img src={SITE.photo} alt={SITE.name} className="w-full h-full object-cover" />
+        <Tooltip label="Back to top" />
+        <HalftonePhoto src={SITE.photo} alt="Leia Yun in halftone dots" size={36} cell={1} />
       </button>
 
       <div className="w-px h-5 bg-black/10 mx-1" />
@@ -65,6 +59,10 @@ export default function Dock({ onAvatarClick, avatarActive }: Props) {
           <rect x="3" y="13" width="8" height="8" rx="1.5" />
           <rect x="13" y="13" width="8" height="8" rx="1.5" />
         </svg>
+      </DockIcon>
+
+      <DockIcon label="On the Shelf" onClick={() => scrollTo('#shelf')}>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m7 3 5 7 5-7M7 3H3l6 10m8-10h4l-6 10"/><circle cx="12" cy="16" r="5"/><path d="m12 13 .8 1.8 2 .2-1.5 1.3.5 2-1.8-1-1.8 1 .5-2-1.5-1.3 2-.2z"/></svg>
       </DockIcon>
 
       <DockIcon label="Contact" onClick={() => scrollTo('#contact')}>

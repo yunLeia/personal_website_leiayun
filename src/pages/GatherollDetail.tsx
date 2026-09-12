@@ -1,3 +1,4 @@
+import ProjectIntro from '../components/ProjectIntro';
 import { useState } from 'react';
 import { Reveal } from '../components/shared';
 
@@ -123,37 +124,7 @@ export default function GatherollDetail() {
       <div className="case-study-content">
 
         {/* Overview */}
-        <div id="overview" data-outline="Overview" className="mt-12 mb-14 animate-fade-in">
-          <h1 className="text-[32px] max-sm:text-[26px] font-bold tracking-tight text-[#111] mb-2">
-            GatheRoll
-          </h1>
-          <p className="text-[14px] text-[#999] mb-6">{OVERVIEW.meta}</p>
-          <h2 className="text-[22px] max-sm:text-[19px] font-semibold text-[#111] tracking-tight leading-[1.4] mb-3">
-            {OVERVIEW.tagline}
-          </h2>
-          <p className="text-[15px] font-normal text-[#444] leading-[1.7] mb-6">{OVERVIEW.subtext}</p>
-
-
-          <div className="flex gap-3">
-            <a
-              href={OVERVIEW.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[14px] font-medium px-5 py-2 rounded-full bg-[#1d1d1f] text-white no-underline transition-all duration-200 hover:bg-[#424245] active:scale-[0.97]"
-            >
-              github &#8599;
-            </a>
-            <a
-              href={OVERVIEW.links.demo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[14px] font-medium px-5 py-2 rounded-full bg-black/[0.05] text-[#1d1d1f] no-underline transition-all duration-200 hover:bg-black/[0.08] active:scale-[0.97]"
-            >
-              live demo &#8599;
-            </a>
-          </div>
-          <DemoMedia />
-        </div>
+        <ProjectIntro name="GatheRoll" summary={`${OVERVIEW.tagline} ${OVERVIEW.subtext}`} role="Product Engineer" context="Independent project · 2026" links={[{ label: "GitHub", href: OVERVIEW.links.github }]}><DemoMedia /></ProjectIntro>
 
         <div className="h-px bg-black/5 mb-16" />
 

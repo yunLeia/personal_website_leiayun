@@ -13,16 +13,8 @@ export default function Nav() {
   function handleItemClick(e: React.MouseEvent, item: NavItem) {
     e.preventDefault();
 
-    const triggerGreeting = item.label === 'About';
+    navigate('/', { state: { section: item.href.slice(1) } });
 
-    if (location.pathname !== '/') {
-      navigate('/' + item.href, triggerGreeting ? { state: { openGreeting: true } } : undefined);
-    } else {
-      document.querySelector(item.href)?.scrollIntoView({ behavior: 'smooth' });
-      if (triggerGreeting) {
-        window.dispatchEvent(new CustomEvent('open-greeting'));
-      }
-    }
   }
 
   return (
@@ -74,7 +66,7 @@ export default function Nav() {
                               e.preventDefault();
                               setOpenKey(null);
                               if (location.pathname !== '/') {
-                                navigate('/' + sub.href);
+                                navigate('/', { state: { section: sub.href.slice(1) } });
                               } else {
                                 document.querySelector(sub.href)?.scrollIntoView({ behavior: 'smooth' });
                               }

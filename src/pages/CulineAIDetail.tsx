@@ -1,3 +1,4 @@
+import ProjectIntro from '../components/ProjectIntro';
 import { Reveal, ToolPill } from '../components/shared';
 
 // ─── Data ────────────────────────────────────────────────────────
@@ -48,26 +49,7 @@ export default function CulineAIDetail() {
       <div className="case-study-content">
 
         {/* Overview */}
-        <div id="overview" data-outline="Overview" className="mt-12 mb-14 animate-fade-in">
-          <h1 className="text-[32px] max-sm:text-[26px] font-bold tracking-tight text-[#111] mb-2">
-            CulinAI
-          </h1>
-          <p className="text-[14px] text-[#999] mb-6">{OVERVIEW.event}</p>
-          <div className="flex flex-col gap-2 mb-6">
-            <div className="text-[15px] font-normal text-[#444]"><span className="font-semibold text-[#111]">Role:</span> {OVERVIEW.role}</div>
-          </div>
-          <p className="text-[15px] font-normal text-[#444] leading-[1.7] mb-6">{OVERVIEW.summary}</p>
-          <div className="flex gap-3">
-            <a
-              href={OVERVIEW.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[14px] font-medium px-5 py-2 rounded-full bg-[#1d1d1f] text-white no-underline transition-all duration-200 hover:bg-[#424245] active:scale-[0.97]"
-            >
-              github &#8599;
-            </a>
-          </div>
-        </div>
+        <ProjectIntro name="CulinAI" summary={OVERVIEW.summary} role={OVERVIEW.role} context={OVERVIEW.event} links={[{ label: "GitHub", href: OVERVIEW.links.github }]} />
 
         <div className="h-px bg-black/5 mb-16" />
 
