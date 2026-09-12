@@ -1,4 +1,4 @@
-import { Link, useParams, Navigate } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 import { PLANFIT_PROJECTS, type PlanfitProject } from './planfitData';
 import { Reveal, ToolPill } from '../components/shared';
 
@@ -128,9 +128,7 @@ export default function PlanfitCaseStudy() {
   return (
     <div className="case-study-body">
       <div className="case-study-content">
-        <Link to="/work/planfit" className="text-[14px] font-medium text-[#86868b] no-underline transition-opacity duration-200 hover:opacity-60">
-          ← back to planfit
-        </Link>
+
 
         <div className="mt-12 mb-14 animate-fade-in">
           <p className="text-[13px] text-[#999] mb-2">planfit · case study {project.num}</p>

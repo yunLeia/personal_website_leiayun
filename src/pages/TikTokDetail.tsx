@@ -1,5 +1,5 @@
 import { EXPERIENCE } from '../data';
-import { Reveal, ToolPill, BackLink } from '../components/shared';
+import { Reveal, ToolPill } from '../components/shared';
 
 const tiktok = EXPERIENCE.find((experience) => experience.company === 'TikTok')!;
 
@@ -42,7 +42,6 @@ export default function TikTokDetail() {
   return (
     <div className="case-study-body">
       <div className="case-study-content">
-        <BackLink />
 
         <div id="overview" data-outline="Overview" className="mt-12 mb-14 animate-fade-in">
           <h1 className="text-[32px] max-sm:text-[26px] font-bold tracking-tight text-[#111] mb-6">

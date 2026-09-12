@@ -1,4 +1,4 @@
-import { Reveal, ToolPill, BackLink } from '../components/shared';
+import { Reveal, ToolPill } from '../components/shared';
 
 // ─── Data ────────────────────────────────────────────────────────
 
@@ -55,7 +55,6 @@ export default function IndigoDetail() {
   return (
     <div className="case-study-body">
       <div className="case-study-content">
-        <BackLink />
 
         {/* Overview */}
         <div id="overview" data-outline="Overview" className="mt-12 mb-14 animate-fade-in">

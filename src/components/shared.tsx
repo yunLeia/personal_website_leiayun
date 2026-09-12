@@ -1,5 +1,4 @@
 import { type ReactNode } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 // Shared tool/keyword pill used across detail pages
@@ -35,21 +34,5 @@ export function Reveal({
     >
       {children}
     </div>
-  );
-}
-
-// "← back" link used on detail pages. Uses browser history (POP navigation)
-// instead of Link to="/" (a PUSH) so ScrollToTop restores the homepage's
-// saved scroll position instead of resetting to the top.
-export function BackLink({ children = '← back' }: { children?: ReactNode }) {
-  const navigate = useNavigate();
-  return (
-    <button
-      type="button"
-      onClick={() => (window.history.length > 1 ? navigate(-1) : navigate('/'))}
-      className="text-[14px] font-medium text-[#86868b] no-underline transition-opacity duration-200 hover:opacity-60 bg-transparent border-none p-0 cursor-pointer"
-    >
-      {children}
-    </button>
   );
 }

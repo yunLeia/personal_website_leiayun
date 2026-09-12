@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { PLANFIT_OVERVIEW, PLANFIT_PROJECTS } from './planfitData';
 import PasswordModal from '../components/PasswordModal';
 import { trackCaseStudyClick } from '../lib/analytics';
-import { Reveal, ToolPill, BackLink } from '../components/shared';
+import { Reveal, ToolPill } from '../components/shared';
 
 // ─── Project block (Work-page style) ────────────────────────────
 
@@ -81,7 +81,6 @@ export default function PlanfitDetail() {
   return (
     <div className="case-study-body">
       <div className="case-study-content">
-        <BackLink />
 
         {/* Overview */}
         <div id="overview" data-outline="Overview" className="mt-12 mb-14 animate-fade-in">

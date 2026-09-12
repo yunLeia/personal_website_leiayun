@@ -15,12 +15,14 @@ export default function ExperienceSection({ onSelect, activeKey }: Props) {
       <ol className="experience-list">
         {EXPERIENCE.map((exp) => (
           <li className="experience-entry" key={exp.company}>
+            {exp.detailPath ? <Link className="experience-row-link" to={exp.detailPath} aria-label={`Read about my work at ${exp.company}`} /> : <button className="experience-row-link" type="button" aria-label={`Read about my work at ${exp.company}`} aria-pressed={activeKey === `${exp.company}-${exp.role} · ${exp.date}`} onClick={() => onSelect({ messages: exp.subProjects.flatMap((s) => s.chat), title: exp.company, subtitle: `${exp.role} · ${exp.date}` })} />}
             <div className="experience-heading">
-              <h3>{exp.detailPath ? <Link to={exp.detailPath}>{exp.company}<span className="experience-detail-arrow" aria-hidden="true">↗</span></Link> : <button type="button" aria-pressed={activeKey === `${exp.company}-${exp.role} · ${exp.date}`} onClick={() => onSelect({ messages: exp.subProjects.flatMap((s) => s.chat), title: exp.company, subtitle: `${exp.role} · ${exp.date}` })}>{exp.company}<ExternalArrow /></button>}</h3>
+              <h3>{exp.url ? <a className="company-link" href={exp.url} target="_blank" rel="noopener noreferrer" aria-label={`${exp.company} website (opens in a new tab)`}>{exp.company}<ExternalArrow /></a> : exp.company}</h3>
               <span className="experience-date">{exp.date}</span>
             </div>
             <p className="experience-position">{exp.role}</p>
             {exp.subtitle && <p className="experience-summary">{exp.subtitle}</p>}
+            <span className="experience-open-indicator" aria-hidden="true">↗</span>
           </li>
         ))}
       </ol>

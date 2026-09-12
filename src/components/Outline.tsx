@@ -1,14 +1,14 @@
-import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 interface OutlineItem { id: string; label: string }
 
 export default function Outline() {
   const [items, setItems] = useState<OutlineItem[]>([]);
   const [activeId, setActiveId] = useState('');
-  const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const linksRef = useRef<HTMLElement>(null);
+  const { pathname } = useLocation();
+  const isProject = ['/work/gatheroll', '/work/indigo', '/work/culinai'].includes(pathname);
 
   useEffect(() => {
     let frame = 0;
@@ -44,13 +44,14 @@ export default function Outline() {
   }, []);
 
   return (
-    <aside className={`article-outline ${collapsed ? 'is-collapsed' : ''} ${mobileOpen ? 'is-open' : ''}`}>
-      <button type="button" className="outline-toggle" aria-label={collapsed ? 'Expand page outline' : 'Collapse page outline'} aria-expanded={!collapsed} aria-controls="article-outline-links" onClick={() => setCollapsed(!collapsed)}>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16m6-10-2 2 2 2"/></svg>
-      </button>
-      <Link to="/#projects" className="outline-back">← Portfolio</Link>
-      <button type="button" className="outline-mobile-toggle" aria-expanded={mobileOpen} aria-controls="article-outline-links" onClick={() => setMobileOpen(!mobileOpen)}>On this page <span aria-hidden="true">{mobileOpen ? '−' : '+'}</span></button>
-      <nav id="article-outline-links" ref={linksRef} aria-label="Page outline" hidden={collapsed}>
+    <aside className={`article-outline ${mobileOpen ? 'is-open' : ''}`}>
+      <div className="outline-toolbar">
+        <Link to={isProject ? '/#projects' : '/#experience'} className="outline-back-icon" aria-label="Back to portfolio" title="Back to portfolio">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m12 5-7 7 7 7M5 12h14" /></svg>
+        </Link>
+        <button type="button" className="outline-mobile-toggle" aria-expanded={mobileOpen} aria-controls="article-outline-links" onClick={() => setMobileOpen(!mobileOpen)}>On this page <span aria-hidden="true">{mobileOpen ? '−' : '+'}</span></button>
+      </div>
+      <nav id="article-outline-links" aria-label="Page outline">
         <ul>{items.map((item) => <li key={item.id}>
           <a href={`#${item.id}`} aria-current={activeId === item.id ? 'location' : undefined} onClick={(event) => {
             event.preventDefault();

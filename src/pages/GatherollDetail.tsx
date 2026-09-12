@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Reveal, BackLink } from '../components/shared';
+import { Reveal } from '../components/shared';
 
 // ─── Data ────────────────────────────────────────────────────────
 
@@ -121,7 +121,6 @@ export default function GatherollDetail() {
   return (
     <div className="case-study-body">
       <div className="case-study-content">
-        <BackLink />
 
         {/* Overview */}
         <div id="overview" data-outline="Overview" className="mt-12 mb-14 animate-fade-in">
