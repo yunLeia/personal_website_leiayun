@@ -87,7 +87,7 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 .experience-heading :is(a,button):is(:hover,:focus-visible) .experience-detail-arrow { opacity: 1; transform: none; }
 .experience-date { color: var(--muted); font-size: 12px; line-height: 20px; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .experience-position { color: var(--copy); font-size: 14px; margin: 2px 0 0; line-height: 20px; }
-.experience-summary { color: var(--muted); font-size: 14px; line-height: 1.65; margin: 8px 0 0; max-width: 460px; }
+.experience-summary { color: var(--muted); font-size: 14px; line-height: 1.65; margin: 8px 0 0; }
 .portfolio-project-row { display: grid; grid-template-columns: 40px 144px minmax(0,1fr); align-items: start; gap: 4px 16px; padding: 18px 0; width: 100%; text-align: left; border-top: .5px solid var(--rule); transition: background 150ms; }
 .project-icon-frame { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; padding: 2px; border: .5px solid var(--rule); border-radius: 10px; box-shadow: 0 1px 2px #00000005; transition: transform 300ms var(--spring), box-shadow 150ms; overflow: hidden; }
 .project-icon-frame img { width: 36px; height: 36px; object-fit: cover; border-radius: 7px; }
