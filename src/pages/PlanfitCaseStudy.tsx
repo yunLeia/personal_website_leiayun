@@ -1,7 +1,6 @@
 import { Link, useParams, Navigate } from 'react-router-dom';
 import { PLANFIT_PROJECTS, type PlanfitProject } from './planfitData';
 import { Reveal, ToolPill } from '../components/shared';
-import Outline from '../components/Outline';
 
 // ─── Case Study View ────────────────────────────────────────────
 
@@ -127,9 +126,8 @@ export default function PlanfitCaseStudy() {
   if (!project) return <Navigate to="/work/planfit" replace />;
 
   return (
-    <div className="min-h-screen">
-      <Outline />
-      <div className="max-w-[1080px] mx-auto px-10 max-sm:px-5 pt-28 max-sm:pt-24 pb-24">
+    <div className="case-study-body">
+      <div className="case-study-content">
         <Link to="/work/planfit" className="text-[14px] font-medium text-[#86868b] no-underline transition-opacity duration-200 hover:opacity-60">
           ← back to planfit
         </Link>

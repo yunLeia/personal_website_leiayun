@@ -127,6 +127,7 @@ export const PROJECTS: ProjectItem[] = [
     sub: "everyone's photos from one event, in one shared album. Scan a QR, bulk-add your photos, and GatheRoll handles the rest.",
     tags: ['0→1 Product', 'Computer Vision', 'Next.js', 'FastAPI'],
     detailPath: '/work/gatheroll',
+    cover: '/images/gatheroll-thumbnail.png',
     chat: [
       "built **GatheRoll**, everyone's photos from one event, in one shared album",
       'scan a qr, bulk-add your photos, and GatheRoll checks them automatically',
@@ -139,7 +140,7 @@ export const PROJECTS: ProjectItem[] = [
     sub: 'real-time audio awareness for deaf & hard-of-hearing users, built with gemini + google adk',
     tags: ['Accessibility', 'Gemini 2.5 Flash', 'Google ADK', 'Hackathon'],
     detailPath: '/work/indigo',
-    cover: '/images/myindigo-cover.webp',
+    cover: '/images/myindigo-thumbnail.png',
     chat: [
       'built a **real-time audio awareness app** for deaf and hard-of-hearing users',
       'your phone listens, classifies sounds with **gemini 2.5 flash**, and sends **actionable alerts** to your watch',
@@ -152,7 +153,7 @@ export const PROJECTS: ProjectItem[] = [
     sub: 'an AI-powered site that generates recipes from a photo of your fridge or food items.',
     tags: ['Multimodal AI', 'Food Waste Reduction', 'LLaVA', 'SDXL-Turbo'],
     detailPath: '/work/culinai',
-    cover: '/images/culinai-cover.webp',
+    cover: '/images/culinai-thumbnail.png',
     chat: [
       'built an **ai recipe app**',
       'you upload a photo of ingredients and it turns that into a **usable recipe**',

@@ -41,9 +41,9 @@ export default function Home() {
   const activeKey = chat ? `${chat.title}-${chat.subtitle}` : null;
 
   return (
-    <div className="min-h-screen bg-[#fcfcfb] px-6 max-sm:px-5 pt-14 max-sm:pt-10 pb-12 max-sm:pb-24 relative">
+    <div className="portfolio-page">
       <PaperGrain />
-      <div className="max-w-[600px] mx-auto relative z-10">
+      <div className="portfolio-shell">
         <Header />
         <main>
           <ExperienceSection onSelect={openChat} activeKey={activeKey} />

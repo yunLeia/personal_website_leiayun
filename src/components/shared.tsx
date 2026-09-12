@@ -5,7 +5,7 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 // Shared tool/keyword pill used across detail pages
 export function ToolPill({ children }: { children: string }) {
   return (
-    <span className="text-[11px] text-[#666] font-normal bg-black/[0.05] rounded-full px-3 py-1">
+    <span className="text-[12px] text-[#797772] font-normal border border-black/10 rounded-sm px-2 py-1">
       {children}
     </span>
   );
@@ -29,7 +29,7 @@ export function Reveal({
       ref={ref}
       id={id}
       data-outline={outline}
-      className={`transition-all duration-600 ease-out ${
+      className={`detail-reveal transition-all duration-300 ease-out ${
         visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
       } ${className}`}
     >

@@ -3,7 +3,6 @@ import { PLANFIT_OVERVIEW, PLANFIT_PROJECTS } from './planfitData';
 import PasswordModal from '../components/PasswordModal';
 import { trackCaseStudyClick } from '../lib/analytics';
 import { Reveal, ToolPill, BackLink } from '../components/shared';
-import Outline from '../components/Outline';
 
 // ─── Project block (Work-page style) ────────────────────────────
 
@@ -80,9 +79,8 @@ export default function PlanfitDetail() {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
-    <div className="min-h-screen">
-      <Outline />
-      <div className="max-w-[1080px] mx-auto px-10 max-sm:px-5 pt-28 max-sm:pt-24 pb-24">
+    <div className="case-study-body">
+      <div className="case-study-content">
         <BackLink />
 
         {/* Overview */}

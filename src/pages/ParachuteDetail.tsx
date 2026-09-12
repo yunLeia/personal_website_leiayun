@@ -1,5 +1,4 @@
 import { Reveal, ToolPill, BackLink } from '../components/shared';
-import Outline from '../components/Outline';
 
 // ─── Data ────────────────────────────────────────────────────────
 
@@ -40,9 +39,8 @@ const RESULTS = [
 
 export default function ParachuteDetail() {
   return (
-    <div className="min-h-screen">
-      <Outline />
-      <div className="max-w-[1080px] mx-auto px-10 max-sm:px-5 pt-28 max-sm:pt-24 pb-24">
+    <div className="case-study-body">
+      <div className="case-study-content">
         <BackLink />
 
         {/* Overview */}

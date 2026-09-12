@@ -28,14 +28,14 @@ function DockIcon({ children, label, onClick }: { children: React.ReactNode; lab
 }
 
 function scrollTo(id: string) {
-  document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' });
+  document.querySelector(id)?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
 }
 
 export default function Dock({ onAvatarClick, avatarActive }: Props) {
   return (
     <nav
       aria-label="Primary"
-      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-1 px-2 py-2 rounded-full bg-[oklab(0.99_0_0.001_/_0.72)] shadow-[0_0_0_1px_rgba(0,0,0,0.06),0_8px_30px_rgba(0,0,0,0.1)]"
+      className="portfolio-dock"
     >
       <button
         type="button"

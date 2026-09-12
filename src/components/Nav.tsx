@@ -26,8 +26,8 @@ export default function Nav() {
   }
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-40 border-b bg-[#f0f2f5] border-black/5">
-      <div className="max-w-[1080px] mx-auto flex items-center justify-end gap-8 max-sm:gap-4 px-8 max-sm:px-5 py-4">
+    <nav className="case-study-nav">
+      <div className="case-study-nav-items">
         {NAV_ITEMS.map((item: NavItem) => {
           const hasDropdown = !!item.items?.length;
           const isOpen = openKey === item.label;
@@ -56,7 +56,7 @@ export default function Nav() {
                   id={menuId}
                   role="menu"
                   aria-label={`${item.label} submenu`}
-                  className={`absolute top-full left-1/2 -translate-x-1/2 pt-3 transition-all duration-200 max-sm:hidden ${
+                  className={`absolute bottom-full left-1/2 -translate-x-1/2 pb-3 transition-all duration-200 max-sm:hidden ${
                     isOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-1 pointer-events-none'
                   }`}
                 >
