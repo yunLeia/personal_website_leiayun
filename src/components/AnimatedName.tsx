@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 
+const RATIOS = [[.7773,.6641],[.9297,.9258],[.3984,.4648],[.8867,1.094],[.9531,.9023],[.9609,.8281],[.9375,.9805]];
 const LETTERS = ['L', 'e', 'i', 'a', 'Y', 'u', 'n'];
 
 export default function AnimatedName() {
   const [variants, setVariants] = useState<(number | null)[]>(() => LETTERS.map(() => null));
+  const heading = useRef<HTMLHeadingElement>(null);
   const versions = useRef(LETTERS.map(() => 0));
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const returns = useRef<(ReturnType<typeof setTimeout> | undefined)[]>([]);
@@ -12,6 +14,11 @@ export default function AnimatedName() {
 
   useEffect(() => {
     const introTimers = timers.current;
+    const measure = () => heading.current?.querySelectorAll<HTMLElement>('.name-type').forEach((letter) => {
+      letter.parentElement?.style.setProperty('--text-width', `${letter.offsetWidth}px`);
+    });
+    measure();
+    void document.fonts.ready.then(measure);
     const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
     reduced.current = preference.matches;
     const update = () => {
@@ -64,9 +71,9 @@ export default function AnimatedName() {
   };
 
   return (
-    <h1 className="animated-name" aria-label="Leia Yun">
+    <h1 ref={heading} className="animated-name" aria-label="Leia Yun">
       <span className="name-letters" aria-hidden="true">
-        {LETTERS.map((letter, index) => <span key={index} className={`name-letter ${index === 4 ? 'name-word-start' : ''}`} data-illustrated={variants[index] !== null} onPointerEnter={(event) => { if (event.pointerType !== 'touch') play(index); }} onPointerDown={(event) => { if (event.pointerType === 'touch') play(index); }}>
+        {LETTERS.map((letter, index) => <span key={index} className={`name-letter ${index === 4 ? 'name-word-start' : ''}`} style={{ width: variants[index] === null ? 'var(--text-width)' : `${RATIOS[index][variants[index]!] * 1.32 + .08}em` }} data-illustrated={variants[index] !== null} onPointerEnter={(event) => { if (event.pointerType !== 'touch') play(index); }} onPointerDown={(event) => { if (event.pointerType === 'touch') play(index); }}>
           <span className="name-type">{letter}</span>
           {[0, 1].map((version) => <img key={version} className="name-art" data-visible={variants[index] === version} src={`/images/name/${index}-${version}.webp`} alt="" draggable={false} />)}
         </span>)}

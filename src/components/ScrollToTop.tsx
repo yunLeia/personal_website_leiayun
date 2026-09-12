@@ -1,48 +1,45 @@
 import { useEffect, useLayoutEffect } from 'react';
 import { useLocation, useNavigationType } from 'react-router-dom';
 
-// Session-scoped scroll position cache, keyed by React Router's per-entry
-// location.key. The browser's own back/forward scroll restoration is
-// unreliable here: it fires before client-rendered content reaches its
-// final height, so we track and restore positions ourselves instead.
 const scrollPositions = new Map<string, number>();
+const storageKey = (key: string, pathname: string) => `portfolio-scroll:${key}:${pathname}`;
 
 export default function ScrollToTop() {
-  const { pathname, hash, key } = useLocation();
+  const { pathname, hash, key, state } = useLocation();
   const navigationType = useNavigationType();
 
-  // `html { scroll-behavior: smooth }` (index.css) makes even
-  // `window.scrollTo(0, 0)` glide instead of jump, which is what looked
-  // like the page sliding up on every navigation. `behavior: 'instant'`
-  // overrides that. Runs in useLayoutEffect (before paint, and before
-  // nested useScrollReveal checks) so sections compute their in-viewport
-  // state against the new page's scroll position, not the old one.
   useLayoutEffect(() => {
-    // Prevent the browser from fighting our own restoration below.
-    if ('scrollRestoration' in window.history) {
-      window.history.scrollRestoration = 'manual';
+    window.history.scrollRestoration = 'manual';
+    let saved = scrollPositions.get(key);
+    if (saved === undefined) {
+      try {
+        const stored = sessionStorage.getItem(storageKey(key, pathname));
+        if (stored !== null) saved = Number(stored);
+      } catch { /* Scroll restoration still works without browser storage. */ }
     }
-    if (hash) return;
-    const target = navigationType === 'POP' ? scrollPositions.get(key) ?? 0 : 0;
-    window.scrollTo({ top: target, left: 0, behavior: 'instant' });
-  }, [pathname, hash, key, navigationType]);
-
-  // Keep the cache up to date so it's there if the user leaves and comes
-  // back via back/forward.
-  useEffect(() => {
-    const onScroll = () => scrollPositions.set(key, window.scrollY);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [key]);
+    // Restore before paint, without animating the journey from the page top.
+    if (navigationType === 'POP' && saved !== undefined && Number.isFinite(saved)) {
+      window.scrollTo({ top: saved, left: 0, behavior: 'instant' });
+      return;
+    }
+    const section = (state as { section?: string } | null)?.section;
+    const target = document.getElementById(section || hash.slice(1));
+    if (target) target.scrollIntoView({ behavior: 'instant' });
+    else window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [pathname, hash, key, state, navigationType]);
 
   useEffect(() => {
-    if (!hash) return;
-    const timer = setTimeout(() => {
-      const el = document.querySelector(hash);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }, 50);
-    return () => clearTimeout(timer);
-  }, [pathname, hash]);
+    const save = () => {
+      scrollPositions.set(key, window.scrollY);
+      try { sessionStorage.setItem(storageKey(key, pathname), String(window.scrollY)); } catch { /* Storage is optional. */ }
+    };
+    window.addEventListener('scroll', save, { passive: true });
+    window.addEventListener('pagehide', save);
+    return () => {
+      window.removeEventListener('scroll', save);
+      window.removeEventListener('pagehide', save);
+    };
+  }, [key, pathname]);
 
   return null;
 }

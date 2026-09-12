@@ -46,7 +46,7 @@ export default function Outline() {
   return (
     <aside className={`article-outline ${mobileOpen ? 'is-open' : ''}`}>
       <div className="outline-toolbar">
-        <Link to={isProject ? '/#projects' : '/#experience'} className="outline-back-icon" aria-label="Back to portfolio" title="Back to portfolio">
+        <Link to="/" state={{ section: isProject ? 'projects' : 'experience' }} className="outline-back-icon" aria-label="Back to portfolio" title="Back to portfolio">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m12 5-7 7 7 7M5 12h14" /></svg>
         </Link>
         <button type="button" className="outline-mobile-toggle" aria-expanded={mobileOpen} aria-controls="article-outline-links" onClick={() => setMobileOpen(!mobileOpen)}>On this page <span aria-hidden="true">{mobileOpen ? '−' : '+'}</span></button>
@@ -60,7 +60,6 @@ export default function Outline() {
             element.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
             element.setAttribute('tabindex', '-1');
             element.focus({ preventScroll: true });
-            window.history.replaceState(window.history.state, '', `#${item.id}`);
             setActiveId(item.id);
             setMobileOpen(false);
           }}><span className="outline-tick" aria-hidden="true"/><span>{item.label}</span></a>
