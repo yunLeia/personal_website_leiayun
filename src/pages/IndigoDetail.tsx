@@ -1,13 +1,14 @@
-import { Reveal, ToolPill, BackgroundBlobs, BackLink } from '../components/shared';
+import ProjectIntro from '../components/ProjectIntro';
+import { Reveal, ToolPill } from '../components/shared';
 
 // ─── Data ────────────────────────────────────────────────────────
 
 const OVERVIEW = {
-  event: 'NYC Build With AI Hackathon @ NYU Tandon — March 2026',
+  event: 'NYC Build With AI Hackathon @ NYU Tandon · March 2026',
   role: 'Full-Stack + AI Engineer',
   duration: '36 hours',
   summary:
-    'Real-time audio awareness for deaf and hard-of-hearing users. Your phone listens, classifies sounds with Gemini 2.5 Flash, and sends actionable alerts to your Apple Watch — not transcriptions, but instructions.',
+    'Real-time audio awareness for deaf and hard-of-hearing users. Your phone listens, classifies sounds with Gemini 2.5 Flash, and sends actionable alerts to your Apple Watch: instructions, not transcriptions.',
   links: {
     pitchDeck: 'https://www.figma.com/deck/ebsg6XMvEQVfHLcYQmva4Z/myIndigo_Google?node-id=1-133&viewport=-124%2C-31%2C0.59&t=TTdyLd0Ns68gQfd3-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1',
     github: 'https://github.com/yunLeia/indigo-ai-agent',
@@ -53,59 +54,30 @@ const DECISIONS = [
 
 export default function IndigoDetail() {
   return (
-    <div className="min-h-screen">
-      <BackgroundBlobs />
-      <div className="max-w-[1080px] mx-auto px-10 max-sm:px-5 pt-28 max-sm:pt-24 pb-24">
-        <BackLink />
+    <div className="case-study-body">
+      <div className="case-study-content">
 
         {/* Overview */}
-        <div className="mt-12 mb-14 animate-fade-in">
-          <h1 className="text-[32px] max-sm:text-[26px] font-bold tracking-tight text-[#111] mb-2">
-            myIndigo
-          </h1>
-          <p className="text-[14px] text-[#999] mb-6">{OVERVIEW.event}</p>
-          <div className="flex flex-col gap-2 mb-6">
-            <div className="text-[15px] font-normal text-[#444]"><span className="font-semibold text-[#111]">Role:</span> {OVERVIEW.role}</div>
-          </div>
-          <p className="text-[15px] font-normal text-[#444] leading-[1.7] mb-6">{OVERVIEW.summary}</p>
-          <div className="flex gap-3">
-            <a
-              href={OVERVIEW.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[14px] font-medium px-5 py-2 rounded-full bg-[#1d1d1f] text-white no-underline transition-all duration-200 hover:bg-[#424245] active:scale-[0.97]"
-            >
-              github &#8599;
-            </a>
-            <a
-              href={OVERVIEW.links.pitchDeck}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[14px] font-medium px-5 py-2 rounded-full bg-white/15 backdrop-blur-[12px] border border-white/30 text-[#1d1d1f] no-underline transition-all duration-200 hover:bg-white/25 active:scale-[0.97]"
-            >
-              pitch deck &#8599;
-            </a>
-          </div>
-        </div>
+        <ProjectIntro name="myIndigo" summary={OVERVIEW.summary} role={OVERVIEW.role} context={OVERVIEW.event} duration={OVERVIEW.duration} links={[{ label: "GitHub", href: OVERVIEW.links.github }, { label: "Pitch deck", href: OVERVIEW.links.pitchDeck }]} />
 
         <div className="h-px bg-black/5 mb-16" />
 
         {/* Context — Problem / Target */}
-        <Reveal className="mb-20 max-sm:mb-14">
+        <Reveal className="mb-20 max-sm:mb-14" id="context" outline="Context">
           <div className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3">
             Context
           </div>
           <h2 className="text-[26px] max-sm:text-[22px] font-bold text-[#111] tracking-tight leading-[1.2] mb-10">
-            Critical sounds go unheard — and that's both a safety and accessibility problem.
+            Critical sounds go unheard, and that's both a safety and accessibility problem.
           </h2>
           <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-5 max-sm:gap-4">
             {/* The Problem */}
-            <div className="bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-2xl p-7 max-sm:p-6">
+            <div className="bg-black/[0.03] rounded-2xl p-7 max-sm:p-6">
               <h3 className="text-[18px] font-semibold text-[#111] tracking-tight mb-3">
                 The Problem
               </h3>
               <p className="text-[15px] font-normal text-[#444] leading-[1.65] mb-5">
-                Critical sounds in daily life go unheard — alarms, announcements, doorbells, laughter.
+                Critical sounds in daily life go unheard: alarms, announcements, doorbells, laughter.
               </p>
               <ul className="space-y-2 text-[14px] text-[#666] leading-[1.6]">
                 <li>• Limited access to information</li>
@@ -116,39 +88,39 @@ export default function IndigoDetail() {
             </div>
 
             {/* Who It's For */}
-            <div className="bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-2xl p-7 max-sm:p-6">
+            <div className="bg-black/[0.03] rounded-2xl p-7 max-sm:p-6">
               <h3 className="text-[18px] font-semibold text-[#111] tracking-tight mb-3">
                 Who It's For
               </h3>
               <div className="mb-4">
                 <div className="text-[14px] font-semibold text-[#111] mb-1">Primary</div>
-                <div className="text-[14px] text-[#444] leading-[1.6]">Deaf &amp; hard-of-hearing users — for whom detection is both an accessibility and safety need.</div>
+                <div className="text-[14px] text-[#444] leading-[1.6]">Deaf &amp; hard-of-hearing users, for whom detection is both an accessibility and safety need.</div>
               </div>
               <div>
                 <div className="text-[14px] font-semibold text-[#111] mb-1">Extended</div>
-                <div className="text-[14px] text-[#444] leading-[1.6]">Older adults — ~1/3 of 65+ experience hearing loss and miss household alerts.</div>
+                <div className="text-[14px] text-[#444] leading-[1.6]">Older adults: ~1/3 of 65+ experience hearing loss and miss household alerts.</div>
               </div>
             </div>
           </div>
         </Reveal>
 
         {/* The Solution (full-width image) */}
-        <Reveal className="mb-20 max-sm:mb-14">
+        <Reveal className="mb-20 max-sm:mb-14" id="solution" outline="The Solution">
           <div className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3">
             The Solution
           </div>
           <h2 className="text-[26px] max-sm:text-[22px] font-bold text-[#111] tracking-tight leading-[1.2] mb-10">
             Turn sounds into grounded, actionable guidance.
           </h2>
-          <div className="w-full rounded-2xl overflow-hidden bg-white/10 backdrop-blur-[12px] border border-white/25">
-            <img src="/images/indigo-solution.webp" alt="Solution — Listen, Understand, Act" loading="lazy" decoding="async" className="w-full h-auto block" />
+          <div className="section-media overflow-hidden">
+            <img src="/images/indigo-solution.webp" alt="Solution: Listen, Understand, Act" loading="lazy" decoding="async" className="w-full h-auto block" />
           </div>
         </Reveal>
 
         <div className="h-px bg-black/5 mb-16" />
 
         {/* Real-time audio pipeline */}
-        <Reveal className="mb-20 max-sm:mb-14">
+        <Reveal className="mb-20 max-sm:mb-14" id="pipeline" outline="Audio Pipeline">
           <div className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3">
             Real-time Audio Pipeline
           </div>
@@ -158,13 +130,8 @@ export default function IndigoDetail() {
           <p className="text-[16px] max-sm:text-[15px] font-normal text-[#666] leading-[1.5] mb-10">
             End-to-end real-time audio pipeline.
           </p>
-          <div className="flex flex-col md:flex-row md:items-start gap-8 md:gap-12">
-            <div className="flex-1 w-full">
-              <div className="w-full rounded-2xl overflow-hidden bg-white/10 backdrop-blur-[12px] border border-white/25">
-                <img src="/images/indigo-pipeline.webp" alt="End-to-end audio pipeline" loading="lazy" decoding="async" className="w-full h-auto block" />
-              </div>
-            </div>
-            <div className="flex-1">
+          <div className="section-with-media">
+<div className="flex-1">
               <div className="flex flex-col gap-5">
                 {FLOW_STEPS.map((step) => (
                   <div key={step.label}>
@@ -184,13 +151,18 @@ export default function IndigoDetail() {
                 <ToolPill>Web Audio API</ToolPill>
               </div>
             </div>
-          </div>
+<div className="section-media">
+              <div className="section-media overflow-hidden">
+                <img src="/images/indigo-pipeline.webp" alt="End-to-end audio pipeline" loading="lazy" decoding="async" className="w-full h-auto block" />
+              </div>
+            </div>
+</div>
         </Reveal>
 
         <div className="h-px bg-black/5 mb-16" />
 
         {/* System Design */}
-        <Reveal className="mb-20 max-sm:mb-14">
+        <Reveal className="mb-20 max-sm:mb-14" id="system-design" outline="System Design">
           <div className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3">
             System Design
           </div>
@@ -200,13 +172,8 @@ export default function IndigoDetail() {
           <p className="text-[16px] max-sm:text-[15px] font-normal text-[#666] leading-[1.5] mb-10">
             Orchestrated via agents.
           </p>
-          <div className="flex flex-col md:flex-row-reverse md:items-start gap-8 md:gap-12">
-            <div className="flex-1 w-full">
-              <div className="w-full rounded-2xl overflow-hidden bg-white/10 backdrop-blur-[12px] border border-white/25">
-                <img src="/images/indigo-gemini-roles.webp" alt="Gemini used in three roles" loading="lazy" decoding="async" className="w-full h-auto block" />
-              </div>
-            </div>
-            <div className="flex-1">
+          <div className="section-with-media">
+<div className="flex-1">
               <div className="flex flex-col gap-5">
                 <div>
                   <div className="text-[16px] font-semibold text-[#111] tracking-tight mb-2">Gemini 2.5 Flash is used across</div>
@@ -231,13 +198,18 @@ export default function IndigoDetail() {
                 <ToolPill>Python</ToolPill>
               </div>
             </div>
-          </div>
+<div className="section-media">
+              <div className="section-media overflow-hidden">
+                <img src="/images/indigo-gemini-roles.webp" alt="Gemini used in three roles" loading="lazy" decoding="async" className="w-full h-auto block" />
+              </div>
+            </div>
+</div>
         </Reveal>
 
         <div className="h-px bg-black/5 mb-16" />
 
         {/* Key Decisions */}
-        <Reveal className="mb-16">
+        <Reveal className="mb-16" id="decisions" outline="Key Decisions">
           <div className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3">
             Key Decisions
           </div>
@@ -246,7 +218,7 @@ export default function IndigoDetail() {
           </h2>
           <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-5">
             {DECISIONS.map((d) => (
-              <div key={d.title} className="bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-2xl p-7 max-sm:p-6">
+              <div key={d.title} className="bg-black/[0.03] rounded-2xl p-7 max-sm:p-6">
                 <h3 className="text-[18px] font-semibold text-[#111] tracking-tight mb-3">{d.title}</h3>
                 <p className="text-[15px] font-normal text-[#444] leading-[1.65]">{d.description}</p>
               </div>

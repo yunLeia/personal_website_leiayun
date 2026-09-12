@@ -1,5 +1,5 @@
 import { EXPERIENCE } from '../data';
-import { Reveal, ToolPill, BackgroundBlobs, BackLink } from '../components/shared';
+import { Reveal, ToolPill } from '../components/shared';
 
 const tiktok = EXPERIENCE.find((experience) => experience.company === 'TikTok')!;
 
@@ -10,7 +10,7 @@ const WORK_ITEMS = [
     num: '01',
     meta: '8 datasets · reports in 1 minute',
     title: 'Internal Marketing Diagnostic Tool',
-    description: 'Built the Korea team\'s first internal marketing diagnostic tool, integrating 8 datasets into a Python service that generates account-level hygiene reports in 1 minute — replacing a 15+ query, one-hour manual process and enabling daily team use.',
+    description: "Built the Korea team's first internal marketing diagnostic tool, integrating 8 datasets into a Python service that generates account-level hygiene reports in 1 minute, replacing a 15+ query, one-hour manual process and enabling daily team use.",
     tools: ['Python', 'Data Pipelines', 'Automation', 'Internal Tooling'],
   },
   {
@@ -40,12 +40,10 @@ const RESULTS = [
 
 export default function TikTokDetail() {
   return (
-    <div className="min-h-screen">
-      <BackgroundBlobs />
-      <div className="max-w-[1080px] mx-auto px-10 max-sm:px-5 pt-28 max-sm:pt-24 pb-24">
-        <BackLink />
+    <div className="case-study-body">
+      <div className="case-study-content">
 
-        <div className="mt-12 mb-14 animate-fade-in">
+        <div id="overview" data-outline="Overview" className="mt-12 mb-14 animate-fade-in">
           <h1 className="text-[32px] max-sm:text-[26px] font-bold tracking-tight text-[#111] mb-6">
             <a
               href={tiktok.url}
@@ -66,13 +64,13 @@ export default function TikTokDetail() {
         <div className="h-px bg-black/5 mb-16" />
 
         {/* What I Built */}
-        <Reveal className="mb-16">
+        <Reveal className="mb-16" id="what-i-built" outline="What I Built">
           <h2 className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-10">
             What I Built
           </h2>
           <div className="grid grid-cols-3 max-sm:grid-cols-1 gap-5">
             {WORK_ITEMS.map((item) => (
-              <div key={item.title} className="bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-2xl p-7 max-sm:p-6 flex flex-col">
+              <div key={item.title} className="bg-black/[0.03] rounded-2xl p-7 max-sm:p-6 flex flex-col">
                 <p className="text-[13px] font-medium text-[#666] mb-3">
                   {item.num} &middot; {item.meta}
                 </p>
@@ -91,13 +89,13 @@ export default function TikTokDetail() {
         <div className="h-px bg-black/5 mb-16" />
 
         {/* Results */}
-        <Reveal className="mb-16">
+        <Reveal className="mb-16" id="results" outline="Results">
           <h2 className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-10">
             Results
           </h2>
           <div className="grid grid-cols-4 max-sm:grid-cols-2 gap-4">
             {RESULTS.map((r) => (
-              <div key={r.label} className="bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-2xl px-5 py-7 text-center">
+              <div key={r.label} className="bg-black/[0.03] rounded-2xl px-5 py-7 text-center">
                 <div className="text-[40px] sm:text-[52px] font-semibold text-[#111] leading-none mb-3" style={{ fontFamily: "'Lora', serif" }}>
                   {r.value}
                 </div>

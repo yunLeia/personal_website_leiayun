@@ -1,24 +1,15 @@
-import { useState, useCallback, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useState, useCallback } from 'react';
+import MedalShelf from '../components/MedalShelf';
 import Header from '../components/Header';
 import ExperienceSection from '../components/ExperienceSection';
 import ProjectsSection from '../components/ProjectsSection';
 import ContactSection from '../components/ContactSection';
 import DetailPanel, { type PanelChat } from '../components/DetailPanel';
-import { BackgroundBlobs } from '../components/shared';
+import Dock from '../components/Dock';
+import PaperGrain from '../components/PaperGrain';
 
 export default function Home() {
-  const location = useLocation();
   const [chat, setChat] = useState<PanelChat | null>(null);
-
-  useEffect(() => {
-    const state = location.state as { openGreeting?: boolean } | null;
-    if (state?.openGreeting) {
-      window.dispatchEvent(new CustomEvent('open-greeting'));
-      window.history.replaceState({}, '');
-    }
-  }, [location.state]);
-
   const openChat = useCallback(
     (incoming: PanelChat) => {
       const key = `${incoming.title}-${incoming.subtitle}`;
@@ -33,18 +24,19 @@ export default function Home() {
   const activeKey = chat ? `${chat.title}-${chat.subtitle}` : null;
 
   return (
-    <div className="min-h-screen px-8 sm:px-12 max-sm:px-5 pt-20 max-sm:pt-16 pb-12 max-sm:pb-24 relative overflow-hidden">
-      <BackgroundBlobs />
-
-      <div className="max-w-[1080px] mx-auto">
+    <div className="portfolio-page">
+      <PaperGrain />
+      <div className="portfolio-shell">
         <Header />
         <main>
           <ExperienceSection onSelect={openChat} activeKey={activeKey} />
           <ProjectsSection onSelect={openChat} activeKey={activeKey} />
+          <MedalShelf />
           <ContactSection />
         </main>
       </div>
-      <DetailPanel chat={chat} onClose={closeChat} />
+      <Dock />
+      {chat && <DetailPanel chat={chat} onClose={closeChat} greetingOpen={false} onCloseGreeting={closeChat} />}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { Reveal, ToolPill, BackgroundBlobs, BackLink } from '../components/shared';
+import { Reveal, ToolPill } from '../components/shared';
 
 // ─── Data ────────────────────────────────────────────────────────
 
@@ -6,7 +6,7 @@ const OVERVIEW = {
   role: 'AI Engineering Intern',
   period: 'Mar – Jun 2024',
   summary:
-    'Parachute is an AI-powered career coaching startup. I built the foundational AI infrastructure — resume classification and RAG pipeline — from zero existing AI infra.',
+    'Parachute is an AI-powered career coaching startup. I built the foundational AI infrastructure (resume classification and RAG pipeline) from zero existing AI infra.',
 };
 
 const WORK_ITEMS = [
@@ -14,7 +14,7 @@ const WORK_ITEMS = [
     num: '01',
     meta: '~73% accuracy · 3 strategies benchmarked',
     title: 'Resume Classifier',
-    description: 'Built a Streamlit prototype — PDF upload → PyPDF extraction → GPT classification. Benchmarked 3 prompting strategies (structured JSON, zero-shot, instruction-guided). Zero-shot won at ~73% accuracy; recommended fine-tuning path for production.',
+    description: 'Built a Streamlit prototype: PDF upload → PyPDF extraction → GPT classification. Benchmarked 3 prompting strategies (structured JSON, zero-shot, instruction-guided). Zero-shot won at ~73% accuracy; recommended fine-tuning path for production.',
     tools: ['Prompt Engineering', 'Benchmarking', 'GPT API', 'Streamlit', 'PyPDF'],
     image: '/images/parachute-resume-classifier.webp',
   },
@@ -39,13 +39,11 @@ const RESULTS = [
 
 export default function ParachuteDetail() {
   return (
-    <div className="min-h-screen">
-      <BackgroundBlobs />
-      <div className="max-w-[1080px] mx-auto px-10 max-sm:px-5 pt-28 max-sm:pt-24 pb-24">
-        <BackLink />
+    <div className="case-study-body">
+      <div className="case-study-content">
 
         {/* Overview */}
-        <div className="mt-12 mb-14 animate-fade-in">
+        <div id="overview" data-outline="Overview" className="mt-12 mb-14 animate-fade-in">
           <h1 className="text-[32px] max-sm:text-[26px] font-bold tracking-tight text-[#111] mb-6">
             <a
               href="https://www.letsparachute.com"
@@ -66,28 +64,16 @@ export default function ParachuteDetail() {
         <div className="h-px bg-black/5 mb-16" />
 
         {/* What I Built */}
-        <div className="mb-16">
+        <div id="what-i-built" data-outline="What I Built" className="mb-16">
           <h2 className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-12">
             What I Built
           </h2>
           <div className="space-y-24 max-sm:space-y-16">
-            {WORK_ITEMS.map((item, i) => {
-              const reversed = i % 2 !== 0;
+            {WORK_ITEMS.map((item) => {
               return (
                 <Reveal key={item.title}>
-                  <div className={`flex flex-col ${reversed ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-10 md:gap-14`}>
-                    <div className="w-full md:flex-[2]">
-                      <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden border border-white/25 bg-[#F0F3F7]">
-                        {item.image ? (
-                          <img src={item.image} alt={item.title} loading="lazy" decoding="async" className="w-full h-full object-contain" />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center">
-                            <span className="text-black/20 text-[13px]">screenshot</span>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                    <div className="md:flex-[3]">
+                  <div className="section-with-media">
+<div className="md:flex-[3]">
                       <p className="text-[13px] font-medium text-[#666]">
                         {item.num} &middot; {item.meta}
                       </p>
@@ -99,7 +85,18 @@ export default function ParachuteDetail() {
                         {item.tools.map((t) => <ToolPill key={t}>{t}</ToolPill>)}
                       </div>
                     </div>
-                  </div>
+<div className="section-media">
+                      <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden border border-black/5 bg-[#F0F3F7]">
+                        {item.image ? (
+                          <img src={item.image} alt={item.title} loading="lazy" decoding="async" className="w-full h-full object-contain" />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center">
+                            <span className="text-black/20 text-[13px]">screenshot</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+</div>
                 </Reveal>
               );
             })}
@@ -109,13 +106,13 @@ export default function ParachuteDetail() {
         <div className="h-px bg-black/5 mb-16" />
 
         {/* Results */}
-        <Reveal className="mb-16">
+        <Reveal className="mb-16" id="results" outline="Results">
           <h2 className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-10">
             Results
           </h2>
           <div className="grid grid-cols-4 max-sm:grid-cols-2 gap-4">
             {RESULTS.map((r) => (
-              <div key={r.label} className="bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-2xl px-5 py-7 text-center">
+              <div key={r.label} className="bg-black/[0.03] rounded-2xl px-5 py-7 text-center">
                 <div className="text-[40px] sm:text-[52px] font-semibold text-[#111] leading-none mb-3" style={{ fontFamily: "'Lora', serif" }}>
                   {r.value}
                 </div>

@@ -1,102 +1,37 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { PROJECTS } from '../data';
-import { useScrollReveal } from '../hooks/useScrollReveal';
 import type { PanelChat } from './DetailPanel';
+import { SectionHeader } from './HomeUI';
 
 interface Props {
   onSelect: (chat: PanelChat) => void;
   activeKey: string | null;
 }
 
-function ProjectCard({
-  proj,
-  isActive,
-  onClick,
-}: {
-  proj: (typeof PROJECTS)[number];
-  isActive: boolean;
-  onClick: () => void;
-}) {
-  const { ref, visible } = useScrollReveal();
-
-  return (
-    <div ref={ref}>
-      <button
-        onClick={onClick}
-        className={`group w-full text-left font-[inherit] overflow-hidden rounded-2xl max-sm:rounded-xl cursor-pointer transition-all duration-500 bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] hover:bg-white/25 hover:shadow-[0_4px_24px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.6)] ${
-          visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-        } ${isActive ? 'bg-white/25 border-white/40 shadow-[0_4px_24px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.6)]' : ''}`}
-      >
-        <div className="px-8 pt-8 pb-6 max-sm:px-6 max-sm:pt-5 max-sm:pb-5">
-          <div className="text-[20px] max-sm:text-[16px] font-semibold text-[#111] tracking-tight transition-opacity duration-200 group-hover:opacity-70">
-            {proj.name}
-          </div>
-          <div className="text-[16px] max-sm:text-[14px] font-normal text-[#444] mt-3 max-sm:mt-2 leading-[1.65] max-w-[720px]">
-            {proj.sub}
-          </div>
-          {proj.tags && (
-            <div className="flex flex-wrap gap-2 mt-4 max-sm:mt-3">
-              {proj.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="text-[11px] max-sm:text-[10px] font-medium text-[#888] bg-white/20 backdrop-blur-[6px] border border-white/25 rounded-full px-3 py-1"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
-        </div>
-        {proj.cover && (
-          <div className="w-full aspect-[16/9] overflow-hidden border-t border-white/20">
-            <img
-              src={proj.cover}
-              alt={proj.name}
-              loading="lazy"
-              decoding="async"
-              className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
-            />
-          </div>
-        )}
-      </button>
-    </div>
-  );
-}
+const SUMMARIES: Record<string, string> = {
+  GatheRoll: 'One shared album for every event. Scan a QR code, add your photos, and let AI handle the sorting.',
+  myIndigo: 'Real-time sound awareness for deaf and hard-of-hearing people, with actionable alerts on their watch.',
+  CulinAI: 'Turn a photo of your ingredients into a recipe, and put what’s already in your fridge to use.',
+};
 
 export default function ProjectsSection({ onSelect, activeKey }: Props) {
-  const navigate = useNavigate();
-
-  function handleClick(proj: (typeof PROJECTS)[number]) {
-    if (proj.detailPath) {
-      navigate(proj.detailPath);
-    } else {
-      onSelect({
-        messages: proj.chat,
-        title: proj.name,
-        subtitle: 'project details',
-      });
-    }
-  }
-
   return (
-    <section id="projects" className="min-h-[85vh] max-sm:min-h-0 flex flex-col justify-center py-16 max-sm:py-10 scroll-mt-20">
-      <h2 className="text-[12px] max-sm:text-[11px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-10 max-sm:mb-6">
-        Projects
-      </h2>
-
-      <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-5 max-sm:gap-3">
-        {PROJECTS.map((proj) => {
-          const key = `${proj.name}-${proj.sub}`;
-          return (
-            <ProjectCard
-              key={proj.name}
-              proj={proj}
-              isActive={activeKey === key}
-              onClick={() => handleClick(proj)}
-            />
-          );
+    <section id="projects" className="portfolio-section portfolio-enter" style={{ animationDelay: '180ms' }}>
+      <SectionHeader num="02" title="Projects" />
+      <ul className="project-list">
+        {PROJECTS.map((proj, index) => {
+          const content = <>
+            <span className={`project-icon-frame project-icon-${index}`} aria-hidden="true">
+              {proj.cover ? <img src={proj.cover} alt="" width="36" height="36" loading="lazy" decoding="async" /> : <span className="project-monogram">G</span>}
+            </span>
+            <span className="project-identity"><span className="project-name">{proj.name}<span className="project-arrow" aria-hidden="true">↗</span></span><span className="project-category">{proj.tags?.[0]}</span></span>
+            <span className="project-description">{SUMMARIES[proj.name] || proj.sub}</span>
+          </>;
+          return <li key={proj.name}>
+            {proj.detailPath ? <Link className="portfolio-project-row" to={proj.detailPath}>{content}</Link> : <button className="portfolio-project-row" type="button" aria-pressed={activeKey === `${proj.name}-project details`} onClick={() => onSelect({ messages: proj.chat, title: proj.name, subtitle: 'project details' })}>{content}</button>}
+          </li>;
         })}
-      </div>
+      </ul>
     </section>
   );
 }

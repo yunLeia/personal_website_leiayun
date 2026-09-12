@@ -1,5 +1,6 @@
+import ProjectIntro from '../components/ProjectIntro';
 import { useState } from 'react';
-import { Reveal, BackgroundBlobs, BackLink } from '../components/shared';
+import { Reveal } from '../components/shared';
 
 // ─── Data ────────────────────────────────────────────────────────
 
@@ -51,7 +52,7 @@ const BUILT = [
 // ─── Shared card / heading classes ──────────────────────────────
 
 const CARD =
-  'bg-white/15 backdrop-blur-[16px] border border-white/30 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] rounded-2xl';
+  'bg-black/[0.03] rounded-2xl';
 const EYEBROW = 'text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3';
 const H2 = 'text-[26px] max-sm:text-[22px] font-bold text-[#111] tracking-tight leading-[1.2]';
 
@@ -61,12 +62,12 @@ function DemoMedia() {
   const [errored, setErrored] = useState(false);
 
   return (
-    <div className="mb-6">
+    <div className="section-media mt-6">
       <div className={`w-full aspect-video overflow-hidden ${CARD} flex items-center justify-center`}>
         {!errored ? (
           <img
             src="/images/gatheroll-demo.gif"
-            alt="GatheRoll demo — scan a QR, bulk-add your photos, watch them sort"
+            alt="GatheRoll demo: scan a QR, bulk-add your photos, watch them sort"
             loading="lazy"
             className="w-full h-full object-cover"
             onError={() => setErrored(true)}
@@ -119,48 +120,16 @@ function FlowStepper() {
 
 export default function GatherollDetail() {
   return (
-    <div className="min-h-screen">
-      <BackgroundBlobs />
-      <div className="max-w-[1080px] mx-auto px-10 max-sm:px-5 pt-28 max-sm:pt-24 pb-24">
-        <BackLink />
+    <div className="case-study-body">
+      <div className="case-study-content">
 
         {/* Overview */}
-        <div className="mt-12 mb-14 animate-fade-in">
-          <h1 className="text-[32px] max-sm:text-[26px] font-bold tracking-tight text-[#111] mb-2">
-            GatheRoll
-          </h1>
-          <p className="text-[14px] text-[#999] mb-6">{OVERVIEW.meta}</p>
-          <h2 className="text-[22px] max-sm:text-[19px] font-semibold text-[#111] tracking-tight leading-[1.4] mb-3">
-            {OVERVIEW.tagline}
-          </h2>
-          <p className="text-[15px] font-normal text-[#444] leading-[1.7] mb-6">{OVERVIEW.subtext}</p>
-
-          <DemoMedia />
-
-          <div className="flex gap-3">
-            <a
-              href={OVERVIEW.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[14px] font-medium px-5 py-2 rounded-full bg-[#1d1d1f] text-white no-underline transition-all duration-200 hover:bg-[#424245] active:scale-[0.97]"
-            >
-              github &#8599;
-            </a>
-            <a
-              href={OVERVIEW.links.demo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[14px] font-medium px-5 py-2 rounded-full bg-white/15 backdrop-blur-[12px] border border-white/30 text-[#1d1d1f] no-underline transition-all duration-200 hover:bg-white/25 active:scale-[0.97]"
-            >
-              live demo &#8599;
-            </a>
-          </div>
-        </div>
+        <ProjectIntro name="GatheRoll" summary={`${OVERVIEW.tagline} ${OVERVIEW.subtext}`} role="Product Engineer" context="Independent project · 2026" links={[{ label: "GitHub", href: OVERVIEW.links.github }]}><DemoMedia /></ProjectIntro>
 
         <div className="h-px bg-black/5 mb-16" />
 
         {/* Problem */}
-        <Reveal className="mb-14">
+        <Reveal className="mb-14" id="problem" outline="Problem">
           <div className={EYEBROW}>Problem</div>
           <h2 className={`${H2} mb-6`}>Sharing photos is easy. Getting everyone to actually do it isn't.</h2>
           <p className="text-[15px] text-[#444] leading-[1.7] max-w-[640px]">{PROBLEM}</p>
@@ -169,10 +138,10 @@ export default function GatherollDetail() {
         <div className="h-px bg-black/5 mb-16" />
 
         {/* Key Product Insight */}
-        <Reveal className="mb-20 max-sm:mb-14">
+        <Reveal className="mb-20 max-sm:mb-14" id="insight" outline="Key Insight">
           <div className={EYEBROW}>Key Product Insight</div>
           <h2 className={`${H2} mb-8`}>
-            The real cost wasn't selecting photos — it was reviewing all of them before sharing.
+            Reviewing the whole batch before sharing was the expensive part.
           </h2>
           <div className={`p-7 max-sm:p-6 mb-6 ${CARD}`}>
             <div className="flex flex-col gap-4">
@@ -198,7 +167,7 @@ export default function GatherollDetail() {
         <div className="h-px bg-black/5 mb-16" />
 
         {/* 3 Product Decisions */}
-        <Reveal className="mb-20 max-sm:mb-14">
+        <Reveal className="mb-20 max-sm:mb-14" id="decisions" outline="Decisions">
           <div className={EYEBROW}>3 Product Decisions</div>
           <h2 className={`${H2} mb-10`}>Every decision traded one failure mode for a cheaper one.</h2>
           <div className="grid grid-cols-3 max-sm:grid-cols-1 gap-5">
@@ -215,7 +184,7 @@ export default function GatherollDetail() {
         <div className="h-px bg-black/5 mb-16" />
 
         {/* Product Flow */}
-        <Reveal className="mb-20 max-sm:mb-14">
+        <Reveal className="mb-20 max-sm:mb-14" id="flow" outline="Product Flow">
           <div className={EYEBROW}>Product Flow</div>
           <h2 className={`${H2} mb-10`}>From QR scan to a shared album.</h2>
           <div className={`p-8 max-sm:p-6 mb-6 ${CARD}`}>
@@ -227,7 +196,7 @@ export default function GatherollDetail() {
         <div className="h-px bg-black/5 mb-16" />
 
         {/* Built End-to-End */}
-        <Reveal className="mb-16">
+        <Reveal className="mb-16" id="built" outline="Built End-to-End">
           <div className={EYEBROW}>Built End-to-End</div>
           <div className={`p-7 max-sm:p-6 ${CARD}`}>
             <div className="grid grid-cols-3 max-sm:grid-cols-1 gap-6">
