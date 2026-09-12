@@ -253,12 +253,12 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 .intro-aside .linkedin-link:hover { background: #eeeeed; border-color: #aaa9a4; transform: translateY(-1px); }
 .intro-copy h1.animated-name { display: block; font-size: 34px; line-height: 1.3; font-weight: 500; letter-spacing: -.045em; margin: 0 0 20px; padding: 4px 0; }
 .name-letters { display: inline-flex; align-items: baseline; }
-.name-letter { position: relative; display: inline-block; cursor: default; isolation: isolate; flex: none; transition: width 220ms var(--spring); }
+.name-letter { position: relative; display: inline-block; cursor: default; isolation: isolate; flex: none; transition: width 380ms cubic-bezier(.22,1,.36,1); }
 .name-word-start { margin-left: .28em; }
-.name-type { display: inline-block; white-space: nowrap; transition: opacity 100ms ease, transform 180ms var(--swift); }
-.name-art { position: absolute; height: 1.32em; width: auto; max-width: none; left: 50%; top: 50%; object-fit: contain; opacity: 0; transform: translate(-50%,-50%) scale(.8) rotate(-5deg); pointer-events: none; transition: opacity 100ms ease, transform 220ms var(--spring); }
+.name-type { display: inline-block; white-space: nowrap; transition: opacity 180ms ease, transform 320ms cubic-bezier(.22,1,.36,1); }
+.name-art { position: absolute; height: 1.32em; width: auto; max-width: none; left: 50%; top: 50%; object-fit: contain; opacity: 0; transform: translate(-50%,-50%) scale(.94) rotate(-3deg); pointer-events: none; transition: opacity 180ms ease, transform 380ms cubic-bezier(.22,1,.36,1); }
 .name-letter[data-illustrated="true"] { z-index: 2; }
-.name-letter[data-illustrated="true"] .name-type { opacity: 0; transform: scale(.85); }
+.name-letter[data-illustrated="true"] .name-type { opacity: 0; transform: scale(.96); }
 .name-art[data-visible="true"] { opacity: 1; transform: translate(-50%,-50%) scale(1) rotate(0); }
 @media (max-width: 440px) { .intro-aside .resume-link, .intro-aside .linkedin-link { width: 100%; padding-inline: 10px; } }
 @media (prefers-reduced-motion: reduce) {
