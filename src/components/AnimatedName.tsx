@@ -45,10 +45,9 @@ export default function AnimatedName() {
       LETTERS.forEach((_, index) => {
         const show = (variant: number | null) => setVariants((current) => current.map((value, i) => i === index ? variant : value));
         timers.current.push(setTimeout(() => show(0), 450 + index * 35));
-        timers.current.push(setTimeout(() => show(1), 1550 + index * 35));
-        timers.current.push(setTimeout(() => show(null), 2650 + index * 35));
+        timers.current.push(setTimeout(() => show(null), 1700 + index * 35));
       });
-      introTimers.push(setTimeout(() => { introComplete.current = true; }, 3150));
+      introTimers.push(setTimeout(() => { introComplete.current = true; }, 2200));
     };
     Promise.all([...images, document.fonts.ready]).then(() => {
       if (cancelled || !heading.current) return;
@@ -86,7 +85,7 @@ export default function AnimatedName() {
       pointer.current = { x: event.clientX, y: event.clientY, index };
     }} onPointerLeave={() => { pointer.current.index = -1; }}>
       <span className="name-letters" aria-hidden="true">
-        {LETTERS.map((letter, index) => <span key={index} className={`name-letter ${index === 4 ? 'name-word-start' : ''}`} style={{ width: variants[index] === null ? 'var(--text-width)' : `${RATIOS[index][variants[index]!] * 1.32 + .08}em` }} data-name-index={index} data-illustrated={variants[index] !== null} onPointerDown={(event) => { if (event.pointerType === 'touch') play(index); }}>
+        {LETTERS.map((letter, index) => <span key={index} className={`name-letter ${index === 4 ? 'name-word-start' : ''}`} style={{ width: variants[index] === null ? 'var(--text-width)' : `${RATIOS[index][variants[index]!] * 1.19 - .035}em` }} data-name-index={index} data-illustrated={variants[index] !== null} onPointerDown={(event) => { if (event.pointerType === 'touch') play(index); }}>
           <span className="name-type">{letter}</span>
           {[0, 1].map((version) => <img key={version} className="name-art" data-visible={variants[index] === version} src={`/images/name/${index}-${version}.webp`} alt="" draggable={false} />)}
         </span>)}

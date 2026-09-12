@@ -18,7 +18,7 @@ export default function HalftonePhoto({ src, alt, size = 200, cell = 5, classNam
     if (!canvas || !ctx) return;
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const px = size * dpr;
+    const px = Math.round(size * dpr);
 
     const img = new Image();
     img.src = src;
@@ -67,7 +67,7 @@ export default function HalftonePhoto({ src, alt, size = 200, cell = 5, classNam
         if (y < px - 1) stack.push(idx + px);
       }
 
-      const c = cell * dpr;
+      const c = Math.max(1, Math.round(cell * dpr));
 
       // Pass 1: per-cell average luminance for subject cells, plus the
       // subject's actual min/max so we can auto-level contrast — skin
@@ -121,12 +121,12 @@ export default function HalftonePhoto({ src, alt, size = 200, cell = 5, classNam
           const idx = cy * cols + cx;
           if (!cellIsSubject[idx]) continue;
           const stretched = Math.min(1, Math.max(0, (cellAvg[idx] - lo) / range));
-          const darkness = Math.pow(1 - stretched, 0.85);
-          radiusOf[idx] = (c / 2) * Math.sqrt(darkness) * 1.1;
+          const darkness = Math.pow(1 - stretched, size <= 48 ? 1.65 : 0.85);
+          radiusOf[idx] = (c / 2) * Math.sqrt(darkness) * (size <= 48 ? .94 : 1.1);
         }
       }
 
-      const MIN_CLUSTER = 6;
+      const MIN_CLUSTER = size <= 48 ? 1 : 6;
       const labelVisited = new Uint8Array(cols * rows);
       const keep = new Uint8Array(cols * rows);
       for (let start = 0; start < cols * rows; start++) {

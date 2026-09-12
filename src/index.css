@@ -256,11 +256,11 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 .name-letter { position: relative; display: inline-block; cursor: default; isolation: isolate; flex: none; transition: width 380ms cubic-bezier(.22,1,.36,1); }
 .name-word-start { margin-left: .28em; }
 .name-type { display: inline-block; white-space: nowrap; transition: opacity 180ms ease, transform 320ms cubic-bezier(.22,1,.36,1); }
-.name-art { position: absolute; height: 1.32em; width: auto; max-width: none; left: 50%; top: 50%; object-fit: contain; opacity: 0; transform: translate(-50%,-50%) scale(.94) rotate(-3deg); pointer-events: none; transition: opacity 180ms ease, transform 380ms cubic-bezier(.22,1,.36,1); }
+.name-art { position: absolute; height: 1.26em; width: auto; max-width: none; left: 50%; top: 50%; object-fit: contain; opacity: 0; transform: translate(-50%,-50%) scale(.94) rotate(-3deg); pointer-events: none; transition: opacity 180ms ease, transform 380ms cubic-bezier(.22,1,.36,1); }
 .name-letter[data-illustrated="true"] { z-index: 2; }
 .name-letter[data-illustrated="true"] .name-type { opacity: 0; transform: scale(.96); }
-.name-art[data-visible="true"] { opacity: 1; transform: translate(-50%,-50%) scale(1) rotate(0); animation: name-sticker-arrive 480ms cubic-bezier(.22,1,.36,1) both; }
-@keyframes name-sticker-arrive { 0% { transform: translate(-50%,calc(-50% + 3px)) scale(.92) rotate(-3deg); } 70% { transform: translate(-50%,-50%) scale(1.015) rotate(.4deg); } 100% { transform: translate(-50%,-50%) scale(1) rotate(0); } }
+.name-art[data-visible="true"] { opacity: 1; transform: translate(-50%,-50%) scale(1) rotate(var(--name-tilt, -4deg)); animation: name-sticker-arrive 480ms cubic-bezier(.22,1,.36,1) both; }
+@keyframes name-sticker-arrive { 0% { transform: translate(-50%,calc(-50% + 3px)) scale(.92) rotate(-3deg); } 70% { transform: translate(-50%,-50%) scale(1.015) rotate(.4deg); } 100% { transform: translate(-50%,-50%) scale(1) rotate(var(--name-tilt, -4deg)); } }
 @media (max-width: 440px) { .intro-aside .resume-link, .intro-aside .linkedin-link { width: 100%; padding-inline: 10px; } }
 @media (prefers-reduced-motion: reduce) {
   .animated-name .name-art { display: none; }
@@ -268,14 +268,19 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 }
 
 /* A collection of real race keepsakes, with one medal brought forward. */
-.medal-shelf { margin-top: 38px; padding-top: 16px; }
-.medal-row { display: flex; align-items: flex-end; justify-content: center; gap: 2px; min-height: 228px; padding-inline: 10px; perspective: 900px; }
-.medal-item { position: relative; width: 23%; max-width: 142px; flex-shrink: 0; height: 204px; padding: 0; border: 0; background: none; cursor: pointer; transform: translateY(4px) rotateY(-16deg) scale(.85); transform-origin: 50% 90%; opacity: .65; filter: saturate(.8); transition: transform 480ms cubic-bezier(.22,1,.36,1), opacity 240ms, filter 240ms; }
-.medal-item img { width: 100%; height: 100%; object-fit: contain; object-position: center bottom; filter: drop-shadow(3px 5px 3px #00000018); }
-.medal-item[aria-pressed="true"] { transform: translateY(-12px) rotateY(0deg) scale(1.13); opacity: 1; filter: saturate(1); z-index: 2; }
-.medal-item:hover { opacity: 1; filter: saturate(1); }
-.medal-item:focus-visible { outline: 1px dashed var(--muted); outline-offset: 5px; border-radius: 8px; }
-.medal-shelf-edge { position: relative; height: 9px; margin-top: 5px; background: linear-gradient(#eeeeed, #d9d9d6 35%, #e6e6e3 65%, #c9c9c6); border-top: 1px solid #d5d5d2; border-radius: 1px; box-shadow: 0 6px 9px -7px #0005; }
+.medal-shelf { position: relative; margin-top: 34px; }
+.medal-row { --medal-width: 168px; position: relative; display: flex; align-items: flex-start; gap: 10px; height: 263px; overflow-x: auto; overflow-y: hidden; padding: 0 calc(50% - var(--medal-width) / 2) 20px; scrollbar-width: none; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; cursor: grab; user-select: none; }
+.medal-row::-webkit-scrollbar { display: none; }
+.medal-row[data-dragging="true"] { scroll-snap-type: none; cursor: grabbing; }
+.medal-item { position: relative; width: var(--medal-width); flex: 0 0 var(--medal-width); height: 236px; padding: 0; border: 0; background: none; cursor: inherit; scroll-snap-align: center; transform: scale(.86); transform-origin: 50% 0; opacity: .54; filter: saturate(.75); transition: transform 440ms cubic-bezier(.22,1,.36,1), opacity 240ms, filter 240ms; }
+.medal-item img { width: 100%; height: 100%; object-fit: contain; object-position: center top; transform: rotate(var(--medal-tilt, 0deg)); transform-origin: 50% 0; transition: transform 420ms cubic-bezier(.22,1,.36,1), filter 240ms; filter: drop-shadow(2px 5px 3px #00000018); pointer-events: none; }
+.medal-item[aria-pressed="true"] { transform: scale(1); opacity: 1; filter: saturate(1); z-index: 2; }
+.medal-item:hover, .medal-item:focus-visible { opacity: 1; filter: saturate(1); }
+.medal-item:hover img, .medal-item:focus-visible img { filter: drop-shadow(4px 9px 5px #00000028); }
+.medal-item:focus-visible { outline: 1px dashed var(--muted); outline-offset: -2px; border-radius: 4px; }
+.medal-shelf-edge { position: absolute; left: 0; right: 0; top: -5px; z-index: 3; height: 10px; background: linear-gradient(#f2f2ef, #d6d6d2 45%, #e4e4df 60%, #bdbdb8); border-top: 1px solid #d5d5d2; border-radius: 2px; box-shadow: 0 4px 6px -3px #0004; pointer-events: none; }
+.medal-hint { margin: 0; text-align: center; font: 10px 'Geist Mono', monospace; color: var(--muted); }
+.medal-hint span { margin-left: 6px; }
 .medal-caption { min-height: 74px; padding-top: 19px; text-align: center; }
 .medal-caption p { font-size: 14px; color: var(--copy); margin: 0 0 4px; }
 .medal-caption span { font-family: 'Geist Mono', monospace; color: var(--muted); font-size: 11px; }
@@ -290,9 +295,13 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 .project-actions a { display: inline-flex; gap: 16px; align-items: center; border: .5px solid var(--rule); border-radius: 5px; padding: 9px 14px; font-size: 13px; text-decoration: none; transition: background 180ms; }
 .project-actions a:hover { background: #eeeeed; }
 @media (max-width: 480px) {
-  .medal-row { min-height: 182px; padding-inline: 0; }
-  .medal-item { height: 164px; width: 24%; }
+  .medal-row { --medal-width: 142px; height: 233px; }
+  .medal-item { height: 208px; }
   .project-facts { grid-template-columns: 1fr; gap: 16px; }
   .case-study-content .project-intro .project-lede { font-size: 16px; }
 }
 @media (prefers-reduced-motion: reduce) { .medal-item { transition: none; } }
+
+.name-letter:nth-child(2n) { --name-tilt: 5deg; }
+.name-letter:nth-child(3n) { --name-tilt: -7deg; }
+@media (prefers-reduced-motion: reduce) { .medal-item img { transform: none; transition: none; } }

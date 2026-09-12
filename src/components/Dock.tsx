@@ -40,7 +40,7 @@ export default function Dock() {
         className="group relative w-9 h-9 rounded-full overflow-hidden shrink-0 cursor-pointer hover:ring-2 hover:ring-black/10"
       >
         <Tooltip label="Back to top" />
-        <HalftonePhoto src={SITE.photo} alt="Leia Yun in halftone dots" size={36} cell={1} />
+        <HalftonePhoto src={SITE.photo} alt="Leia Yun in halftone dots" size={36} cell={1.5} />
       </button>
 
       <div className="w-px h-5 bg-black/10 mx-1" />
