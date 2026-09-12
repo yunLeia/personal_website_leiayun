@@ -9,9 +9,9 @@ export default function Header() {
     <header id="about" className="portfolio-intro portfolio-enter">
       <div className="intro-copy">
         <AnimatedName />
-        <p>I'm Leia, a senior at NYU studying Computer Science. I care a lot about the space where product and engineering meet, and about building things that actually solve a problem for someone.</p>
-        <p>I most recently interned at <a href="#experience" onClick={(event) => { event.preventDefault(); document.getElementById('experience')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' }); }}>TikTok</a>, where I built AI powered workflows for a regional business team. Before that I was a Product Engineer at <a href="/work/planfit">Planfit</a>, where I owned core business metrics and ran 100+ experiments end to end: problem discovery, PRD, build, ship, analysis.</p>
-        <p>Being a generalist is kind of my thing. I bring speed, craft, attention to detail, and a little fun to whatever the team is making. I do my best work in fast moving environments where I actually own the outcome.</p>
+        <p>I'm Leia, a senior at NYU studying Computer Science. I care about the space where product and engineering meet, and really about anything that solves a problem for someone.</p>
+        <p>Most recently I interned at <a href="#experience" onClick={(event) => { event.preventDefault(); document.getElementById('experience')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' }); }}>TikTok</a>, building AI powered workflows that automated the busywork for client facing teams. Before that I was a Product Engineer at <a href="/work/planfit">Planfit</a>, where I owned core business metrics and ran 100+ experiments end to end.</p>
+        <p>Being a generalist is kind of my thing. I bring speed, craft, and a little fun to whatever the team is making.</p>
         <p>Have something in mind? <a href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(SITE.email)}`} target="_blank" rel="noopener noreferrer" aria-label="Let’s talk — compose an email in Gmail">Let's talk<ExternalArrow /></a></p>
       </div>
       <div className="intro-aside">
