@@ -1,23 +1,5 @@
 import { type ReactNode } from 'react';
-
-// ─── Colors ──────────────────────────────────────────────────────
-
-const c = {
-  blueBg: '#eff6ff', blueText: '#1d4ed8',
-  yellowBg: '#fffbeb', yellowText: '#b45309',
-};
-
-// ─── Helpers (used in JSX data) ─────────────────────────────────
-
-function B({ children }: { children: ReactNode }) {
-  return <strong className="font-semibold text-[#111]">{children}</strong>;
-}
-
-function Hi({ color, children }: { color: 'blue' | 'yellow'; children: ReactNode }) {
-  const bg = color === 'blue' ? c.blueBg : c.yellowBg;
-  const fg = color === 'blue' ? c.blueText : c.yellowText;
-  return <mark style={{ background: bg, color: fg, padding: '2px 6px', fontWeight: 600, borderRadius: 3 }}>{children}</mark>;
-}
+import { B, Hi } from '../components/PlanfitInlineMarks';
 
 // ─── Types ──────────────────────────────────────────────────────
 

@@ -40,7 +40,6 @@ const RESULTS = [
 
 export default function TikTokDetail() {
   return (
-    <div className="case-study-body">
       <div className="case-study-content">
 
         <div id="overview" data-outline="Overview" className="mt-12 mb-14 animate-fade-in">
@@ -107,6 +106,5 @@ export default function TikTokDetail() {
           </div>
         </Reveal>
       </div>
-    </div>
   );
 }

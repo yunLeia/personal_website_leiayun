@@ -39,7 +39,6 @@ const RESULTS = [
 
 export default function ParachuteDetail() {
   return (
-    <div className="case-study-body">
       <div className="case-study-content">
 
         {/* Overview */}
@@ -124,6 +123,5 @@ export default function ParachuteDetail() {
           </div>
         </Reveal>
       </div>
-    </div>
   );
 }

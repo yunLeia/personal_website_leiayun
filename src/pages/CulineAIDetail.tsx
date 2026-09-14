@@ -45,7 +45,6 @@ const DECISIONS = [
 
 export default function CulineAIDetail() {
   return (
-    <div className="case-study-body">
       <div className="case-study-content">
 
         {/* Overview */}
@@ -149,6 +148,5 @@ export default function CulineAIDetail() {
           </div>
         </Reveal>
       </div>
-    </div>
   );
 }

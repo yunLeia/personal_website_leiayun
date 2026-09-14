@@ -74,7 +74,7 @@ export default function PlanfitDetail() {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
-    <div className="case-study-body">
+    <>
       <div className="case-study-content">
 
         {/* Overview */}
@@ -115,6 +115,6 @@ export default function PlanfitDetail() {
         </div>
       </div>
       {modalOpen && <PasswordModal onClose={() => setModalOpen(false)} />}
-    </div>
+    </>
   );
 }

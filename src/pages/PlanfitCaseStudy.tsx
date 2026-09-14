@@ -126,9 +126,7 @@ export default function PlanfitCaseStudy() {
   if (!project) return <Navigate to="/work/planfit" replace />;
 
   return (
-    <div className="case-study-body">
       <div className="case-study-content">
-
 
         <div className="mt-12 mb-14 animate-fade-in">
           <p className="text-[13px] text-[#999] mb-2">planfit · case study {project.num}</p>
@@ -141,6 +139,5 @@ export default function PlanfitCaseStudy() {
 
         <CaseStudyView project={project} />
       </div>
-    </div>
   );
 }

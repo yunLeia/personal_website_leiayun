@@ -54,7 +54,6 @@ const DECISIONS = [
 
 export default function IndigoDetail() {
   return (
-    <div className="case-study-body">
       <div className="case-study-content">
 
         {/* Overview */}
@@ -226,6 +225,5 @@ export default function IndigoDetail() {
           </div>
         </Reveal>
       </div>
-    </div>
   );
 }

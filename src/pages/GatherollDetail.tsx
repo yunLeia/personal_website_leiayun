@@ -5,14 +5,10 @@ import { Reveal } from '../components/shared';
 // ─── Data ────────────────────────────────────────────────────────
 
 const OVERVIEW = {
-  meta: 'Product Engineer · 2026',
   tagline: "Everyone's photos from one event, in one shared album.",
   subtext: 'Scan a QR, bulk-add your photos, and GatheRoll handles the rest.',
   demoCaption: 'Scan a QR, bulk-add your photos, and GatheRoll handles the rest.',
-  links: {
-    github: 'https://github.com/yunLeia/gatheroll',
-    demo: '#',
-  },
+  githubUrl: 'https://github.com/yunLeia/gatheroll',
 };
 
 const PROBLEM =
@@ -120,11 +116,10 @@ function FlowStepper() {
 
 export default function GatherollDetail() {
   return (
-    <div className="case-study-body">
       <div className="case-study-content">
 
         {/* Overview */}
-        <ProjectIntro name="GatheRoll" summary={`${OVERVIEW.tagline} ${OVERVIEW.subtext}`} role="Product Engineer" context="Independent project · 2026" links={[{ label: "GitHub", href: OVERVIEW.links.github }]}><DemoMedia /></ProjectIntro>
+        <ProjectIntro name="GatheRoll" summary={`${OVERVIEW.tagline} ${OVERVIEW.subtext}`} role="Product Engineer" context="Independent project · 2026" links={[{ label: "GitHub", href: OVERVIEW.githubUrl }]}><DemoMedia /></ProjectIntro>
 
         <div className="h-px bg-black/5 mb-16" />
 
@@ -212,6 +207,5 @@ export default function GatherollDetail() {
           </div>
         </Reveal>
       </div>
-    </div>
   );
 }

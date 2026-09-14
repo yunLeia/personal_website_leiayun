@@ -14,12 +14,6 @@ export const SOCIAL_LINKS = [
 ];
 
 // ─── Experience ──────────────────────────────────────────────────
-export interface SubProject {
-  title: string;
-  metric?: string;
-  chat: string[];
-}
-
 export interface ExperienceItem {
   company: string;
   url?: string;
@@ -27,9 +21,8 @@ export interface ExperienceItem {
   role: string;
   date: string;
   subtitle?: string;
-  detailPath?: string;
+  detailPath: string;
   tags?: string[];
-  subProjects: SubProject[];
 }
 
 export const EXPERIENCE: ExperienceItem[] = [
@@ -42,15 +35,6 @@ export const EXPERIENCE: ExperienceItem[] = [
     date: 'May-Aug 2026',
     subtitle: 'Built AI-powered workflows for internal teams and enterprise clients.',
     tags: ['AI Workflow Automation', 'Internal Tooling', 'Cross-functional Builder', '170+ Daily Adoption'],
-    subProjects: [
-      {
-        title: 'Overview',
-        chat: [
-          "this is my current role: **ai engineer intern** at tiktok",
-          "i'm currently working on it, so more to share soon :)",
-        ],
-      },
-    ],
   },
   {
     company: 'Planfit',
@@ -61,38 +45,6 @@ export const EXPERIENCE: ExperienceItem[] = [
     subtitle: 'Owned 5 product tracks end-to-end, from problem discovery to deployment.',
     detailPath: '/work/planfit',
     tags: ['0→1 Product', '4M+ Users', '+15% Subscription', 'End-to-End Ownership', 'Claude Code', 'Amplitude'],
-    subProjects: [
-      {
-        title: 'Paywall A/B Engine',
-        metric: '+15% subs',
-        chat: [
-          'built an **automated a/b testing system**',
-          'basically rotates variants on its own based on **performance**',
-          'used it to **localize paywalls** + optimize flows',
-          'bumped **cta by ~15%** and **subscriptions by ~10%**',
-        ],
-      },
-      {
-        title: 'Competition Leaderboard',
-        metric: '2k+ clubs',
-        chat: [
-          'designed a **competition leaderboard** from scratch',
-          'did everything from **user interviews** to **full-stack code**',
-          'grew to **2k+ clubs** and lifted activation **~12%** in the us',
-          'one of my favorite **0→1 builds**',
-        ],
-      },
-      {
-        title: 'Onboarding Experiments',
-        metric: '+15% trial→sub',
-        chat: [
-          'spent a lot of time on **onboarding experiments**',
-          'tested **copy, ui, flows** across different segments',
-          'got trial → sub up **~15%**',
-          'learned a ton about **localization** and **user psychology**',
-        ],
-      },
-    ],
   },
   {
     company: 'Parachute',
@@ -102,16 +54,6 @@ export const EXPERIENCE: ExperienceItem[] = [
     subtitle: 'Built resume classification and RAG pipeline for an AI career coaching platform, starting from zero AI infra.',
     detailPath: '/work/parachute',
     tags: ['AI Infra from Zero', 'RAG Pipeline', 'Resume Classifier', 'LangChain', 'GPT API'],
-    subProjects: [
-      {
-        title: 'RAG Pipeline',
-        chat: [
-          'worked on a **rag pipeline** for production use',
-          'tested different **llms + vector dbs** to see what actually performs better',
-          'also built **python pipelines** to clean + structure data at scale',
-        ],
-      },
-    ],
   },
 ];
 
@@ -120,9 +62,8 @@ export interface ProjectItem {
   name: string;
   sub: string;
   tags?: string[];
-  detailPath?: string;
+  detailPath: string;
   cover?: string;
-  chat: string[];
 }
 
 export const PROJECTS: ProjectItem[] = [
@@ -132,12 +73,6 @@ export const PROJECTS: ProjectItem[] = [
     tags: ['0→1 Product', 'Computer Vision', 'Next.js', 'FastAPI'],
     detailPath: '/work/gatheroll',
     cover: '/images/gatheroll-thumbnail.png',
-    chat: [
-      "built **GatheRoll**, everyone's photos from one event, in one shared album",
-      'scan a qr, bulk-add your photos, and GatheRoll checks them automatically',
-      'high-confidence photos share instantly, only the uncertain ones need a quick review',
-      "realized the real cost wasn't selecting photos, it was reviewing all of them before sharing",
-    ],
   },
   {
     name: 'myIndigo',
@@ -145,12 +80,6 @@ export const PROJECTS: ProjectItem[] = [
     tags: ['Accessibility', 'Gemini 2.5 Flash', 'Google ADK', 'Hackathon'],
     detailPath: '/work/indigo',
     cover: '/images/myindigo-thumbnail.png',
-    chat: [
-      'built a **real-time audio awareness app** for deaf and hard-of-hearing users',
-      'your phone listens, classifies sounds with **gemini 2.5 flash**, and sends **actionable alerts** to your watch',
-      'emergency sirens → "move to the right, fire truck approaching"',
-      'built in **36 hours** at nyc build with ai hackathon @ nyu tandon',
-    ],
   },
   {
     name: 'CulinAI',
@@ -158,21 +87,7 @@ export const PROJECTS: ProjectItem[] = [
     tags: ['Multimodal AI', 'Food Waste Reduction', 'LLaVA', 'SDXL-Turbo'],
     detailPath: '/work/culinai',
     cover: '/images/culinai-thumbnail.png',
-    chat: [
-      'built an **ai recipe app**',
-      'you upload a photo of ingredients and it turns that into a **usable recipe**',
-      'used **multimodal models + prompt tuning** to make outputs actually useful',
-      'the goal was to help **reduce food waste**',
-    ],
   },
-];
-
-// ─── About (greeting bubbles) ────────────────────────────────────
-export const ABOUT_INTRO = [
-  "hi! i'm leia, cs + data science @ nyu",
-  "i build products and turn user behavior into data-driven decisions",
-  "most recently at planfit, i owned features end-to-end and ran 40+ experiments to improve activation and conversion",
-  "click anything if you're curious :)",
 ];
 
 // ─── Nav ─────────────────────────────────────────────────────────

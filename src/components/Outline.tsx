@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { PROJECTS } from '../data';
 
 interface OutlineItem { id: string; label: string }
 
@@ -8,7 +9,7 @@ export default function Outline() {
   const [activeId, setActiveId] = useState('');
   const [mobileOpen, setMobileOpen] = useState(false);
   const { pathname } = useLocation();
-  const isProject = ['/work/gatheroll', '/work/indigo', '/work/culinai'].includes(pathname);
+  const isProject = PROJECTS.some((project) => project.detailPath === pathname);
 
   useEffect(() => {
     let frame = 0;
