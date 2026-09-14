@@ -1,6 +1,6 @@
 # personal_website_leiayun
 
-Personal portfolio website for [leiayun.com](https://www.leiayun.com).
+Personal portfolio website for [leiayun.com](https://leiayun.com/).
 
 ## Tech Stack
 

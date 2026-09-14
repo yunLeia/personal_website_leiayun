@@ -1,13 +1,5 @@
 import { SITE } from '../data';
-import HalftonePhoto from './HalftonePhoto';
-
-function Tooltip({ label }: { label: string }) {
-  return (
-    <span className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 px-2 py-1 rounded-md bg-[#1e1d1b] text-white text-[12px] font-medium whitespace-nowrap opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150">
-      {label}
-    </span>
-  );
-}
+import { Tooltip } from './shared';
 
 function DockIcon({ children, label, onClick }: { children: React.ReactNode; label: string; onClick: () => void }) {
   return (
@@ -40,7 +32,7 @@ export default function Dock() {
         className="group relative w-9 h-9 rounded-full overflow-hidden shrink-0 cursor-pointer hover:ring-2 hover:ring-black/10"
       >
         <Tooltip label="Back to top" />
-        <HalftonePhoto src={SITE.photo} alt="Leia Yun in halftone dots" size={36} cell={1.5} />
+        <img src={SITE.photoHalftone} alt="Leia Yun in halftone dots" width={36} height={36} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
       </button>
 
       <div className="w-px h-5 bg-black/10 mx-1" />

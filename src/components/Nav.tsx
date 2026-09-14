@@ -1,6 +1,36 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { NAV_ITEMS, type NavItem } from '../data';
+import { NAV_ITEMS, SITE, type NavItem } from '../data';
+import { Tooltip } from './shared';
+
+const ICONS: Record<string, React.ReactNode> = {
+  '#experience': (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="7" width="18" height="13" rx="2" />
+      <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+    </svg>
+  ),
+  '#projects': (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="3" width="8" height="8" rx="1.5" />
+      <rect x="13" y="3" width="8" height="8" rx="1.5" />
+      <rect x="3" y="13" width="8" height="8" rx="1.5" />
+      <rect x="13" y="13" width="8" height="8" rx="1.5" />
+    </svg>
+  ),
+  '#shelf': (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="15" cy="4" r="2" />
+      <path d="m5 10 4-3 4 2 3 4h4M13 9l-3 6 4 3v4M10 15l-4 4H2" />
+    </svg>
+  ),
+  '#contact': (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="m3 7 9 6 9-6" />
+    </svg>
+  ),
+};
 
 export default function Nav() {
   const location = useLocation();
@@ -18,29 +48,37 @@ export default function Nav() {
   }
 
   return (
-    <nav className="case-study-nav">
+    <nav className="case-study-nav" aria-label="Primary">
       <div className="case-study-nav-items">
-        {NAV_ITEMS.map((item: NavItem) => {
+        {NAV_ITEMS.map((item: NavItem, index) => {
           const hasDropdown = !!item.items?.length;
           const isOpen = openKey === item.label;
           const menuId = `nav-menu-${item.label.toLowerCase()}`;
+          const isAbout = item.href === '#about';
 
           return (
-            <div
-              key={item.label}
-              className="relative"
-              onMouseEnter={() => hasDropdown && setOpenKey(item.label)}
-              onMouseLeave={() => hasDropdown && setOpenKey(null)}
-            >
+            <Fragment key={item.label}>
+              {index === 1 && <div className="w-px h-5 bg-black/10 mx-1" />}
+              <div
+                className="relative"
+                onMouseEnter={() => hasDropdown && setOpenKey(item.label)}
+                onMouseLeave={() => hasDropdown && setOpenKey(null)}
+              >
               <a
                 href={item.href}
                 onClick={(e) => handleItemClick(e, item)}
                 aria-haspopup={hasDropdown || undefined}
                 aria-expanded={hasDropdown ? isOpen : undefined}
                 aria-controls={hasDropdown ? menuId : undefined}
-                className="text-[14px] max-sm:text-[12px] font-medium no-underline transition-opacity duration-200 hover:opacity-60 whitespace-nowrap text-[#666]"
+                aria-label={item.label}
+                className={
+                  isAbout
+                    ? 'group relative w-11 h-11 rounded-full overflow-hidden flex items-center justify-center hover:ring-2 hover:ring-black/10'
+                    : 'group relative w-11 h-11 flex items-center justify-center rounded-full text-[#666]'
+                }
               >
-                {item.label.toLowerCase()}
+                <Tooltip label={item.label} />
+                {isAbout ? <img src={SITE.photoHalftone} alt="" width={32} height={32} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} /> : ICONS[item.href]}
               </a>
 
               {hasDropdown && (
@@ -91,7 +129,8 @@ export default function Nav() {
                   </div>
                 </div>
               )}
-            </div>
+              </div>
+            </Fragment>
           );
         })}
       </div>

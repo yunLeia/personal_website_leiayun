@@ -1,5 +1,4 @@
 import { SITE, SOCIAL_LINKS } from '../data';
-import HalftonePhoto from './HalftonePhoto';
 import { ExternalArrow } from './HomeUI';
 import AnimatedName from './AnimatedName';
 
@@ -15,7 +14,9 @@ export default function Header() {
         <p>Have something in mind? <a href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(SITE.email)}`} target="_blank" rel="noopener noreferrer" aria-label="Let’s talk — compose an email in Gmail">Let's talk<ExternalArrow /></a></p>
       </div>
       <div className="intro-aside">
-        <div className="portrait-frame"><HalftonePhoto src={SITE.photo} alt="Portrait of Leia Yun" size={240} cell={3} /></div>
+        <div className="portrait-frame">
+          <img src={SITE.photoHalftone} alt="Portrait of Leia Yun" width={240} height={240} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+        </div>
         <a className="resume-link" href={SITE.resumePath} target="_blank" rel="noopener noreferrer">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M14 3H5v18h14V8zM14 3v6h5M8 13h8M8 17h6" /></svg>
           Résumé <ExternalArrow />

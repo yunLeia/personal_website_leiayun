@@ -4,6 +4,7 @@ export const SITE = {
   email: 'sy3544@nyu.edu',
   resumePath: '/Leia_Yun_Resume.pdf',
   photo: '/images/leia.webp',
+  photoHalftone: '/images/leia-dots.png',
   tagline: 'ai & product engineer, turning ideas into impact',
 };
 
@@ -22,6 +23,7 @@ export interface SubProject {
 export interface ExperienceItem {
   company: string;
   url?: string;
+  logo?: string;
   role: string;
   date: string;
   subtitle?: string;
@@ -35,6 +37,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     company: 'TikTok',
     detailPath: '/work/tiktok',
     url: 'https://lifeattiktok.com/',
+    logo: '/images/tiktok-logo.png',
     role: 'AI Engineer Intern',
     date: 'May-Aug 2026',
     subtitle: 'Built AI-powered workflows for internal teams and enterprise clients.',
@@ -52,6 +55,7 @@ export const EXPERIENCE: ExperienceItem[] = [
   {
     company: 'Planfit',
     url: 'https://planfit.ai/en',
+    logo: '/images/planfit-logo.png',
     role: 'Product Engineer Intern',
     date: 'Mar–Dec 2025',
     subtitle: 'Owned 5 product tracks end-to-end, from problem discovery to deployment.',
@@ -92,7 +96,7 @@ export const EXPERIENCE: ExperienceItem[] = [
   },
   {
     company: 'Parachute',
-    url: 'https://www.letsparachute.com',
+    logo: '/images/parachute-logo.jpeg',
     role: 'AI Engineer Intern',
     date: 'Mar–Jun 2024',
     subtitle: 'Built resume classification and RAG pipeline for an AI career coaching platform, starting from zero AI infra.',

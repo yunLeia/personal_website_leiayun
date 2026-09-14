@@ -1,6 +1,15 @@
 import { type ReactNode } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
+// Fade-in label shown above an icon button on hover/focus
+export function Tooltip({ label }: { label: string }) {
+  return (
+    <span className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 px-2 py-1 rounded-md bg-[#1e1d1b] text-white text-[12px] font-medium whitespace-nowrap opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150">
+      {label}
+    </span>
+  );
+}
+
 // Shared tool/keyword pill used across detail pages
 export function ToolPill({ children }: { children: string }) {
   return (

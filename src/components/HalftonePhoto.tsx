@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 
 interface Props {
   src: string;
@@ -8,24 +8,41 @@ interface Props {
   className?: string;
 }
 
+// Dithering the same photo at the same size is deterministic, so cache the
+// result per src+size+cell+dpr — otherwise every remount (e.g. the dock
+// avatar when navigating back to the home page) redraws from a blank
+// canvas, which reads as the picture flashing/changing.
+const renderCache = new Map<string, ImageData>();
+
 // Renders a photo as a newspaper-style halftone dot pattern via canvas.
 export default function HalftonePhoto({ src, alt, size = 200, cell = 5, className = '' }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
     if (!canvas || !ctx) return;
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const px = Math.round(size * dpr);
+    const cacheKey = `${src}|${size}|${cell}|${dpr}`;
 
+    canvas.width = px;
+    canvas.height = px;
+
+    const cached = renderCache.get(cacheKey);
+    if (cached) {
+      ctx.putImageData(cached, 0, 0);
+      return;
+    }
+
+    let cancelled = false;
     const img = new Image();
-    img.src = src;
+    // Attach onload before src: for an already-cached image some browsers
+    // fire load as soon as src is set, which would race past a handler
+    // attached afterward and leave the canvas blank.
     img.onload = () => {
-      canvas.width = px;
-      canvas.height = px;
-
+      if (cancelled) return;
       const off = document.createElement('canvas');
       off.width = px;
       off.height = px;
@@ -172,6 +189,13 @@ export default function HalftonePhoto({ src, alt, size = 200, cell = 5, classNam
           ctx.fill();
         }
       }
+
+      renderCache.set(cacheKey, ctx.getImageData(0, 0, px, px));
+    };
+    img.src = src;
+
+    return () => {
+      cancelled = true;
     };
   }, [src, size, cell]);
 
