@@ -32,7 +32,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     detailPath: '/work/tiktok',
     url: 'https://lifeattiktok.com/',
     logo: '/images/tiktok-logo.png',
-    role: 'AI Engineer Intern',
+    role: 'Client Solution Manager Intern',
     date: 'May-Aug 2026',
     subtitle: 'Built AI-powered workflows for internal teams and enterprise clients.',
     tags: ['AI Workflow Automation', 'Internal Tooling', 'Cross-functional Builder', '170+ Daily Adoption'],
