@@ -65,6 +65,8 @@ export interface ProjectItem {
   tags?: string[];
   detailPath: string;
   cover?: string;
+  // Hidden from the homepage list and nav menu; the detail page still works by URL.
+  hidden?: boolean;
 }
 
 export const PROJECTS: ProjectItem[] = [
@@ -74,6 +76,7 @@ export const PROJECTS: ProjectItem[] = [
     tags: ['0→1 Product', 'Computer Vision', 'Next.js', 'FastAPI'],
     detailPath: '/work/gatheroll',
     cover: '/images/gatheroll-thumbnail.png',
+    hidden: true,
   },
   {
     name: 'myIndigo',
@@ -117,11 +120,7 @@ export const NAV_ITEMS: NavItem[] = [
   {
     label: 'Projects',
     href: '#projects',
-    items: [
-      { label: 'GatheRoll', href: '/work/gatheroll' },
-      { label: 'myIndigo', href: '/work/indigo' },
-      { label: 'CulinAI', href: '/work/culinai' },
-    ],
+    items: PROJECTS.filter((project) => !project.hidden).map((project) => ({ label: project.name, href: project.detailPath })),
   },
   { label: 'Shelf', href: '#shelf' },
   { label: 'Contact', href: '#contact' },

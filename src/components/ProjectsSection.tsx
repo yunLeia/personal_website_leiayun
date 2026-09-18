@@ -13,7 +13,7 @@ export default function ProjectsSection() {
     <section id="projects" className="portfolio-section portfolio-enter" style={{ animationDelay: '180ms' }}>
       <SectionHeader num="02" title="Projects" />
       <ul className="project-list">
-        {PROJECTS.map((proj, index) => (
+        {PROJECTS.filter((proj) => !proj.hidden).map((proj, index) => (
           <li key={proj.name}>
             <Link className="portfolio-project-row" to={proj.detailPath}>
               <span className={`project-icon-frame project-icon-${index}`} aria-hidden="true">
