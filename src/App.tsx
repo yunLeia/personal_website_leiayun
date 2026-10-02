@@ -6,6 +6,7 @@ import TikTokDetail from './pages/TikTokDetail';
 import PlanfitCaseStudy from './pages/PlanfitCaseStudy';
 import ParachuteDetail from './pages/ParachuteDetail';
 import IndigoDetail from './pages/IndigoDetail';
+import CabineDetail from './pages/CabineDetail';
 import CulineAIDetail from './pages/CulineAIDetail';
 import GatherollDetail from './pages/GatherollDetail';
 import Nav from './components/Nav';
@@ -24,6 +25,7 @@ function App() {
         <Route path="/work/planfit/:slug" element={<PlanfitCaseStudy />} />
         <Route path="/work/parachute" element={<ParachuteDetail />} />
         <Route path="/work/indigo" element={<IndigoDetail />} />
+        <Route path="/work/cabine" element={<CabineDetail />} />
         <Route path="/work/culinai" element={<CulineAIDetail />} />
         <Route path="/work/gatheroll" element={<GatherollDetail />} />
         </Route>

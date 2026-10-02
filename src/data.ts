@@ -71,6 +71,13 @@ export interface ProjectItem {
 
 export const PROJECTS: ProjectItem[] = [
   {
+    name: 'Cabine',
+    sub: 'see the outfit before you buy the piece. a browser extension that keeps your wardrobe beside every store.',
+    tags: ['0→1 Product', 'Browser Extension', 'In Progress'],
+    detailPath: '/work/cabine',
+    cover: '/images/cabine-thumbnail.png',
+  },
+  {
     name: 'GatheRoll',
     sub: "everyone's photos from one event, in one shared album. Scan a QR, bulk-add your photos, and GatheRoll handles the rest.",
     tags: ['0→1 Product', 'Computer Vision', 'Next.js', 'FastAPI'],

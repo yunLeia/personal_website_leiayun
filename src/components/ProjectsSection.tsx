@@ -3,6 +3,7 @@ import { PROJECTS } from '../data';
 import { SectionHeader } from './HomeUI';
 
 const SUMMARIES: Record<string, string> = {
+  Cabine: 'A browser extension that keeps your wardrobe beside every store, so you can combine a new piece with clothes you already own before deciding whether to buy.',
   GatheRoll: 'One shared album for every event. Scan a QR code, add your photos, and let AI handle the sorting.',
   myIndigo: 'Real-time sound awareness for deaf and hard-of-hearing people, with actionable alerts on their watch.',
   CulinAI: 'Turn a photo of your ingredients into a recipe, and put what’s already in your fridge to use.',
