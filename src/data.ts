@@ -45,7 +45,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     date: 'Mar–Dec 2025',
     subtitle: 'Owned 5 product tracks end-to-end, from problem discovery to deployment.',
     detailPath: '/work/planfit',
-    tags: ['0→1 Product', '4M+ Users', '+15% Subscription', 'End-to-End Ownership', 'Claude Code', 'Amplitude'],
+    tags: ['0→1 Product', '4M+ Users', '+8% Subscription', 'End-to-End Ownership', 'Claude Code', 'Amplitude'],
   },
   {
     company: 'Parachute',
@@ -72,8 +72,8 @@ export interface ProjectItem {
 export const PROJECTS: ProjectItem[] = [
   {
     name: 'Cabine',
-    sub: 'see the outfit before you buy the piece. a browser extension that keeps your wardrobe beside every store.',
-    tags: ['0→1 Product', 'Browser Extension', 'In Progress'],
+    sub: 'a chrome extension that brings your wardrobe beside an online store, so you can see what you’d wear a new piece with before buying it.',
+    tags: ['0→1 Product', 'Chrome Extension', 'In Progress'],
     detailPath: '/work/cabine',
     cover: '/images/cabine-thumbnail.png',
   },

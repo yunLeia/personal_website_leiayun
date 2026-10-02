@@ -1,5 +1,5 @@
 import ProjectIntro from '../components/ProjectIntro';
-import { WorkSection, WorkProse, WorkList } from '../components/WorkItem';
+import { WorkSection, WorkProse, WorkList, WorkMetrics, WorkTools } from '../components/WorkItem';
 import { B, Hi } from '../components/InlineMarks';
 
 export default function CabineDetail() {
@@ -7,57 +7,74 @@ export default function CabineDetail() {
     <div className="case-study-content">
       <ProjectIntro
         name="Cabine"
-        summary="A browser extension that keeps your wardrobe beside every store, so you can combine a new piece with clothes you already own before deciding whether to buy."
-        role="Product and Engineering (solo)"
-        context="Fall 2026 · In progress, defining the first version"
+        summary="A Chrome extension that brings your wardrobe beside an online store, so you can see what you’d wear a new piece with before buying it."
+        facts={[
+          { label: 'Role', value: 'Founder & Full-Stack Engineer' },
+          { label: 'Timeline', value: 'Sep 2026 – Present' },
+          { label: 'Status', value: 'v0.1.0, pre-launch' },
+        ]}
         links={[]}
       />
 
       <WorkSection id="problem" num="01" title="The Problem" lede="Stores sell pieces. You wear outfits.">
         <WorkProse>
-          <p>Product pages answer <em>do I like this piece?</em> but not <em>will I wear it with what I already own?</em> The item is styled in the retailer’s world, not yours, so shoppers <B>decide on the piece and find out later whether it works as an outfit</B>.</p>
-          <p>Wardrobe apps organize what you own, try-on tools simulate fit, and stores help you find more to buy. <Hi color="yellow">None of them bring your wardrobe into the moment you decide.</Hi></p>
-          <p>Cabine changes the loop from Browse → Like → Cart → Buy to <B>Browse → Combine with my wardrobe → Decide</B>. It’s for people who shop online often and own pieces they rarely wear, because they bought them without knowing what they’d wear them with.</p>
+          <p>Online stores show an item in a carefully styled setting. They don’t show how it works with <B>the clothes you already own</B>, so shoppers decide on the piece and find out later whether it works as an outfit.</p>
+          <p>Cabine brings that missing context into the shopping moment and answers one question: <Hi color="blue">What would I wear this with?</Hi></p>
+          <p>The belief behind it: <B>a good purchase should make your wardrobe more useful, not just bigger.</B></p>
         </WorkProse>
       </WorkSection>
 
-      <WorkSection id="how-it-works" num="02" title="How It Works" lede="Show the combination. Let the user judge.">
+      <WorkSection id="how-it-works" num="02" title="How It Works" lede="Take your closet shopping.">
         <WorkProse>
-          <p>When something catches your eye, you bring it into Cabine and place it next to clothes you already own on a simple mannequin-style canvas.</p>
           <WorkList items={[
-            <><B>Find</B> a piece while shopping online.</>,
-            <><B>Bring it in</B> straight from the product page.</>,
-            <><B>Combine</B> it with your own tops, bottoms, and outerwear.</>,
-            <><B>Decide</B> to buy, save, or skip.</>,
+            <>Right-click a product image and choose <B>“Take it to Cabine.”</B> The piece is captured and Cabine opens in Chrome’s side panel, right next to the store.</>,
+            <>Pick clothes from your own closet to pair with it, then click <B>“See them together.”</B></>,
+            <>Cabine generates the outfit on a fixed mannequin. Save the look, try another combination, or go back to the product page.</>,
           ]} />
-          <p>The canvas doesn’t simulate fit, and Cabine <B>never scores your outfit or recommends more to buy</B>. It answers one question: <Hi color="blue">can I imagine wearing this with what I already own?</Hi></p>
+          <p>For example, bring in a black jacket, pick your white tee and dark jeans, and see the combination <B>before deciding whether to buy the jacket</B>.</p>
+          <p>Pieces live in two places: the <B>Fitting Room</B> for store items you’re considering, and <B>My Closet</B> for clothes you own. When you actually buy something, “I got this” moves it into your closet. Cabine never handles checkout.</p>
+          <p>Adding your clothes is deliberately small. Upload photos, or scan a <B>QR code</B> to add them from your phone. You start with an empty closet and <Hi color="yellow">just a few pieces you actually wear</Hi>, not your entire wardrobe.</p>
         </WorkProse>
       </WorkSection>
 
-      <WorkSection id="decisions" num="03" title="Decision Log" lede="I log major decisions as I make them. First entry: how garment images get into Cabine.">
+      <WorkSection id="how-i-built-it" num="03" title="How I Built It" lede="Your wardrobe stays in the browser. The heavy lifting runs on the server.">
         <WorkProse>
-          <p>The options were to extract garments from model photos and busy backgrounds, or to support only clean, standalone product and closet images. <B>I chose clean images only.</B></p>
-          <p><Hi color="yellow">The hardest technical problem isn’t the most important product problem.</Hi> Before investing in computer vision or realistic try-on, I want to prove the core behavior is valuable. The tradeoff is <B>fewer supported products</B>, and users need clean photos of their own clothes.</p>
-          <p>If people find the loop useful but image constraints become the main source of friction, extraction is the next problem worth solving. Until then, realistic try-on, outfit scores, and full wardrobe management wait.</p>
-        </WorkProse>
-      </WorkSection>
-
-      <WorkSection id="validation" num="04" title="What I Need to Prove" lede="Does seeing a new piece with my own clothes change or confirm my purchase decision?">
-        <WorkProse>
-          <p>The primary signal is <Hi color="blue">pairing rate</Hi>: of the pieces brought into Cabine, how many get paired with at least one item the user already owns. I’m also watching whether people <B>try more than one combination</B>, end sessions with a clear decision, and come back during a later shopping session.</p>
-          <p>The risks I want to test first:</p>
+          <p>The wardrobe is <B>local-first with no account</B>: garment records live in <code>chrome.storage.local</code>, and photos and rendered looks live in IndexedDB.</p>
+          <p>Outfit rendering, garment-photo cleanup, and phone uploads run on a <B>Vercel Functions</B> backend using <B>FASHN</B>, with private Vercel Blob storage for cached results and temporary files, and Neon Postgres for product analytics.</p>
           <WorkList items={[
-            <><B>Value.</B> Will people pause mid-shopping to use it, or will it feel like friction?</>,
-            <><B>Setup.</B> How few owned pieces make it useful? A handful of frequently worn ones may be enough.</>,
-            <><B>Fidelity.</B> Are clean cutouts enough to judge a combination, or do people expect realistic try-on?</>,
-            <><B>Extraction.</B> Can Cabine reliably pull usable images from real shopping sites?</>,
+            <><B>Hash-based render caching</B>, so identical outfit requests reuse a cached result instead of rendering again.</>,
+            <><B>Usage quotas and spending limits</B> per install, plus duplicate-request protection.</>,
+            <><B>Jittered retries</B> for concurrent writes, <Hi color="blue">validated with 8 concurrent renders</Hi>.</>,
+            <><B>Category inference</B> from English and Korean keywords in page titles, across tops, bottoms, dresses, outerwear, and shoes. If Cabine can’t tell, it asks.</>,
+          ]} />
+          <WorkMetrics metrics={[
+            { value: '8', label: 'Concurrent renders validated' },
+            { value: '5', label: 'Garment categories' },
+            { value: '0', label: 'Accounts required' },
           ]} />
         </WorkProse>
+        <WorkTools tools={['Chrome Extension', 'Vercel Functions', 'FASHN', 'Vercel Blob', 'Neon Postgres', 'IndexedDB']} />
       </WorkSection>
 
-      <WorkSection id="vision" num="05" title="Vision" lede="Make online shopping aware of what you already own.">
+      <WorkSection id="decisions" num="04" title="Decision Log" lede="Cabine shows. You decide.">
         <WorkProse>
-          <p>A good purchase does more than add one item. It <B>creates more ways to wear the things already there</B>. Over time, Cabine can help wardrobes get more useful with every purchase, not just larger.</p>
+          <p><B>Wardrobe fit, not body fit.</B> AI shows the selected garments together on a fixed, headless mannequin. It doesn’t predict your body shape, sizing, or physical fit. The question is how a new piece works with what you already own.</p>
+          <p><B>Not a stylist.</B> Cabine doesn’t generate outfits, score them, or recommend what to buy. <Hi color="yellow">You choose the pieces and judge the result</Hi>; AI only provides the visual context.</p>
+          <p><B>Cut the Buy / Save / Pass step.</B> Earlier versions asked you to rate each store piece. Now the flow ends with seeing the combination, saving it if you want, or going back to the store.</p>
+          <p><B>No garment slots.</B> The interface used to ask you to fill every category. I removed the slots so the interaction feels like answering <B>one shopping question</B>.</p>
+          <p><B>An empty closet to start.</B> New users start with nothing rather than sample clothes presented as their own, and only need a few pieces to begin.</p>
+        </WorkProse>
+      </WorkSection>
+
+      <WorkSection id="whats-next" num="05" title="What’s Next" lede="Make every clothing purchase more wearable.">
+        <WorkProse>
+          <p>The question I need to answer: <B>does seeing a new piece with my own clothes change or confirm my purchase decision?</B> The signal I care about most is <Hi color="blue">pairing rate</Hi>, how often a captured piece gets paired with something the user already owns.</p>
+          <p>Before launch, I still need to verify:</p>
+          <WorkList items={[
+            <><B>Store coverage.</B> Capture depends on accessible product images, so compatibility across stores isn’t verified yet.</>,
+            <><B>Render quality</B> across many garment types.</>,
+            <><B>Distribution.</B> The Chrome Web Store listing isn’t live yet.</>,
+          ]} />
         </WorkProse>
       </WorkSection>
     </div>

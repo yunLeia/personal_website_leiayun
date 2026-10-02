@@ -287,8 +287,8 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 .case-study-content .work-label { margin: 0; padding-top: 3px; color: var(--muted); font: 400 11px/18px 'Geist Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
 .case-study-content .work-body p { margin: 0; }
 .work-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
-.work-list li { position: relative; padding-left: 16px; color: var(--copy); font-size: 14px; line-height: 1.7; }
-.work-list li::before { content: ''; position: absolute; left: 0; top: .85em; width: 6px; height: 1px; background: var(--muted); }
+.work-list li { position: relative; padding-left: 20px; color: var(--copy); font-size: 14px; line-height: 1.7; }
+.work-list li::before { content: ''; position: absolute; left: 2px; top: calc(.85em - 2.5px); width: 5px; height: 5px; background: #8a8882; }
 .work-list strong, .work-body b { color: var(--ink); font-weight: 600; }
 .work-metrics { display: grid; grid-template-columns: repeat(auto-fill, minmax(124px, 1fr)); gap: 8px; margin: 0; }
 .work-metrics > div { display: flex; flex-direction: column; padding: 12px 14px; border: .5px solid var(--rule); border-radius: 2px; }
@@ -313,3 +313,4 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 .case-study-content .work-prose p { margin: 0; max-width: 64ch; font-size: 15px; line-height: 1.75; }
 .work-prose .work-list li { font-size: 15px; }
 .work-prose b, .work-prose strong { color: var(--ink); font-weight: 600; }
+.work-prose code { padding: 1px 5px; border: .5px solid var(--rule); border-radius: 2px; background: var(--hover-bg); color: var(--ink); font: 12.5px 'Geist Mono', monospace; }

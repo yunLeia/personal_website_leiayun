@@ -9,43 +9,50 @@ const WORK: WorkItemData[] = [
   {
     id: 'resume-classifier',
     num: '01',
-    title: 'Resume Classifier',
-    lede: 'Three prompting strategies benchmarked to find what actually classifies resumes.',
+    title: 'Resume Parsing & Classification',
+    lede: 'From PDF resumes to structured profiles that make mentor matching faster.',
+    problem: <>Parachute matched mentors and mentees from PDF resumes, but had <B>no AI infrastructure</B> to turn them into structured data.</>,
+    did: [
+      <>Built <B>Python ETL pipelines</B> using PyMuPDF and regex-based field extraction to turn PDF resumes into structured candidate profiles.</>,
+      'Prototyped GPT classification in Streamlit: PDF upload → text extraction → classification.',
+      <>Benchmarked <B>3 prompting strategies</B>: structured JSON, zero-shot, and instruction-guided. Zero-shot won at <B>~73% accuracy</B>.</>,
+      <>Found <Hi color="yellow">structured JSON mode hallucinated fields</Hi> that weren’t in the resume, and recommended a fine-tuning path for production.</>,
+    ],
+    metrics: [
+      { value: '18%', label: 'Faster mentor–mentee matching' },
+      { value: '~73%', label: 'Accuracy, zero-shot' },
+      { value: '3', label: 'Strategies benchmarked' },
+    ],
+    takeaway: <>Structured profiles cut mentor–mentee matching time by <Hi color="blue">18%</Hi>.</>,
     figure: {
       src: '/images/parachute-resume-classifier-fig.webp',
       alt: 'Resume classifier prototype with prompt, uploaded resume, and structured output',
       caption: 'Streamlit prototype and prompt experiments',
     },
-    problem: <>Parachute needed to classify incoming resumes automatically, but had <B>no AI infrastructure</B> to build on.</>,
-    did: [
-      'Built a Streamlit prototype: PDF upload → PyPDF extraction → GPT classification.',
-      <>Benchmarked <B>3 prompting strategies</B>: structured JSON, zero-shot, and instruction-guided. Zero-shot won at <Hi color="blue">~73% accuracy</Hi>.</>,
-      <>Found <Hi color="yellow">structured JSON mode hallucinated fields</Hi> that weren’t in the resume.</>,
-      'Recommended a fine-tuning path for production.',
-    ],
-    metrics: [
-      { value: '~73%', label: 'Accuracy, zero-shot' },
-      { value: '3', label: 'Strategies benchmarked' },
-    ],
-    tools: ['Prompt Engineering', 'Benchmarking', 'GPT API', 'Streamlit', 'PyPDF'],
+    tools: ['Python', 'PyMuPDF', 'Regex', 'GPT API', 'Streamlit', 'Prompt Engineering'],
   },
   {
     id: 'rag-pipeline',
     num: '02',
     title: 'RAG Pipeline',
-    lede: 'The query-to-answer architecture behind the career coaching chatbot MVP.',
+    lede: 'The retrieval pipeline behind the career coaching chatbot MVP.',
+    problem: 'The chatbot MVP needed answers grounded in Parachute’s own documents, without adding infrastructure cost at an early stage.',
+    did: [
+      <>Evaluated <B>FAISS, Pinecone, and Elasticsearch</B> across latency, cost, and integration complexity.</>,
+      <>Chose self-hosted FAISS and deployed the pipeline at <Hi color="yellow">zero additional infrastructure cost</Hi>.</>,
+      'Built the flow end to end: document chunking → embedding generation → top-k retrieval → context assembly → LLM response.',
+      'Used LangChain for chain composition.',
+    ],
+    metrics: [
+      { value: '$0', label: 'Added infra cost' },
+      { value: '3', label: 'Vector stores evaluated' },
+    ],
     figure: {
       src: '/images/parachute-rag-fig.webp',
       alt: 'RAG pipeline diagram: user query, embedding, top-k retrieval, context and prompt, GPT response',
       caption: 'RAG pipeline architecture',
     },
-    problem: 'The chatbot MVP needed answers grounded in Parachute’s own content, at a cost that made sense for an early-stage product.',
-    did: [
-      'Designed the full flow: document chunking → FAISS embedding → retrieval → GPT generation.',
-      <>Chose <Hi color="yellow">FAISS over Pinecone</Hi>: no hosted cost at MVP scale.</>,
-      'Used LangChain for chain composition.',
-    ],
-    tools: ['System Design', 'LangChain', 'FAISS', 'GPT API'],
+    tools: ['System Design', 'FAISS', 'LangChain', 'GPT API'],
   },
 ];
 
