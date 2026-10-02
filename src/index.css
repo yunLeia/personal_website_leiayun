@@ -314,3 +314,9 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 .work-prose .work-list li { font-size: 15px; }
 .work-prose b, .work-prose strong { color: var(--ink); font-weight: 600; }
 .work-prose code { padding: 1px 5px; border: .5px solid var(--rule); border-radius: 2px; background: var(--hover-bg); color: var(--ink); font: 12.5px 'Geist Mono', monospace; }
+.case-study-content .project-title-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; margin: 0 0 24px; }
+.case-study-content .project-intro .project-title-row h1 { margin: 0; }
+.project-actions a.is-primary { background: var(--ink); border-color: var(--ink); color: var(--paper); font-weight: 500; }
+.project-actions a.is-primary:hover { background: #3a3935; }
+.case-study-content .project-intro .case-cover { max-width: none; margin: 0 0 28px; }
+.case-cover.is-natural > img { aspect-ratio: auto; object-fit: contain; }

@@ -10,10 +10,10 @@ export default function CabineDetail() {
         summary="A Chrome extension that brings your wardrobe beside an online store, so you can see what you’d wear a new piece with before buying it."
         facts={[
           { label: 'Role', value: 'Founder & Full-Stack Engineer' },
-          { label: 'Timeline', value: 'Sep 2026 – Present' },
+          { label: 'Date', value: 'Sep 2026 – Present' },
           { label: 'Status', value: 'v0.1.0, pre-launch' },
         ]}
-        links={[]}
+        links={[{ label: 'Visit site', href: 'https://cabine-j7p.pages.dev', primary: true }]}
       />
 
       <WorkSection id="problem" num="01" title="The Problem" lede="Stores sell pieces. You wear outfits.">

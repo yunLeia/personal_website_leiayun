@@ -8,12 +8,14 @@ export default function IndigoDetail() {
       <ProjectIntro
         name="myIndigo"
         summary="Real-time audio awareness for deaf and hard-of-hearing users. Your phone listens, classifies sounds with Gemini 2.5 Flash, and sends actionable alerts to your Apple Watch: instructions, not transcriptions."
-        role="Full-Stack + AI Engineer"
-        context="NYC Build With AI Hackathon @ NYU Tandon · March 2026"
-        duration="36 hours"
+        facts={[
+          { label: 'Role', value: 'Full-Stack + AI Engineer' },
+          { label: 'Date', value: 'March 2026 · 36 hours' },
+          { label: 'Context', value: 'NYC Build With AI Hackathon @ NYU Tandon' },
+        ]}
         links={[
           { label: 'GitHub', href: 'https://github.com/yunLeia/indigo-ai-agent' },
-          { label: 'Pitch deck', href: 'https://www.figma.com/deck/ebsg6XMvEQVfHLcYQmva4Z/myIndigo_Google?node-id=1-133&viewport=-124%2C-31%2C0.59&t=TTdyLd0Ns68gQfd3-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1' },
+          { label: 'Pitch deck', href: 'https://www.figma.com/deck/ebsg6XMvEQVfHLcYQmva4Z/myIndigo_Google?node-id=1-133&viewport=-124%2C-31%2C0.59&t=TTdyLd0Ns68gQfd3-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1', primary: true },
         ]}
       />
 

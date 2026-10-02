@@ -2,12 +2,6 @@
 
 Generated with the built-in image generation tool on September 12, 2026. Applied to homepage project icons and detail-page covers. The myIndigo thumbnail is the user's supplied image, copied unchanged.
 
-## GatheRoll
-
-File: `public/images/gatheroll-thumbnail.png`
-
-Prompt: A creative simple premium square project thumbnail for GatheRoll, an app collecting everyone's photos into one event album. An elegant small stack of three ivory photographic prints gently fanned together, one quiet abstract sunlit landscape visible, sculptural tactile paper, restrained soft shadows, muted forest-green background. Single centered recognizable object with generous negative space, editorial product photography meets minimal 3D illustration, no text, no letters, no UI, no watermark. Make a finished standalone square raster image suitable both as 40px project icon and large portfolio cover.
-
 ## CulinAI
 
 File: `public/images/culinai-thumbnail.png`

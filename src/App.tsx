@@ -7,7 +7,6 @@ import ParachuteDetail from './pages/ParachuteDetail';
 import IndigoDetail from './pages/IndigoDetail';
 import CabineDetail from './pages/CabineDetail';
 import CulineAIDetail from './pages/CulineAIDetail';
-import GatherollDetail from './pages/GatherollDetail';
 import Nav from './components/Nav';
 import ScrollToTop from './components/ScrollToTop';
 
@@ -25,7 +24,6 @@ function App() {
         <Route path="/work/indigo" element={<IndigoDetail />} />
         <Route path="/work/cabine" element={<CabineDetail />} />
         <Route path="/work/culinai" element={<CulineAIDetail />} />
-        <Route path="/work/gatheroll" element={<GatherollDetail />} />
         </Route>
       </Routes>
     </BrowserRouter>

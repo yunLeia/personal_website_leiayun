@@ -65,6 +65,8 @@ export interface ProjectItem {
   tags?: string[];
   detailPath: string;
   cover?: string;
+  // Animated image shown at the top of the detail page; falls back to cover.
+  hero?: string;
   // Hidden from the homepage list and nav menu; the detail page still works by URL.
   hidden?: boolean;
 }
@@ -76,14 +78,7 @@ export const PROJECTS: ProjectItem[] = [
     tags: ['0→1 Product', 'Chrome Extension', 'In Progress'],
     detailPath: '/work/cabine',
     cover: '/images/cabine-thumbnail.png',
-  },
-  {
-    name: 'GatheRoll',
-    sub: "everyone's photos from one event, in one shared album. Scan a QR, bulk-add your photos, and GatheRoll handles the rest.",
-    tags: ['0→1 Product', 'Computer Vision', 'Next.js', 'FastAPI'],
-    detailPath: '/work/gatheroll',
-    cover: '/images/gatheroll-thumbnail.png',
-    hidden: true,
+    hero: '/images/cabine-hero.webp',
   },
   {
     name: 'myIndigo',
@@ -91,6 +86,7 @@ export const PROJECTS: ProjectItem[] = [
     tags: ['Accessibility', 'Gemini 2.5 Flash', 'Google ADK', 'Hackathon'],
     detailPath: '/work/indigo',
     cover: '/images/myindigo-thumbnail.png',
+    hero: '/images/indigo-hero.webp',
   },
   {
     name: 'CulinAI',
@@ -98,6 +94,7 @@ export const PROJECTS: ProjectItem[] = [
     tags: ['Multimodal AI', 'Food Waste Reduction', 'LLaVA', 'SDXL-Turbo'],
     detailPath: '/work/culinai',
     cover: '/images/culinai-thumbnail.png',
+    hero: '/images/culinai-hero.webp',
   },
 ];
 

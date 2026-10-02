@@ -4,7 +4,6 @@ import { SectionHeader } from './HomeUI';
 
 const SUMMARIES: Record<string, string> = {
   Cabine: 'A Chrome extension that brings your wardrobe beside an online store, so you can see what you’d wear a new piece with before buying it.',
-  GatheRoll: 'One shared album for every event. Scan a QR code, add your photos, and let AI handle the sorting.',
   myIndigo: 'Real-time sound awareness for deaf and hard-of-hearing people, with actionable alerts on their watch.',
   CulinAI: 'Turn a photo of your ingredients into a recipe, and put what’s already in your fridge to use.',
 };

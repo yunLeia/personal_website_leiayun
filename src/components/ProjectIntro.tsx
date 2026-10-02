@@ -1,35 +1,44 @@
 import type { ReactNode } from 'react';
+import { PROJECTS } from '../data';
 
 type Fact = { label: string; value: string };
+type Link = { label: string; href: string; primary?: boolean };
 
 type Props = {
   name: string;
   summary: string;
   eyebrow?: string;
-  role?: string;
-  context?: string;
-  duration?: string;
-  facts?: Fact[];
-  links: { label: string; href: string }[];
+  facts: Fact[];
+  links: Link[];
   children?: ReactNode;
 };
 
-export default function ProjectIntro({ name, summary, eyebrow = 'Selected project', role, context, duration, facts, links, children }: Props) {
-  const rows = facts ?? [
-    role && { label: 'My role', value: role },
-    context && { label: 'Context', value: context },
-    duration && { label: 'Duration', value: duration },
-  ].filter((row): row is Fact => Boolean(row));
+export default function ProjectIntro({ name, summary, eyebrow = 'Selected project', facts, links, children }: Props) {
+  const project = PROJECTS.find((item) => item.name === name);
+  const image = project?.hero ?? project?.cover;
 
   return (
     <header id="overview" data-outline="Overview" className="project-intro">
       <p className="project-eyebrow">{eyebrow}</p>
-      <h1>{name}</h1>
+      <div className="project-title-row">
+        <h1>{name}</h1>
+        <div className="project-actions">
+          {links.filter((link) => link.href !== '#').map((link) => (
+            <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className={link.primary ? 'is-primary' : undefined}>
+              {link.label}<span aria-hidden="true">↗</span>
+            </a>
+          ))}
+        </div>
+      </div>
+      {image && (
+        <figure className={`case-cover${project?.hero ? ' is-natural' : ''}`}>
+          <img src={image} alt={`${name} preview`} />
+        </figure>
+      )}
       <p className="project-lede">{summary}</p>
       <dl className="project-facts">
-        {rows.map((row) => <div key={row.label}><dt>{row.label}</dt><dd>{row.value}</dd></div>)}
+        {facts.map((row) => <div key={row.label}><dt>{row.label}</dt><dd>{row.value}</dd></div>)}
       </dl>
-      <div className="project-actions">{links.filter(link => link.href !== '#').map(link => <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer">{link.label}<span aria-hidden="true">↗</span></a>)}</div>
       {children}
     </header>
   );

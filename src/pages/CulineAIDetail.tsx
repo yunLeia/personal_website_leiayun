@@ -8,8 +8,11 @@ export default function CulineAIDetail() {
       <ProjectIntro
         name="CulinAI"
         summary="An AI-powered site that generates recipes from a photo of your fridge or food items."
-        role="PM and AI Engineer"
-        context="Tech@NYU · TechTrek"
+        facts={[
+          { label: 'Role', value: 'PM and AI Engineer' },
+          { label: 'Date', value: 'May 2024' },
+          { label: 'Context', value: 'Tech@NYU · TechTrek' },
+        ]}
         links={[{ label: 'GitHub', href: 'https://github.com/leiassyun/CulinAI' }]}
       />
 
