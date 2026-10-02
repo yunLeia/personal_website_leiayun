@@ -1,110 +1,87 @@
 import { EXPERIENCE } from '../data';
-import { Reveal, ToolPill } from '../components/shared';
+import ProjectIntro from '../components/ProjectIntro';
+import WorkItem, { type WorkItemData } from '../components/WorkItem';
+import { B, Hi } from '../components/InlineMarks';
 
 const tiktok = EXPERIENCE.find((experience) => experience.company === 'TikTok')!;
 
-// ─── Data ────────────────────────────────────────────────────────
-
-const WORK_ITEMS = [
+const WORK: WorkItemData[] = [
   {
+    id: 'diagnostic-tool',
     num: '01',
-    meta: '8 datasets · reports in 1 minute',
     title: 'Internal Marketing Diagnostic Tool',
-    description: "Built the Korea team's first internal marketing diagnostic tool, integrating 8 datasets into a Python service that generates account-level hygiene reports in 1 minute, replacing a 15+ query, one-hour manual process and enabling daily team use.",
+    lede: 'An hour of manual queries, turned into a one-minute report.',
+    problem: [
+      <>Checking an account’s marketing hygiene meant running <B>15+ queries</B> by hand.</>,
+      <>Each check took <B>about an hour</B>, so the team couldn’t run it routinely.</>,
+    ],
+    did: [
+      <>Built the Korea team’s <B>first internal marketing diagnostic tool</B>.</>,
+      <>Integrated <B>8 datasets</B> into a single Python service.</>,
+      <>Generated account-level hygiene reports automatically, <Hi color="blue">in 1 minute instead of 1 hour</Hi>.</>,
+    ],
+    metrics: [
+      { value: '1 min', label: 'Per report, from ~1 hour' },
+      { value: '8', label: 'Datasets integrated' },
+      { value: 'Daily', label: 'Team use' },
+    ],
+    figure: {
+      src: '/images/tiktok-diagnostic-tool.webp',
+      alt: 'Internal automation workspace listing the Hygiene Report Generator alongside other team automations',
+      caption: 'Hygiene Report Generator in the team’s automation workspace',
+    },
     tools: ['Python', 'Data Pipelines', 'Automation', 'Internal Tooling'],
   },
   {
+    id: 'creative-audit',
     num: '02',
-    meta: '3,000+ creatives per account · 20+ enterprise clients',
     title: 'Ad Creative Audit Pipeline',
-    description: 'Designed a multi-stage LLM pipeline to label 3,000+ ad creatives per account and audit best practices, decomposing analysis into focused prompts to generate optimization recommendations for 20+ enterprise clients.',
+    lede: 'Thousands of creatives per account, audited against best practices.',
+    problem: [
+      <>Enterprise accounts run <B>3,000+ ad creatives</B> each.</>,
+      'Reviewing them against best practices by hand doesn’t scale.',
+    ],
+    did: [
+      'Designed a multi-stage LLM pipeline to label every creative in an account.',
+      <><Hi color="yellow">Decomposed the analysis into focused prompts</Hi> instead of one large prompt.</>,
+      <>Turned the audit into optimization recommendations for <B>20+ enterprise clients</B>.</>,
+    ],
+    metrics: [
+      { value: '3,000+', label: 'Creatives per account' },
+      { value: '20+', label: 'Enterprise clients' },
+    ],
     tools: ['LLM Pipelines', 'Prompt Engineering', 'Ad Analytics'],
   },
   {
+    id: 'ai-learning-series',
     num: '03',
-    meta: '100+ employees adopted · ranked #1 & #2 org-wide',
     title: 'AI Learning Series & Internal Guide',
-    description: 'Created an all-in-one internal AI guide of use cases and prompts adopted by 100+ employees, and led a two-session AI Learning Series that ranked 1st and 2nd among the organization\'s internal Masterclasses that year.',
+    lede: 'Helping the wider team actually use AI in their daily work.',
+    problem: 'Teams wanted to use AI at work but had no shared set of use cases or prompts to start from.',
+    did: [
+      <>Created an all-in-one internal AI guide of use cases and prompts, adopted by <B>100+ employees</B>.</>,
+      <>Led a two-session AI Learning Series that <Hi color="blue">ranked 1st and 2nd</Hi> among the org’s internal Masterclasses that year.</>,
+    ],
+    metrics: [
+      { value: '100+', label: 'Employees using the guide' },
+      { value: 'Top 2', label: 'Masterclass ranking, org-wide' },
+      { value: '4.95', label: 'Avg feedback (of 5)' },
+    ],
     tools: ['Technical Enablement', 'Workshop Facilitation', 'Content Design'],
   },
 ];
 
-const RESULTS = [
-  { value: 'Top 2', label: 'Masterclass ranking, org-wide' },
-  { value: '4.95', label: 'Avg feedback score (of 5)' },
-  { value: '100+', label: 'Employees using AI guide' },
-  { value: '20+', label: 'Enterprise clients served' },
-];
-
-// ─── Page ────────────────────────────────────────────────────────
-
 export default function TikTokDetail() {
   return (
-      <div className="case-study-content">
-
-        <div id="overview" data-outline="Overview" className="mt-12 mb-14 animate-fade-in">
-          <h1 className="text-[32px] max-sm:text-[26px] font-bold tracking-tight text-[#111] mb-6">
-            <a
-              href={tiktok.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#111] no-underline hover:underline underline-offset-[6px] decoration-[#d2d2d7] hover:decoration-[#111] transition-colors duration-200"
-            >
-              {tiktok.company}
-            </a>
-          </h1>
-          <div className="flex flex-col gap-2 mb-6">
-            <div className="text-[15px] font-normal text-[#444]"><span className="font-semibold text-[#111]">Role:</span> {tiktok.role}</div>
-            <div className="text-[15px] font-normal text-[#444]"><span className="font-semibold text-[#111]">Period:</span> {tiktok.date}</div>
-          </div>
-          <p className="text-[15px] font-normal text-[#444] leading-[1.7]">{tiktok.subtitle}</p>
-        </div>
-
-        <div className="h-px bg-black/5 mb-16" />
-
-        {/* What I Built */}
-        <Reveal className="mb-16" id="what-i-built" outline="What I Built">
-          <h2 className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-10">
-            What I Built
-          </h2>
-          <div className="grid grid-cols-3 max-sm:grid-cols-1 gap-5">
-            {WORK_ITEMS.map((item) => (
-              <div key={item.title} className="bg-black/[0.03] rounded-2xl p-7 max-sm:p-6 flex flex-col">
-                <p className="text-[13px] font-medium text-[#666] mb-3">
-                  {item.num} &middot; {item.meta}
-                </p>
-                <h3 className="text-[18px] font-semibold text-[#111] tracking-tight mb-3">
-                  {item.title}
-                </h3>
-                <p className="text-[15px] text-[#444] leading-[1.65] mb-5 flex-1">{item.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {item.tools.map((t) => <ToolPill key={t}>{t}</ToolPill>)}
-                </div>
-              </div>
-            ))}
-          </div>
-        </Reveal>
-
-        <div className="h-px bg-black/5 mb-16" />
-
-        {/* Results */}
-        <Reveal className="mb-16" id="results" outline="Results">
-          <h2 className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-10">
-            Results
-          </h2>
-          <div className="grid grid-cols-4 max-sm:grid-cols-2 gap-4">
-            {RESULTS.map((r) => (
-              <div key={r.label} className="bg-black/[0.03] rounded-2xl px-5 py-7 text-center">
-                <div className="text-[40px] sm:text-[52px] font-semibold text-[#111] leading-none mb-3" style={{ fontFamily: "'Lora', serif" }}>
-                  {r.value}
-                </div>
-                <div className="text-[11px] font-medium text-[#888] uppercase tracking-[0.08em]">
-                  {r.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </Reveal>
-      </div>
+    <div className="case-study-content">
+      <ProjectIntro
+        name={tiktok.company}
+        eyebrow="Experience"
+        summary={tiktok.subtitle ?? ''}
+        facts={[{ label: 'Role', value: tiktok.role }, { label: 'Period', value: tiktok.date }]}
+        links={tiktok.url ? [{ label: 'Company site', href: tiktok.url }] : []}
+      />
+      {WORK.map((item) => <WorkItem key={item.id} {...item} />)}
+    </div>
   );
 }

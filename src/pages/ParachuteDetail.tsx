@@ -1,127 +1,65 @@
-import { Reveal, ToolPill } from '../components/shared';
+import { EXPERIENCE } from '../data';
+import ProjectIntro from '../components/ProjectIntro';
+import WorkItem, { type WorkItemData } from '../components/WorkItem';
+import { B, Hi } from '../components/InlineMarks';
 
-// ─── Data ────────────────────────────────────────────────────────
+const parachute = EXPERIENCE.find((experience) => experience.company === 'Parachute')!;
 
-const OVERVIEW = {
-  role: 'AI Engineering Intern',
-  period: 'Mar – Jun 2024',
-  summary:
-    'Parachute is an AI-powered career coaching startup. I built the foundational AI infrastructure (resume classification and RAG pipeline) from zero existing AI infra.',
-};
-
-const WORK_ITEMS = [
+const WORK: WorkItemData[] = [
   {
+    id: 'resume-classifier',
     num: '01',
-    meta: '~73% accuracy · 3 strategies benchmarked',
     title: 'Resume Classifier',
-    description: 'Built a Streamlit prototype: PDF upload → PyPDF extraction → GPT classification. Benchmarked 3 prompting strategies (structured JSON, zero-shot, instruction-guided). Zero-shot won at ~73% accuracy; recommended fine-tuning path for production.',
+    lede: 'Three prompting strategies benchmarked to find what actually classifies resumes.',
+    figure: {
+      src: '/images/parachute-resume-classifier-fig.webp',
+      alt: 'Resume classifier prototype with prompt, uploaded resume, and structured output',
+      caption: 'Streamlit prototype and prompt experiments',
+    },
+    problem: <>Parachute needed to classify incoming resumes automatically, but had <B>no AI infrastructure</B> to build on.</>,
+    did: [
+      'Built a Streamlit prototype: PDF upload → PyPDF extraction → GPT classification.',
+      <>Benchmarked <B>3 prompting strategies</B>: structured JSON, zero-shot, and instruction-guided. Zero-shot won at <Hi color="blue">~73% accuracy</Hi>.</>,
+      <>Found <Hi color="yellow">structured JSON mode hallucinated fields</Hi> that weren’t in the resume.</>,
+      'Recommended a fine-tuning path for production.',
+    ],
+    metrics: [
+      { value: '~73%', label: 'Accuracy, zero-shot' },
+      { value: '3', label: 'Strategies benchmarked' },
+    ],
     tools: ['Prompt Engineering', 'Benchmarking', 'GPT API', 'Streamlit', 'PyPDF'],
-    image: '/images/parachute-resume-classifier.webp',
   },
   {
+    id: 'rag-pipeline',
     num: '02',
-    meta: 'Full RAG architecture for chatbot MVP',
     title: 'RAG Pipeline',
-    description: 'Designed the full query-response architecture for the career coaching chatbot MVP. Document chunking → FAISS embedding → retrieval → GPT generation. Chose FAISS over Pinecone (no hosted cost for MVP scale) and LangChain for chain composition.',
-    tools: ['System Design', 'Architecture', 'LangChain', 'FAISS', 'GPT API'],
-    image: '/images/parachute-rag.webp',
+    lede: 'The query-to-answer architecture behind the career coaching chatbot MVP.',
+    figure: {
+      src: '/images/parachute-rag-fig.webp',
+      alt: 'RAG pipeline diagram: user query, embedding, top-k retrieval, context and prompt, GPT response',
+      caption: 'RAG pipeline architecture',
+    },
+    problem: 'The chatbot MVP needed answers grounded in Parachute’s own content, at a cost that made sense for an early-stage product.',
+    did: [
+      'Designed the full flow: document chunking → FAISS embedding → retrieval → GPT generation.',
+      <>Chose <Hi color="yellow">FAISS over Pinecone</Hi>: no hosted cost at MVP scale.</>,
+      'Used LangChain for chain composition.',
+    ],
+    tools: ['System Design', 'LangChain', 'FAISS', 'GPT API'],
   },
 ];
-
-const RESULTS = [
-  { value: '18%', label: 'Faster matching' },
-  { value: '3', label: 'Strategies benchmarked' },
-  { value: '1', label: 'Prototype shipped' },
-  { value: 'Full', label: 'Stack recommendation' },
-];
-
-// ─── Page ────────────────────────────────────────────────────────
 
 export default function ParachuteDetail() {
   return (
-      <div className="case-study-content">
-
-        {/* Overview */}
-        <div id="overview" data-outline="Overview" className="mt-12 mb-14 animate-fade-in">
-          <h1 className="text-[32px] max-sm:text-[26px] font-bold tracking-tight text-[#111] mb-6">
-            <a
-              href="https://www.letsparachute.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#111] no-underline hover:underline underline-offset-[6px] decoration-[#d2d2d7] hover:decoration-[#111] transition-colors duration-200"
-            >
-              Parachute
-            </a>
-          </h1>
-          <div className="flex flex-col gap-2 mb-6">
-            <div className="text-[15px] font-normal text-[#444]"><span className="font-semibold text-[#111]">Role:</span> {OVERVIEW.role}</div>
-            <div className="text-[15px] font-normal text-[#444]"><span className="font-semibold text-[#111]">Period:</span> {OVERVIEW.period}</div>
-          </div>
-          <p className="text-[15px] font-normal text-[#444] leading-[1.7]">{OVERVIEW.summary}</p>
-        </div>
-
-        <div className="h-px bg-black/5 mb-16" />
-
-        {/* What I Built */}
-        <div id="what-i-built" data-outline="What I Built" className="mb-16">
-          <h2 className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-12">
-            What I Built
-          </h2>
-          <div className="space-y-24 max-sm:space-y-16">
-            {WORK_ITEMS.map((item) => {
-              return (
-                <Reveal key={item.title}>
-                  <div className="section-with-media">
-<div className="md:flex-[3]">
-                      <p className="text-[13px] font-medium text-[#666]">
-                        {item.num} &middot; {item.meta}
-                      </p>
-                      <h3 className="mt-3 text-[28px] max-sm:text-[22px] font-bold text-[#111] tracking-tight leading-[1.2]">
-                        {item.title}
-                      </h3>
-                      <p className="mt-4 text-[15px] text-[#333] leading-[1.65]">{item.description}</p>
-                      <div className="flex flex-wrap gap-2 mt-5">
-                        {item.tools.map((t) => <ToolPill key={t}>{t}</ToolPill>)}
-                      </div>
-                    </div>
-<div className="section-media">
-                      <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden border border-black/5 bg-[#F0F3F7]">
-                        {item.image ? (
-                          <img src={item.image} alt={item.title} loading="lazy" decoding="async" className="w-full h-full object-contain" />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center">
-                            <span className="text-black/20 text-[13px]">screenshot</span>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-</div>
-                </Reveal>
-              );
-            })}
-          </div>
-        </div>
-
-        <div className="h-px bg-black/5 mb-16" />
-
-        {/* Results */}
-        <Reveal className="mb-16" id="results" outline="Results">
-          <h2 className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-10">
-            Results
-          </h2>
-          <div className="grid grid-cols-4 max-sm:grid-cols-2 gap-4">
-            {RESULTS.map((r) => (
-              <div key={r.label} className="bg-black/[0.03] rounded-2xl px-5 py-7 text-center">
-                <div className="text-[40px] sm:text-[52px] font-semibold text-[#111] leading-none mb-3" style={{ fontFamily: "'Lora', serif" }}>
-                  {r.value}
-                </div>
-                <div className="text-[11px] font-medium text-[#888] uppercase tracking-[0.08em]">
-                  {r.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </Reveal>
-      </div>
+    <div className="case-study-content">
+      <ProjectIntro
+        name={parachute.company}
+        eyebrow="Experience"
+        summary="Parachute is an AI-powered career coaching startup. I built its foundational AI infrastructure, resume classification and a RAG pipeline, starting from zero."
+        facts={[{ label: 'Role', value: parachute.role }, { label: 'Period', value: parachute.date }]}
+        links={[{ label: 'Company site', href: 'https://www.letsparachute.com' }]}
+      />
+      {WORK.map((item) => <WorkItem key={item.id} {...item} />)}
+    </div>
   );
 }

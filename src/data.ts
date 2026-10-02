@@ -119,7 +119,7 @@ export const NAV_ITEMS: NavItem[] = [
     label: 'Experience',
     href: '#experience',
     items: [
-      { label: 'TikTok', href: '#experience' },
+      { label: 'TikTok', href: '/work/tiktok' },
       { label: 'Planfit', href: '/work/planfit' },
       { label: 'Parachute', href: '/work/parachute' },
     ],

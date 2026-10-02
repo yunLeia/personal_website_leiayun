@@ -1,152 +1,40 @@
 import ProjectIntro from '../components/ProjectIntro';
-import { Reveal, ToolPill } from '../components/shared';
-
-// ─── Data ────────────────────────────────────────────────────────
-
-const OVERVIEW = {
-  event: 'Tech@NYU · TechTrek',
-  role: 'PM and AI Engineer',
-  summary:
-    'CulinAI is an AI-powered site that allows users to generate recipes by uploading a photo of their fridge or food items.',
-  links: {
-    github: 'https://github.com/leiassyun/CulinAI',
-  },
-};
-
-const FLOW_STEPS = [
-  {
-    label: 'Capture',
-    text: 'User uploads a photo of their fridge or ingredients.',
-  },
-  {
-    label: 'Recognize',
-    text: 'LLaVA extracts ingredients directly from the image in one multimodal pass, instead of a separate vision + LLM pipeline.',
-  },
-  {
-    label: 'Generate',
-    text: 'Prompt-tuned outputs return a recipe; SDXL-Turbo generates a matching food image. Users save and organize recipes they like.',
-  },
-];
-
-const DECISIONS = [
-  {
-    title: 'Multimodal model',
-    description: 'LLaVA handles vision + language in a single pass. Reduced pipeline complexity and enabled real-time response.',
-    role: 'Modeling decision',
-  },
-  {
-    title: 'Inference strategy',
-    description: 'Used Replicate for hosted inference. Optimized for iteration speed over infra control during a solo build.',
-    role: 'Infra decision',
-  },
-];
-
-// ─── Page ────────────────────────────────────────────────────────
+import { WorkSection, WorkProse, WorkFigure, WorkTools } from '../components/WorkItem';
+import { B, Hi } from '../components/InlineMarks';
 
 export default function CulineAIDetail() {
   return (
-      <div className="case-study-content">
+    <div className="case-study-content">
+      <ProjectIntro
+        name="CulinAI"
+        summary="An AI-powered site that generates recipes from a photo of your fridge or food items."
+        role="PM and AI Engineer"
+        context="Tech@NYU · TechTrek"
+        links={[{ label: 'GitHub', href: 'https://github.com/leiassyun/CulinAI' }]}
+      />
 
-        {/* Overview */}
-        <ProjectIntro name="CulinAI" summary={OVERVIEW.summary} role={OVERVIEW.role} context={OVERVIEW.event} links={[{ label: "GitHub", href: OVERVIEW.links.github }]} />
+      <WorkSection id="problem" num="01" title="The Problem" lede="Most people already have food at home. They just don’t know how to turn it into a meal.">
+        <WorkProse>
+          <p>“What should I eat today?” isn’t a lack of options. It’s a <B>mismatch between what people have and what recipes expect</B>. Ingredients sit unused because recipes assume missing items, people default to the same meals or order out, and planning a meal feels harder than cooking it.</p>
+          <p>CulinAI flips that: <Hi color="blue">cook with what you already have</Hi>, not what a recipe expects. It generates recipes from available ingredients and <B>adapts to constraints</B> instead of asking for substitutions.</p>
+        </WorkProse>
+      </WorkSection>
 
-        <div className="h-px bg-black/5 mb-16" />
+      <WorkSection id="how-it-works" num="02" title="How It Works" lede="Photo in, recipe out.">
+        <WorkProse>
+          <p>The user uploads a photo of their fridge or ingredients. LLaVA extracts the ingredients directly from the image in <Hi color="blue">one multimodal pass</Hi>, prompt-tuned outputs turn them into a recipe, and SDXL-Turbo generates a matching food image.</p>
+          <p>Users can <B>save and organize</B> the recipes they like.</p>
+        </WorkProse>
+        <WorkFigure num="02" src="/images/culinai-upload.webp" alt="CulinAI upload interface" caption="Upload interface" />
+        <WorkTools tools={['LLaVA', 'SDXL-Turbo', 'Replicate', 'JavaScript']} />
+      </WorkSection>
 
-        {/* Context */}
-        <Reveal className="mb-20 max-sm:mb-14" id="context" outline="Context">
-          <div className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3">
-            Context
-          </div>
-          <h2 className="text-[26px] max-sm:text-[22px] font-bold text-[#111] tracking-tight leading-[1.2] mb-10">
-            Most people already have food at home. They just don't know how to turn it into a meal.
-          </h2>
-          <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-5 max-sm:gap-4">
-            <div className="bg-black/[0.03] rounded-2xl p-7 max-sm:p-6">
-              <h3 className="text-[18px] font-semibold text-[#111] tracking-tight mb-3">
-                The Problem
-              </h3>
-              <p className="text-[15px] font-normal text-[#444] leading-[1.65] mb-5">
-                "What should I eat today?" isn't a lack of options. It's a mismatch between what people have and what recipes expect.
-              </p>
-              <ul className="space-y-2 text-[14px] text-[#666] leading-[1.6]">
-                <li>• Ingredients sit unused because recipes assume missing items</li>
-                <li>• People default to the same meals or order out</li>
-                <li>• Planning meals feels harder than cooking them</li>
-              </ul>
-            </div>
-            <div className="bg-black/[0.03] rounded-2xl p-7 max-sm:p-6">
-              <h3 className="text-[18px] font-semibold text-[#111] tracking-tight mb-3">
-                Why CulinAI
-              </h3>
-              <p className="text-[15px] font-normal text-[#444] leading-[1.65] mb-5">
-                Cook with what you already have, not what a recipe expects.
-              </p>
-              <ul className="space-y-2 text-[14px] text-[#666] leading-[1.6]">
-                <li>• Generate recipes from available ingredients</li>
-                <li>• Adapt to constraints instead of requiring substitutions</li>
-                <li>• Turn "random ingredients" into structured meals</li>
-              </ul>
-            </div>
-          </div>
-        </Reveal>
-
-        <div className="h-px bg-black/5 mb-16" />
-
-        {/* Pipeline */}
-        <Reveal className="mb-20 max-sm:mb-14" id="pipeline" outline="How It Works">
-          <div className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3">
-            How It Works
-          </div>
-          <h2 className="text-[26px] max-sm:text-[22px] font-bold text-[#111] tracking-tight leading-[1.2] mb-10">
-            Photo in, recipe out.
-          </h2>
-          <div className="section-with-media">
-<div className="flex-1">
-              <div className="flex flex-col gap-5">
-                {FLOW_STEPS.map((step) => (
-                  <div key={step.label}>
-                    <div className="text-[16px] font-semibold text-[#111] tracking-tight mb-1.5">{step.label}</div>
-                    <div className="text-[14px] text-[#444] leading-[1.65]">{step.text}</div>
-                  </div>
-                ))}
-              </div>
-              <div className="flex flex-wrap gap-2 mt-7">
-                <ToolPill>LLaVA</ToolPill>
-                <ToolPill>SDXL-Turbo</ToolPill>
-                <ToolPill>Replicate</ToolPill>
-                <ToolPill>JavaScript</ToolPill>
-              </div>
-            </div>
-<div className="section-media">
-              <div className="w-full rounded-2xl overflow-hidden border border-black/5">
-                <img src="/images/culinai-upload.webp" alt="CulinAI upload interface" loading="lazy" decoding="async" className="w-full h-auto block" />
-              </div>
-            </div>
-</div>
-        </Reveal>
-
-        <div className="h-px bg-black/5 mb-16" />
-
-        {/* Key Decisions */}
-        <Reveal className="mb-16" id="decisions" outline="Key Decisions">
-          <div className="text-[12px] font-semibold text-[#999] uppercase tracking-[0.14em] mb-3">
-            Key Decisions
-          </div>
-          <h2 className="text-[26px] max-sm:text-[22px] font-bold text-[#111] tracking-tight leading-[1.2] mb-10">
-            Ship fast, stay focused.
-          </h2>
-          <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-5">
-            {DECISIONS.map((d) => (
-              <div key={d.title} className="bg-black/[0.03] rounded-2xl p-7 max-sm:p-6 flex flex-col">
-                <h3 className="text-[18px] font-semibold text-[#111] tracking-tight mb-3">{d.title}</h3>
-                <p className="text-[15px] font-normal text-[#444] leading-[1.65] mb-5 flex-1">{d.description}</p>
-                <div className="text-[11px] font-semibold text-[#999] uppercase tracking-[0.14em]">
-                  {d.role}
-                </div>
-              </div>
-            ))}
-          </div>
-        </Reveal>
-      </div>
+      <WorkSection id="decisions" num="03" title="Key Decisions" lede="Ship fast, stay focused.">
+        <WorkProse>
+          <p><B>A multimodal model.</B> LLaVA handles vision and language in a single pass instead of a separate vision model plus an LLM. That <Hi color="yellow">reduced pipeline complexity and enabled real-time responses</Hi>.</p>
+          <p><B>Hosted inference.</B> Running models on Replicate traded infra control for <B>iteration speed</B>, which mattered more during a solo build.</p>
+        </WorkProse>
+      </WorkSection>
+    </div>
   );
 }

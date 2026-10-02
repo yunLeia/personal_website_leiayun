@@ -131,20 +131,8 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 .case-study-content [data-outline] { scroll-margin-top: 48px; }
 .case-study-content h1 { font-family: 'Geist', sans-serif; font-size: 32px; line-height: 1.18; font-weight: 600; letter-spacing: -.03em; color: var(--ink); }
 .case-study-content h2 { font-family: 'Geist', sans-serif; font-size: 18px; line-height: 1.35; letter-spacing: -.02em; font-weight: 600; color: var(--ink); }
-.case-study-content h2.uppercase { font-family: 'Geist Mono', monospace; font-size: 12px; letter-spacing: .08em; line-height: 18px; font-weight: 400; color: var(--muted); display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
-.case-study-content h2.uppercase::before { content: ''; width: 9px; height: 18px; border: .5px solid #aaa79e; background: repeating-linear-gradient(-45deg,#aaa79e80 0 1px,transparent 1px 3.5px); }
 .case-study-content h3 { font-size: 16px; line-height: 1.45; font-weight: 600; letter-spacing: -.01em; }
 .case-study-content p { color: var(--copy); font-size: 14px; font-weight: 400; line-height: 1.72; }
-.case-study-content [style*="Lora"] { font-family: 'Geist', sans-serif !important; letter-spacing: -.025em; }
-.case-study-content .rounded-2xl { border-radius: 4px; }
-.case-study-content .bg-black\/\[0\.03\] { background: var(--hover-bg); border: .5px solid var(--rule); border-radius: 1px; box-shadow: none; }
-.case-study-content .bg-\[\#F0F3F7\] { background: var(--hover-bg); }
-.case-study-content .grid-cols-4 { grid-template-columns: repeat(2,minmax(0,1fr)); }
-.case-study-content .grid-cols-3 { grid-template-columns: 1fr; }
-.case-study-content .md\:flex-row, .case-study-content .md\:flex-row-reverse { flex-direction: column; align-items: stretch; gap: 24px; }
-.case-study-content .space-y-24 > :not([hidden]) ~ :not([hidden]) { margin-top: 64px; }
-.case-study-content .text-\[11px\] { font-size: 12px; }
-.case-study-content .text-\[40px\], .case-study-content .sm\:text-\[52px\] { font-size: 36px; }
 .case-study-content [data-outline]:focus { outline: none; }
 .case-cover { max-width: 640px; margin: 0 auto 40px; padding: 12px 12px 8px; border: .5px solid var(--rule); background: #fffefb; box-shadow: none; }
 .case-cover > img { display: block; width: 100%; aspect-ratio: 16/9; height: auto; object-fit: cover; }
@@ -199,9 +187,6 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 .case-study-content > [data-outline="Overview"] > .flex { border-block: .5px solid var(--rule); padding-block: 16px; margin-bottom: 24px; }
 .case-study-content > [data-outline="Overview"] > .flex > div { font-size: 13px; line-height: 1.6; color: var(--muted); }
 .case-study-content .mb-20, .case-study-content .mb-16 { margin-bottom: 48px; }
-.case-study-content .text-\[11px\], .case-study-content .text-\[12px\] { font-family: 'Geist Mono', monospace; font-weight: 400; }
-.case-study-content p[style*="Lora"] { font-size: 22px; line-height: 1.45; font-weight: 400; }
-.case-study-content p[style*="Lora"].italic { font-size: 15px; }
 
 /* The company website and case study are separate, non-nested links. */
 .experience-row-link { position: absolute; inset: 0; z-index: 1; cursor: pointer; border-radius: 2px; }
@@ -225,16 +210,6 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
   .portfolio-project-row:hover .project-icon-frame, .experience-entry:hover .experience-open-indicator { transform: none; }
 }
 
-/* Neutral paper and inset gray sampled from the supplied reference. */
-.case-study-content .bg-black\/\[0\.03\].p-7, .case-study-content .bg-black\/\[0\.03\].px-6 { padding: 20px; }
-.section-with-media { display: flex; flex-direction: column; align-items: stretch; gap: 24px; }
-.section-media { width: 100%; max-width: 600px; margin-inline: auto; }
-.section-media > div { aspect-ratio: auto; background-color: var(--hover-bg); border-color: var(--rule); border-radius: 1px; }
-.section-media img { display: block; width: 100%; height: auto; max-height: 420px; object-fit: contain; }
-@media (max-width: 600px) {
-  .section-with-media { gap: 20px; }
-  .section-media img { max-height: 340px; }
-}
 
 /* Original paper background; only interactive and inset surfaces use gray. */
 .intro-aside .resume-link, .intro-aside .linkedin-link { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; width: 156px; padding: 10px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; line-height: 20px; text-decoration: none; transition: background 150ms, border-color 150ms, transform 180ms var(--swift); }
@@ -299,3 +274,42 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 .medal-caption .medal-distance { display: block; margin-bottom: 8px; font-size: 10px; letter-spacing: .04em; }
 
 @media (max-width: 600px) { .portfolio-section { margin-top: 80px; } }
+
+/* Experience pages: one numbered section per project, Problem → What I did → Impact. */
+.case-study-content .work-item { margin-bottom: 88px; }
+.case-study-content .work-title { display: flex; align-items: center; gap: 14px; margin: 0 0 14px; font-size: 24px; line-height: 1.25; font-weight: 600; letter-spacing: -.035em; }
+.case-study-content .work-title .section-tag { flex-shrink: 0; align-self: center; }
+.case-study-content .work-lede { max-width: 60ch; margin: 0 0 28px; font-size: 16px; line-height: 1.6; color: var(--ink); }
+.work-figure { margin: 28px 0 0; }
+.work-figure img { display: block; width: 100%; height: auto; border: .5px solid var(--rule); border-radius: 4px; background: var(--hover-bg); box-shadow: 0 1px 2px #201f1c0a, 0 12px 28px -18px #201f1c40; }
+.work-figure figcaption { margin-top: 12px; color: var(--muted); font: 12px/18px 'Geist Mono', monospace; letter-spacing: .04em; text-transform: uppercase; }
+.work-block { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 24px; padding: 18px 0; border-top: .5px solid var(--rule); }
+.case-study-content .work-label { margin: 0; padding-top: 3px; color: var(--muted); font: 400 11px/18px 'Geist Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
+.case-study-content .work-body p { margin: 0; }
+.work-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.work-list li { position: relative; padding-left: 16px; color: var(--copy); font-size: 14px; line-height: 1.7; }
+.work-list li::before { content: ''; position: absolute; left: 0; top: .85em; width: 6px; height: 1px; background: var(--muted); }
+.work-list strong, .work-body b { color: var(--ink); font-weight: 600; }
+.work-metrics { display: grid; grid-template-columns: repeat(auto-fill, minmax(124px, 1fr)); gap: 8px; margin: 0; }
+.work-metrics > div { display: flex; flex-direction: column; padding: 12px 14px; border: .5px solid var(--rule); border-radius: 2px; }
+.work-metrics dd { margin: 0; color: var(--ink); font-size: 22px; line-height: 1.15; font-weight: 600; letter-spacing: -.035em; }
+.work-metrics dt { margin-top: 6px; color: var(--muted); font: 10.5px/1.45 'Geist Mono', monospace; letter-spacing: .05em; text-transform: uppercase; }
+.case-study-content .work-takeaway { margin-top: 14px; color: var(--copy); }
+.work-tools { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 18px; border-top: .5px solid var(--rule); }
+.work-figure + .work-tools { padding-top: 16px; border-top: 0; }
+.work-block + .work-figure { margin-top: 8px; }
+@media (max-width: 640px) {
+  .case-study-content .work-title { font-size: 20px; gap: 10px; }
+  .work-block { grid-template-columns: 1fr; gap: 8px; }
+  .case-study-content .work-item { margin-bottom: 64px; }
+}
+.case-study-content .project-intro + .work-item { margin-top: 72px; }
+.project-intro .project-facts:has(> div:nth-child(3)) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 640px) {
+  .project-intro .project-facts:has(> div:nth-child(3)) { grid-template-columns: 1fr; }
+  .case-study-content .project-intro + .work-item { margin-top: 48px; }
+}
+.work-prose { display: grid; gap: 16px; padding-top: 22px; border-top: .5px solid var(--rule); }
+.case-study-content .work-prose p { margin: 0; max-width: 64ch; font-size: 15px; line-height: 1.75; }
+.work-prose .work-list li { font-size: 15px; }
+.work-prose b, .work-prose strong { color: var(--ink); font-weight: 600; }
