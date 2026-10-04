@@ -3,9 +3,9 @@ import { PROJECTS } from '../data';
 import { SectionHeader } from './HomeUI';
 
 const SUMMARIES: Record<string, string> = {
-  Cabine: 'A Chrome extension that brings your wardrobe beside an online store, so you can see what you’d wear a new piece with before buying it.',
-  myIndigo: 'Real-time sound awareness for deaf and hard-of-hearing people, with actionable alerts on their watch.',
-  CulinAI: 'Turn a photo of your ingredients into a recipe, and put what’s already in your fridge to use.',
+  Cabine: 'An AI-powered Chrome extension that brings your closet into online shopping',
+  myIndigo: 'A real-time sound awareness app that sends actionable alerts straight to your watch',
+  CulinAI: 'An AI recipe app that turns what’s in your fridge into something you can cook',
 };
 
 export default function ProjectsSection() {

@@ -18,9 +18,9 @@ export default function CabineDetail() {
 
       <WorkSection id="problem" num="01" title="The Problem" lede="Stores sell pieces. You wear outfits.">
         <WorkProse>
-          <p>Online stores show an item in a carefully styled setting. They don’t show how it works with <B>the clothes you already own</B>, so shoppers decide on the piece and find out later whether it works as an outfit.</p>
-          <p>Cabine brings that missing context into the shopping moment and answers one question: <Hi color="blue">What would I wear this with?</Hi></p>
-          <p>The belief behind it: <B>a good purchase should make your wardrobe more useful, not just bigger.</B></p>
+          <p>When I shop online, I often love each item on its own. I get excited, order it, and look forward to it arriving. But once I actually have it, I realize <B>I’m not sure what to wear it with</B>. I end up wearing it less than I expected, or even buying another piece just to make the first purchase work.</p>
+          <p>That’s when I noticed the mismatch. When we shop for clothes online, we only ever see <B>one piece at a time</B>. But what we actually wear are <B>outfits</B>, pairing each piece with <B>the clothes we already have in the closet</B>.</p>
+          <p>Cabine brings your own wardrobe into that moment of purchase and helps answer one question: <Hi color="blue">What would I actually wear this with?</Hi></p>
         </WorkProse>
       </WorkSection>
 
@@ -68,13 +68,14 @@ export default function CabineDetail() {
 
       <WorkSection id="whats-next" num="05" title="What’s Next" lede="Make every clothing purchase more wearable.">
         <WorkProse>
-          <p>The question I need to answer: <B>does seeing a new piece with my own clothes change or confirm my purchase decision?</B> The signal I care about most is <Hi color="blue">pairing rate</Hi>, how often a captured piece gets paired with something the user already owns.</p>
-          <p>Before launch, I still need to verify:</p>
+          <p>The next thing I want to learn isn’t technical. It’s <B>whether Cabine actually changes how people shop</B>: does seeing a new piece with your own clothes change or confirm your purchase decision? The signal I care about most is <Hi color="blue">pairing rate</Hi>, how often a captured store item gets paired with something the user already owns.</p>
+          <p>Before launch, I still need to validate:</p>
           <WorkList items={[
-            <><B>Store coverage.</B> Capture depends on accessible product images, so compatibility across stores isn’t verified yet.</>,
-            <><B>Render quality</B> across many garment types.</>,
-            <><B>Distribution.</B> The Chrome Web Store listing isn’t live yet.</>,
+            <><B>Store coverage.</B> Capture depends on accessible product images, so compatibility across stores still needs broader testing.</>,
+            <><B>Render quality.</B> I need to test more garment types and combinations outside my own wardrobe.</>,
+            <><B>Distribution and GTM.</B> I’ve built products before, but I haven’t taken one of my own from idea through launch and distribution. That’s the part I’m most excited to learn next: getting Cabine in front of real users, seeing where my assumptions are wrong, and <Hi color="yellow">iterating from actual behavior instead of my own intuition</Hi>.</>,
           ]} />
+          <p>Later, if the behavior is there, the next problems become API cost optimization and monetization. But first I want to prove the product is useful enough for people to come back.</p>
         </WorkProse>
       </WorkSection>
     </div>

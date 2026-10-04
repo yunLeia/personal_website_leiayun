@@ -62,7 +62,7 @@ export default function ParachuteDetail() {
       <ProjectIntro
         name={parachute.company}
         eyebrow="Experience"
-        summary="Parachute is an AI-powered career coaching startup. I built its foundational AI infrastructure, resume classification and a RAG pipeline, starting from zero."
+        summary="Parachute is an AI-powered career coaching startup. I built its foundational AI infrastructure, resume classification and a RAG pipeline."
         facts={[{ label: 'Role', value: parachute.role }, { label: 'Period', value: parachute.date }]}
         links={[{ label: 'Company site', href: 'https://www.letsparachute.com' }]}
       />
