@@ -18,7 +18,8 @@ export default function Outline() {
       frame = 0;
       let current = elements[0]?.id || '';
       for (const element of elements) {
-        if (element.getBoundingClientRect().top <= 160) current = element.id;
+        const rect = element.getBoundingClientRect();
+        if (rect.height > 0 && rect.top <= 160) current = element.id;
       }
       if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) current = elements.at(-1)?.id || current;
       setActiveId(current);
@@ -53,16 +54,25 @@ export default function Outline() {
         <button type="button" className="outline-mobile-toggle" aria-expanded={mobileOpen} aria-controls="article-outline-links" onClick={() => setMobileOpen(!mobileOpen)}>On this page <span aria-hidden="true">{mobileOpen ? '−' : '+'}</span></button>
       </div>
       <nav id="article-outline-links" aria-label="Page outline">
-        <ul>{items.map((item) => <li key={item.id}>
+        <ul>{items.map((item, index) => <li key={item.id} className={index === 0 ? 'outline-title' : undefined}>
           <a href={`#${item.id}`} aria-current={activeId === item.id ? 'location' : undefined} onClick={(event) => {
             event.preventDefault();
-            const element = document.getElementById(item.id);
-            if (!element) return;
-            element.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-            element.setAttribute('tabindex', '-1');
-            element.focus({ preventScroll: true });
-            setActiveId(item.id);
+            const handled = !window.dispatchEvent(new CustomEvent('open-work-section', { detail: item.id, cancelable: true }));
+            if (handled) {
+              setActiveId(item.id);
+              setMobileOpen(false);
+              return;
+            }
+            const go = () => {
+              const element = document.getElementById(item.id);
+              if (!element) return;
+              element.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+              element.setAttribute('tabindex', '-1');
+              element.focus({ preventScroll: true });
+              setActiveId(item.id);
+            };
             setMobileOpen(false);
+            requestAnimationFrame(() => requestAnimationFrame(go));
           }}><span className="outline-tick" aria-hidden="true"/><span>{item.label}</span></a>
         </li>)}</ul>
       </nav>

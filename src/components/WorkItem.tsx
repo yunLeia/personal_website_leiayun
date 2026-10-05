@@ -1,4 +1,6 @@
-import type { ReactNode } from 'react';
+import { isValidElement, useEffect, useRef, useState, type ReactNode } from 'react';
+import { createPortal } from 'react-dom';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 import { Reveal, ToolPill } from './shared';
 
 export function WorkSection({ id, num, title, lede, children }: { id: string; num: string; title: string; lede?: ReactNode; children: ReactNode }) {
@@ -44,13 +46,65 @@ export function WorkMetrics({ metrics }: { metrics: { value: string; label: stri
   );
 }
 
-export function WorkFigure({ num, src, alt, caption }: { num: string; src: string; alt: string; caption: string }) {
-  return (
-    <figure className="work-figure">
-      <img src={src} alt={alt} loading="lazy" decoding="async" />
-      <figcaption>Fig. {num} — {caption}</figcaption>
+const ExpandIcon = () => (
+  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg>
+);
+
+function Lightbox({ num, src, alt, caption, onClose }: { num: string; src: string; alt: string; caption: string; onClose: () => void }) {
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onCloseRef.current(); };
+    document.addEventListener('keydown', onKey);
+    const overflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    closeRef.current?.focus();
+    return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = overflow; };
+  }, []);
+  return createPortal(
+    <div className="work-lightbox" role="dialog" aria-modal="true" aria-label={`Figure ${num}: ${caption}`} onClick={onClose}>
+      <figure onClick={(e) => e.stopPropagation()}>
+        <img src={src} alt={alt} />
+        <figcaption>Fig. {num} — {caption}</figcaption>
+      </figure>
+      <button ref={closeRef} type="button" className="work-lightbox-close" onClick={onClose} aria-label="Close">Esc ×</button>
+    </div>,
+    document.body,
+  );
+}
+
+type Fig = { src: string; alt: string; caption: string };
+
+export function WorkFigures({ num, figures }: { num: string; figures: Fig[] }) {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const { ref, visible } = useScrollReveal();
+  const trigger = useRef<HTMLElement | null>(null);
+  const close = () => { setOpenIndex(null); trigger.current?.focus(); };
+  const labelFor = (i: number) => (figures.length > 1 ? `${num}${String.fromCharCode(65 + i)}` : num);
+  const card = (fig: Fig, i: number, variant: string) => (
+    <figure className={`work-figure ${variant}`} key={fig.src}>
+      <button type="button" className="work-figure-btn" onClick={(e) => { trigger.current = e.currentTarget; setOpenIndex(i); }} aria-label={`Expand figure ${labelFor(i)}: ${fig.caption}`}>
+        <img src={fig.src} alt={fig.alt} loading="lazy" decoding="async" ref={(el) => { if (el?.complete) el.classList.add('is-loaded'); }} onLoad={(e) => e.currentTarget.classList.add('is-loaded')} />
+        <span className="work-figure-badge"><ExpandIcon />Expand</span>
+      </button>
+      <figcaption>Fig. {labelFor(i)} — {fig.caption}</figcaption>
     </figure>
   );
+  const open = openIndex === null ? null : figures[openIndex];
+  return (
+    <>
+      <div className="work-figure-group">{figures.map((fig, i) => card(fig, i, 'work-figure--inline'))}</div>
+      <aside ref={ref} className={`work-aside${visible ? ' is-visible' : ''}`}>
+        <div className="work-aside-sticky">{figures.map((fig, i) => card(fig, i, 'work-figure--side'))}</div>
+      </aside>
+      {open && openIndex !== null && <Lightbox num={labelFor(openIndex)} src={open.src} alt={open.alt} caption={open.caption} onClose={close} />}
+    </>
+  );
+}
+
+export function WorkFigure({ num, ...fig }: { num: string } & Fig) {
+  return <WorkFigures num={num} figures={[fig]} />;
 }
 
 export function WorkTools({ tools }: { tools: string[] }) {
@@ -62,28 +116,29 @@ export interface WorkItemData {
   num: string;
   title: string;
   lede: ReactNode;
-  figure?: { src: string; alt: string; caption: string };
+  figure?: Fig | Fig[];
   problem: ReactNode | ReactNode[];
   bet?: ReactNode;
-  did: ReactNode[];
+  did: ReactNode[] | ReactNode;
   metrics?: { value: string; label: string }[];
   takeaway?: ReactNode;
+  impactLabel?: string;
   tools?: string[];
 }
 
-export default function WorkItem({ id, num, title, lede, figure, problem, bet, did, metrics, takeaway, tools }: WorkItemData) {
+export default function WorkItem({ id, num, title, lede, figure, problem, bet, did, metrics, takeaway, impactLabel, tools }: WorkItemData) {
   return (
     <WorkSection id={id} num={num} title={title} lede={lede}>
-      <WorkBlock label="The problem">{Array.isArray(problem) ? <WorkList items={problem} /> : <p>{problem}</p>}</WorkBlock>
+      <WorkBlock label="The problem">{Array.isArray(problem) ? <WorkList items={problem} /> : isValidElement(problem) && problem.type === 'div' ? problem : <p>{problem}</p>}</WorkBlock>
       {bet && <WorkBlock label="My bet"><p>{bet}</p></WorkBlock>}
-      <WorkBlock label="What I did"><WorkList items={did} /></WorkBlock>
-      {metrics && (
-        <WorkBlock label="Impact">
-          <WorkMetrics metrics={metrics} />
-          {takeaway && <p className="work-takeaway">{takeaway}</p>}
+      <WorkBlock label="What I did">{Array.isArray(did) ? <WorkList items={did} /> : did}</WorkBlock>
+      {(takeaway || metrics) && (
+        <WorkBlock label={impactLabel ?? 'Impact'}>
+          {takeaway && (isValidElement(takeaway) && takeaway.type === 'div' ? takeaway : <p className="work-takeaway">{takeaway}</p>)}
+          {metrics && <WorkMetrics metrics={metrics} />}
         </WorkBlock>
       )}
-      {figure && <WorkFigure num={num} {...figure} />}
+      {figure && <WorkFigures num={num} figures={Array.isArray(figure) ? figure : [figure]} />}
       {tools && <WorkTools tools={tools} />}
     </WorkSection>
   );

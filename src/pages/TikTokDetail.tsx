@@ -2,82 +2,96 @@ import { EXPERIENCE } from '../data';
 import ProjectIntro from '../components/ProjectIntro';
 import WorkItem, { type WorkItemData } from '../components/WorkItem';
 import { B, Hi } from '../components/InlineMarks';
+import WorkQuestions from '../components/WorkQuestions';
 
 const tiktok = EXPERIENCE.find((experience) => experience.company === 'TikTok')!;
+
+const QUESTIONS = [
+  <>What’s the <Hi>root problem</Hi> underneath the symptom?</>,
+  <>How can I turn a prompt into a <Hi>reliable system</Hi>?</>,
+  <>How do I communicate about AI with <Hi>nontechnical people</Hi>?</>,
+  <>What makes <Hi>automation worth</Hi> more than just another alert?</>,
+];
 
 const WORK: WorkItemData[] = [
   {
     id: 'diagnostic-tool',
     num: '01',
-    title: 'Marketing Diagnostic Tool',
-    lede: 'An hour of manual queries, turned into a one-minute account health report.',
-    problem: [
-      <>To check an account’s health, Sales ran <B>15+ queries by hand</B> across separate datasets.</>,
-      <>Each report took <B>about an hour</B>, and Apps, Gaming, and Leads accounts each need different checks.</>,
-    ],
-    did: [
-      <>Built an end-to-end diagnostic tool: enter an ad lever (Apps, Gaming, or Leads) and an account ID, get a full hygiene report.</>,
-      <>Integrated <B>8+ datasets</B> through Python/SQL ETL pipelines, covering revenue, budget utilization, signal quality, attribution, and creative volume.</>,
-      <>Matched each lever to its own report profile, so every account type gets only the sections that apply to it.</>,
-      <>Generated a doc with charts, a summary table, and <B>LLM-written suggested actions</B>, sent to the requester automatically.</>,
-      <>Extended it into scheduled automations: a <B>Monday workflow</B> that finds newly spending apps and accounts and routes their reports to each department’s group chat, and a <B>weekly revenue monitor</B> that sends role-specific alerts to client partners and CSMs.</>,
-    ],
+    title: 'Account Hygiene Diagnostic Tool',
+    lede: 'An hour of manual account research, turned into a one-minute account health report.',
+    problem: (
+      <div className="work-stack">
+        <p>Account managers spent about an hour per account pulling data from eight scattered sources, so much of their book went unreviewed.</p>
+        <p>By shadowing teammates 1:1, I found a deeper issue: <Hi>there was no shared framework for what a healthy account looked like.</Hi> Different teams — even senior and junior CSMs — checked different signals.</p>
+      </div>
+    ),
+    did: (
+      <>
+        <p>I worked with C&amp;S team leads, Industry Ops, and Data Analysis to define a shared diagnostic framework for each vertical, covering metrics like budget utilization, CPA against target, and product adoption. I then built a <B>Python and SQL service</B> that integrates all eight sources and generates a complete account health report from a single client ID.</p>
+        <p>In V2, I added an <B>LLM decision-support layer</B> that detects meaningful changes, explains what matters, and turns each diagnosis into a specific next action.</p>
+      </>
+    ),
     metrics: [
-      { value: '1 min', label: 'Per report, from 60 min' },
-      { value: '15+', label: 'Manual queries replaced' },
-      { value: '8+', label: 'Datasets integrated' },
-      { value: 'Daily', label: 'Team use' },
+      { value: '< 1 min', label: 'Per report, from ~60 min' },
+      { value: '170+', label: 'Runs per day' },
+      { value: '8', label: 'Data sources integrated' },
     ],
-    takeaway: <>Reporting went <Hi color="blue">from 60 minutes to 1</Hi>, which made daily use by the team possible.</>,
+    takeaway: (
+      <div className="work-stack">
+        <p>Report preparation dropped from ~60 minutes to under 1 minute, and usage grew to 170+ runs per day. Teammates began <B>building their own schedulers</B> on top of the tool to cover their full account books.</p>
+        <p>CSMs used its recommendations in client conversations and brought its summary tables directly into client meetings. The diagnostic framework later expanded from App to Gaming and Lead Gen, covering every vertical on the Contents &amp; Services team.</p>
+      </div>
+    ),
     figure: {
       src: '/images/tiktok-diagnostic-tool.webp',
       alt: 'Internal automation workspace listing the Hygiene Report Generator alongside other team automations',
       caption: 'The report generator and the automations built on it',
     },
-    tools: ['Python', 'SQL', 'ETL Pipelines', 'LLM Analysis', 'Automation'],
   },
   {
     id: 'creative-audit',
     num: '02',
-    title: 'Ad Creative Audit Workflow',
-    lede: 'Creative recommendations for every gaming account, without anyone watching thousands of videos.',
-    problem: [
-      <>Gaming sales and account managers needed <B>consistent, advisory creative recommendations</B> for their clients.</>,
-      <>Enterprise accounts run <B>3,000+ ad creatives</B> each, far too many to review video by video.</>,
-    ],
-    did: [
-      <>Engineered a multi-stage agentic workflow with <B>MCP tool calls, prompt chaining, structured JSON outputs, and retry logic</B>.</>,
-      <>Step one labels every creative against <B>8 best-practice criteria</B>, such as a brand logo in the first 3 seconds or a CTA with both text and sound, plus concept clusters that emerge from the set.</>,
-      <><Hi color="yellow">Audited against validated best practices instead of re-running statistical analysis</Hi>, since each criterion is already tied to a measured performance lift.</>,
-      <>Step two turns the labels into a <B>Creative Growth Report</B>: what’s winning, what risk is emerging, and what to produce next.</>,
-      <>Improved acceptance rate through <B>human-in-the-loop review</B>. Using it needs no video review or coding: attach a CSV, run the prompt, get the report.</>,
-    ],
+    title: 'Creative Audit Agent Workflow',
+    lede: 'Thousands of ad creatives per account, audited by a staged agent workflow instead of by hand.',
+    problem: <>A single enterprise account could hold 3,000+ ad creatives, and reviewing each one for concept, format, hook, CTA, and best practice adherence by hand didn’t scale. Underneath that, there was no agreed rubric for what a strong creative looked like in the Korean market, so even a fast review had nothing consistent to measure against.</>,
+    did: (
+      <p>I secured data access from APAC and Industry Ops for market benchmarks and best practice examples, then aligned with CSMs and CPs on what applied to Korea and turned it into a review rubric. I built a workflow on <B>internal AI agents and a browser MCP tool</B> that opens each creative, <Hi>labels it against the rubric as structured JSON</Hi>, and aggregates the labels into account-level patterns. A final stage, with <B>human review</B>, turns those findings into recommendations in TikTok’s voice that Sales can bring straight to clients.</p>
+    ),
+    takeaway: <>The workflow audited 3,000+ creatives per account and produced reports for 20+ enterprise clients across 3 Sales teams. After a prototype demo and rounds of feedback with Sales, those reports were delivered to clients and <B>used in their Quarterly Business Reviews</B>.</>,
     metrics: [
-      { value: '3,000+', label: 'Creatives per account' },
+      { value: '3,000+', label: 'Creatives audited per account' },
       { value: '20+', label: 'Enterprise clients' },
-      { value: '8', label: 'Best-practice criteria' },
+      { value: '3', label: 'Sales teams' },
     ],
     tools: ['Agentic Workflow', 'MCP', 'Prompt Chaining', 'Structured Outputs', 'Ad Analytics'],
   },
   {
     id: 'ai-enablement',
     num: '03',
-    title: 'AI Playbook & Workshops',
-    lede: 'Helping client partners spend less time on manual work and more on clients.',
-    problem: 'Client partners spent much of their week on manual reporting and analysis, while new internal AI tools like Aime, iDA, and Magibook weren’t yet part of how the team worked.',
-    did: [
-      <>Co-authored an <B>AI playbook</B> documenting prompt workflows, tool integrations, and prototype demos.</>,
-      <>Led the <B>AI Essentials</B> workshop series, from Aime to iDA and Magibook automation, for <B>100+ employees</B>.</>,
-      <>Shared the playbook cross-functionally with <B>TikTok Japan</B>.</>,
-      <>The sessions <Hi color="blue">ranked #1 and #2</Hi> among the year’s internal Masterclasses.</>,
-    ],
+    title: 'AI Implementation Guide & Workshops',
+    lede: 'Instead of building every automation myself, helping non-technical teams build their own.',
+    problem: <>ByteDance had 100+ internal AI tools, updated so quickly that no one had organized them, so most people didn’t know what existed or which tool fit which situation. Underneath that, <Hi>people new to AI couldn’t tell which parts of their own work could be automated</Hi>, so even good tools went unused.</>,
+    did: (
+      <p>With a collaborator from TikTok Japan, I wrote an internal AI implementation guide built around real workflows I had shipped. I <B>organized it by problem rather than by feature</B>, in the language of non-technical GBS teams, with ready-to-use prompts, demo workflows, and <B>a method for spotting which tasks are worth automating</B>. I then ran sessions and workshops for 100+ employees.</p>
+    ),
+    takeaway: <>Two of my sessions ranked #1 and #2 in that year’s KR Masterclass series. The signal I cared about more came afterward: people from teams I had never worked with messaged me asking not “Can you build this for us?” but <B>“How can I build something like this myself?”</B></>,
     metrics: [
-      { value: 'Top 2', label: 'Masterclass ranking, org-wide' },
-      { value: '170+', label: 'Daily adoption' },
       { value: '100+', label: 'Employees trained' },
+      { value: '#1, #2', label: 'KR Masterclass sessions' },
     ],
-    takeaway: <>“As a CP, we can spend more time focusing on clients rather than doing manual work.” <span className="text-[#888]">— Workshop participant</span></>,
     tools: ['Technical Enablement', 'Workshop Facilitation', 'Prompt Workflows'],
+  },
+  {
+    id: 'weekly-alerts',
+    num: '04',
+    title: 'Weekly Key Change Alerts',
+    lede: 'From alerts people ignored to alerts that point to the cause.',
+    problem: <>Each CSM managed 70+ accounts, so attention went to the biggest advertisers and smaller shifts that signaled revenue opportunities or coming drops went unnoticed. I focused on <B>the accounts in between</B>: the largest were already checked daily, and the smallest weren’t worth the time.</>,
+    did: (
+      <p>V1 scanned a large dataset for sudden drops, growth, and meaningful metric changes, and sent them to Sales as a weekly alert. Then I saw that the alerts were read and ignored, because knowing something changed didn’t tell anyone where to look or what to do. So V2 used a <B>rule-based drill-down from client to account, campaign, and ad group</B> to pinpoint where each change came from, and went only to <B>opted-in subscribers who could act on it</B>.</p>
+    ),
+    impactLabel: 'What I learned',
+    takeaway: <>Automating detection does not automatically create value. A useful alert tells <Hi>the right person what changed, why it matters, and what to do next — and ultimately leads to business value.</Hi> The question that mattered was never how much I could detect, but whether anyone would act.</>,
   },
 ];
 
@@ -88,10 +102,10 @@ export default function TikTokDetail() {
         name={tiktok.company}
         eyebrow="Experience"
         summary={tiktok.subtitle ?? ''}
-        facts={[{ label: 'Role', value: tiktok.role }, { label: 'Period', value: tiktok.date }]}
+        facts={[{ label: 'Role', value: tiktok.role }, { label: 'Team', value: 'Global Business Solutions (GBS) · Contents & Services' }, { label: 'Period', value: tiktok.date }]}
         links={tiktok.url ? [{ label: 'Company site', href: tiktok.url }] : []}
       />
-      {WORK.map((item) => <WorkItem key={item.id} {...item} />)}
+      <WorkQuestions items={WORK.map((w, i) => ({ id: w.id, num: w.num, title: w.title, question: QUESTIONS[i], content: <WorkItem {...w} /> }))} />
     </div>
   );
 }
