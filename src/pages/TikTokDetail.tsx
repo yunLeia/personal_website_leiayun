@@ -8,7 +8,7 @@ const tiktok = EXPERIENCE.find((experience) => experience.company === 'TikTok')!
 
 const QUESTIONS = [
   <>What’s the <Hi>root problem</Hi> underneath the symptom?</>,
-  <>How can I turn a prompt into a <Hi>reliable system</Hi>?</>,
+  <>How can I turn a prompt into a <Hi>scalable system</Hi>?</>,
   <>How do I communicate about AI with <Hi>nontechnical people</Hi>?</>,
   <>What makes <Hi>automation worth</Hi> more than just another alert?</>,
 ];
@@ -53,9 +53,12 @@ const WORK: WorkItemData[] = [
     num: '02',
     title: 'Creative Audit Agent Workflow',
     lede: 'Thousands of ad creatives per account, audited by a staged agent workflow instead of by hand.',
-    problem: <>A single enterprise account could hold 3,000+ ad creatives, and reviewing each one for concept, format, hook, CTA, and best practice adherence by hand didn’t scale. Underneath that, there was no agreed rubric for what a strong creative looked like in the Korean market, so even a fast review had nothing consistent to measure against.</>,
+    problem: <>A single enterprise account could hold 3,000+ ad creatives, making manual review of concept, format, hook, CTA, and best-practice adherence impossible to scale. There was also no rubric for <B>what strong creative looked like in the Korean market, so even faster review lacked a consistent standard</B>.</>,
     did: (
-      <p>I secured data access from APAC and Industry Ops for market benchmarks and best practice examples, then aligned with CSMs and CPs on what applied to Korea and turned it into a review rubric. I built a workflow on <B>internal AI agents and a browser MCP tool</B> that opens each creative, <Hi>labels it against the rubric as structured JSON</Hi>, and aggregates the labels into account-level patterns. A final stage, with <B>human review</B>, turns those findings into recommendations in TikTok’s voice that Sales can bring straight to clients.</p>
+      <>
+        <p>I secured APAC benchmark data and best-practice examples from Industry Ops, then worked with CSMs and CPs to turn what applied to Korea into <B>a shared review rubric</B>.</p>
+        <p>A single prompt wasn’t enough for a task this complex, so I broke the process into <Hi>a staged workflow using internal AI agents and a browser MCP tool</Hi>: open each creative, evaluate it against the rubric, return structured JSON, aggregate patterns at the account level, and generate client-ready recommendations.</p>
+      </>
     ),
     takeaway: <>The workflow audited 3,000+ creatives per account and produced reports for 20+ enterprise clients across 3 Sales teams. After a prototype demo and rounds of feedback with Sales, those reports were delivered to clients and <B>used in their Quarterly Business Reviews</B>.</>,
     metrics: [
