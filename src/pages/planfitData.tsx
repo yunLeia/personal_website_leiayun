@@ -5,18 +5,18 @@ import { B, Hi } from '../components/InlineMarks';
 
 interface ThinkingStep { label: string; text: ReactNode }
 interface ExecStep { label: string; text: ReactNode }
-interface ImpactMetric { value: string; label: string }
 
 export interface PlanfitProject {
   num: string;
   slug: string;
   title: string;
+  subtitle: string;
+  goal: string;
   image?: string | string[];
-  heroTagline: [string, string];
   problemBody: ReactNode;
   thinking: ThinkingStep[];
   execution: ExecStep[];
-  impact: ImpactMetric[];
+  didBody?: ReactNode;
   impactTakeaway: ReactNode;
   tools: string[];
 }
@@ -36,50 +36,63 @@ export const PLANFIT_OVERVIEW = {
 export const PLANFIT_PROJECTS: PlanfitProject[] = [
   {
     num: '01',
-    slug: 'community-club',
-    title: 'Community Club',
-    image: ['/images/planfit-community-club-1.webp', '/images/planfit-community-club-2.webp'],
-    heroTagline: [
-      "Users don't want community.",
-      'They want a reason to come back.',
-    ],
+    slug: 'ai-stretching',
+    title: 'Stretching Recommendation',
+    subtitle: 'Recommendation logic, experiment design, and activation',
+    goal: 'Activation',
+    image: ['/images/planfit-ai-stretching-1.webp', '/images/planfit-ai-stretching-2.webp'],
     problemBody: (
       <>
-        Club feature existed: 4.1% join rate, 3.2% revisit within 3 days. VOC and 20+ user interviews pointed to the same friction: <Hi>users didn't know which club to pick, didn't see the value, and felt the social feed was one more thing to maintain</Hi>.
+        Stretching feedback looked fragmented: users said routines were too short, hard to follow, or that they wanted to add, remove, and reorder exercises. I initially thought the answer was more customization. But after digging deeper through VOC and user interviews, I found a shared root cause: <B>the routines ignored physical flow.</B> A sequence could jump from standing → sitting → standing → lying, making individually relevant stretches frustrating to follow as a routine.
       </>
     ),
-    thinking: [
-      { label: 'Observation', text: <>Users saw it. They just didn't use it. Low join and revisit rates, backed by interviews and behavioral data.</> },
-      { label: 'Diagnosis', text: <>A passive social feed gives users nothing to return for after a workout. The feature existed. The reason to care didn't.</> },
-      { label: 'Hypothesis', text: <>Users don't want community. They want <B>competition</B>. Auto-match by fitness level. Surface rankings right after workouts. Give them a reason to care about their rank.</> },
-    ],
-    execution: [
-      { label: 'Concept Shift', text: <>Social feed → competition-based system. Rewrote the product spec from scratch.</> },
-      { label: 'Challenge League', text: <>Auto-matched users by fitness level. Tested immediately: <B>122 signups vs. 27</B> for regular clubs in the same window.</> },
-      { label: 'Post-Workout Trigger', text: <>Surfaced rankings right after session completion, the highest-motivation moment.</> },
-      { label: 'Build & Ship', text: <>Defined MVP scope and PRDs, then built the leaderboard end to end: UI/UX, relational schema, APIs, and event-driven notifications, with Claude Code, SuperClaude, and Figma MCP. No eng handoff.</> },
-      { label: 'Iterate', text: <>Validated with 75+ A/B tests against DAU/MAU and guardrail metrics.</> },
-    ],
-    impact: [
-      { value: '+14%', label: 'Community engagement' },
-      { value: '340+', label: 'Clubs created' },
-      { value: '75+', label: 'A/B tests' },
-    ],
-    impactTakeaway: <>Users returned when given a clear competitive context. <B>Timing and structure drove retention</B>, not feature visibility.</>,
-    tools: ['0→1 Product', 'User Research', 'Problem Discovery', 'Figma MCP', 'Amplitude'],
+    thinking: [],
+    execution: [],
+    didBody: (
+      <p>
+        Instead of adding controls for users to fix the routine themselves, I redesigned the recommendation to make it better by default. I <B>classified stretches by posture, added a transition cost between positions</B>, and combined that with existing personalization signals like workout history, body area, and injury context. The pipeline became <Hi>candidate filtering → weighted scoring → sequence optimization</Hi>, so recommendations were both relevant to the user and natural to follow. I translated the discovery into production implementation — from user interviews and PRD to database/schema design, backend recommendation logic, React Native integration, and A/B testing.
+      </p>
+    ),
+    impactTakeaway: (
+      <div className="work-stack">
+        <p>The new recommendation <B>increased activation by 12%</B>, with more users not only starting a workout but completing the full routine.</p>
+        <p>More unexpectedly, it also <B>increased free-trial starts by 7%</B> in A/B testing. Since most trials previously came from the onboarding paywall, this suggested a new conversion path: users could decide to subscribe after experiencing the quality of the recommendation itself.</p>
+      </div>
+    ),
+    tools: ['Product Discovery', 'User Interviews', 'PRD', 'Recommendation System', 'Database & Schema Design', 'Activation Strategy', 'Weighted Scoring', 'REST APIs'],
   },
   {
     num: '02',
-    slug: 'onboarding-paywall',
-    title: 'Onboarding & Paywall',
-    image: '/images/planfit-onboarding-paywall-fig.webp',
-    heroTagline: [
-      "The bottleneck wasn't ideas.",
-      'It was how fast we could test them.',
-    ],
+    slug: 'community-club',
+    title: 'Public Clubs & Leaderboard',
+    subtitle: 'Community mechanics, engagement, and iteration',
+    goal: 'Engagement + Retention',
+    image: ['/images/planfit-community-club-1.webp', '/images/planfit-community-club-2.webp'],
     problemBody: (
       <>
-        Trial CVR sat at ~15%. Users completed onboarding but didn't convert. Funnel analysis on Amplitude revealed drop-offs weren't random: <Hi>they clustered around moments where users were asked to trust the product before it had earned that trust</Hi>. Copy wasn't localized. The paywall wasn't personalized. And every experiment required a full dev cycle to ship.
+        Planfit already had Clubs — small private groups where friends could share workouts and react to each other’s posts — but adoption remained low. Through user interviews and behavioral data, I found the core constraint: <B>the social experience depended too heavily on existing friendships.</B> Joining required inviting friends, and when one person stopped working out, the group often faded with them — limiting Clubs’ ability to support Planfit’s goal of helping users build consistent workout habits.
+      </>
+    ),
+    thinking: [],
+    execution: [],
+    didBody: (
+      <p>
+        I reframed the question from “How do we improve Clubs?” to “What kind of social motivation helps people keep working out?” Based on competitive research and a hypothesis around shared goals, progress, and light competition, I <Hi>redesigned Clubs as discoverable communities and introduced activity-based leaderboards and overtake notifications</Hi>. I <B>owned the feature end to end</B> — from product definition and UX through React Native/Django implementation, instrumentation, and iteration.
+      </p>
+    ),
+    impactTakeaway: <>The redesign led to <B>340+ user-created clubs and increased club engagement by 14%</B>. Leaderboard and notification experiments also improved re-engagement, while participants showed stronger workout-goal completion and retention — evidence that the feature was influencing not just social activity, but workout consistency.</>,
+    tools: ['Full Stack', 'React Native', 'Django', 'SQL / Relational DB', 'Concurrency', 'Notifications System', 'Ranking Logic', 'Amplitude', 'A/B Testing', 'Figma', 'Competitive Research'],
+  },
+  {
+    num: '03',
+    slug: 'onboarding-paywall',
+    title: 'Onboarding & Paywall',
+    subtitle: 'Conversion experiments across activation and subscription',
+    goal: 'Subscription',
+    image: '/images/planfit-onboarding-paywall-fig.webp',
+    problemBody: (
+      <>
+        Trial CVR sat at ~15%. Users completed onboarding but didn't convert. Funnel analysis on Amplitude revealed drop-offs weren't random: <B>they clustered around moments where users were asked to trust the product before it had earned that trust</B>. Copy wasn't localized. The paywall wasn't personalized. And every experiment required a full dev cycle to ship.
       </>
     ),
     thinking: [
@@ -90,48 +103,31 @@ export const PLANFIT_PROJECTS: PlanfitProject[] = [
     execution: [
       { label: 'Funnel Mapping', text: <>Mapped every drop-off via Amplitude by platform, country, and traffic source. Found where trust broke down.</> },
       { label: '30+ A/B Experiments', text: <>Designed and directly coded variants (copy, UI/UX, flow) grounded in loss aversion, personalization expectations, and commitment devices.</> },
-      { label: 'Automated Testing Engine', text: <>Built at the Planfit hackathon: GPT generates localized copy → Django REST deploys it in real time → Amplitude detects significance → <B>auto-applies the winner</B>, orchestrated with n8n. Scaled to 150+ copy experiments with no manual intervention.</> },
+      { label: 'Automated Testing Engine', text: <>Built at the Planfit hackathon: <Hi>GPT generates localized copy → Django REST deploys it in real time → Amplitude detects significance → auto-applies the winner</Hi>, orchestrated with n8n. Scaled to 150+ copy experiments with no manual intervention.</> },
       { label: 'Segmented Execution', text: <>Each segment (country, platform, traffic source) got its own variant. Nothing was generic.</> },
-    ],
-    impact: [
-      { value: '+20%', label: 'CTA conversion' },
-      { value: '+8%', label: 'Subscription conversion' },
-      { value: '150+', label: 'Automated experiments' },
     ],
     impactTakeaway: <><B>Conversion moved when users felt the product was built for them.</B> Automation meant the next experiment started the moment the last one ended.</>,
     tools: ['A/B Testing', 'Funnel Analysis', 'Reference Research', 'GPT API', 'n8n', 'Django'],
   },
   {
-    num: '03',
-    slug: 'ai-stretching',
-    title: 'AI Stretching Recommendation',
-    image: ['/images/planfit-ai-stretching-1.webp', '/images/planfit-ai-stretching-2.webp'],
-    heroTagline: [
-      "Users weren't complaining about stretching.",
-      'They were telling me the logic was broken.',
-    ],
+    num: '04',
+    slug: 'voc-pipeline',
+    title: 'VOC Pipeline',
+    subtitle: 'From fragmented feedback to product decisions',
+    goal: 'Product Decisions',
     problemBody: (
       <>
-        Change the order. Swap this exercise. Adjust the timing. On the surface, it looked like a list of small feature requests. 100+ VOC entries. 30+ user interviews. <Hi>The same friction, over and over.</Hi>
+        Customer feedback came in from multiple sources and was too fragmented to turn into product decisions. <B>Recurring issues were hard to see, and nothing connected them to what got built next.</B>
       </>
     ),
-    thinking: [
-      { label: 'Observation', text: <>Users kept asking to modify their stretching routine: wrong movements, no customization, no way to preview. High volume, consistent pattern.</> },
-      { label: 'Diagnosis', text: <>The recommendation logic didn't account for physical flow. Users were constantly switching positions mid-routine, making the experience feel disjointed. They weren't asking for features. They were telling me something deeper was wrong.</> },
-      { label: 'Hypothesis', text: <>Don't fix the surface complaints. <B>Fix the sequence logic.</B> If stretches map to muscles worked that day and follow natural movement flow, completion will increase on its own.</> },
-    ],
+    thinking: [],
     execution: [
-      { label: 'VOC Analysis', text: <>Categorized 100+ entries and 30+ interview insights into friction clusters. Prioritized by impact: sequence logic first, customization second.</> },
-      { label: 'V2 Recommendation Engine', text: <>Built candidate filtering and weighted scoring over 80M+ workout records, mapping stretches to the muscles worked that day, equipment, and movement flow. Owned server logic, API integration, testing, and deployment.</> },
-      { label: 'Key Failure', text: <>Removing cardio warmup <B>dropped completion 9.8% at 98% significance</B>. Data revealed it acts as a psychological on-ramp: users needed a familiar entry point. Rolled back immediately.</> },
-      { label: 'Ship & Validate', text: <>Shipped add/delete/reorder and video preview. Validated through 15+ A/B experiments across 30,000+ DAU.</> },
+      { label: 'Ingestion', text: <><Hi>Engineered a multi-source ingestion pipeline</Hi> for 2,500+ VOC items.</> },
+      { label: 'Classification', text: <>Built an LLM classifier with JSON schema validation to categorize each item.</> },
+      { label: 'Aggregation', text: <>Implemented deduplication and SQL aggregation queries to surface recurring issues.</> },
+      { label: 'Ship', text: <>Turned the findings into fixes shipped across 8+ sprints.</> },
     ],
-    impact: [
-      { value: '+12%', label: 'Activation' },
-      { value: '300K+', label: 'MAU served' },
-      { value: '80M+', label: 'Workout records' },
-    ],
-    impactTakeaway: <><B>One root-cause fix cleared the VOC backlog</B>, reduced onboarding drop-off, and moved activation and D7 retention. Going deeper than the surface request drove broader product impact than any individual feature fix would have.</>,
-    tools: ['VOC Analysis', 'User Interviews', 'Recommendation Logic', 'Django', 'React Native'],
+    impactTakeaway: <>Recurring issues surfaced from <B>2,500+ feedback items</B> became fixes shipped across 8+ sprints.</>,
+    tools: ['VOC Analysis', 'LLM Classifier', 'Data Pipeline', 'JSON Schema', 'SQL'],
   },
 ];

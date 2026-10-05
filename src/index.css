@@ -268,7 +268,7 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 .case-study-content .project-intro { margin: 0 0 40px; }
 .case-study-content .project-intro .project-eyebrow { font: 11px 'Geist Mono', monospace; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); margin: 0 0 14px; }
 .case-study-content .project-intro h1 { font-size: clamp(32px, 5vw, 44px); line-height: 1.1; font-weight: 550; letter-spacing: -.045em; margin: 0 0 20px; }
-.case-study-content .project-intro .project-lede { max-width: 58ch; font-size: 17px; line-height: 1.65; color: var(--copy); margin: 0 0 30px; }
+.case-study-content .project-intro .project-lede { max-width: 58ch; font-size: 15.5px; line-height: 1.65; color: var(--copy); margin: 0 0 30px; }
 .project-facts { display: grid; grid-template-columns: 1fr 1.5fr; gap: 20px 32px; border-block: .5px solid var(--rule); padding: 20px 0; margin: 0 0 22px; }
 .project-facts dt { font: 10px 'Geist Mono', monospace; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 8px; }
 .project-facts dd { font-size: 13px; line-height: 1.6; margin: 0; }
@@ -279,7 +279,7 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
   .medal-row { --medal-width: 142px; height: 233px; }
   .medal-item { height: 208px; }
   .project-facts { grid-template-columns: 1fr; gap: 16px; }
-  .case-study-content .project-intro .project-lede { font-size: 16px; }
+  .case-study-content .project-intro .project-lede { font-size: 15px; }
 }
 @media (prefers-reduced-motion: reduce) { .medal-item { transition: none; } }
 
@@ -326,8 +326,8 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
   .case-study-content .project-intro + .work-item { margin-top: 48px; }
 }
 .work-prose { display: grid; gap: 16px; padding-top: 22px; border-top: .5px solid var(--rule); }
-.case-study-content .work-prose p { margin: 0; max-width: 64ch; font-size: 15px; line-height: 1.75; }
-.work-prose .work-list li { font-size: 15px; }
+.case-study-content .work-prose p { margin: 0; max-width: 64ch; font-size: 14px; line-height: 1.75; }
+.work-prose .work-list li { font-size: 14px; }
 .work-prose b, .work-prose strong { color: var(--ink); font-weight: 600; }
 .work-prose code { padding: 1px 5px; border: .5px solid var(--rule); border-radius: 2px; background: var(--hover-bg); color: var(--ink); font: 12.5px 'Geist Mono', monospace; }
 .case-study-content .project-title-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; margin: 0 0 24px; }
@@ -370,8 +370,8 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 .work-lightbox { position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; padding: 48px 32px; background: #1a1917e6; backdrop-filter: blur(6px); cursor: zoom-out; animation: lightbox-in 200ms var(--swift); }
 .work-lightbox figure { margin: 0; max-width: min(1200px, 100%); cursor: default; }
 .work-lightbox img { display: block; max-width: 100%; max-height: calc(100vh - 150px); margin: 0 auto; border-radius: 4px; box-shadow: 0 30px 80px -20px #000a; animation: lightbox-pop 300ms var(--swift); }
-.work-lightbox figcaption { margin-top: 14px; color: #d8d6cf; font: 12px/18px 'Geist Mono', monospace; letter-spacing: .04em; text-transform: uppercase; text-align: center; }
-.work-lightbox-close { position: absolute; top: 18px; right: 22px; padding: 6px 12px; border: .5px solid #ffffff40; border-radius: 4px; background: transparent; color: #fcfcfb; font: 12px/18px 'Geist Mono', monospace; letter-spacing: .04em; cursor: pointer; transition: background 150ms; }
+.work-lightbox figcaption { margin-top: 14px; color: #d8d6cf; font: 12px/18px 'Geist Mono', monospace; letter-spacing: .02em; text-transform: none; text-align: center; }
+.work-lightbox-close { position: absolute; top: 18px; right: 22px; padding: 6px 12px; border: .5px solid #ffffff40; border-radius: 3px; background: transparent; color: #fcfcfb; font: 12px/18px 'Geist Mono', monospace; letter-spacing: .04em; cursor: pointer; transition: background 150ms; }
 .work-lightbox-close:hover { background: #ffffff1f; }
 @keyframes lightbox-in { from { opacity: 0; } }
 @keyframes lightbox-pop { from { opacity: 0; transform: scale(.97) translateY(8px); } }
@@ -387,16 +387,18 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 .work-questions ol { margin: 0; padding: 0; list-style: none; border-bottom: .5px solid var(--rule); }
 .work-questions > ol > li { position: relative; border-top: .5px solid var(--rule); opacity: 0; transform: translateY(14px); transition: opacity 600ms var(--swift), transform 700ms var(--swift); transition-delay: calc(var(--i) * 90ms); scroll-margin-top: 24px; }
 .work-questions.is-visible > ol > li { opacity: 1; transform: none; }
-.work-q-head { position: relative; width: 100%; display: grid; grid-template-columns: 44px minmax(0, 1fr) 34px; align-items: center; gap: 4px 20px; padding: 30px 0; border: 0; background: none; color: var(--ink); text-align: left; cursor: pointer; font: inherit; }
+.work-q-head { position: relative; width: 100%; display: grid; grid-template-columns: 52px minmax(0, 1fr) 28px; align-items: center; gap: 4px 16px; padding: 30px 0; border: 0; background: none; color: var(--ink); text-align: left; cursor: pointer; font: inherit; }
 .work-questions > ol > li::before { content: ''; position: absolute; inset: 0 -14px; z-index: -1; background: var(--hover-bg); border-radius: 3px; opacity: 0; transition: opacity 180ms var(--swift); pointer-events: none; }
+.work-questions > ol > li.is-open::before, .work-questions > ol > li.is-open:hover::before { inset: 0 -20px; opacity: .5; background: var(--hover-bg); border-radius: 6px; transition: opacity 350ms var(--swift); }
+@media (max-width: 760px) { .work-questions > ol > li.is-open::before { inset: 0 -14px; } }
 .work-q-num { align-self: start; padding-top: 5px; color: var(--muted); font: 12px/18px 'Geist Mono', monospace; letter-spacing: .06em; }
 .work-q-body { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
 .case-study-content .work-q-text { display: block; max-width: 44ch; color: var(--ink); font-size: clamp(18px, 2.4vw, 22px); line-height: 1.3; font-weight: 500; letter-spacing: -.03em; }
 .work-q-target { color: var(--muted); font: 12px/18px 'Geist Mono', monospace; letter-spacing: .04em; transition: color 150ms; }
-.work-q-toggle { position: relative; width: 34px; height: 34px; border: .5px solid var(--rule); border-radius: 50%; transition: transform 320ms var(--spring), background 150ms, border-color 150ms; }
-.work-q-toggle::before, .work-q-toggle::after { content: ''; position: absolute; left: 50%; top: 50%; width: 12px; height: 1.25px; background: currentColor; transform: translate(-50%, -50%); transition: transform 280ms var(--swift), opacity 150ms; }
+.work-q-toggle { position: relative; width: 28px; height: 28px; border: .5px solid #aaa79e; border-radius: 50%; color: var(--muted); background: transparent; transition: translate 300ms var(--spring), rotate 320ms var(--spring), color 150ms; }
+.work-q-toggle::before, .work-q-toggle::after { content: ''; position: absolute; left: 50%; top: 50%; width: 10px; height: 1.25px; background: currentColor; transform: translate(-50%, -50%); transition: transform 280ms var(--swift), opacity 150ms; }
 .work-q-toggle::after { transform: translate(-50%, -50%) rotate(90deg); }
-.work-questions > ol > li.is-open > .work-q-head .work-q-toggle { transform: rotate(180deg); background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.work-questions > ol > li.is-open > .work-q-head .work-q-toggle { rotate: 180deg; color: var(--ink); background: repeating-linear-gradient(-45deg, #aaa79e80 0 1px, transparent 1px 3.5px); }
 .work-questions > ol > li.is-open > .work-q-head .work-q-toggle::after { transform: translate(-50%, -50%) rotate(0deg); }
 .work-q-head:focus-visible { outline: 2px solid #716c5d; outline-offset: 4px; }
 .work-q-head { transition: opacity 280ms ease, filter 280ms ease; }
@@ -422,14 +424,84 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 @media (hover: hover) {
   .work-questions:not(.has-open) > ol:hover > li:not(:hover):not(:focus-within) { opacity: .45; }
   .work-questions > ol > li:hover::before, .work-questions > ol > li:focus-within:not(.is-open)::before { opacity: 1; }
-  .work-q-head:hover .work-q-toggle { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  .work-q-head:hover .work-q-toggle { color: var(--ink); translate: 0 -2px; }
   .work-q-head:hover .work-q-target { color: var(--ink); }
 }
 @media (max-width: 760px) {
-  .work-q-head { grid-template-columns: 28px minmax(0, 1fr) 32px; gap: 4px 12px; padding: 22px 0; }
+  .work-q-head { grid-template-columns: 46px minmax(0, 1fr) 28px; gap: 4px 10px; padding: 22px 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .work-questions > ol > li { opacity: 1; transform: none; transition: none; }
   .work-q-toggle, .work-q-toggle::before, .work-q-toggle::after, .work-q-head { transition: none; }
   .work-panel, .work-panel.is-open .work-item > :not(.work-aside) { transition: none; animation: none; }
 }
+
+/* ───────────────────────────────────────────────────────────────
+   Detail page type system (experience + project pages)
+   Fonts   Geist for reading text · Geist Mono for labels only
+   Colors  ink #201f1c   titles, lede, bold
+           copy #504e49  body text
+           muted #797772 labels, captions, meta
+   Roles   Label     Mono 11px   uppercase .08em   muted
+           Caption   Mono 10.5px sentence case     muted  (figure captions)
+           Body      Geist 14px  400  copy
+           Bold      Geist 14px  600  ink
+           Summary   Geist 15.5px 400 copy  (page header, 15px on phones)
+           Toggle    Geist 22px  500  ink   (18px on phones)
+           Meta      Geist 13px  400  muted (toggle description)
+   ─────────────────────────────────────────────────────────────── */
+.case-study-content .project-intro .project-eyebrow,
+.case-study-content .project-facts dt,
+.case-study-content p.work-questions-lead,
+.case-study-content .work-q-num,
+.case-study-content .work-label {
+  font: 400 11px/18px 'Geist Mono', monospace;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.case-study-content .work-q-num { padding-top: 7px; }
+.case-study-content .work-body p,
+.case-study-content .work-prose p,
+.case-study-content .work-body li,
+.case-study-content .work-list li { font-size: 14px; line-height: 1.7; color: var(--copy); }
+.case-study-content strong { color: var(--ink); font-weight: 600; }
+.case-study-content .work-q-target { font: 400 13px/1.45 'Geist', system-ui, sans-serif; letter-spacing: normal; text-transform: none; color: var(--muted); }
+.work-q-tag { align-self: start; margin-top: 3px; }
+.case-study-content .work-panel .work-lede { margin: 0 0 24px; font-size: 16px; line-height: 1.6; color: var(--ink); }
+.case-study-content .work-figure figcaption { font: 400 10.5px/16px 'Geist Mono', monospace; letter-spacing: .01em; text-transform: none; color: var(--muted); }
+
+/* ───────────────────────────────────────────────────────────────
+   Button system
+   Rectangular   radius 5px · border .5px --rule · Geist 13px/500 · padding 9×14 · min-height 41px (44px on touch)
+                 secondary: transparent, ink text · primary: ink fill, paper text
+   Circular      28px · border .5px #aaa79e · selected toggle only: hatch fill
+   Small tag     radius 3px · border .5px --rule
+   Hover         every button lifts 2px; rectangles also tint to --hover-bg
+   ─────────────────────────────────────────────────────────────── */
+.intro-aside .resume-link, .intro-aside .linkedin-link, .project-actions a {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 41px; padding: 9px 14px;
+  border: .5px solid var(--rule); border-radius: 5px; box-shadow: none;
+  background: transparent; color: var(--ink);
+  font: 500 13px/20px 'Geist', system-ui, sans-serif; letter-spacing: normal; text-decoration: none;
+  transition: transform 300ms var(--spring), background 150ms, border-color 150ms;
+}
+.intro-aside .resume-link:hover, .intro-aside .linkedin-link:hover, .project-actions a:hover { transform: translateY(-2px); background: var(--hover-bg); border-color: var(--rule); }
+.intro-aside .resume-link, .project-actions a.is-primary { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.intro-aside .resume-link:hover, .project-actions a.is-primary:hover { background: #3a3935; border-color: #3a3935; }
+.intro-aside .resume-link .external-arrow, .project-actions a.is-primary .external-arrow { color: inherit; }
+.outline-back-icon { position: relative; width: 28px; height: 28px; border: .5px solid #aaa79e; background: transparent; transition: translate 300ms var(--spring), color 150ms; }
+.outline-back-icon:hover { background: transparent; color: var(--ink); translate: 0 -2px; }
+.portfolio-dock button, .portfolio-dock a { transition: translate 300ms var(--spring), background 150ms; }
+.portfolio-dock button:hover, .portfolio-dock a:hover { translate: 0 -2px; }
+.work-lightbox-close:hover { translate: 0 -2px; }
+.tool-pill { display: inline-block; padding: 4px 8px; border: .5px solid var(--rule); border-radius: 3px; color: var(--muted); font: 400 12px/20px 'Geist', system-ui, sans-serif; }
+@media (pointer: coarse) { .intro-aside .resume-link, .intro-aside .linkedin-link, .project-actions a { min-height: 44px; } }
+@media (prefers-reduced-motion: reduce) {
+  .intro-aside .resume-link:hover, .intro-aside .linkedin-link:hover, .project-actions a:hover { transform: none; }
+  .outline-back-icon:hover, .portfolio-dock button:hover, .portfolio-dock a:hover, .work-lightbox-close:hover, .work-q-head:hover .work-q-toggle { translate: none; }
+}
+.outline-back-icon svg { width: 15px; height: 15px; }
+.outline-back-icon::before { content: ''; position: absolute; inset: -8px; border-radius: 50%; }
+.outline-toolbar { gap: 12px; }

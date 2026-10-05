@@ -115,27 +115,25 @@ export interface WorkItemData {
   id: string;
   num: string;
   title: string;
-  lede: ReactNode;
+  lede?: ReactNode;
   figure?: Fig | Fig[];
   problem: ReactNode | ReactNode[];
   bet?: ReactNode;
   did: ReactNode[] | ReactNode;
-  metrics?: { value: string; label: string }[];
   takeaway?: ReactNode;
   impactLabel?: string;
   tools?: string[];
 }
 
-export default function WorkItem({ id, num, title, lede, figure, problem, bet, did, metrics, takeaway, impactLabel, tools }: WorkItemData) {
+export default function WorkItem({ id, num, title, lede, figure, problem, bet, did, takeaway, impactLabel, tools }: WorkItemData) {
   return (
     <WorkSection id={id} num={num} title={title} lede={lede}>
       <WorkBlock label="The problem">{Array.isArray(problem) ? <WorkList items={problem} /> : isValidElement(problem) && problem.type === 'div' ? problem : <p>{problem}</p>}</WorkBlock>
       {bet && <WorkBlock label="My bet"><p>{bet}</p></WorkBlock>}
       <WorkBlock label="What I did">{Array.isArray(did) ? <WorkList items={did} /> : did}</WorkBlock>
-      {(takeaway || metrics) && (
+      {takeaway && (
         <WorkBlock label={impactLabel ?? 'Impact'}>
           {takeaway && (isValidElement(takeaway) && takeaway.type === 'div' ? takeaway : <p className="work-takeaway">{takeaway}</p>)}
-          {metrics && <WorkMetrics metrics={metrics} />}
         </WorkBlock>
       )}
       {figure && <WorkFigures num={num} figures={Array.isArray(figure) ? figure : [figure]} />}

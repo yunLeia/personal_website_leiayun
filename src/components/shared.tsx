@@ -13,9 +13,7 @@ export function Tooltip({ label }: { label: string }) {
 // Shared tool/keyword pill used across detail pages
 export function ToolPill({ children }: { children: string }) {
   return (
-    <span className="text-[12px] text-[#797772] font-normal border border-black/10 rounded-sm px-2 py-1">
-      {children}
-    </span>
+    <span className="tool-pill">{children}</span>
   );
 }
 

@@ -6,6 +6,7 @@ export interface WorkQuestion {
   num: string;
   title: string;
   question: ReactNode;
+  sublabel?: string;
   content: ReactNode;
 }
 
@@ -99,10 +100,10 @@ export default function WorkQuestions({ lead = 'I asked:', items }: { lead?: str
           return (
             <li key={item.id} ref={(el) => { rows.current[item.id] = el; }} className={open ? 'is-open' : undefined} style={{ ['--i' as string]: i }}>
               <button type="button" className="work-q-head" aria-expanded={open} aria-controls={`panel-${item.id}`} onClick={() => toggle(item.id)}>
-                <span className="work-q-num">{String(i + 1).padStart(2, '0')}</span>
+                <span className="section-tag work-q-tag" aria-hidden="true"><span className="section-index">{String(i + 1).padStart(2, '0')}</span><span className="section-hatch" /></span>
                 <span className="work-q-body">
                   <span className="work-q-text">{item.question}</span>
-                  <span className="work-q-target">{item.num} · {item.title}</span>
+                  <span className="work-q-target">{item.sublabel ?? item.title}</span>
                 </span>
                 <span className="work-q-toggle" aria-hidden="true" />
               </button>
