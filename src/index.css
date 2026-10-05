@@ -154,6 +154,13 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 .article-outline a[aria-current="location"] .outline-tick { width: 28px; background: var(--ink); }
 .article-outline li a:hover { color: var(--ink); }
 .article-outline li a:hover .outline-tick { width: 24px; background: #827c71; }
+@media (min-width: 1200px) {
+  .article-outline { width: clamp(180px, calc((100vw - 768px)/2 - 44px), 236px); }
+  .article-outline li a { grid-template-columns: 10px minmax(0, 1fr); gap: 5px; }
+  .article-outline .outline-tick { width: 5px; }
+  .article-outline a[aria-current="location"] .outline-tick { width: 10px; }
+  .article-outline li a:hover .outline-tick { width: 8px; }
+}
 .article-outline li.outline-title { margin-bottom: 10px; }
 .article-outline li.outline-title a { grid-template-columns: minmax(0,1fr); gap: 0; padding: 0 0 14px; border-bottom: .5px solid var(--rule); color: var(--ink); font-size: 16px; line-height: 1.3; font-weight: 600; letter-spacing: -.02em; }
 .article-outline li.outline-title .outline-tick { display: none; }

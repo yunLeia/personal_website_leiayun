@@ -17,7 +17,7 @@ const WORK: WorkItemData[] = [
   {
     id: 'diagnostic-tool',
     num: '01',
-    title: 'Account Hygiene Diagnostic Tool',
+    title: 'Account Health Diagnostic Tool',
     lede: 'An hour of manual account research, turned into a one-minute account health report.',
     problem: (
       <div className="work-stack">
