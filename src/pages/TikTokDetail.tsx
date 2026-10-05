@@ -105,7 +105,7 @@ export default function TikTokDetail() {
         name={tiktok.company}
         eyebrow="Experience"
         summary={tiktok.subtitle ?? ''}
-        facts={[{ label: 'Role', value: tiktok.role }, { label: 'Team', value: 'Global Business Solutions (GBS) · Contents & Services' }, { label: 'Period', value: tiktok.date }]}
+        facts={[{ label: 'Role', value: <>{tiktok.role} | <em>Internal Automation</em></> }, { label: 'Team', value: 'Global Business Solutions (GBS) · Contents & Services' }, { label: 'Period', value: tiktok.date }]}
         links={tiktok.url ? [{ label: 'Company site', href: tiktok.url }] : []}
       />
       <WorkQuestions items={WORK.map((w, i) => ({ id: w.id, num: w.num, title: w.title, question: QUESTIONS[i], content: <WorkItem {...w} /> }))} />

@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { PROJECTS } from '../data';
 
-type Fact = { label: string; value: string };
+type Fact = { label: string; value: ReactNode };
 type Link = { label: string; href: string; primary?: boolean };
 
 type Props = {
