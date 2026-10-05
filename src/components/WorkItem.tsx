@@ -85,7 +85,7 @@ export function WorkFigures({ num, figures }: { num: string; figures: Fig[] }) {
   const card = (fig: Fig, i: number, variant: string) => (
     <figure className={`work-figure ${variant}`} key={fig.src}>
       <button type="button" className="work-figure-btn" onClick={(e) => { trigger.current = e.currentTarget; setOpenIndex(i); }} aria-label={`Expand figure ${labelFor(i)}: ${fig.caption}`}>
-        <img src={fig.src} alt={fig.alt} loading="lazy" decoding="async" ref={(el) => { if (el?.complete) el.classList.add('is-loaded'); }} onLoad={(e) => e.currentTarget.classList.add('is-loaded')} />
+        <img src={fig.src} alt={fig.alt} loading="eager" decoding="async" ref={(el) => { if (el?.complete) el.classList.add('is-loaded'); }} onLoad={(e) => e.currentTarget.classList.add('is-loaded')} />
         <span className="work-figure-badge"><ExpandIcon />Expand</span>
       </button>
       <figcaption>Fig. {labelFor(i)} — {fig.caption}</figcaption>

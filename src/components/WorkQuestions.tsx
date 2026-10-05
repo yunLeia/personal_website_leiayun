@@ -9,31 +9,60 @@ export interface WorkQuestion {
   content: ReactNode;
 }
 
+const TOP_OFFSET = 24;
+const PIN_DURATION = 520;
 const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 export default function WorkQuestions({ lead = 'I asked:', items }: { lead?: string; items: WorkQuestion[] }) {
   const { ref, visible } = useScrollReveal();
   const [openId, setOpenId] = useState<string | null>(null);
-  const [settledId, setSettledId] = useState<string | null>(null);
   const rows = useRef<Record<string, HTMLLIElement | null>>({});
-  const scrollMode = useRef<'near' | 'force' | null>(null);
   const openIdRef = useRef<string | null>(null);
+  const stopPin = useRef<(() => void) | null>(null);
   const ids = items.map((item) => item.id).join('|');
   openIdRef.current = openId;
 
-  const scrollRow = (id: string) => {
+  // Start scrolling right away and keep the row pinned near the top while panels expand and collapse around it.
+  const pinRow = (id: string) => {
     const row = rows.current[id];
     if (!row) return;
-    row.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
+    stopPin.current?.();
     row.querySelector<HTMLButtonElement>('.work-q-head')?.focus({ preventScroll: true });
+    if (prefersReducedMotion()) {
+      requestAnimationFrame(() => row.scrollIntoView({ block: 'start' }));
+      return;
+    }
+    const events = ['wheel', 'touchstart', 'keydown', 'mousedown'] as const;
+    const began = performance.now();
+    const startY = window.scrollY;
+    let frame = 0;
+    const stop = () => {
+      cancelAnimationFrame(frame);
+      events.forEach((name) => window.removeEventListener(name, stop));
+      if (stopPin.current === stop) stopPin.current = null;
+    };
+    const tick = (now: number) => {
+      const elapsed = now - began;
+      // Where the page would need to be right now to hold the row at the top; it keeps moving while panels resize.
+      const target = window.scrollY + (row.getBoundingClientRect().top - TOP_OFFSET);
+      const progress = Math.min(1, elapsed / PIN_DURATION);
+      const eased = progress < 0.5 ? 2 * progress ** 2 : 1 - (-2 * progress + 2) ** 2 / 2;
+      const next = progress >= 1 ? target : startY + (target - startY) * eased;
+      if (Math.abs(next - window.scrollY) > 0.3) window.scrollTo(0, next);
+      if (elapsed < PIN_DURATION + 200) frame = requestAnimationFrame(tick);
+      else stop();
+    };
+    events.forEach((name) => window.addEventListener(name, stop, { passive: true }));
+    stopPin.current = stop;
+    frame = requestAnimationFrame(tick);
   };
 
   useEffect(() => {
     const openFromHash = () => {
       const hash = window.location.hash.slice(1);
       if (!hash || !ids.split('|').includes(hash)) return;
-      if (openIdRef.current !== hash) scrollMode.current = 'force';
       setOpenId(hash);
+      pinRow(hash);
     };
     openFromHash();
     window.addEventListener('hashchange', openFromHash);
@@ -41,47 +70,28 @@ export default function WorkQuestions({ lead = 'I asked:', items }: { lead?: str
       const id = (event as CustomEvent<string>).detail;
       if (!ids.split('|').includes(id)) return;
       event.preventDefault();
-      if (openIdRef.current === id) { scrollRow(id); return; }
-      scrollMode.current = 'force';
       setOpenId(id);
+      pinRow(id);
     };
     window.addEventListener('open-work-section', onOpen);
-    return () => { window.removeEventListener('open-work-section', onOpen); window.removeEventListener('hashchange', openFromHash); };
+    return () => {
+      window.removeEventListener('open-work-section', onOpen);
+      window.removeEventListener('hashchange', openFromHash);
+      stopPin.current?.();
+    };
   }, [ids]);
 
-  // Once the panel has finished expanding (its height transition ends; a timer covers the no-transition case),
-  // let its content overflow again (the side thumbnail sits outside the column) and scroll the row into place.
-  useEffect(() => {
-    setSettledId(null);
-    if (!openId) return;
-    const panel = document.getElementById(`panel-${openId}`);
-    let done = false;
-    const finish = () => {
-      if (done) return;
-      done = true;
-      setSettledId(openId);
-      const mode = scrollMode.current;
-      scrollMode.current = null;
-      const row = rows.current[openId];
-      if (!mode || !row) return;
-      const top = row.getBoundingClientRect().top;
-      if (mode === 'force' || top < 0 || top > 160) scrollRow(openId);
-    };
-    const onEnd = (event: TransitionEvent) => {
-      if (event.target === panel && event.propertyName === 'grid-template-rows') window.setTimeout(finish, 30);
-    };
-    panel?.addEventListener('transitionend', onEnd);
-    const fallback = window.setTimeout(finish, prefersReducedMotion() ? 0 : 900);
-    return () => { panel?.removeEventListener('transitionend', onEnd); window.clearTimeout(fallback); };
-  }, [openId]);
-
   const toggle = (id: string) => {
-    scrollMode.current = openId !== id ? 'near' : null;
-    setOpenId(openId === id ? null : id);
+    if (openIdRef.current === id) {
+      setOpenId(null);
+      return;
+    }
+    setOpenId(id);
+    pinRow(id);
   };
 
   return (
-    <section ref={ref} className={`work-questions${visible ? ' is-visible' : ''}`} aria-label="Questions this work answers">
+    <section ref={ref} className={`work-questions${visible ? ' is-visible' : ''}${openId ? ' has-open' : ''}`} aria-label="Questions this work answers">
       <p className="work-questions-lead">{lead}</p>
       <ol>
         {items.map((item, i) => {
@@ -101,7 +111,7 @@ export default function WorkQuestions({ lead = 'I asked:', items }: { lead?: str
                 role="region"
                 aria-label={item.title}
                 aria-hidden={!open}
-                className={`work-panel${open ? ' is-open' : ''}${settledId === item.id ? ' is-settled' : ''}`}
+                className={`work-panel${open ? ' is-open' : ''}`}
                 ref={(el) => { if (el) { if (open) el.removeAttribute('inert'); else el.setAttribute('inert', ''); } }}
               >
                 <div className="work-panel-inner">{item.content}</div>

@@ -70,9 +70,9 @@ const WORK: WorkItemData[] = [
     num: '03',
     title: 'AI Implementation Guide & Workshops',
     lede: 'Instead of building every automation myself, helping non-technical teams build their own.',
-    problem: <>ByteDance had 100+ internal AI tools, updated so quickly that no one had organized them, so most people didn’t know what existed or which tool fit which situation. Underneath that, <Hi>people new to AI couldn’t tell which parts of their own work could be automated</Hi>, so even good tools went unused.</>,
+    problem: <>ByteDance had 100+ internal AI tools, updated so quickly that no one had organized them, so most people didn’t know what existed or which tool fit which situation. Underneath that, <B>people new to AI couldn’t tell which parts of their own work could be automated</B>, so even good tools went unused.</>,
     did: (
-      <p>With a collaborator from TikTok Japan, I wrote an internal AI implementation guide built around real workflows I had shipped. I <B>organized it by problem rather than by feature</B>, in the language of non-technical GBS teams, with ready-to-use prompts, demo workflows, and <B>a method for spotting which tasks are worth automating</B>. I then ran sessions and workshops for 100+ employees.</p>
+      <p>With a collaborator from TikTok Japan, I wrote an internal AI implementation guide built around real workflows I had shipped. I organized it around <Hi>the real workflows teams actually went through, rather than around what each AI tool could do</Hi>, with ready-to-use prompts, demo workflows, and a method for spotting which tasks were worth automating. I then ran sessions and workshops for 100+ employees.</p>
     ),
     takeaway: <>Two of my sessions ranked #1 and #2 in that year’s KR Masterclass series. The signal I cared about more came afterward: people from teams I had never worked with messaged me asking not “Can you build this for us?” but <B>“How can I build something like this myself?”</B></>,
     metrics: [
