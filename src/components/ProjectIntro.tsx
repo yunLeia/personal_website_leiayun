@@ -8,12 +8,13 @@ type Props = {
   name: string;
   summary: string;
   eyebrow?: string;
+  note?: string[];
   facts: Fact[];
   links: Link[];
   children?: ReactNode;
 };
 
-export default function ProjectIntro({ name, summary, eyebrow = 'Selected project', facts, links, children }: Props) {
+export default function ProjectIntro({ name, summary, eyebrow = 'Selected project', note, facts, links, children }: Props) {
   const project = PROJECTS.find((item) => item.name === name);
   const image = project?.hero ?? project?.cover;
 
@@ -22,6 +23,7 @@ export default function ProjectIntro({ name, summary, eyebrow = 'Selected projec
       <p className="project-eyebrow">{eyebrow}</p>
       <div className="project-title-row">
         <h1>{name}</h1>
+        {note && <p className="project-note">{note.map((line) => <span key={line}>{line}</span>)}</p>}
         <div className="project-actions">
           {links.filter((link) => link.href !== '#').map((link) => (
             <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className={link.primary ? 'is-primary' : undefined}>

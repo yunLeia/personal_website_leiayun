@@ -81,21 +81,23 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 .experience-list, .project-list, .footer-tree { margin: 0; padding: 0; list-style: none; }
 .experience-entry { position: relative; isolation: isolate; cursor: pointer; display: grid; grid-template-columns: 44px 152px minmax(0,1fr) 92px; align-items: start; gap: 4px 16px; padding: 18px 16px 18px 0; border-top: .5px solid var(--rule); }
 .experience-identity { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+@media (min-width: 761px) { .experience-role { white-space: nowrap; } }
 .experience-identity h3 { font-size: 14.5px; line-height: 21.5px; font-weight: 500; margin: 0; color: var(--ink); }
 .experience-identity a, .experience-identity button { display: inline-flex; align-items: center; gap: 0; text-align: left; transition: color 150ms; }
-.experience-role { color: #64625d; font-size: 13px; line-height: 20px; }
-.experience-date { grid-column: 4; justify-self: end; color: var(--muted); font-size: 12.5px; line-height: 22px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.experience-role { color: #64625d; font-size: 12.5px; line-height: 20px; }
+.experience-date { grid-column: 4; justify-self: end; text-align: right; color: var(--muted); font-size: 12.5px; line-height: 22px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.experience-kind { display: block; margin-top: 1px; font-size: 11.5px; line-height: 18px; color: #aaa79e; }
 .experience-identity .external-arrow { margin-left: 2px; font-size: 9px; }
-.experience-summary { grid-column: 3; padding-right: 28px; color: var(--muted); font-size: 13px; line-height: 1.65; margin: 0; }
-.portfolio-project-row { position: relative; isolation: isolate; cursor: pointer; display: grid; grid-template-columns: 44px 152px minmax(0,1fr); align-items: start; gap: 4px 16px; padding: 18px 0; width: 100%; text-align: left; border-top: .5px solid var(--rule); }
+.experience-summary { grid-column: 3; padding-right: 0; color: var(--muted); font-size: 13px; line-height: 1.65; margin: 0; }
+.portfolio-project-row { position: relative; isolation: isolate; cursor: pointer; display: grid; grid-template-columns: 44px 152px minmax(0,1fr) 92px; align-items: start; gap: 4px 16px; padding: 18px 16px 18px 0; width: 100%; text-align: left; border-top: .5px solid var(--rule); }
 .project-icon-frame { display: flex; align-items: center; justify-content: center; position: relative; width: 44px; height: 44px; padding: 2px; border: .5px solid var(--rule); border-radius: 11px; box-shadow: 0 1px 2px #00000005; transition: transform 300ms var(--spring), box-shadow 150ms; overflow: visible; }
 .project-icon-frame img { width: 40px; height: 40px; object-fit: cover; border-radius: 8px; }
 .project-monogram { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 8px; background: #e6eadb; color: #526343; font-size: 25px; font-weight: 500; letter-spacing: -.08em; }
 .project-identity { display: flex; flex-direction: column; gap: 2px; }
 .project-name { color: var(--ink); font-size: 14.5px; font-weight: 500; line-height: 21.5px; }
 .project-arrow { display: inline-block; margin-left: 2px; font-size: 9px; color: var(--muted); transition: transform 150ms; }
-.project-category { color: #64625d; font-size: 13px; line-height: 20px; }
-.project-description { color: var(--muted); font-size: 13px; line-height: 1.65; }
+.project-category { color: #64625d; font-size: 12.5px; line-height: 20px; }
+.project-description { grid-column: 3; color: var(--muted); font-size: 13px; line-height: 1.65; }
 .portfolio-project-row:is(:hover,:focus-visible) .project-icon-frame { transform: translateY(-1px); box-shadow: none; }
 .portfolio-project-row:is(:hover,:focus-visible) .project-arrow { transform: translate(2px,-2px); }
 .portfolio-project-row:is(:hover,:focus-visible) .project-description { color: var(--copy); }
@@ -113,15 +115,14 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 .portfolio-dock button:focus-visible > span { opacity: 1; }
 @media (min-width: 601px) and (max-width: 760px) {
   .experience-entry { grid-template-columns: 44px 128px minmax(0,1fr) auto; gap: 4px 12px; }
-  .portfolio-project-row { grid-template-columns: 44px 128px minmax(0,1fr); gap: 4px 12px; }
-  .experience-summary { padding-right: 12px; }
+  .portfolio-project-row { grid-template-columns: 44px 128px minmax(0,1fr) auto; gap: 4px 12px; }
 }
 @media (max-width: 600px) {
   .portfolio-project-row { grid-template-columns: 44px minmax(0,1fr); gap: 3px 16px; }
   .project-icon-frame { grid-row: span 2; }
-  .project-description { grid-column: 2; margin-top: 4px; }
+  .project-description { grid-column: 2; margin: 4px 0 0; }
   .experience-entry { grid-template-columns: 44px minmax(0,1fr) auto; gap: 3px 16px; }
-  .experience-summary { grid-column: 2 / span 2; padding-right: 0; margin-top: 4px; }
+  .experience-summary { grid-column: 2 / span 2; padding-right: 0; margin: 4px 0 0; }
   .experience-date { grid-column: 3; grid-row: 1; }
 }
 @media (max-width: 380px) {
@@ -213,7 +214,7 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 .experience-entry:focus-within::before, .portfolio-project-row:focus-visible::before { opacity: 1; }
 .experience-entry:focus-within .experience-open-indicator { opacity: 1; transform: none; }
 .project-list > li, .experience-list > li { transition: opacity 180ms var(--swift); }
-.project-icon-frame::before { content: ''; position: absolute; inset: -4px; border-radius: 1px; opacity: 0; transform: scale(.82); transition: opacity 150ms, transform 300ms var(--spring); background: linear-gradient(currentColor,currentColor) left top/7px .5px no-repeat, linear-gradient(currentColor,currentColor) left top/.5px 7px no-repeat, linear-gradient(currentColor,currentColor) right top/7px .5px no-repeat, linear-gradient(currentColor,currentColor) right top/.5px 7px no-repeat, linear-gradient(currentColor,currentColor) left bottom/7px .5px no-repeat, linear-gradient(currentColor,currentColor) left bottom/.5px 7px no-repeat, linear-gradient(currentColor,currentColor) right bottom/7px .5px no-repeat, linear-gradient(currentColor,currentColor) right bottom/.5px 7px no-repeat; }
+.project-icon-frame::before, .work-figure-frame::before { content: ''; position: absolute; inset: -4px; border-radius: 1px; opacity: 0; transform: scale(.82); transition: opacity 150ms, transform 300ms var(--spring); background: linear-gradient(currentColor,currentColor) left top/7px .5px no-repeat, linear-gradient(currentColor,currentColor) left top/.5px 7px no-repeat, linear-gradient(currentColor,currentColor) right top/7px .5px no-repeat, linear-gradient(currentColor,currentColor) right top/.5px 7px no-repeat, linear-gradient(currentColor,currentColor) left bottom/7px .5px no-repeat, linear-gradient(currentColor,currentColor) left bottom/.5px 7px no-repeat, linear-gradient(currentColor,currentColor) right bottom/7px .5px no-repeat, linear-gradient(currentColor,currentColor) right bottom/.5px 7px no-repeat; }
 .portfolio-project-row:focus-visible .project-icon-frame::before, .experience-entry:focus-within .project-icon-frame::before { opacity: .34; transform: scale(1); }
 @media (hover: hover) and (pointer: fine) {
   .project-list:hover > li:not(:hover):not(:focus-within), .experience-list:hover > li:not(:hover):not(:focus-within) { opacity: .44; }
@@ -360,7 +361,7 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 @media (min-width: 1200px) {
   .work-aside + .work-tools { padding-top: 18px; border-top: .5px solid var(--rule); }
   .work-aside { display: block; position: absolute; top: 0; bottom: 0; left: calc(100% + 56px); width: clamp(150px, calc((100vw - 768px)/2 - 48px), 220px); pointer-events: none; }
-  .work-aside-sticky { pointer-events: auto; opacity: 0; transform: translateX(12px); transition: opacity 480ms cubic-bezier(.2, .7, .3, 1) 130ms, transform 540ms cubic-bezier(.2, .7, .3, 1) 130ms; }
+  .work-aside-sticky { padding-top: 8px; pointer-events: auto; opacity: 0; transform: translateX(12px); transition: opacity 480ms cubic-bezier(.2, .7, .3, 1) 130ms, transform 540ms cubic-bezier(.2, .7, .3, 1) 130ms; }
   .work-aside.is-visible .work-aside-sticky { opacity: 1; transform: none; }
   .work-figure-group { display: none; }
   .work-figure--side { margin: 0; }
@@ -505,3 +506,20 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 .outline-back-icon svg { width: 15px; height: 15px; }
 .outline-back-icon::before { content: ''; position: absolute; inset: -8px; border-radius: 50%; }
 .outline-toolbar { gap: 12px; }
+
+/* Company note — smallest caption tier, sits beside the project name */
+.case-study-content .project-title-row { justify-content: flex-start; }
+.case-study-content .project-title-row .project-actions { margin-left: auto; }
+.case-study-content .project-note { display: flex; flex-direction: column; gap: 3px; margin: 6px 0 0 4px; font: 400 10.5px/1.4 'Geist Mono', ui-monospace, monospace; color: var(--muted); align-self: flex-end; }
+
+/* Figure focus corners — same bracket frame as the home-page logos */
+.work-figure-frame { position: relative; display: block; }
+.work-figure-frame::before { z-index: 1; pointer-events: none; color: var(--ink); inset: -6px; }
+.work-figure-frame:has(.work-figure-btn:focus-visible)::before { opacity: .34; transform: scale(1); }
+.work-figure-btn:focus-visible { outline: none; }
+@media (hover: hover) and (pointer: fine) {
+  .work-figure-frame:hover::before { opacity: .34; transform: scale(1); }
+}
+
+.portfolio-project-row:focus-visible .experience-open-indicator { opacity: 1; transform: none; }
+@media (hover: hover) and (pointer: fine) { .portfolio-project-row:hover .experience-open-indicator { opacity: 1; transform: none; } }

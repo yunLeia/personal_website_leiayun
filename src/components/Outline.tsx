@@ -26,7 +26,8 @@ export default function Outline() {
     };
     const scan = () => {
       elements = Array.from(document.querySelectorAll<HTMLElement>('.case-study-main [data-outline]'));
-      const title = document.querySelector('.case-study-main h1')?.textContent?.trim();
+      const heading = document.querySelector<HTMLElement>('.case-study-main h1');
+      const title = (heading?.dataset.title ?? heading?.textContent)?.trim();
       const next = elements.map((element, index) => {
         if (!element.id) element.id = `outline-section-${index}`;
         return { id: element.id, label: index === 0 && title ? title : element.dataset.outline || '' };

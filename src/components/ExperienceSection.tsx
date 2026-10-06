@@ -15,10 +15,10 @@ export default function ExperienceSection() {
             </span>
             <div className="experience-identity">
               <h3>{exp.url ? <a className="company-link" href={exp.url} target="_blank" rel="noopener noreferrer" aria-label={`${exp.company} website (opens in a new tab)`}>{exp.company}<ExternalArrow /></a> : exp.company}</h3>
-              <span className="experience-role">{exp.role}</span>
+              <span className="experience-role">{exp.role.replace(/ Intern$/, '')}</span>
             </div>
             {exp.subtitle && <p className="experience-summary">{exp.subtitle}</p>}
-            <span className="experience-date">{exp.date}</span>
+            <span className="experience-date">{exp.date}{/ Intern$/.test(exp.role) && <span className="experience-kind">Internship</span>}</span>
             <span className="experience-open-indicator" aria-hidden="true">↗</span>
           </li>
         ))}

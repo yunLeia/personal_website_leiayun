@@ -28,7 +28,8 @@ export const PLANFIT_OVERVIEW = {
   team: 'Activation · Subscription',
   period: 'Mar – Dec 2025',
   summary:
-    'Planfit is an AI-powered fitness app with 4M+ users worldwide. As a Builder, I owned problems end-to-end (user research, PRD, design, development, QA, and post-launch analysis) without handing off to other functions.',
+    'Owned product problems end to end — from discovery through design, engineering, launch, and iteration',
+  note: ['AI fitness app · 4M+ users · 4.7★', 'App of the Day in 100+ countries'],
 };
 
 // ─── Projects ───────────────────────────────────────────────────

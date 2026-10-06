@@ -19,8 +19,9 @@ export default function ProjectsSection() {
               <span className={`project-icon-frame project-icon-${index}`} aria-hidden="true">
                 {proj.cover ? <img src={proj.cover} alt="" width="36" height="36" loading="lazy" decoding="async" /> : <span className="project-monogram">{proj.name[0]}</span>}
               </span>
-              <span className="project-identity"><span className="project-name">{proj.name}<span className="project-arrow" aria-hidden="true">↗</span></span><span className="project-category">{proj.tags?.[0]}</span></span>
+              <span className="project-identity"><span className="project-name">{proj.name}</span><span className="project-category">{proj.tags?.[0]}</span></span>
               <span className="project-description">{SUMMARIES[proj.name] || proj.sub}</span>
+              <span className="experience-open-indicator" aria-hidden="true">↗</span>
             </Link>
           </li>
         ))}

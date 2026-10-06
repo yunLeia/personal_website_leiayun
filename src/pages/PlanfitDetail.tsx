@@ -18,6 +18,7 @@ export default function PlanfitDetail() {
         name="Planfit"
         eyebrow="Experience"
         summary={PLANFIT_OVERVIEW.summary}
+        note={PLANFIT_OVERVIEW.note}
         facts={[
           { label: 'Role', value: PLANFIT_OVERVIEW.role },
           { label: 'Team', value: PLANFIT_OVERVIEW.team },
