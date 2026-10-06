@@ -64,7 +64,7 @@ export const PLANFIT_PROJECTS: PlanfitProject[] = [
   {
     num: '02',
     slug: 'community-club',
-    title: 'Public Clubs & Leaderboard',
+    title: 'Clubs & Leaderboard',
     subtitle: 'Community mechanics, engagement, and iteration',
     goal: 'Engagement + Retention',
     image: ['/images/planfit-community-club-1.webp', '/images/planfit-community-club-2.webp'],
@@ -86,28 +86,24 @@ export const PLANFIT_PROJECTS: PlanfitProject[] = [
   {
     num: '03',
     slug: 'onboarding-paywall',
-    title: 'Onboarding & Paywall',
+    title: 'Onboarding & Experiment System',
     subtitle: 'Conversion experiments across activation and subscription',
     goal: 'Subscription',
-    image: '/images/planfit-onboarding-paywall-fig.webp',
+    image: ['/images/planfit-onboarding-paywall-fig.webp', '/images/planfit-onboarding-n8n.webp', '/images/planfit-onboarding-offer.webp'],
     problemBody: (
       <>
-        Trial CVR sat at ~15%. Users completed onboarding but didn't convert. Funnel analysis on Amplitude revealed drop-offs weren't random: <B>they clustered around moments where users were asked to trust the product before it had earned that trust</B>. Copy wasn't localized. The paywall wasn't personalized. And every experiment required a full dev cycle to ship.
+        Trial conversion had plateaued around 15%, with major drop-offs happening before users had experienced enough product value to trust the paywall. Early experiments showed another pattern: there was no single “best” onboarding message — different segments responded to different motivations. But <B>testing each new hypothesis still required a development cycle, making the team’s learning speed a bottleneck of its own.</B>
       </>
     ),
-    thinking: [
-      { label: 'Observation', text: <>Drop-offs varied by platform, country, and traffic source, each segment breaking the funnel in a different spot.</> },
-      { label: 'Diagnosis', text: <>Users didn't feel seen by the time they reached the paywall. Generic copy and a one-size-fits-all experience couldn't convert a diverse, global user base.</> },
-      { label: 'Hypothesis', text: <>If we <B>personalize by segment</B> and experiment fast enough, conversion will move. And if the loop runs itself, we can test continuously without slowing the team down.</> },
-    ],
-    execution: [
-      { label: 'Funnel Mapping', text: <>Mapped every drop-off via Amplitude by platform, country, and traffic source. Found where trust broke down.</> },
-      { label: '30+ A/B Experiments', text: <>Designed and directly coded variants (copy, UI/UX, flow) grounded in loss aversion, personalization expectations, and commitment devices.</> },
-      { label: 'Automated Testing Engine', text: <>Built at the Planfit hackathon: <Hi>GPT generates localized copy → Django REST deploys it in real time → Amplitude detects significance → auto-applies the winner</Hi>, orchestrated with n8n. Scaled to 150+ copy experiments with no manual intervention.</> },
-      { label: 'Segmented Execution', text: <>Each segment (country, platform, traffic source) got its own variant. Nothing was generic.</> },
-    ],
-    impactTakeaway: <><B>Conversion moved when users felt the product was built for them.</B> Automation meant the next experiment started the moment the last one ended.</>,
-    tools: ['A/B Testing', 'Funnel Analysis', 'Reference Research', 'GPT API', 'n8n', 'Django'],
+    thinking: [],
+    execution: [],
+    didBody: (
+      <p>
+        I first ran experiments across localized copy, CTAs, onboarding flow, and paywall messaging, using Amplitude funnels to understand how each segment responded. As the number of experiments grew, I <Hi>turned that repeated workflow into an automated multilingual experimentation system</Hi>: GPT generated localized variants, Django APIs handled targeting and assignment, Amplitude measured outcomes, and n8n orchestrated significance checks and winner rollout. Once we defined the right user segments, the system could <B>continuously generate and test new copy for each one</B> — allowing us to keep learning what worked without rebuilding every experiment from scratch.
+      </p>
+    ),
+    impactTakeaway: <>The system <B>scaled experimentation to 150+ variants and improved CTA conversion by 20%</B>. It expanded beyond onboarding into paywall experiments and became more valuable as Planfit entered new markets, supporting localized testing across English, German, Spanish, and Japanese. What started as a way to improve one funnel became infrastructure for learning what messaging worked across segments and markets.</>,
+    tools: ['Growth Experimentation', 'Funnel Analysis', 'Statistical Testing', 'GPT', 'n8n', 'Amplitude', 'Automation'],
   },
   {
     num: '04',
@@ -117,17 +113,22 @@ export const PLANFIT_PROJECTS: PlanfitProject[] = [
     goal: 'Product Decisions',
     problemBody: (
       <>
-        Customer feedback came in from multiple sources and was too fragmented to turn into product decisions. <B>Recurring issues were hard to see, and nothing connected them to what got built next.</B>
+        I handled customer support every morning, reading emails, reviews, bug reports, and feature requests firsthand, and kept seeing the same complaints resurface. VOC was already stored in a database and reviewed regularly, but as volume grew, searching individual messages wasn’t enough: <B>I couldn’t show how common an issue was, whether it was getting worse, or how it compared with other issues competing for the next sprint.</B>
       </>
     ),
     thinking: [],
-    execution: [
-      { label: 'Ingestion', text: <><Hi>Engineered a multi-source ingestion pipeline</Hi> for 2,500+ VOC items.</> },
-      { label: 'Classification', text: <>Built an LLM classifier with JSON schema validation to categorize each item.</> },
-      { label: 'Aggregation', text: <>Implemented deduplication and SQL aggregation queries to surface recurring issues.</> },
-      { label: 'Ship', text: <>Turned the findings into fixes shipped across 8+ sprints.</> },
-    ],
-    impactTakeaway: <>Recurring issues surfaced from <B>2,500+ feedback items</B> became fixes shipped across 8+ sprints.</>,
-    tools: ['VOC Analysis', 'LLM Classifier', 'Data Pipeline', 'JSON Schema', 'SQL'],
+    execution: [],
+    didBody: (
+      <>
+        <p>
+          I built a pipeline that turned raw feedback into structured product evidence. <Hi>n8n collected and normalized VOC from each source; semantic retrieval matched new feedback with similar historical issues, and GPT assigned consistent labels</Hi> for issue, product area, type, and urgency. I aggregated frequency and trends across <B>2,500+ VOC items</B>, then surfaced them in a Notion dashboard with representative customer feedback so anyone on the team could understand the signal without querying the data.
+        </p>
+        <p>
+          I also created a <B>biweekly VOC review</B> where I walked Product, Design, and Engineering leads through the dashboard and we prioritized which customer problems should enter upcoming sprints.
+        </p>
+      </>
+    ),
+    impactTakeaway: <>Those decisions led to <B>fixes shipped across 8+ sprints</B>, and the review became an ongoing team process — turning VOC from a passive archive into a recurring input for product prioritization and planning.</>,
+    tools: ['VOC Analysis', 'n8n', 'Semantic Retrieval', 'LLM Classification', 'Notion Dashboard', 'Prioritization'],
   },
 ];

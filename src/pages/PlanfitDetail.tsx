@@ -6,7 +6,7 @@ import { Hi } from '../components/InlineMarks';
 
 const CAPTIONS: Record<string, string[]> = {
   'community-club': ['Challenge Club unlock and weekly ranking screens', 'Engagement results in Amplitude after launch'],
-  'onboarding-paywall': ['Onboarding and paywall variants across segments'],
+  'onboarding-paywall': ['Onboarding and paywall variants across segments', 'Workflow automation in n8n', 'One-time offer paywall'],
   'ai-stretching': ['Stretching routine redesign: before, after, and the edit flow', 'Experiment results in Amplitude'],
   'voc-pipeline': [],
 };
