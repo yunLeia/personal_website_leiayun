@@ -34,12 +34,12 @@ const WORK: WorkItemData[] = [
     id: 'creative-audit',
     num: '02',
     title: 'Creative Audit Agent Workflow',
-    problem: <>A single enterprise account could hold <B>3,000+ ad creatives</B>, making manual review impossible to scale. There was also no shared rubric for what strong creative looked like in the Korean market, so even a faster review had no consistent standard.</>,
+    problem: <>A single enterprise account could have <B>3,000+ ad creatives</B>, but reviewing them required account managers to manually watch, label, and analyze each video. That made creative audits too time-consuming to scale beyond a small number of priority clients. There was also no shared Korea-specific standard for evaluating creatives, making the analysis difficult to apply consistently.</>,
     did: (
-      <p>I worked with APAC, Industry Ops, and Sales teams to turn regional benchmarks into a Korea-specific review rubric. <Hi>Instead of relying on one prompt for a complex task, I broke the work into a staged agent workflow.</Hi> Using internal AI agents and a browser MCP tool, the system opens each creative, evaluates it against the rubric as <B>structured JSON</B>, aggregates account-level patterns, and generates client-ready recommendations and reports.</p>
+      <p>I partnered with <B>APAC Industry Ops and Sales</B> to turn regional benchmarks into a <B>Korea-specific creative rubric</B>, then built a reusable AI skill using <B>browser MCP</B> to open, inspect, and label creatives. My first version handled data retrieval, video review, analysis, and reporting in one long agent run, but as the workflow grew, carrying too much context and intermediate state made it fragile. I redesigned it into <Hi>smaller modular skills with bounded responsibilities, explicit inputs, structured JSON outputs, and controlled handoffs</Hi> between stages. This <B>externalized the workflow state instead of relying on a single model context</B>, while the individual skills were orchestrated back into one simple end-to-end workflow for account managers.</p>
     ),
     takeaway: <>The workflow audited <B>3,000+ creatives per account</B> and produced reports for <B>20+ enterprise clients across 3 Sales teams</B>. The reports were delivered to clients and used in Quarterly Business Reviews.</>,
-    tools: ['Agentic Workflow', 'MCP', 'Prompt Chaining', 'Structured Outputs', 'Ad Analytics'],
+    tools: ['Agentic Workflow', 'MCP', 'Prompt Chaining', 'Context Window', 'State Management', 'Ad Analytics'],
   },
   {
     id: 'ai-enablement',
