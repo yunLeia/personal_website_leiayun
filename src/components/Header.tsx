@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { SITE, SOCIAL_LINKS } from '../data';
 import { ExternalArrow } from './HomeUI';
 import AnimatedName from './AnimatedName';
@@ -9,7 +10,7 @@ export default function Header() {
       <div className="intro-copy">
         <AnimatedName />
         <p>I'm Leia, a senior at NYU studying Computer Science. I care about the space where product and engineering meet, and really about anything that solves a problem for someone.</p>
-        <p>Most recently I interned at <a href="#experience" onClick={(event) => { event.preventDefault(); document.getElementById('experience')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' }); }}>TikTok</a>, building AI powered workflows that automated the busywork for client facing teams. Before that I was a Product Engineer at <a href="/work/planfit">Planfit</a>, where I owned core business metrics and ran 100+ experiments end to end.</p>
+        <p>Most recently I interned at <Link to="/work/tiktok">TikTok</Link>, building AI powered workflows that automated the busywork for client facing teams. Before that I was a Product Engineer at <Link to="/work/planfit">Planfit</Link>, where I owned core business metrics and ran 100+ experiments end to end.</p>
         <p>Being a generalist is kind of my thing, but I go deep when the details matter. I bring speed, craft, and a little fun to whatever the team is making.</p>
         <p>Have something in mind? <a href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(SITE.email)}`} target="_blank" rel="noopener noreferrer" aria-label="Let’s talk — compose an email in Gmail">Let's talk<ExternalArrow /></a></p>
       </div>

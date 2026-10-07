@@ -29,7 +29,7 @@ export const PLANFIT_OVERVIEW = {
   period: 'Mar – Dec 2025',
   summary:
     'Owned product problems end to end — from discovery through design, engineering, launch, and iteration',
-  note: ['AI fitness app · 4M+ users · 4.7★', 'App of the Day in 100+ countries'],
+  note: ['AI fitness app · 4M+ users · 4.7★ (67,000+)', 'App of the Day in 100+ countries'],
 };
 
 // ─── Projects ───────────────────────────────────────────────────
