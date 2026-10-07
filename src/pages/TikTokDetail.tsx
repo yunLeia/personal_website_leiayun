@@ -38,7 +38,7 @@ const WORK: WorkItemData[] = [
     did: (
       <p>I partnered with <B>APAC Industry Ops and Sales</B> to turn regional benchmarks into a <B>Korea-specific creative rubric</B>, then built a reusable AI skill using <B>browser MCP</B> to open, inspect, and label creatives. My first version handled data retrieval, video review, analysis, and reporting in one long agent run, but as the workflow grew, carrying too much context and intermediate state made it fragile. I redesigned it into <Hi>smaller modular skills with bounded responsibilities, explicit inputs, structured JSON outputs, and controlled handoffs</Hi> between stages. This <B>externalized the workflow state instead of relying on a single model context</B>, while the individual skills were orchestrated back into one simple end-to-end workflow for account managers.</p>
     ),
-    takeaway: <>The workflow audited <B>3,000+ creatives per account</B> and produced reports for <B>20+ enterprise clients across 3 Sales teams</B>. The reports were delivered to clients and used in Quarterly Business Reviews.</>,
+    takeaway: <>The workflow was used across <B>3 Sales teams</B>, with creative audit reports delivered directly to <B>20+ enterprise clients</B>. After launch, account managers continued using the published skills to prepare for Quarterly Business Reviews, <B>running the full workflow themselves with just a client account ID</B>.</>,
     tools: ['Agentic Workflow', 'MCP', 'Prompt Chaining', 'Context Window', 'State Management', 'Ad Analytics'],
   },
   {
