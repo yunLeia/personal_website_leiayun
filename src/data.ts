@@ -9,7 +9,7 @@ export const SITE = {
 };
 
 export const SOCIAL_LINKS = [
-  { label: 'Calendly (15-min chat)', href: 'https://calendly.com/leia-yun-s/15-minute-meeting' },
+  { label: 'Calendly (15-min chat)', href: 'https://calendly.com/leia-yun-s/15-min-chat' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/leia-yun-s/' },
   { label: 'GitHub', href: 'https://github.com/leiassyun' },
 ];

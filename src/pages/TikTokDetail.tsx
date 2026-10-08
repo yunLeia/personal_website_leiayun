@@ -62,7 +62,7 @@ const WORK: WorkItemData[] = [
     ),
     impactLabel: 'What I learned',
     tools: ['Alerting', 'Rule-based Logic', 'Drill-down Analysis', 'Revenue Monitoring', 'Automation'],
-    takeaway: <><Hi>Automation only creates value when it leads to action that helps the client and, ultimately, drives business outcomes</Hi> — not when it simply produces another alert. That changed the question I ask from “What can I automate?” to <B>“Will the time and insight it creates turn into business results?”</B></>,
+    takeaway: <>Automation only creates <Hi>real business value</Hi> when it leads to action that helps the client and, ultimately, drives business outcomes — not when it simply produces another alert. That changed the question I ask from “What can I automate?” to <B>“Will the time and insight it creates turn into business results?”</B></>,
   },
 ];
 
@@ -73,7 +73,7 @@ export default function TikTokDetail() {
         name={tiktok.company}
         eyebrow="Experience"
         summary={tiktok.subtitle ?? ''}
-        facts={[{ label: 'Role', value: <>{tiktok.role} | <em>Internal Automation</em></> }, { label: 'Team', value: 'Global Business Solutions (GBS) · Contents & Services' }, { label: 'Period', value: tiktok.date }]}
+        facts={[{ label: 'Role', value: tiktok.role }, { label: 'Team', value: 'Global Business Solutions (GBS) · Contents & Services' }, { label: 'Period', value: tiktok.date }]}
         links={tiktok.url ? [{ label: 'Company site', href: tiktok.url }] : []}
       />
       <WorkQuestions items={WORK.map((w, i) => ({ id: w.id, num: w.num, title: w.title, question: QUESTIONS[i], content: <WorkItem {...w} /> }))} />

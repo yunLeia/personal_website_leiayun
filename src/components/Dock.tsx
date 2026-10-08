@@ -1,4 +1,3 @@
-import { SITE } from '../data';
 import { Tooltip } from './shared';
 
 function DockIcon({ children, label, onClick }: { children: React.ReactNode; label: string; onClick: () => void }) {
@@ -25,18 +24,6 @@ export default function Dock() {
       aria-label="Primary"
       className="portfolio-dock"
     >
-      <button
-        type="button"
-        onClick={() => window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })}
-        aria-label="Back to top"
-        className="group relative w-9 h-9 rounded-full overflow-hidden shrink-0 cursor-pointer hover:ring-2 hover:ring-black/10"
-      >
-        <Tooltip label="Back to top" />
-        <img src={SITE.photoHalftone} alt="Leia Yun in halftone dots" width={36} height={36} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-      </button>
-
-      <div className="w-px h-5 bg-black/10 mx-1" />
-
       <DockIcon label="Experience" onClick={() => scrollTo('#experience')}>
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
           <rect x="3" y="7" width="18" height="13" rx="2" />

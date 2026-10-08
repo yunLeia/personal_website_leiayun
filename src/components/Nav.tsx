@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { NAV_ITEMS, SITE, type NavItem } from '../data';
+import { NAV_ITEMS, type NavItem } from '../data';
 import { Tooltip } from './shared';
 
 const ICONS: Record<string, React.ReactNode> = {
@@ -50,15 +50,13 @@ export default function Nav() {
   return (
     <nav className="case-study-nav" aria-label="Primary">
       <div className="case-study-nav-items">
-        {NAV_ITEMS.map((item: NavItem, index) => {
+        {NAV_ITEMS.filter((item) => item.href !== '#about').map((item: NavItem) => {
           const hasDropdown = !!item.items?.length;
           const isOpen = openKey === item.label;
           const menuId = `nav-menu-${item.label.toLowerCase()}`;
-          const isAbout = item.href === '#about';
 
           return (
             <Fragment key={item.label}>
-              {index === 1 && <div className="w-px h-5 bg-black/10 mx-1" />}
               <div
                 className="relative"
                 onMouseEnter={() => hasDropdown && setOpenKey(item.label)}
@@ -71,14 +69,10 @@ export default function Nav() {
                 aria-expanded={hasDropdown ? isOpen : undefined}
                 aria-controls={hasDropdown ? menuId : undefined}
                 aria-label={item.label}
-                className={
-                  isAbout
-                    ? 'group relative w-11 h-11 rounded-full overflow-hidden flex items-center justify-center hover:ring-2 hover:ring-black/10'
-                    : 'group relative w-11 h-11 flex items-center justify-center rounded-full text-[#666]'
-                }
+                className="group relative w-11 h-11 flex items-center justify-center rounded-full text-[#666]"
               >
                 <Tooltip label={item.label} />
-                {isAbout ? <img src={SITE.photoHalftone} alt="" width={32} height={32} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} /> : ICONS[item.href]}
+                {ICONS[item.href]}
               </a>
 
               {hasDropdown && (

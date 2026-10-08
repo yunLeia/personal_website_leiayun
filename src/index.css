@@ -39,6 +39,8 @@
 }
 .portfolio-shell { position: relative; z-index: 1; width: min(100%, 768px); margin: 0 auto; padding: 56px 32px 112px; border-inline: .5px dashed var(--rule); }
 .portfolio-intro { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 40px; }
+.intro-actions { display: flex; gap: 8px; width: 100%; }
+.intro-aside .intro-actions .resume-link, .intro-aside .intro-actions .linkedin-link { flex: 1 1 0; width: auto; min-width: 0; padding-inline: 8px; gap: 6px; font-size: 13px; }
 .intro-copy h1 { display: flex; align-items: center; gap: 10px; font-size: 16px; line-height: 24px; font-weight: 600; letter-spacing: -.4px; margin: 0 0 16px; }
 .identity-mark { color: #b67748; font-size: 15px; font-weight: 400; }
 .intro-copy p { margin: 0 0 12px; color: var(--copy); line-height: 1.72; }
@@ -47,7 +49,8 @@
 .intro-copy a, .linkedin-link { text-decoration: underline dotted; text-decoration-color: #aaa69c; text-underline-offset: 4px; transition: color 150ms, text-decoration-color 150ms; }
 .intro-copy a:hover, .linkedin-link:hover { color: var(--ink); text-decoration-style: solid; }
 .intro-aside { display: flex; align-items: center; flex-direction: column; gap: 12px; }
-.portrait-frame { width: 240px; height: 240px; margin-bottom: 8px; }
+.intro-aside { align-self: start; gap: 46px; margin-top: calc(clamp(30px, 7.2vw, 38px) * 1.3 + 4px); }
+.portrait-frame { width: 240px; height: 240px; }
 .resume-link { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 6px 18px; border: .5px solid #d9d7d1; border-radius: 4px; box-shadow: 0 1px 2px #201f1c06; transition: transform 300ms var(--spring), background 150ms; }
 .resume-link:hover { transform: translateY(-2px); background: var(--hover-bg); }
 .linkedin-link { color: var(--muted); padding: 2px 8px; }
@@ -69,10 +72,8 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 }
 @media (max-width: 440px) {
   .portfolio-intro { grid-template-columns: 1fr; gap: 28px; }
-  .intro-aside { grid-row: 1; display: grid; grid-template-columns: 140px 1fr; justify-items: center; gap: 8px 24px; }
-  .portrait-frame { grid-row: span 2; margin: 0; }
-  .resume-link { align-self: end; }
-  .linkedin-link { align-self: start; }
+  .intro-aside { grid-row: 1; align-self: start; align-items: flex-start; margin-top: 0; }
+  .portrait-frame { margin: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -109,6 +110,8 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 .footer-tree li::before { content: ''; position: absolute; width: 10px; left: 0; top: 15px; border-top: .5px solid var(--rule); }
 .footer-tree a { transition: color 150ms; overflow-wrap: anywhere; }
 .footer-tree a:hover { color: var(--ink); }
+.footer-tree a { display: inline-flex; align-items: center; gap: 8px; }
+.footer-tree a svg:first-child { flex: none; }
 .portfolio-dock { position: fixed; z-index: 40; bottom: max(20px, env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 4px; padding: 6px; border-radius: 999px; background: #fcfcfbef; box-shadow: 0 0 0 1px #dedcd680, 0 8px 30px #00000014; }
 .portfolio-dock button { width: 44px; height: 44px; }
 .portfolio-dock svg { width: 18px; height: 18px; }
@@ -229,12 +232,12 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 
 
 /* Original paper background; only interactive and inset surfaces use gray. */
-.intro-aside .resume-link, .intro-aside .linkedin-link { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; width: 156px; padding: 10px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; line-height: 20px; text-decoration: none; transition: background 150ms, border-color 150ms, transform 180ms var(--swift); }
-.intro-aside .resume-link { background: var(--ink); color: #fcfcfb; border: 1px solid var(--ink); box-shadow: 0 2px 3px #0000000a; }
-.intro-aside .resume-link .external-arrow { color: inherit; }
-.intro-aside .resume-link:hover { background: #383734; transform: translateY(-1px); }
-.intro-aside .linkedin-link { background: transparent; color: var(--copy); border: 1px solid #d5d4d0; }
-.intro-aside .linkedin-link:hover { background: var(--hover-bg); border-color: #aaa9a4; transform: translateY(-1px); }
+.intro-actions .resume-link, .intro-actions .linkedin-link { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; width: 156px; padding: 10px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; line-height: 20px; text-decoration: none; transition: background 150ms, border-color 150ms, transform 180ms var(--swift); }
+.intro-actions .resume-link { background: var(--ink); color: #fcfcfb; border: 1px solid var(--ink); box-shadow: 0 2px 3px #0000000a; }
+.intro-actions .resume-link .external-arrow { color: inherit; }
+.intro-actions .resume-link:hover { background: #383734; transform: translateY(-1px); }
+.intro-actions .linkedin-link { background: transparent; color: var(--copy); border: 1px solid #d5d4d0; }
+.intro-actions .linkedin-link:hover { background: var(--hover-bg); border-color: #aaa9a4; transform: translateY(-1px); }
 .intro-copy h1.animated-name { display: block; font-size: clamp(30px, 7.2vw, 38px); line-height: 1.3; font-weight: 500; letter-spacing: -.045em; margin: 0 0 20px; padding: 4px 0; }
 .name-letters { display: inline-flex; align-items: baseline; }
 .name-letter { position: relative; display: inline-block; cursor: default; isolation: isolate; flex: none; transition: width 380ms cubic-bezier(.22,1,.36,1); }
@@ -245,7 +248,7 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 .name-letter[data-illustrated="true"] .name-type { opacity: 0; transform: scale(.96); }
 .name-art[data-visible="true"] { opacity: 1; transform: translate(-50%,-50%) scale(1) rotate(var(--name-tilt, -4deg)); animation: name-sticker-arrive 480ms cubic-bezier(.22,1,.36,1) both; }
 @keyframes name-sticker-arrive { 0% { transform: translate(-50%,calc(-50% + 3px)) scale(.92) rotate(var(--name-tilt, -4deg)); } 70% { transform: translate(-50%,-50%) scale(1.015) rotate(var(--name-tilt, -4deg)); } 100% { transform: translate(-50%,-50%) scale(1) rotate(var(--name-tilt, -4deg)); } }
-@media (max-width: 440px) { .intro-aside .resume-link, .intro-aside .linkedin-link { width: 100%; padding-inline: 10px; } }
+@media (max-width: 440px) { .intro-actions .resume-link, .intro-actions .linkedin-link { width: 100%; padding-inline: 10px; } }
 @media (prefers-reduced-motion: reduce) {
   .animated-name .name-art { display: none; }
   .animated-name .name-type { opacity: 1; transform: none; }
@@ -487,7 +490,7 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
    Small tag     radius 3px · border .5px --rule
    Hover         every button lifts 2px; rectangles also tint to --hover-bg
    ─────────────────────────────────────────────────────────────── */
-.intro-aside .resume-link, .intro-aside .linkedin-link, .project-actions a {
+.intro-actions .resume-link, .intro-actions .linkedin-link, .project-actions a {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
   min-height: 41px; padding: 9px 14px;
   border: .5px solid var(--rule); border-radius: 5px; box-shadow: none;
@@ -495,19 +498,19 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
   font: 500 13px/20px 'Geist', system-ui, sans-serif; letter-spacing: normal; text-decoration: none;
   transition: transform 300ms var(--spring), background 150ms, border-color 150ms;
 }
-.intro-aside .resume-link:hover, .intro-aside .linkedin-link:hover, .project-actions a:hover { transform: translateY(-2px); background: var(--hover-bg); border-color: var(--rule); }
-.intro-aside .resume-link, .project-actions a.is-primary { background: var(--ink); border-color: var(--ink); color: var(--paper); }
-.intro-aside .resume-link:hover, .project-actions a.is-primary:hover { background: #3a3935; border-color: #3a3935; }
-.intro-aside .resume-link .external-arrow, .project-actions a.is-primary .external-arrow { color: inherit; }
+.intro-actions .resume-link:hover, .intro-actions .linkedin-link:hover, .project-actions a:hover { transform: translateY(-2px); background: var(--hover-bg); border-color: var(--rule); }
+.intro-actions .resume-link, .project-actions a.is-primary { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.intro-actions .resume-link:hover, .project-actions a.is-primary:hover { background: #3a3935; border-color: #3a3935; }
+.intro-actions .resume-link .external-arrow, .project-actions a.is-primary .external-arrow { color: inherit; }
 .outline-back-icon { position: relative; width: 28px; height: 28px; border: .5px solid #aaa79e; background: transparent; transition: translate 300ms var(--spring), color 150ms; }
 .outline-back-icon:hover { background: transparent; color: var(--ink); translate: 0 -2px; }
 .portfolio-dock button, .portfolio-dock a { transition: translate 300ms var(--spring), background 150ms; }
 .portfolio-dock button:hover, .portfolio-dock a:hover { translate: 0 -2px; }
 .work-lightbox-close:hover { translate: 0 -2px; }
 .tool-pill { display: inline-block; padding: 4px 8px; border: .5px solid var(--rule); border-radius: 3px; color: var(--muted); font: 400 12px/20px 'Geist', system-ui, sans-serif; }
-@media (pointer: coarse) { .intro-aside .resume-link, .intro-aside .linkedin-link, .project-actions a { min-height: 44px; } }
+@media (pointer: coarse) { .intro-actions .resume-link, .intro-actions .linkedin-link, .project-actions a { min-height: 44px; } }
 @media (prefers-reduced-motion: reduce) {
-  .intro-aside .resume-link:hover, .intro-aside .linkedin-link:hover, .project-actions a:hover { transform: none; }
+  .intro-actions .resume-link:hover, .intro-actions .linkedin-link:hover, .project-actions a:hover { transform: none; }
   .outline-back-icon:hover, .portfolio-dock button:hover, .portfolio-dock a:hover, .work-lightbox-close:hover, .work-q-head:hover .work-q-toggle { translate: none; }
 }
 .outline-back-icon svg { width: 15px; height: 15px; }
