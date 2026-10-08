@@ -10,7 +10,7 @@ const QUESTIONS = [
   <>What’s the <Hi>root problem</Hi> underneath the symptom?</>,
   <>How can I turn a prompt into a <Hi>scalable system</Hi>?</>,
   <>How do I communicate about AI with <Hi>nontechnical people</Hi>?</>,
-  <>What makes <Hi>automation worth</Hi> more than just another alert?</>,
+  <>What makes automation create <Hi>real business value</Hi>?</>,
 ];
 
 const WORK: WorkItemData[] = [
@@ -62,7 +62,7 @@ const WORK: WorkItemData[] = [
     ),
     impactLabel: 'What I learned',
     tools: ['Alerting', 'Rule-based Logic', 'Drill-down Analysis', 'Revenue Monitoring', 'Automation'],
-    takeaway: <>Automation only creates <Hi>real business value</Hi> when it leads to action that helps the client and, ultimately, drives business outcomes — not when it simply produces another alert. That changed the question I ask from “What can I automate?” to <B>“Will the time and insight it creates turn into business results?”</B></>,
+    takeaway: <><Hi>Automation only creates value when it leads to action that helps the client and, ultimately, drives business outcomes</Hi> — not when it simply produces another alert. That changed the question I ask from “What can I automate?” to <B>“Will the time and insight it creates turn into business results?”</B></>,
   },
 ];
 
