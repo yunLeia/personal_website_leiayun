@@ -50,8 +50,8 @@
 .shop-btn.ghost{background:#FFF;color:var(--ink);border:1px solid var(--ink)}
 .shop-note{font-size:10px;color:var(--muted);margin-top:2px}
 .ext-panel{position:absolute;right:0;top:0;bottom:0;width:44%;display:flex;flex-direction:column;background:#FFF;border-left:1px solid var(--line);box-shadow:-18px 0 40px #1F2A3D14;transform:translateX(102%);transition:transform .75s var(--ease)}
-.ext-window:not([data-state=store]):not([data-state=clicking]) .ext-panel{transform:none}
-.ext-window:not([data-state=store]):not([data-state=clicking]) .ext-store{right:44%}
+.ext-window:not([data-state=store]):not([data-state=menu]):not([data-state=clicking]) .ext-panel{transform:none}
+.ext-window:not([data-state=store]):not([data-state=menu]):not([data-state=clicking]) .ext-store{right:44%}
 .ext-head{display:flex;justify-content:space-between;align-items:center;padding:10px 16px 6px;font-size:11px;color:var(--muted);flex-shrink:0}
 .ext-logo{position:relative;width:74px;height:24px;overflow:hidden;mix-blend-mode:multiply}
 .ext-logo img{position:absolute;width:150%;max-width:none;left:-25%;top:55%;transform:translateY(-50%)}
@@ -80,7 +80,7 @@ button.chip:hover{border-color:#AEB5C0}
 .shop-product{grid-template-columns:1fr;padding:10px}
 .shop-info{display:none}
 .ext-panel{width:74%}
-.ext-window:not([data-state=store]):not([data-state=clicking]) .ext-store{right:74%}
+.ext-window:not([data-state=store]):not([data-state=menu]):not([data-state=clicking]) .ext-store{right:74%}
 .ext-body{grid-template-columns:1fr;grid-template-rows:1fr auto}
 .ext-pickers{display:grid;grid-template-columns:1fr 1fr;gap:8px;transform:translateY(8px)}
 .chip{width:34px;height:40px}
@@ -88,9 +88,9 @@ button.chip:hover{border-color:#AEB5C0}
 @media(prefers-reduced-motion:reduce){.ext-store,.ext-panel{transition:none}}
 .shop-nav{overflow:hidden;white-space:nowrap}
 .ext-panel{width:58%}
-.ext-window:not([data-state=store]):not([data-state=clicking]) .ext-store{right:58%}
+.ext-window:not([data-state=store]):not([data-state=menu]):not([data-state=clicking]) .ext-store{right:58%}
 .ext-store::after{content:'';position:absolute;inset:0;background:#14161A;opacity:0;pointer-events:none;transition:opacity .7s var(--ease)}
-.ext-window:not([data-state=store]):not([data-state=clicking]) .ext-store::after{opacity:.38}
+.ext-window:not([data-state=store]):not([data-state=menu]):not([data-state=clicking]) .ext-store::after{opacity:.38}
 .ext-body{grid-template-columns:1.15fr auto;gap:20px;padding:6px 22px 20px}
 .ext-loading{inset:0;border-radius:10px}
 .ext-window[data-state=loading] .ext-look-img{opacity:0}
@@ -98,7 +98,7 @@ button.chip:hover{border-color:#AEB5C0}
 .chip{width:46px;height:52px}
 .picker small{font-size:10px}
 @media(max-width:640px){.ext-panel{width:78%}
-.ext-window:not([data-state=store]):not([data-state=clicking]) .ext-store{right:78%}
+.ext-window:not([data-state=store]):not([data-state=menu]):not([data-state=clicking]) .ext-store{right:78%}
 .ext-body{grid-template-columns:1fr;padding:4px 12px 12px;gap:10px}
 .chip{width:36px;height:42px}}
 .ext-look,.ext-loading{background:#F1F1F1}
@@ -159,3 +159,22 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-r
  .chip{height:44px}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* Right-click flow: context menu on the product photo -> "Try in Cabine" -> panel opens */
+.shop-photo{position:relative}
+.capture-box{position:absolute;inset:10% 18% 12%;border:1.5px dashed #fff;border-radius:6px;box-shadow:0 0 0 1px #1A1A1A33;opacity:0;transform:scale(1.04);transition:opacity .25s,transform .35s var(--ease);pointer-events:none}
+.ext-window:is([data-state=clicking]) .capture-box{opacity:1;transform:none;transition-delay:.34s}
+.ctx-menu{position:absolute;left:30%;top:46%;z-index:3;min-width:150px;padding:5px;border:1px solid #D9DCE1;border-radius:8px;background:#fff;box-shadow:0 10px 28px #1F2A3D26;font-size:11px;color:#2B2F36;opacity:0;transform:translateY(-4px) scale(.97);transform-origin:0 0;transition:opacity .2s,transform .25s var(--ease);pointer-events:none}
+.ctx-item{display:flex;align-items:center;gap:7px;padding:6px 9px;border-radius:5px;white-space:nowrap;transition:background .2s,color .2s}
+.ctx-sep{display:block;height:1px;margin:4px 3px;background:#ECEEF1}
+.ctx-cabine img{width:13px;height:13px}
+.ctx-cabine{font-weight:600}
+.ext-window:is([data-state=menu],[data-state=clicking]) .ctx-menu{opacity:1;transform:none}
+.ext-window[data-state=clicking] .ctx-cabine{background:#E3EAF7;color:#1A1A1A;transition-delay:.3s}
+.ctx-cursor{position:absolute;left:30%;top:46%;z-index:4;width:18px;height:18px;margin:-3px 0 0 -3px;opacity:0;translate:0 0;transition:opacity .15s,translate .34s cubic-bezier(.22,.8,.2,1);pointer-events:none;filter:drop-shadow(0 1px 1px #0003)}
+.ext-window:is([data-state=menu],[data-state=clicking]) .ctx-cursor{opacity:1}
+.ext-window[data-state=clicking] .ctx-cursor{translate:30px 84px}
+.ext-window:not([data-state=store]):not([data-state=menu]):not([data-state=clicking]) .ctx-menu,
+.ext-window:not([data-state=store]):not([data-state=menu]):not([data-state=clicking]) .ctx-cursor,
+.ext-window:not([data-state=store]):not([data-state=menu]):not([data-state=clicking]) .capture-box{opacity:0;transition:opacity .25s}
+@media(prefers-reduced-motion:reduce){.ctx-menu,.ctx-cursor,.capture-box{transition:none}}

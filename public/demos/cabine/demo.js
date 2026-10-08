@@ -66,8 +66,9 @@
   $$('.chip[data-key]', ext).forEach(b => b.setAttribute('aria-pressed', String(pick[b.dataset.key] === b.dataset.value)));
   lookImg.src = `assets/v2/looks/${pick.top}__${pick.outer}__${pick.bottom}__${pick.shoes}.webp`; lookImg.hidden = false; missing.hidden = true;
   if (reduced) { ext.dataset.state = 'ready'; running = false; return; }
-  ext.dataset.state = 'store'; await sleep(500);      // the store page on its own
-  ext.dataset.state = 'clicking'; await sleep(450);   // the Cabine icon is clicked
+  ext.dataset.state = 'store'; await sleep(600);      // the store page on its own
+  ext.dataset.state = 'menu'; await sleep(650);       // right-click the product photo: the context menu opens
+  ext.dataset.state = 'clicking'; await sleep(780);   // the cursor glides to "Try in Cabine", picks it, and the piece is captured
   ext.dataset.state = 'loading'; restartLoader(); await sleep(LOADER_MS);   // panel opens with the pieces; the look area plays one full loader
   ext.dataset.state = 'ready';                        // the striped shirt with light jeans; visitors can restyle it
   await sleep(900);
