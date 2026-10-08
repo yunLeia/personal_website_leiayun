@@ -61,6 +61,8 @@ export const EXPERIENCE: ExperienceItem[] = [
 // ─── Projects ────────────────────────────────────────────────────
 export interface ProjectItem {
   name: string;
+  // Product site; the name on the homepage links here while the row opens the detail page.
+  url?: string;
   sub: string;
   tags?: string[];
   detailPath: string;
@@ -74,6 +76,7 @@ export interface ProjectItem {
 export const PROJECTS: ProjectItem[] = [
   {
     name: 'Cabine',
+    url: 'https://cabine-j7p.pages.dev',
     sub: 'a chrome extension that brings your wardrobe beside an online store, so you can see what you’d wear a new piece with before buying it.',
     tags: ['Chrome Extension', '0→1 Product', 'In Progress'],
     detailPath: '/work/cabine',

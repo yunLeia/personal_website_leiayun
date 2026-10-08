@@ -39,9 +39,15 @@ export default function AnimatedName() {
       return image.decode().catch(() => undefined);
     }));
     let observer: IntersectionObserver | undefined;
+    let armed = true;   // replays each time the name returns to view after having scrolled away
     const start = () => {
       if (cancelled || reduced.current) return;
-      observer?.disconnect();
+      armed = false;
+      introTimers.forEach(clearTimeout);
+      introTimers.length = 0;
+      returns.current.forEach(clearTimeout);
+      introComplete.current = false;
+      setVariants(LETTERS.map(() => null));
       LETTERS.forEach((_, index) => {
         const show = (variant: number | null) => setVariants((current) => current.map((value, i) => i === index ? variant : value));
         timers.current.push(setTimeout(() => show(0), 450 + index * 35));
@@ -52,7 +58,10 @@ export default function AnimatedName() {
     Promise.all([...images, document.fonts.ready]).then(() => {
       if (cancelled || !heading.current) return;
       // A restored scroll position must not spend the entrance offscreen.
-      observer = new IntersectionObserver(([entry]) => { if (entry.isIntersecting) start(); }, { threshold: 1 });
+      observer = new IntersectionObserver(([entry]) => {
+        if (entry.intersectionRatio < 0.2) armed = true;
+        else if (entry.intersectionRatio >= 0.999 && armed) start();
+      }, { threshold: [0, 0.2, 1] });
       observer.observe(heading.current);
     });
     const returnTimers = returns.current;
