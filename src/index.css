@@ -337,6 +337,13 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 .project-actions a.is-primary:hover { background: #3a3935; }
 .case-study-content .project-intro .case-cover { max-width: none; margin: 0 0 28px; }
 .case-cover.is-natural > img { aspect-ratio: auto; object-fit: contain; }
+
+.cabine-demo-preview { margin: 0 0 28px; container-type: inline-size; }
+.cabine-demo-frame { position: relative; padding-top: calc(60% + 34px); }
+.cabine-demo-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; border-radius: 10px; }
+@container (max-width: 640px) {
+  .cabine-demo-frame { padding-top: calc(140% + 34px); }
+}
 .case-study-content .work-body > :is(p, ul, div, dl) + :is(p, ul, div, dl) { margin-top: 12px; }
 .work-body .work-phase { color: var(--ink); font-weight: 600; }
 .case-study-content .work-body > p.work-phase:not(:first-child) { margin-top: 22px; }

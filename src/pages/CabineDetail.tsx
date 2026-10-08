@@ -14,6 +14,16 @@ export default function CabineDetail() {
           { label: 'Status', value: 'v0.1.0, pre-launch' },
         ]}
         links={[{ label: 'Visit site', href: 'https://cabine-j7p.pages.dev', primary: true }]}
+        preview={
+          <figure className="cabine-demo-preview">
+            <div className="cabine-demo-frame">
+              <iframe
+                src="/demos/cabine/index.html"
+                title="Cabine demo: style a store item with pieces from your closet"
+              />
+            </div>
+          </figure>
+        }
       />
 
       <WorkSection id="problem" num="01" title="The Problem" lede="Stores sell pieces. You wear outfits.">

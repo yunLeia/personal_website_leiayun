@@ -11,10 +11,11 @@ type Props = {
   note?: string[];
   facts: Fact[];
   links: Link[];
+  preview?: ReactNode;
   children?: ReactNode;
 };
 
-export default function ProjectIntro({ name, summary, eyebrow = 'Selected project', note, facts, links, children }: Props) {
+export default function ProjectIntro({ name, summary, eyebrow = 'Selected project', note, facts, links, preview, children }: Props) {
   const project = PROJECTS.find((item) => item.name === name);
   const image = project?.hero ?? project?.cover;
 
@@ -32,11 +33,11 @@ export default function ProjectIntro({ name, summary, eyebrow = 'Selected projec
           ))}
         </div>
       </div>
-      {image && (
+      {preview ?? (image && (
         <figure className={`case-cover${project?.hero ? ' is-natural' : ''}`}>
           <img src={image} alt={`${name} preview`} />
         </figure>
-      )}
+      ))}
       <p className="project-lede">{summary}</p>
       <dl className="project-facts">
         {facts.map((row) => <div key={row.label}><dt>{row.label}</dt><dd>{row.value}</dd></div>)}

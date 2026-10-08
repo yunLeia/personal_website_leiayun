@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Cabine interactive outfit demo</title>
+  <link rel="preload" href="assets/fonts/urbanist-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="demo.css">
+  <script defer src="demo.js"></script>
+</head>
+<body>
+  <svg class="defs" aria-hidden="true"><symbol id="i-replay" viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3M4.5 4.5v4h4"/></symbol></svg>
+  <main aria-label="Interactive demo: open Cabine beside a store and style an outfit from your closet">
+  <div class="window ext-window" data-state="store">
+   <div class="window-bar browser-bar"><i></i><i></i><i></i>
+    <span class="address">the-edit.shop/women/striped-poplin-shirt</span>
+    <button class="ext-replay" type="button" aria-label="Replay the demo"><svg><use href="#i-replay"/></svg></button>
+    <span class="ext-icon" aria-hidden="true"><img src="assets/brand/cabine-icon.svg" alt=""></span>
+   </div>
+   <div class="ext-stage">
+    <div class="ext-store">
+     <div class="shop-nav"><b>The Edit</b><span>New in</span><span>Clothing</span><span>Shoes</span><i class="shop-bag"></i></div>
+     <div class="shop-product">
+      <figure class="shop-photo"><img src="assets/v2/store-stripe-shirt-trousers.webp" alt="A model wearing a blue striped shirt with black wide trousers and heels"></figure>
+      <div class="shop-info">
+       <small>New in · Shirts</small>
+       <h4>Striped poplin shirt</h4>
+       <p class="shop-price">$89</p>
+       <p class="shop-label">Size</p>
+       <div class="shop-sizes"><span>XS</span><span>S</span><span class="on">M</span><span>L</span><span>XL</span></div>
+       <span class="shop-btn">Add to bag</span>
+       <span class="shop-btn ghost">Buy now</span>
+       <p class="shop-note">Free delivery over $100 · Free returns</p>
+      </div>
+     </div>
+    </div>
+    <aside class="ext-panel" aria-label="Cabine side panel">
+     <div class="ext-head"><span class="ext-logo"><img src="assets/brand/cabine-wordmark.png" alt="Cabine"></span><span>With my closet</span></div>
+     <div class="ext-body">
+      <div class="ext-look">
+       <img class="ext-look-img" src="assets/v2/looks/stripe-shirt__no-outer__light-jeans__silver-flats.webp" alt="The striped shirt with your light jeans and silver flats">
+       <i class="look-shimmer"></i>
+       <p class="ext-missing" hidden>Look image coming soon</p>
+       <div class="ext-loading" aria-hidden="true"><img src="assets/brand/loading.gif" alt=""><span>Styling your look</span></div>
+      </div>
+      <div class="ext-pickers" data-pickers></div>
+     </div>
+    </aside>
+   </div>
+  </div>
+  </main>
+</body>
+</html>
