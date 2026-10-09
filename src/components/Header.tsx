@@ -5,7 +5,6 @@ import AnimatedName from './AnimatedName';
 
 export default function Header() {
   const linkedIn = SOCIAL_LINKS.find((link) => link.label === 'LinkedIn');
-  const calendly = SOCIAL_LINKS.find((link) => link.label.startsWith('Calendly'));
   return (
     <header id="about" className="portfolio-intro portfolio-enter">
       <div className="intro-copy">
@@ -13,7 +12,7 @@ export default function Header() {
         <p>I'm Leia, a senior at NYU studying Computer Science. I care about the space where product and engineering meet, and really about anything that solves a problem for someone.</p>
         <p>Most recently I interned at <Link to="/work/tiktok">TikTok</Link>, building AI powered workflows that automated the busywork for client facing teams. Before that I was a Product Engineer at <Link to="/work/planfit">Planfit</Link>, where I owned core business metrics and ran 100+ experiments end to end.</p>
         <p>Being a generalist is kind of my thing, but I go deep when the details matter. I bring speed, craft, and a little fun to whatever the team is making.</p>
-        <p>Have something in mind? <a href={calendly?.href} target="_blank" rel="noopener noreferrer" aria-label="Let’s talk — book a 15-minute chat on Calendly">Let's talk<ExternalArrow /></a></p>
+        <p>Have something in mind? <a href={`mailto:${SITE.email}`} aria-label="Let’s talk — send me an email">Let's talk<ExternalArrow /></a></p>
       </div>
       <div className="intro-aside">
         <div className="portrait-frame">
