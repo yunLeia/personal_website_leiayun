@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { SITE, SOCIAL_LINKS } from '../data';
 import { ExternalArrow } from './HomeUI';
 import AnimatedName from './AnimatedName';
+import DotPortrait from './DotPortrait';
 
 export default function Header() {
   const linkedIn = SOCIAL_LINKS.find((link) => link.label === 'LinkedIn');
@@ -16,7 +17,7 @@ export default function Header() {
       </div>
       <div className="intro-aside">
         <div className="portrait-frame">
-          <img src={SITE.photoHalftone} alt="Portrait of Leia Yun" width={240} height={240} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          <DotPortrait src={SITE.photoHalftone} alt="Portrait of Leia Yun" />
         </div>
         <div className="intro-actions">
           <a className="resume-link" href={SITE.resumePath} target="_blank" rel="noopener noreferrer">

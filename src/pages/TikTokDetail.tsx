@@ -39,6 +39,11 @@ const WORK: WorkItemData[] = [
       <p>I partnered with <B>APAC Industry Ops and Sales</B> to turn regional benchmarks into a <B>Korea-specific creative rubric</B>, then built a reusable AI skill using <B>browser MCP</B> to open, inspect, and label creatives. My first version handled data retrieval, video review, analysis, and reporting in one long agent run, but as the workflow grew, carrying too much context and intermediate state made it fragile. I redesigned it into <Hi>smaller modular skills with bounded responsibilities, explicit inputs, structured JSON outputs, and controlled handoffs</Hi> between stages. This <B>externalized the workflow state instead of relying on a single model context</B>, while the individual skills were orchestrated back into one simple end-to-end workflow for account managers.</p>
     ),
     takeaway: <>The workflow was used across <B>3 Sales teams</B>, with creative audit reports delivered directly to <B>20+ enterprise clients</B>. After launch, account managers continued using the published skills to prepare for Quarterly Business Reviews, <B>running the full workflow themselves with just a client account ID</B>.</>,
+    figure: {
+      src: '/images/tiktok-creative-audit.webp',
+      alt: 'The creative audit agent summarizing its analysis next to the ad creative it reviewed (blurred)',
+      caption: 'The audit agent beside the creative under review',
+    },
     tools: ['Agentic Workflow', 'MCP', 'Prompt Chaining', 'Context Window', 'State Management', 'Ad Analytics'],
   },
   {
@@ -50,6 +55,11 @@ const WORK: WorkItemData[] = [
       <p>With a collaborator from TikTok Japan, I created an internal AI implementation guide with ready-to-use prompts, demo workflows, and a method for identifying tasks worth automating. <Hi>I organized it around real scenarios teams already understood, rather than around AI features or technical capabilities.</Hi> I then turned those workflows into sessions and workshops for <B>100+ employees</B>.</p>
     ),
     takeaway: <>Two sessions ranked <B>#1 and #2 in that year’s KR Masterclass series</B>. Afterward, people from teams I had never worked with began reaching out not to ask me to build something for them, but to ask how they could apply the same approach themselves.</>,
+    figure: {
+      src: '/images/tiktok-ai-workshop.webp',
+      alt: 'A slide from the enablement and workshop materials (blurred)',
+      caption: 'A slide from the enablement materials',
+    },
     tools: ['Technical Enablement', 'Workshop Facilitation', 'Prompt Workflows'],
   },
   {

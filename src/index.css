@@ -534,3 +534,7 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 
 .portfolio-project-row:focus-within .experience-open-indicator { opacity: 1; transform: none; }
 @media (hover: hover) and (pointer: fine) { .portfolio-project-row:hover .experience-open-indicator { opacity: 1; transform: none; } }
+
+/* Interactive dotted portrait: fills its frame; the canvas handles hover and click */
+.dot-portrait { width: 100%; height: 100%; }
+.dot-portrait canvas { display: block; width: 100%; height: 100%; touch-action: manipulation; }
