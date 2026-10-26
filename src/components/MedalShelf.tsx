@@ -68,7 +68,7 @@ export default function MedalShelf() {
           delete event.currentTarget.dataset.dragging;
         }} onPointerLeave={() => { if (!drag.current.moved) drag.current.down = false; }}>
           {MEDALS.map((medal, index) => (
-            <button key={medal.image} type="button" className="medal-item" aria-pressed={selected === index} aria-label={`Show ${medal.title}, ${medal.distance}, ${medal.detail}`} onClick={() => {
+            <button key={medal.image} type="button" className="medal-item" data-medal={medal.image} aria-pressed={selected === index} aria-label={`Show ${medal.title}, ${medal.distance}, ${medal.detail}`} onClick={() => {
               if (drag.current.moved) { drag.current.moved = false; return; }
               center(index);
             }} onPointerMove={(event) => {

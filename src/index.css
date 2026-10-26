@@ -261,7 +261,8 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 .medal-row::-webkit-scrollbar { display: none; }
 .medal-row[data-dragging="true"] { scroll-snap-type: none; cursor: grabbing; }
 .medal-item { position: relative; width: var(--medal-width); flex: 0 0 var(--medal-width); height: 236px; padding: 0; border: 0; background: none; cursor: inherit; scroll-snap-align: center; transform: scale(.86); transform-origin: 50% 0; opacity: .54; filter: saturate(.75); transition: transform 440ms cubic-bezier(.22,1,.36,1), opacity 240ms, filter 240ms; }
-.medal-item img { width: 100%; height: 100%; object-fit: contain; object-position: center top; transform: rotate(var(--medal-tilt, 0deg)); transform-origin: 50% 0; transition: transform 420ms cubic-bezier(.22,1,.36,1), filter 240ms; filter: drop-shadow(2px 5px 3px #00000018); pointer-events: none; }
+.medal-item[data-medal="haunted-island-10k"] { --medal-scale-y: 1.09; }
+.medal-item img { width: 100%; height: 100%; object-fit: contain; object-position: center top; transform: rotate(var(--medal-tilt, 0deg)) scaleY(var(--medal-scale-y, 1)); transform-origin: 50% 0; transition: transform 420ms cubic-bezier(.22,1,.36,1), filter 240ms; filter: drop-shadow(2px 5px 3px #00000018); pointer-events: none; }
 .medal-item[aria-pressed="true"] { transform: scale(1); opacity: 1; filter: saturate(1); z-index: 2; }
 .medal-item:hover, .medal-item:focus-visible { opacity: 1; filter: saturate(1); }
 .medal-item:hover img, .medal-item:focus-visible img { filter: drop-shadow(4px 9px 5px #00000028); }
@@ -290,7 +291,7 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 
 .name-letter:nth-child(2n) { --name-tilt: 5deg; }
 .name-letter:nth-child(3n) { --name-tilt: -7deg; }
-@media (prefers-reduced-motion: reduce) { .medal-item img { transform: none; transition: none; } }
+@media (prefers-reduced-motion: reduce) { .medal-item img { transform: scaleY(var(--medal-scale-y, 1)); transition: none; } }
 
 .medal-caption .medal-distance { display: block; margin-bottom: 8px; font-size: 10px; letter-spacing: .04em; }
 
