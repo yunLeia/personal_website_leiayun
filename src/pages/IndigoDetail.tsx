@@ -7,7 +7,6 @@ export default function IndigoDetail() {
     <div className="case-study-content">
       <ProjectIntro
         name="myIndigo"
-        summary="Real-time audio awareness for deaf and hard-of-hearing users. Your phone listens, classifies sounds with Gemini 2.5 Flash, and sends actionable alerts to your Apple Watch: instructions, not transcriptions."
         facts={[
           { label: 'Role', value: 'Full-Stack + AI Engineer' },
           { label: 'Date', value: 'March 2026 · 36 hours' },

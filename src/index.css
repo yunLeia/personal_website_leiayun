@@ -90,9 +90,13 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 .experience-kind { display: block; margin-top: 1px; font-size: 11.5px; line-height: 18px; color: #aaa79e; }
 .experience-identity .external-arrow { margin-left: 2px; font-size: 9px; }
 .experience-summary { grid-column: 3; padding-right: 6px; color: var(--muted); font-size: 13px; line-height: 1.65; margin: 0; }
-.portfolio-project-row { position: relative; isolation: isolate; cursor: pointer; display: grid; grid-template-columns: 44px 152px minmax(0,1fr) 92px; align-items: start; gap: 4px 16px; padding: 18px 16px 18px 0; width: 100%; text-align: left; border-top: .5px solid var(--rule); }
+.portfolio-project-row { position: relative; isolation: isolate; cursor: pointer; display: grid; grid-template-columns: 44px 152px minmax(0,1fr); align-items: start; gap: 4px 16px; padding: 18px 16px 18px 0; width: 100%; text-align: left; border-top: .5px solid var(--rule); }
 .project-icon-frame { display: flex; align-items: center; justify-content: center; position: relative; width: 44px; height: 44px; padding: 2px; border: .5px solid var(--rule); border-radius: 11px; box-shadow: 0 1px 2px #00000005; transition: transform 300ms var(--spring), box-shadow 150ms; overflow: visible; }
 .project-icon-frame img { width: 40px; height: 40px; object-fit: cover; border-radius: 8px; }
+.project-icon-image { display: flex; align-items: center; justify-content: center; flex: 0 0 40px; width: 40px; height: 40px; overflow: hidden; border-radius: 8px; }
+.project-icon-frame[data-project="ShipShape"] { background: #1f2637; }
+.project-icon-frame[data-project="ShipShape"] img { width: 28px; height: 28px; object-fit: contain; border-radius: 0; }
+.project-icon-frame[data-project="CulinAI"] img { transform: scale(2); }
 .project-monogram { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 8px; background: #e6eadb; color: #526343; font-size: 25px; font-weight: 500; letter-spacing: -.08em; }
 .project-identity { display: flex; flex-direction: column; gap: 2px; }
 .project-name a { display: inline-flex; align-items: center; }
@@ -119,12 +123,12 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 .portfolio-dock button:focus-visible > span { opacity: 1; }
 @media (min-width: 601px) and (max-width: 760px) {
   .experience-entry { grid-template-columns: 44px 128px minmax(0,1fr) auto; gap: 4px 12px; }
-  .portfolio-project-row { grid-template-columns: 44px 128px minmax(0,1fr) auto; gap: 4px 12px; }
+  .portfolio-project-row { grid-template-columns: 44px 128px minmax(0,1fr); gap: 4px 12px; }
 }
 @media (max-width: 600px) {
-  .portfolio-project-row { grid-template-columns: 44px minmax(0,1fr) auto; gap: 3px 16px; }
+  .portfolio-project-row { grid-template-columns: 44px minmax(0,1fr); gap: 3px 16px; }
   .project-icon-frame { grid-row: span 2; }
-  .project-description { grid-column: 2 / span 2; padding-right: 0; margin: 4px 0 0; }
+  .project-description { grid-column: 2; padding-right: 0; margin: 4px 0 0; }
   .experience-entry { grid-template-columns: 44px minmax(0,1fr) auto; gap: 3px 16px; }
   .experience-summary { grid-column: 2 / span 2; padding-right: 0; margin: 4px 0 0; }
   .experience-date { grid-column: 3; grid-row: 1; }
@@ -275,6 +279,10 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 .case-study-content .project-intro .project-eyebrow { font: 11px 'Geist Mono', monospace; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); margin: 0 0 14px; }
 .case-study-content .project-intro h1 { font-size: clamp(32px, 5vw, 44px); line-height: 1.1; font-weight: 550; letter-spacing: -.045em; margin: 0 0 20px; }
 .case-study-content .project-intro .project-lede { max-width: 58ch; font-size: 15.5px; line-height: 1.65; color: var(--copy); margin: 0 0 30px; }
+.shipshape-preview { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; aspect-ratio: 16/9; padding: 24px; background: #1f2637; color: #fff; }
+.shipshape-preview-brand { display: flex; align-items: center; gap: 12px; font-size: clamp(26px, 4vw, 42px); font-weight: 600; letter-spacing: -.04em; }
+.shipshape-preview-brand img { width: clamp(36px, 5vw, 56px); height: auto; }
+.case-study-content .shipshape-preview p { margin: 0; color: #d7dce8; font-size: clamp(12px, 2vw, 17px); text-align: center; }
 .project-facts { display: grid; grid-template-columns: 1fr 1.5fr; gap: 20px 32px; border-block: .5px solid var(--rule); padding: 20px 0; margin: 0 0 22px; }
 .project-facts dt { font: 10px 'Geist Mono', monospace; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 8px; }
 .project-facts dd { font-size: 13px; line-height: 1.6; margin: 0; }

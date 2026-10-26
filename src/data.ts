@@ -75,28 +75,35 @@ export interface ProjectItem {
 
 export const PROJECTS: ProjectItem[] = [
   {
+    name: 'ShipShape',
+    sub: 'Connects builders with industry experts for 1:1 feedback to validate ideas and build better products.',
+    tags: ['Builder Community'],
+    detailPath: '/work/shipshape',
+    cover: '/images/shipshape-logo-dark.svg',
+  },
+  {
     name: 'Cabine',
     url: 'https://cabine-j7p.pages.dev',
-    sub: 'a chrome extension that brings your wardrobe beside an online store, so you can see what you’d wear a new piece with before buying it.',
-    tags: ['Chrome Extension', '0→1 Product', 'In Progress'],
+    sub: 'An AI-powered Chrome extension that lets shoppers visualize new pieces with their own wardrobe before buying.',
+    tags: ['AI Virtual Styling', '0→1 Product', 'In Progress'],
     detailPath: '/work/cabine',
     cover: '/images/cabine-thumbnail.png',
     hero: '/images/cabine-hero.webp',
   },
   {
     name: 'myIndigo',
-    sub: 'real-time audio awareness for deaf & hard-of-hearing users, built with gemini + google adk',
-    tags: ['Accessibility', 'Gemini 2.5 Flash', 'Google ADK', 'Hackathon'],
+    sub: 'Detects important environmental sounds and delivers real-time smartwatch alerts for deaf and hard-of-hearing users.',
+    tags: ['Accessibility Tech', 'Gemini 2.5 Flash', 'Google ADK', 'Hackathon'],
     detailPath: '/work/indigo',
-    cover: '/images/myindigo-thumbnail.png',
+    cover: '/images/myindigo-watch-thumbnail.png',
     hero: '/images/indigo-hero.webp',
   },
   {
     name: 'CulinAI',
-    sub: 'an AI-powered site that generates recipes from a photo of your fridge or food items.',
+    sub: 'Turns photos of your fridge or ingredients into personalized recipes, making it easier to cook with what you have.',
     tags: ['Multimodal AI', 'Food Waste Reduction', 'LLaVA', 'SDXL-Turbo'],
     detailPath: '/work/culinai',
-    cover: '/images/culinai-thumbnail.png',
+    cover: '/images/culinai-bowl-thumbnail.png',
     hero: '/images/culinai-hero.webp',
   },
 ];

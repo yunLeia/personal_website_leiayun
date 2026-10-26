@@ -6,7 +6,7 @@ type Link = { label: string; href: string; primary?: boolean };
 
 type Props = {
   name: string;
-  summary: string;
+  summary?: string;
   eyebrow?: string;
   note?: string[];
   facts: Fact[];
@@ -38,7 +38,7 @@ export default function ProjectIntro({ name, summary, eyebrow = 'Selected projec
           <img src={image} alt={`${name} preview`} />
         </figure>
       ))}
-      <p className="project-lede">{summary}</p>
+      <p className="project-lede">{summary ?? project?.sub}</p>
       <dl className="project-facts">
         {facts.map((row) => <div key={row.label}><dt>{row.label}</dt><dd>{row.value}</dd></div>)}
       </dl>

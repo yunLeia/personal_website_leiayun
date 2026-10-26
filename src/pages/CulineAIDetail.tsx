@@ -7,7 +7,6 @@ export default function CulineAIDetail() {
     <div className="case-study-content">
       <ProjectIntro
         name="CulinAI"
-        summary="An AI-powered site that generates recipes from a photo of your fridge or food items."
         facts={[
           { label: 'Role', value: 'PM and AI Engineer' },
           { label: 'Date', value: 'May 2024' },

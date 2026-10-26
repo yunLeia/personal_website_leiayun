@@ -7,7 +7,6 @@ export default function CabineDetail() {
     <div className="case-study-content">
       <ProjectIntro
         name="Cabine"
-        summary="A Chrome extension that brings your wardrobe beside an online store, so you can see what you’d wear a new piece with before buying it."
         facts={[
           { label: 'Role', value: 'Founder & Full-Stack Engineer' },
           { label: 'Date', value: 'Sep 2026 – Present' },
