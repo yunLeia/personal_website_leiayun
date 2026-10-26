@@ -8,8 +8,8 @@ export default function ProjectsSection() {
       <SectionHeader num="02" title="Projects" />
       <ul className="project-list">
         {PROJECTS.filter((proj) => !proj.hidden).map((proj, index) => (
-          <li className="portfolio-project-row" key={proj.name}>
-            <Link className="experience-row-link" to={proj.detailPath} aria-label={`Read about ${proj.name}`} />
+          <li className={`portfolio-project-row${proj.closed ? ' is-closed' : ''}`} key={proj.name}>
+            {!proj.closed && <Link className="experience-row-link" to={proj.detailPath} aria-label={`Read about ${proj.name}`} />}
             <span className={`project-icon-frame project-icon-${index}`} data-project={proj.name} aria-hidden="true">
               {proj.cover ? <span className="project-icon-image"><img src={proj.cover} alt="" width="40" height="40" loading="lazy" decoding="async" /></span> : <span className="project-monogram">{proj.name[0]}</span>}
             </span>
@@ -18,7 +18,7 @@ export default function ProjectsSection() {
               <span className="project-category">{proj.tags?.[0]}</span>
             </span>
             <span className="project-description">{proj.sub}</span>
-            <span className="experience-open-indicator" aria-hidden="true">↗</span>
+            {!proj.closed && <span className="experience-open-indicator" aria-hidden="true">↗</span>}
           </li>
         ))}
       </ul>

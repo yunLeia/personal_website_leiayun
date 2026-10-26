@@ -94,8 +94,6 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 .project-icon-frame { display: flex; align-items: center; justify-content: center; position: relative; width: 44px; height: 44px; padding: 2px; border: .5px solid var(--rule); border-radius: 11px; box-shadow: 0 1px 2px #00000005; transition: transform 300ms var(--spring), box-shadow 150ms; overflow: visible; }
 .project-icon-frame img { width: 40px; height: 40px; object-fit: cover; border-radius: 8px; }
 .project-icon-image { display: flex; align-items: center; justify-content: center; flex: 0 0 40px; width: 40px; height: 40px; overflow: hidden; border-radius: 8px; }
-.project-icon-frame[data-project="ShipShape"] { background: #1f2637; }
-.project-icon-frame[data-project="ShipShape"] img { width: 28px; height: 28px; object-fit: contain; border-radius: 0; }
 .project-icon-frame[data-project="CulinAI"] img { transform: scale(2); }
 .project-monogram { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 8px; background: #e6eadb; color: #526343; font-size: 25px; font-weight: 500; letter-spacing: -.08em; }
 .project-identity { display: flex; flex-direction: column; gap: 2px; }
@@ -547,3 +545,15 @@ a:hover .external-arrow { transform: translate(1px,-1px); }
 /* Interactive dotted portrait: fills its frame; the canvas handles hover and click */
 .dot-portrait { width: 100%; height: 100%; }
 .dot-portrait canvas { display: block; width: 100%; height: 100%; touch-action: manipulation; }
+
+/* Closed project rows: listed, but nothing opens */
+.portfolio-project-row.is-closed { cursor: default; }
+.portfolio-project-row.is-closed::before { display: none; }
+.portfolio-project-row.is-closed:hover .project-icon-frame { transform: none; }
+.portfolio-project-row.is-closed:hover .project-description { color: var(--muted); }
+.portfolio-project-row.is-closed:hover .project-icon-frame::before { opacity: 0; transform: scale(.82); }
+
+/* ShipShape icon sits smaller inside a matching navy tile, so more of the background shows */
+.project-icon-frame[data-project="ShipShape"] { background: #1f2637; }
+.project-icon-frame[data-project="ShipShape"] .project-icon-image { width: 40px; height: 40px; flex-basis: 40px; background: #1f2637; }
+.project-icon-frame[data-project="ShipShape"] img { width: 30px; height: 30px; border-radius: 4px; }

@@ -71,6 +71,8 @@ export interface ProjectItem {
   hero?: string;
   // Hidden from the homepage list and nav menu; the detail page still works by URL.
   hidden?: boolean;
+  // Listed on the homepage but with no detail page: the row does not open anything.
+  closed?: boolean;
 }
 
 export const PROJECTS: ProjectItem[] = [
@@ -79,7 +81,8 @@ export const PROJECTS: ProjectItem[] = [
     sub: 'Connects builders with industry experts for 1:1 feedback to validate ideas and build better products.',
     tags: ['Builder Community'],
     detailPath: '/work/shipshape',
-    cover: '/images/shipshape-logo-dark.svg',
+    cover: '/images/shipshape-icon-dark.png',
+    closed: true,
   },
   {
     name: 'Cabine',
@@ -134,7 +137,7 @@ export const NAV_ITEMS: NavItem[] = [
   {
     label: 'Projects',
     href: '#projects',
-    items: PROJECTS.filter((project) => !project.hidden).map((project) => ({ label: project.name, href: project.detailPath })),
+    items: PROJECTS.filter((project) => !project.hidden && !project.closed).map((project) => ({ label: project.name, href: project.detailPath })),
   },
   { label: 'Shelf', href: '#shelf' },
   { label: 'Contact', href: '#contact' },
