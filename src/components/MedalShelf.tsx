@@ -5,13 +5,15 @@ const MEDALS = [
   { image: 'mapo', title: 'Mapo Seo Yun-bok Marathon', distance: '6.2 miles · 10K', detail: 'Seoul · April 19, 2025' },
   { image: 'seoul-10k', title: 'Ilgan Sports Seoul Marathon', distance: '6.2 miles · 10K', detail: 'Seoul · September 7, 2025' },
   { image: 'jungnang-rose', title: "Jungnang Mayor’s Cup Rose Marathon", distance: '6.2 miles · 10K', detail: 'Seoul · October 12, 2025' },
-  { image: 'brooklyn', title: 'NYCRUNS Brooklyn Experience Half Marathon', distance: '13.1 miles · Half marathon', detail: 'Brooklyn · April 25, 2026' },
+  { image: 'brooklyn', title: 'NYCRUNS Brooklyn Experience Half Marathon', distance: '13.1 miles · 21.1K', detail: 'Brooklyn · April 25, 2026' },
+  { image: 'haunted-island-10k', title: 'NYCRUNS Haunted Island 10K', distance: '6.2 miles · 10K', detail: 'Governors Island · October 17, 2026' },
 ];
+const INITIAL_MEDAL = Math.max(0, MEDALS.findIndex((medal) => medal.image === 'brooklyn'));
 
 export default function MedalShelf() {
-  const [selected, setSelected] = useState(MEDALS.length - 1);
+  const [selected, setSelected] = useState(INITIAL_MEDAL);
   const row = useRef<HTMLDivElement>(null);
-  const active = useRef(MEDALS.length - 1);
+  const active = useRef(INITIAL_MEDAL);
   const drag = useRef({ start: 0, scroll: 0, moved: false, down: false });
   const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const center = (index: number, behavior: ScrollBehavior = 'smooth') => {
