@@ -83,7 +83,7 @@ export default function MedalShelf() {
               center(next);
               row.current?.querySelectorAll('button')[next]?.focus({ preventScroll: true });
             }}>
-              <img src={`/images/medals/${medal.image}.png`} alt="" width="1122" height="1402" loading="lazy" draggable={false} />
+              <img src={`/images/medals/${medal.image}.webp`} alt="" width="420" height="525" loading="eager" decoding="async" draggable={false} />
             </button>
           ))}
         </div>
