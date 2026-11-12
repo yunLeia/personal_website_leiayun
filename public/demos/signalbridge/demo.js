@@ -70,7 +70,7 @@
   let S;
   const fresh = () => ({
     mode: 'spec', spec: 'brief', rm: 'home', text: '', ovr: {}, w: { ...DEFAULT_W },
-    target: null, chat: [], approved: false, rejected: false, replied: false, replyRead: false, outcome: 'Interested',
+    target: null, chat: [], note: '', meeting: null, meetingSeen: false, approved: false, rejected: false, replied: false, replyRead: false, outcome: 'Interested',
   });
 
   const wait = (ms) => {
@@ -190,6 +190,23 @@
     if (S.spec === 'brief') specBrief();
     else specMap();
     if (S.replied && !S.replyRead) replyNotif();
+    else if (S.meeting && !S.meetingSeen) meetingNotif();
+  }
+
+  async function meetingNotif() {
+    setBadge(1);
+    await wait(700);
+    const rm = R();
+    popNotif(`
+      <div class="nh"><span class="ol">O</span>Calendar<span class="time">now</span></div>
+      <div class="nb"><span class="av blue">${S.target.rm}</span><div><b>${rm.name} invited you</b><small>${S.meeting.slot} · ${S.target.name}</small></div></div>
+      <div class="note-unlock" style="margin:0;font-size:12px">${esc(S.meeting.agenda)}</div>
+      <button class="btn primary pulse" data-open>Accept</button>`, () => {
+      S.meetingSeen = true;
+      setBadge(0);
+      $('.notif')?.remove();
+      toast(`Accepted · ${S.meeting.slot} added to your calendar`);
+    });
   }
 
   // ---- Screen 1: AI market brief + the specialist's view ----
@@ -492,6 +509,9 @@
         <div class="kv"><span class="label">Business</span><div><b>${c.biz}</b> <span class="tag ${c.ev}">${c.ev === 'doc' ? 'Documented' : 'Inferred'}</span></div></div>
         <div class="kv"><span class="label">Your view</span><q>${esc(S.text)}</q></div>
         <div class="kv"><span class="label">Evidence</span><div class="ev">${c.evid.map((e) => `<div><span class="tag ${e.tag}">${e.label}</span><span class="src">${e.src}${e.quote ? ' · 🔒 RM only' : ''}</span></div>`).join('')}</div></div>
+        ${canSend
+          ? `<div class="kv"><span class="label">Note</span><textarea class="note" id="note" rows="3" placeholder="Optional: add context for ${rm.first}…"></textarea></div>`
+          : mine && S.note ? `<div class="kv"><span class="label">Your note</span><div>${esc(S.note)}</div></div>` : ''}
       </div>
       <div class="df">${canSend
         ? `<button class="btn" data-close>Cancel</button><button class="btn primary" id="confirm">Send to ${rm.first}</button>`
@@ -500,6 +520,8 @@
   }
 
   async function confirmSend(c) {
+    S.note = ($('#note')?.value || '').trim();
+    if ($('#note')) $('#note').disabled = true;
     const b = $('#confirm');
     b.disabled = true;
     b.innerHTML = '<span class="spin"></span>Checking access';
@@ -622,6 +644,47 @@
       <button class="btn primary pulse" data-open>Review</button>`, openReview);
   }
 
+  // ---- Book a meeting with the specialist ----
+  const SLOTS = ['Thu 2:00 PM', 'Thu 4:30 PM', 'Fri 10:00 AM'];
+  function syncBookNav() {
+    const a = $('#navbook');
+    a.classList.toggle('booked', !!S.meeting);
+    a.title = S.meeting ? `Meeting with Jordan · ${S.meeting.slot}` : 'Book a meeting with Jordan';
+  }
+
+  function openBooking() {
+    const c = T();
+    const m = S.meeting;
+    let slot = m ? m.slot : SLOTS[0];
+    openDrawer(`
+      <div class="dh"><span class="av">JL</span><div><h2>Meeting with Jordan</h2><small>FX Specialist · Outlook calendar</small></div><button class="x" data-close aria-label="Close">×</button></div>
+      <div class="db">
+        <div class="kv"><span class="label">About</span><div><b>${c.name}</b><small>${c.biz}</small></div></div>
+        <div class="kv"><span class="label">Jordan is free</span><div class="chips" id="slots">${SLOTS.map((t) => `<button class="chip ${t === slot ? 'on' : ''}" data-t="${t}" ${m ? 'disabled' : ''}>${t}</button>`).join('')}</div></div>
+        <div class="kv"><span class="label">Length</span><div>30 min · Teams</div></div>
+        <div class="kv"><span class="label">Agenda</span><textarea class="note" id="agenda" rows="3" ${m ? 'disabled' : ''}>${esc(m ? m.agenda : `Prep for ${c.name} before the client call (${c.biz}).`)}</textarea></div>
+      </div>
+      <div class="df">${m
+        ? '<span class="hint2" style="margin-right:auto">Invite sent</span><button class="btn" data-close>Close</button>'
+        : '<button class="btn" data-close>Cancel</button><button class="btn primary" id="sendinvite">Send invite</button>'}</div>`);
+    if (m) return;
+    $$('#slots .chip').forEach((b) => b.addEventListener('click', () => {
+      slot = b.dataset.t;
+      $$('#slots .chip').forEach((x) => x.classList.toggle('on', x === b));
+    }));
+    $('#sendinvite').addEventListener('click', async () => {
+      const b = $('#sendinvite');
+      b.disabled = true;
+      b.innerHTML = '<span class="spin"></span>Sending';
+      const agenda = $('#agenda').value.trim();
+      await wait(800);
+      S.meeting = { slot, agenda };
+      closeDrawer();
+      toast(`Invite sent to Jordan · ${slot}`);
+      syncBookNav();
+    }, { once: true });
+  }
+
   function openReview() {
     $('.notif')?.remove();
     setBadge(0);
@@ -649,6 +712,7 @@
           <div class="card main">
             <div class="kv"><span class="label">Market</span><div>US tariff on Mexican auto parts · MXN −4.1%</div></div>
             <div class="kv"><span class="label">Jordan's view</span><q>${esc(S.text)}</q></div>
+            ${S.note ? `<div class="kv"><span class="label">Jordan's note</span><div class="note-unlock" style="margin:0">${esc(S.note)}</div></div>` : ''}
             <div class="kv"><span class="label">Judgment</span><div class="chips">${S.sentImp.map((k) => `<span class="tag inf">${IMPACTS[k].label}</span>`).join('')}</div></div>
             <div class="kv"><span class="label">Evidence</span>
               <div class="ev">
@@ -870,12 +934,17 @@
     sw.classList.remove('ready', 'ready-spec');
     nudge.classList.remove('show', 'warn');
     setMe('spec');
+    syncBookNav();
     renderSpec();
   }
   $('#restart').addEventListener('click', start);
+  const navBook = () => { if (S.mode === 'rm' && S.target) openBooking(); };
+  $('#navbook').addEventListener('click', navBook);
+  $('#navbook').addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); navBook(); } });
   $('#bell').addEventListener('click', () => {
     if (S.mode === 'rm' && S.target && !S.approved && !S.rejected) openReview();
     else if (S.mode === 'spec' && S.replied && !S.replyRead) openReply();
+    else if (S.mode === 'spec' && S.meeting && !S.meetingSeen) meetingNotif();
     else toast('No new notifications');
   });
   start();
