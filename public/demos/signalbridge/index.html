@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SignalBridge Prototype</title>
+<meta name="description" content="Concept prototype: an FX specialist's market view becomes a sourced opportunity for the right relationship manager. Synthetic data.">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="demo.css">
+</head>
+<body data-mode="spec">
+
+<div class="stage">
+  <header class="stagehead">
+    <div class="role">
+      <span class="role-av" id="role-av">JL</span>
+      <div>
+        <div class="role-title" id="role-title">Specialist's view</div>
+        <div class="role-sub" id="role-sub">Jordan Lee · FX Product Specialist</div>
+      </div>
+    </div>
+
+    <ol class="steps" id="steps" aria-label="Demo progress">
+      <li class="grp">Specialist</li>
+      <li data-step="1">Brief</li><li data-step="2">Map</li>
+      <li class="sep" aria-hidden="true"></li>
+      <li class="grp">RM</li>
+      <li data-step="3">Review</li><li data-step="4">Prep</li>
+    </ol>
+
+    <div class="controls">
+      <div class="switch-wrap">
+        <div class="switch" id="switch" role="group" aria-label="View as">
+          <button type="button" data-mode="spec" class="on"><span class="dot"></span>Specialist</button>
+          <button type="button" data-mode="rm" aria-disabled="true"><span class="lock" aria-hidden="true"></span><span class="dot"></span>RM</button>
+        </div>
+        <div class="nudge" id="nudge" role="status">Sent. See Sarah's side <b>→</b></div>
+      </div>
+      <button type="button" class="restart" id="restart" title="Restart demo" aria-label="Restart demo">↺</button>
+    </div>
+  </header>
+
+  <div class="monitor">
+    <div class="screen" id="screen">
+      <header class="top">
+        <div class="brand"><span class="logo" aria-hidden="true"></span>Client CRM</div>
+        <div class="search" aria-hidden="true">Search accounts, contacts…</div>
+        <button type="button" class="bell" id="bell" aria-label="Notifications"><span class="badge" id="badge"></span></button>
+        <div class="me" id="me"><span class="av" id="me-av">JL</span><span><b id="me-name">Jordan Lee</b><small id="me-role">FX Specialist</small></span></div>
+      </header>
+
+      <nav class="nav" aria-label="CRM">
+        <a data-nav="home"><i class="ic home"></i><span>Home</span></a>
+        <a data-nav="accounts"><i class="ic accounts"></i><span>Accounts</span></a>
+        <a data-nav="opps"><i class="ic opps"></i><span>Pipeline</span></a>
+        <a data-nav="signal" class="on"><i class="ic signal"></i><span>SignalBridge</span></a>
+      </nav>
+
+      <main class="view" id="view"></main>
+
+      <div class="scrim" id="scrim"></div>
+      <aside class="drawer" id="drawer" aria-hidden="true"></aside>
+    </div>
+  </div>
+  <div class="stand" aria-hidden="true"></div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="demo.js"></script>
+</body>
+</html>
