@@ -29,17 +29,16 @@
   const NEWS_EV = { tag: '', label: 'News', src: 'Tariff announcement · Nov 11' };
 
   const RMS = {
-    SK: { name: 'Sarah', first: 'Sarah', team: 'Mid-market Industrials', others: [['Brightline Tools', 'Machinery', 'Oct 22'], ['Keystone Plastics', 'Packaging', 'Nov 3'], ['Northfield Metals', 'Steel', 'Oct 8']] },
-    DO: { name: 'David', first: 'David', team: 'Transport & Logistics', others: [['Gulfway Shipping', 'Ports', 'Oct 30'], ['Plainsman Trucking', 'Trucking', 'Nov 5'], ['Delta Cold Chain', 'Storage', 'Oct 12']] },
-    PS: { name: 'Priya', first: 'Priya', team: 'Industrials West', others: [['Redwood Valves', 'Valves', 'Oct 17'], ['Mesa Robotics', 'Automation', 'Nov 6'], ['Clearwater Glass', 'Glass', 'Sep 25']] },
-    TB: { name: 'Tom', first: 'Tom', team: 'Logistics South', others: [['Bayou Barge Co.', 'Barges', 'Oct 9'], ['Lone Star Rail', 'Rail', 'Nov 1'], ['Coastal Reefer', 'Cold chain', 'Oct 21']] },
-    MC: { name: 'Maya', first: 'Maya', team: 'Consumer & Food', others: [['Harvest Table Co.', 'Grocery', 'Oct 19'], ['Pacific Snacks', 'Packaged food', 'Nov 2'], ['Sierra Beverages', 'Beverages', 'Oct 27']] },
+    N: { name: 'Nihar', first: 'Nihar', team: 'Mid-market Industrials', others: [['Brightline Tools', 'Machinery', 'Oct 22'], ['Keystone Plastics', 'Packaging', 'Nov 3'], ['Northfield Metals', 'Steel', 'Oct 8']] },
+    M: { name: 'Mykayla', first: 'Mykayla', team: 'Transport & Logistics', others: [['Gulfway Shipping', 'Ports', 'Oct 30'], ['Plainsman Trucking', 'Trucking', 'Nov 5'], ['Delta Cold Chain', 'Storage', 'Oct 12']] },
+    J: { name: 'Jade', first: 'Jade', team: 'Industrials West', others: [['Redwood Valves', 'Valves', 'Oct 17'], ['Mesa Robotics', 'Automation', 'Nov 6'], ['Clearwater Glass', 'Glass', 'Sep 25']] },
+    S: { name: 'Sean', first: 'Sean', team: 'Consumer & Food', others: [['Harvest Table Co.', 'Grocery', 'Oct 19'], ['Pacific Snacks', 'Packaged food', 'Nov 2'], ['Sierra Beverages', 'Beverages', 'Oct 27']] },
   };
 
   const CLIENTS = [
     {
       id: 'A', name: 'Atlas Components', sector: 'Auto parts · Ohio', industry: 'Auto parts', last: 'Sep 30', contact: 'CFO',
-      biz: 'MXN forward hedge', bizSub: '~$40M Mexico payables', ev: 'doc', rm: 'SK', imp: ['mfg', 'hedging'], pts: { mxn: 14, mexico: 18, mfg: 30, hedging: 26 },
+      biz: 'MXN forward hedge', bizSub: '~$40M Mexico payables', ev: 'doc', rm: 'N', imp: ['mfg', 'hedging'], pts: { mxn: 14, mexico: 18, mfg: 30, hedging: 26 },
       evid: [{ tag: 'doc', label: 'CRM note', src: 'Meeting note · Sep 30', quote: 'CFO is considering moving ~30% of stamping supply to Monterrey in 2027.' }, MARKET_EV, NEWS_EV],
       brief: {
         open: "Yesterday's tariff and the peso move could change the cost of your Monterrey plan. Worth 30 minutes to look at locking in rates?",
@@ -50,7 +49,7 @@
     },
     {
       id: 'B', name: 'Rio Freight Lines', sector: 'Freight · Texas', industry: 'Freight', last: 'Oct 14', contact: 'treasurer',
-      biz: 'MXN cash mgmt', bizSub: 'Peso receivables', ev: 'inf', rm: 'DO', imp: ['logistics', 'collections'], pts: { mxn: 15, mexico: 12, logistics: 28, collections: 22 },
+      biz: 'MXN cash mgmt', bizSub: 'Peso receivables', ev: 'inf', rm: 'M', imp: ['logistics', 'collections'], pts: { mxn: 15, mexico: 12, logistics: 28, collections: 22 },
       evid: [{ tag: 'inf', label: 'Inferred', src: '~40% of cross-border loads billed in MXN', quote: 'Treasurer mentioned FX slippage on Mexico collections.' }, MARKET_EV, NEWS_EV],
       brief: {
         open: "The peso's drop cuts what your Mexico invoices are worth in dollars. Want to look at converting collections faster or locking a rate?",
@@ -61,7 +60,7 @@
     },
     {
       id: 'C', name: 'Verde Foods Imports', sector: 'Food importer · CA', industry: 'Food import', last: 'Aug 2', contact: 'finance lead',
-      biz: 'MXN option collar', bizSub: 'Seasonal imports', ev: 'inf', rm: 'MC', imp: ['importers', 'hedging'], pts: { mxn: 12, mexico: 10, importers: 20, hedging: 22 },
+      biz: 'MXN option collar', bizSub: 'Seasonal imports', ev: 'inf', rm: 'S', imp: ['importers', 'hedging'], pts: { mxn: 12, mexico: 10, importers: 20, hedging: 22 },
       evid: [{ tag: 'inf', label: 'Inferred', src: 'Trade-finance data: MXN produce invoices', quote: null }, MARKET_EV, NEWS_EV],
       brief: {
         open: 'Peso swings are big right now. Before your spring produce orders, is it worth capping your MXN costs?',
@@ -72,7 +71,7 @@
     },
     {
       id: 'D', name: 'Keystone Plastics', sector: 'Packaging · Michigan', industry: 'Packaging', last: 'Nov 3', contact: 'controller',
-      biz: 'MXN forward hedge', bizSub: 'Resin bought from Mexico', ev: 'inf', rm: 'SK', imp: ['mfg', 'hedging'], pts: { mxn: 10, mexico: 12, mfg: 24, hedging: 18 },
+      biz: 'MXN forward hedge', bizSub: 'Resin bought from Mexico', ev: 'inf', rm: 'N', imp: ['mfg', 'hedging'], pts: { mxn: 10, mexico: 12, mfg: 24, hedging: 18 },
       evid: [{ tag: 'inf', label: 'Inferred', src: 'Supplier payments to Mexico in AP data', quote: 'Controller asked about USD/MXN pricing on resin last quarter.' }, MARKET_EV, NEWS_EV],
       brief: {
         open: 'Your Mexico resin costs just moved with the peso. Worth a quick look at fixing next quarter\'s rate?',
@@ -83,7 +82,7 @@
     },
     {
       id: 'E', name: 'Gulfway Shipping', sector: 'Ports · Louisiana', industry: 'Ports', last: 'Oct 30', contact: 'CFO',
-      biz: 'MXN cash mgmt', bizSub: 'Port fees billed in MXN', ev: 'inf', rm: 'DO', imp: ['logistics', 'collections'], pts: { mxn: 12, mexico: 9, logistics: 22, collections: 18 },
+      biz: 'MXN cash mgmt', bizSub: 'Port fees billed in MXN', ev: 'inf', rm: 'M', imp: ['logistics', 'collections'], pts: { mxn: 12, mexico: 9, logistics: 22, collections: 18 },
       evid: [{ tag: 'inf', label: 'Inferred', src: 'Veracruz port fees billed in MXN', quote: null }, MARKET_EV, NEWS_EV],
       brief: {
         open: 'Peso swings hit your Veracruz fees when you convert. Want to look at a steadier conversion plan?',
@@ -96,27 +95,27 @@
 
   // More clients, F–Z: [id, name, sector, rm, industry, need, why, [mxn, mexico, industry, need] points]
   const MORE = [
-    ['F', 'Sierra Auto Systems', 'Auto parts · Texas', 'SK', 'mfg', 'hedging', 'Runs a brake-parts plant in Saltillo', [12, 16, 28, 20]],
-    ['G', 'Copperline Logistics', 'Trucking · Arizona', 'DO', 'logistics', 'collections', 'Invoices Mexican shippers in pesos', [12, 12, 26, 20]],
-    ['H', 'Ironbridge Castings', 'Castings · Ohio', 'PS', 'mfg', 'hedging', 'Buys castings from a Monterrey supplier', [10, 14, 24, 18]],
-    ['I', 'Bluewater Appliances', 'Appliances · Kentucky', 'PS', 'mfg', 'hedging', 'Assembles washers with Mexican motors', [11, 13, 22, 16]],
-    ['J', 'Del Campo Produce', 'Produce importer · Texas', 'MC', 'importers', 'hedging', 'Buys avocados in pesos each season', [12, 11, 24, 22]],
-    ['K', 'Summit Wire & Cable', 'Wire · Indiana', 'SK', 'mfg', 'hedging', 'Sources copper wire from Juárez', [10, 15, 22, 14]],
-    ['L', 'Laredo Crossdock', 'Warehousing · Texas', 'TB', 'logistics', 'collections', 'Bills Mexican clients for storage in MXN', [11, 13, 24, 18]],
-    ['M', 'Prairie Tractor Works', 'Farm equipment · Iowa', 'PS', 'mfg', 'collections', 'Sells tractors to Mexican dealers in pesos', [10, 10, 20, 20]],
-    ['N', 'Granite Bay Electronics', 'Electronics · California', 'SK', 'mfg', 'hedging', 'Contract manufacturer in Tijuana', [12, 14, 20, 16]],
-    ['O', 'Pacific Rim Freight', 'Freight · California', 'TB', 'logistics', 'hedging', 'Pays Mexican carriers in pesos', [10, 10, 18, 18]],
-    ['P', 'Golden Harvest Foods', 'Food importer · Florida', 'MC', 'importers', 'hedging', 'Imports tomatoes priced in pesos', [11, 10, 20, 18]],
-    ['Q', 'Riverside Plastics', 'Plastics · Georgia', 'PS', 'mfg', 'hedging', 'Buys resin pellets from Altamira', [9, 12, 18, 14]],
-    ['R', 'Cascade Auto Interiors', 'Auto parts · Michigan', 'SK', 'mfg', 'hedging', 'Seats made at a Puebla supplier', [12, 16, 26, 22]],
-    ['S', 'Border Express', 'Courier · Texas', 'TB', 'logistics', 'collections', 'Paid in pesos for cross-border parcels', [12, 12, 22, 18]],
-    ['T', 'Heartland Pumps', 'Industrial pumps · Kansas', 'PS', 'mfg', 'collections', 'Sells pumps to Mexican mines', [9, 10, 18, 18]],
-    ['U', 'Northstar Fasteners', 'Fasteners · Illinois', 'SK', 'mfg', 'hedging', 'Steel bolts sourced in Monterrey', [11, 15, 24, 18]],
-    ['V', 'Sunbelt Cold Chain', 'Cold storage · Arizona', 'TB', 'logistics', 'hedging', "Pays Mexican growers' freight in MXN", [10, 9, 18, 16]],
-    ['W', 'Gulf Coast Carriers', 'Shipping · Texas', 'DO', 'logistics', 'collections', 'Port of Veracruz fees in pesos', [11, 10, 22, 16]],
-    ['X', 'Casa Verde Snacks', 'Snack importer · Illinois', 'MC', 'importers', 'hedging', 'Buys tortilla chips in pesos', [10, 9, 18, 16]],
-    ['Y', 'Maple Leaf Grocers', 'Grocery importer · New York', 'MC', 'importers', 'collections', 'Mexican distributor pays in pesos', [9, 8, 16, 14]],
-    ['Z', 'Apex Machine Tools', 'Machine tools · Wisconsin', 'PS', 'mfg', 'hedging', 'Buys Mexican-made spindles', [10, 12, 20, 14]],
+    ['F', 'Sierra Auto Systems', 'Auto parts · Texas', 'N', 'mfg', 'hedging', 'Runs a brake-parts plant in Saltillo', [12, 16, 28, 20]],
+    ['G', 'Copperline Logistics', 'Trucking · Arizona', 'M', 'logistics', 'collections', 'Invoices Mexican shippers in pesos', [12, 12, 26, 20]],
+    ['H', 'Ironbridge Castings', 'Castings · Ohio', 'J', 'mfg', 'hedging', 'Buys castings from a Monterrey supplier', [10, 14, 24, 18]],
+    ['I', 'Bluewater Appliances', 'Appliances · Kentucky', 'J', 'mfg', 'hedging', 'Assembles washers with Mexican motors', [11, 13, 22, 16]],
+    ['J', 'Del Campo Produce', 'Produce importer · Texas', 'S', 'importers', 'hedging', 'Buys avocados in pesos each season', [12, 11, 24, 22]],
+    ['K', 'Summit Wire & Cable', 'Wire · Indiana', 'N', 'mfg', 'hedging', 'Sources copper wire from Juárez', [10, 15, 22, 14]],
+    ['L', 'Laredo Crossdock', 'Warehousing · Texas', 'M', 'logistics', 'collections', 'Bills Mexican clients for storage in MXN', [11, 13, 24, 18]],
+    ['M', 'Prairie Tractor Works', 'Farm equipment · Iowa', 'J', 'mfg', 'collections', 'Sells tractors to Mexican dealers in pesos', [10, 10, 20, 20]],
+    ['N', 'Granite Bay Electronics', 'Electronics · California', 'N', 'mfg', 'hedging', 'Contract manufacturer in Tijuana', [12, 14, 20, 16]],
+    ['O', 'Pacific Rim Freight', 'Freight · California', 'M', 'logistics', 'hedging', 'Pays Mexican carriers in pesos', [10, 10, 18, 18]],
+    ['P', 'Golden Harvest Foods', 'Food importer · Florida', 'S', 'importers', 'hedging', 'Imports tomatoes priced in pesos', [11, 10, 20, 18]],
+    ['Q', 'Riverside Plastics', 'Plastics · Georgia', 'J', 'mfg', 'hedging', 'Buys resin pellets from Altamira', [9, 12, 18, 14]],
+    ['R', 'Cascade Auto Interiors', 'Auto parts · Michigan', 'N', 'mfg', 'hedging', 'Seats made at a Puebla supplier', [12, 16, 26, 22]],
+    ['S', 'Border Express', 'Courier · Texas', 'M', 'logistics', 'collections', 'Paid in pesos for cross-border parcels', [12, 12, 22, 18]],
+    ['T', 'Heartland Pumps', 'Industrial pumps · Kansas', 'J', 'mfg', 'collections', 'Sells pumps to Mexican mines', [9, 10, 18, 18]],
+    ['U', 'Northstar Fasteners', 'Fasteners · Illinois', 'N', 'mfg', 'hedging', 'Steel bolts sourced in Monterrey', [11, 15, 24, 18]],
+    ['V', 'Sunbelt Cold Chain', 'Cold storage · Arizona', 'M', 'logistics', 'hedging', "Pays Mexican growers' freight in MXN", [10, 9, 18, 16]],
+    ['W', 'Gulf Coast Carriers', 'Shipping · Texas', 'M', 'logistics', 'collections', 'Port of Veracruz fees in pesos', [11, 10, 22, 16]],
+    ['X', 'Casa Verde Snacks', 'Snack importer · Illinois', 'S', 'importers', 'hedging', 'Buys tortilla chips in pesos', [10, 9, 18, 16]],
+    ['Y', 'Maple Leaf Grocers', 'Grocery importer · New York', 'S', 'importers', 'collections', 'Mexican distributor pays in pesos', [9, 8, 16, 14]],
+    ['Z', 'Apex Machine Tools', 'Machine tools · Wisconsin', 'J', 'mfg', 'hedging', 'Buys Mexican-made spindles', [10, 12, 20, 14]],
   ];
   const LAST = ['Oct 2', 'Sep 18', 'Oct 27', 'Nov 4', 'Aug 29', 'Oct 11', 'Sep 9'];
   MORE.forEach(([id, name, sector, rm, who, need, why, [a, b, c, d]], i) => {
@@ -193,8 +192,8 @@
   function setBadge(n) { const b = $('#badge'); b.textContent = n || ''; b.classList.toggle('show', !!n); }
   function setMe(mode) {
     const spec = mode === 'spec';
-    const rm = S.target ? R() : RMS.SK;
-    const ini = spec ? 'JL' : S.target ? S.target.rm : 'SK';
+    const rm = S.target ? R() : RMS.N;
+    const ini = spec ? 'JL' : S.target ? S.target.rm : 'N';
     $('#me-av').textContent = ini;
     $('#me-av').classList.toggle('blue', !spec);
     $('#me-name').textContent = spec ? 'Jordan' : rm.name;
