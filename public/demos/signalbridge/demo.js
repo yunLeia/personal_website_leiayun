@@ -9,16 +9,21 @@
   const nudge = $('#nudge');
 
   // ---------- Synthetic data ----------
-  const SUGGESTED = 'Tariff plus a weaker peso squeezes US manufacturers that buy from Mexico. Expect hedging demand on MXN payables in the next 4–6 weeks.';
+  const SUGGESTED = 'MXN volatility could raise hedging needs for US manufacturers sourcing in Mexico.';
   const DEFAULT_W = { r: 45, u: 35, e: 20 };
 
-  // The specialist's judgment: what this market move affects.
+  // How the specialist's sentence is read: currency, region, industry, need.
+  // Currency and region give context; industry and need decide which clients match.
   const IMPACTS = {
-    payables: { label: 'MXN payables', sub: 'Costs rise', kw: ['payable', 'cost', 'buy', 'import', 'supplier', 'squeez', 'expens', 'pay for'] },
-    supply: { label: 'Mexico supply chain', sub: 'Plans at risk', kw: ['supply', 'manufactur', 'auto', 'factory', 'plant', 'nearshor', 'monterrey', 'production', 'parts'] },
-    receivables: { label: 'Peso receivables', sub: 'Income falls', kw: ['receivable', 'revenue', 'logistic', 'freight', 'export', 'paid in', 'collect', 'income', 'sell to mexico'] },
-    volatility: { label: 'Peso volatility', sub: 'Hedging need', kw: ['vol', 'hedg', 'swing', 'risk', 'uncertain', 'protect', 'option'] },
+    mxn: { facet: 'Currency', label: 'MXN', fixed: true, kw: ['mxn', 'peso'] },
+    mexico: { facet: 'Region', label: 'Mexico', fixed: true, kw: ['mexic', 'cross-border', 'monterrey'] },
+    mfg: { facet: 'Industry', label: 'US manufacturers', kw: ['us manufacturers', 'manufactur', 'auto parts', 'auto suppliers'] },
+    logistics: { facet: 'Industry', label: 'Logistics firms', kw: ['logistics firms', 'logistic', 'freight', 'shipping'] },
+    importers: { facet: 'Industry', label: 'Food importers', kw: ['food importers', 'importer', 'food'] },
+    hedging: { facet: 'Need', label: 'Hedging', kw: ['hedg'] },
+    collections: { facet: 'Need', label: 'Collections', kw: ['collection', 'receivable', 'paid in'] },
   };
+  const FACET_CLASS = { Currency: 'f-cur', Region: 'f-reg', Industry: 'f-ind', Need: 'f-need' };
 
   const MARKET_EV = { tag: '', label: 'Market data', src: 'MXN −4.1% · 1M vol 16.8%' };
   const NEWS_EV = { tag: '', label: 'News', src: 'Tariff announcement · Nov 11' };
@@ -26,13 +31,15 @@
   const RMS = {
     SK: { name: 'Sarah', first: 'Sarah', team: 'Mid-market Industrials', others: [['Brightline Tools', 'Machinery', 'Oct 22'], ['Keystone Plastics', 'Packaging', 'Nov 3'], ['Northfield Metals', 'Steel', 'Oct 8']] },
     DO: { name: 'David', first: 'David', team: 'Transport & Logistics', others: [['Gulfway Shipping', 'Ports', 'Oct 30'], ['Plainsman Trucking', 'Trucking', 'Nov 5'], ['Delta Cold Chain', 'Storage', 'Oct 12']] },
+    PS: { name: 'Priya', first: 'Priya', team: 'Industrials West', others: [['Redwood Valves', 'Valves', 'Oct 17'], ['Mesa Robotics', 'Automation', 'Nov 6'], ['Clearwater Glass', 'Glass', 'Sep 25']] },
+    TB: { name: 'Tom', first: 'Tom', team: 'Logistics South', others: [['Bayou Barge Co.', 'Barges', 'Oct 9'], ['Lone Star Rail', 'Rail', 'Nov 1'], ['Coastal Reefer', 'Cold chain', 'Oct 21']] },
     MC: { name: 'Maya', first: 'Maya', team: 'Consumer & Food', others: [['Harvest Table Co.', 'Grocery', 'Oct 19'], ['Pacific Snacks', 'Packaged food', 'Nov 2'], ['Sierra Beverages', 'Beverages', 'Oct 27']] },
   };
 
   const CLIENTS = [
     {
       id: 'A', name: 'Atlas Components', sector: 'Auto parts · Ohio', industry: 'Auto parts', last: 'Sep 30', contact: 'CFO',
-      biz: 'MXN forward hedge', bizSub: '~$40M Mexico payables', ev: 'doc', rm: 'SK', imp: ['payables', 'supply'], f: { r: 94, u: 86, e: 78 },
+      biz: 'MXN forward hedge', bizSub: '~$40M Mexico payables', ev: 'doc', rm: 'SK', imp: ['mfg', 'hedging'], pts: { mxn: 14, mexico: 18, mfg: 30, hedging: 26 },
       evid: [{ tag: 'doc', label: 'CRM note', src: 'Meeting note · Sep 30', quote: 'CFO is considering moving ~30% of stamping supply to Monterrey in 2027.' }, MARKET_EV, NEWS_EV],
       brief: {
         open: "Yesterday's tariff and the peso move could change the cost of your Monterrey plan. Worth 30 minutes to look at locking in rates?",
@@ -43,7 +50,7 @@
     },
     {
       id: 'B', name: 'Rio Freight Lines', sector: 'Freight · Texas', industry: 'Freight', last: 'Oct 14', contact: 'treasurer',
-      biz: 'MXN cash mgmt', bizSub: 'Peso receivables', ev: 'inf', rm: 'DO', imp: ['receivables'], f: { r: 82, u: 70, e: 62 },
+      biz: 'MXN cash mgmt', bizSub: 'Peso receivables', ev: 'inf', rm: 'DO', imp: ['logistics', 'collections'], pts: { mxn: 15, mexico: 12, logistics: 28, collections: 22 },
       evid: [{ tag: 'inf', label: 'Inferred', src: '~40% of cross-border loads billed in MXN', quote: 'Treasurer mentioned FX slippage on Mexico collections.' }, MARKET_EV, NEWS_EV],
       brief: {
         open: "The peso's drop cuts what your Mexico invoices are worth in dollars. Want to look at converting collections faster or locking a rate?",
@@ -54,7 +61,7 @@
     },
     {
       id: 'C', name: 'Verde Foods Imports', sector: 'Food importer · CA', industry: 'Food import', last: 'Aug 2', contact: 'finance lead',
-      biz: 'MXN option collar', bizSub: 'Seasonal imports', ev: 'inf', rm: 'MC', imp: ['payables', 'volatility'], f: { r: 70, u: 98, e: 38 },
+      biz: 'MXN option collar', bizSub: 'Seasonal imports', ev: 'inf', rm: 'MC', imp: ['importers', 'hedging'], pts: { mxn: 12, mexico: 10, importers: 20, hedging: 22 },
       evid: [{ tag: 'inf', label: 'Inferred', src: 'Trade-finance data: MXN produce invoices', quote: null }, MARKET_EV, NEWS_EV],
       brief: {
         open: 'Peso swings are big right now. Before your spring produce orders, is it worth capping your MXN costs?',
@@ -63,7 +70,74 @@
       },
       yes: 'Exposure confirmed: <b>~$8M in spring produce invoices</b>. Can you show a collar vs. a forward?',
     },
+    {
+      id: 'D', name: 'Keystone Plastics', sector: 'Packaging · Michigan', industry: 'Packaging', last: 'Nov 3', contact: 'controller',
+      biz: 'MXN forward hedge', bizSub: 'Resin bought from Mexico', ev: 'inf', rm: 'SK', imp: ['mfg', 'hedging'], pts: { mxn: 10, mexico: 12, mfg: 24, hedging: 18 },
+      evid: [{ tag: 'inf', label: 'Inferred', src: 'Supplier payments to Mexico in AP data', quote: 'Controller asked about USD/MXN pricing on resin last quarter.' }, MARKET_EV, NEWS_EV],
+      brief: {
+        open: 'Your Mexico resin costs just moved with the peso. Worth a quick look at fixing next quarter\'s rate?',
+        pts: [['MXN −4.1% this week; 1M vol 16.8%', 2], ['Resin supplier payments to Mexico', 1], ['Tariff from Jan 1 may shift sourcing', 3]],
+        ask: 'Short call with your controller and Jordan (FX).',
+      },
+      yes: 'They want to <b>fix Q1 resin payments (~$6M)</b>. Can you price a 3-month forward?',
+    },
+    {
+      id: 'E', name: 'Gulfway Shipping', sector: 'Ports · Louisiana', industry: 'Ports', last: 'Oct 30', contact: 'CFO',
+      biz: 'MXN cash mgmt', bizSub: 'Port fees billed in MXN', ev: 'inf', rm: 'DO', imp: ['logistics', 'collections'], pts: { mxn: 12, mexico: 9, logistics: 22, collections: 18 },
+      evid: [{ tag: 'inf', label: 'Inferred', src: 'Veracruz port fees billed in MXN', quote: null }, MARKET_EV, NEWS_EV],
+      brief: {
+        open: 'Peso swings hit your Veracruz fees when you convert. Want to look at a steadier conversion plan?',
+        pts: [['1M MXN vol up to 16.8%', 2], ['Veracruz port fees billed in MXN', 1], ['Tariff may change Gulf trade volumes', 3]],
+        ask: 'Intro call with your CFO and Jordan (FX).',
+      },
+      yes: 'They want to <b>convert MXN fees on a fixed schedule</b>. Can you suggest a structure?',
+    },
   ];
+
+  // More clients, F–Z: [id, name, sector, rm, industry, need, why, [mxn, mexico, industry, need] points]
+  const MORE = [
+    ['F', 'Sierra Auto Systems', 'Auto parts · Texas', 'SK', 'mfg', 'hedging', 'Runs a brake-parts plant in Saltillo', [12, 16, 28, 20]],
+    ['G', 'Copperline Logistics', 'Trucking · Arizona', 'DO', 'logistics', 'collections', 'Invoices Mexican shippers in pesos', [12, 12, 26, 20]],
+    ['H', 'Ironbridge Castings', 'Castings · Ohio', 'PS', 'mfg', 'hedging', 'Buys castings from a Monterrey supplier', [10, 14, 24, 18]],
+    ['I', 'Bluewater Appliances', 'Appliances · Kentucky', 'PS', 'mfg', 'hedging', 'Assembles washers with Mexican motors', [11, 13, 22, 16]],
+    ['J', 'Del Campo Produce', 'Produce importer · Texas', 'MC', 'importers', 'hedging', 'Buys avocados in pesos each season', [12, 11, 24, 22]],
+    ['K', 'Summit Wire & Cable', 'Wire · Indiana', 'SK', 'mfg', 'hedging', 'Sources copper wire from Juárez', [10, 15, 22, 14]],
+    ['L', 'Laredo Crossdock', 'Warehousing · Texas', 'TB', 'logistics', 'collections', 'Bills Mexican clients for storage in MXN', [11, 13, 24, 18]],
+    ['M', 'Prairie Tractor Works', 'Farm equipment · Iowa', 'PS', 'mfg', 'collections', 'Sells tractors to Mexican dealers in pesos', [10, 10, 20, 20]],
+    ['N', 'Granite Bay Electronics', 'Electronics · California', 'SK', 'mfg', 'hedging', 'Contract manufacturer in Tijuana', [12, 14, 20, 16]],
+    ['O', 'Pacific Rim Freight', 'Freight · California', 'TB', 'logistics', 'hedging', 'Pays Mexican carriers in pesos', [10, 10, 18, 18]],
+    ['P', 'Golden Harvest Foods', 'Food importer · Florida', 'MC', 'importers', 'hedging', 'Imports tomatoes priced in pesos', [11, 10, 20, 18]],
+    ['Q', 'Riverside Plastics', 'Plastics · Georgia', 'PS', 'mfg', 'hedging', 'Buys resin pellets from Altamira', [9, 12, 18, 14]],
+    ['R', 'Cascade Auto Interiors', 'Auto parts · Michigan', 'SK', 'mfg', 'hedging', 'Seats made at a Puebla supplier', [12, 16, 26, 22]],
+    ['S', 'Border Express', 'Courier · Texas', 'TB', 'logistics', 'collections', 'Paid in pesos for cross-border parcels', [12, 12, 22, 18]],
+    ['T', 'Heartland Pumps', 'Industrial pumps · Kansas', 'PS', 'mfg', 'collections', 'Sells pumps to Mexican mines', [9, 10, 18, 18]],
+    ['U', 'Northstar Fasteners', 'Fasteners · Illinois', 'SK', 'mfg', 'hedging', 'Steel bolts sourced in Monterrey', [11, 15, 24, 18]],
+    ['V', 'Sunbelt Cold Chain', 'Cold storage · Arizona', 'TB', 'logistics', 'hedging', "Pays Mexican growers' freight in MXN", [10, 9, 18, 16]],
+    ['W', 'Gulf Coast Carriers', 'Shipping · Texas', 'DO', 'logistics', 'collections', 'Port of Veracruz fees in pesos', [11, 10, 22, 16]],
+    ['X', 'Casa Verde Snacks', 'Snack importer · Illinois', 'MC', 'importers', 'hedging', 'Buys tortilla chips in pesos', [10, 9, 18, 16]],
+    ['Y', 'Maple Leaf Grocers', 'Grocery importer · New York', 'MC', 'importers', 'collections', 'Mexican distributor pays in pesos', [9, 8, 16, 14]],
+    ['Z', 'Apex Machine Tools', 'Machine tools · Wisconsin', 'PS', 'mfg', 'hedging', 'Buys Mexican-made spindles', [10, 12, 20, 14]],
+  ];
+  const LAST = ['Oct 2', 'Sep 18', 'Oct 27', 'Nov 4', 'Aug 29', 'Oct 11', 'Sep 9'];
+  MORE.forEach(([id, name, sector, rm, who, need, why, [a, b, c, d]], i) => {
+    const hedge = need === 'hedging';
+    CLIENTS.push({
+      id, name, sector, industry: sector.split(' · ')[0], last: LAST[i % LAST.length], contact: 'finance lead',
+      biz: hedge ? 'MXN forward hedge' : 'MXN cash mgmt', bizSub: hedge ? 'Mexico supplier payments' : 'Peso receipts',
+      ev: 'inf', rm, imp: [who, need], pts: { mxn: a, mexico: b, [who]: c, [need]: d }, why,
+      evid: [{ tag: 'inf', label: 'Inferred', src: why, quote: null }, MARKET_EV, NEWS_EV],
+      brief: {
+        open: hedge
+          ? 'The peso move changes what you pay your Mexican suppliers. Worth a quick look at locking in a rate?'
+          : 'The weaker peso cuts what your Mexico invoices are worth in dollars. Want to look at converting faster?',
+        pts: [['MXN −4.1% this week; 1M vol 16.8%', 2], [why, 1], ['US tariff on Mexican auto parts from Jan 1', 3]],
+        ask: 'Short call with your finance lead and Jordan (FX).',
+      },
+      yes: hedge
+        ? "They want to <b>hedge next quarter's MXN payments</b>. Can you price a forward?"
+        : 'They want to <b>convert MXN receipts weekly</b>. Can you suggest a setup?',
+    });
+  });
 
   // ---------- State ----------
   let run = 0;
@@ -83,18 +157,18 @@
   const fromText = (k) => IMPACTS[k].kw.some((w) => S.text.toLowerCase().includes(w));
   const isOn = (k) => (k in S.ovr ? S.ovr[k] : fromText(k));
   const srcOf = (k) => (k in S.ovr ? (S.ovr[k] ? 'you' : '') : fromText(k) ? 'text' : '');
-  const activeKeys = () => Object.keys(IMPACTS).filter(isOn);
+  const activeKeys = () => Object.keys(IMPACTS).filter((k) => !IMPACTS[k].fixed && isOn(k));
   const visible = (c) => c.imp.some(isOn);
-  const factors = (c) => {
-    const missing = c.imp.filter((k) => !isOn(k)).length;
-    return { r: Math.max(0, c.f.r - 12 * missing), u: c.f.u, e: c.f.e };
-  };
-  const score = (c, w = S.w) => {
-    const f = factors(c);
-    const t = w.r + w.u + w.e;
-    return t ? Math.round((w.r * f.r + w.u * f.u + w.e * f.e) / t) : 0;
-  };
-  const flagged = (c) => c.f.u >= 70 && c.f.e < 50;
+  const PT_ORDER = ['mxn', 'mexico', 'mfg', 'logistics', 'importers', 'hedging', 'collections'];
+  const ptKeys = (c) => PT_ORDER.filter((k) => k in c.pts);
+  const score = (c) => ptKeys(c).filter(isOn).reduce((n, k) => n + c.pts[k], 0);
+  const flagged = () => false;
+  // stacked bar: one colored segment per phrase; phrases that are off show as an outline
+  const breakdown = (c, on = isOn) => `<span class="bd">${ptKeys(c).map((k) => {
+    const t = IMPACTS[k];
+    const live = on(k);
+    return `<i class="${FACET_CLASS[t.facet]} ${live ? '' : 'off'}" style="width:${c.pts[k]}%" title="${t.label} ${live ? '+' : 'would add +'}${c.pts[k]}"></i>`;
+  }).join('')}</span>`;
   const tier = (n) => (n >= 80 ? '' : n >= 65 ? 'mid' : 'low');
   const verdict = (c, n) => (n >= 80 ? ['Act', 'doc'] : n >= 65 ? ['Qualify', 'inf'] : ['Watch', '']);
   const T = () => S.target;
@@ -214,99 +288,164 @@
     setStep(1);
     view.innerHTML = `
       <div class="page fade-in">
-        <div class="head">
-          <h1>Market today</h1>
-          <span class="ai">AI summary · 6:30 AM</span>
-          <div class="right"><span class="tag">FX · Americas</span></div>
+        <div class="mhead"><span class="label">Market today</span><span class="ai">AI summary · 6:30 AM</span><span class="tag">FX · Americas</span></div>
+        <div class="signals mini">
+          <div class="card sig"><span class="tag hi">Policy</span><b>US 15% tariff on Mexican auto parts</b><strong>Jan 1</strong></div>
+          <div class="card sig"><span class="tag">Market</span><b>Peso falls after tariff news</b><strong class="down">−4.1%</strong></div>
+          <div class="card sig"><span class="tag warn">Risk</span><b>Peso volatility jumps</b><strong>16.8%</strong></div>
         </div>
-        <div class="signals">
-          <div class="card sig">
-            <div class="row"><span class="tag hi">Policy</span><span class="time">Nov 11</span></div>
-            <h3>US sets 15% tariff on Mexican auto parts</h3>
-            <div class="metric"><strong>Jan 1</strong><span>effective</span></div>
+
+        <div class="composer hero ${S.text ? '' : 'pulse'}" id="composer">
+          <div class="clabel"><h2>Your view</h2><span class="hint2">One sentence: who does this move hit, and how?</span></div>
+          <div class="hlwrap">
+            <div class="hl" id="hl" aria-hidden="true"></div>
+            <textarea id="txt" rows="2" placeholder="Click to add your view…">${esc(S.text)}</textarea>
           </div>
-          <div class="card sig">
-            <div class="row"><span class="tag">Market</span><span class="time">Today</span></div>
-            <h3>Peso falls after tariff news</h3>
-            <div class="metric"><strong class="down">−4.1%</strong><span>MXN vs USD</span></div>
-            ${spark()}
-          </div>
-          <div class="card sig">
-            <div class="row"><span class="tag warn">Risk</span><span class="time">Today</span></div>
-            <h3>Peso volatility jumps</h3>
-            <div class="metric"><strong>16.8%</strong><span>1M vol · +3.2 pts</span></div>
-          </div>
-        </div>
-        <div class="composer ${S.text ? '' : 'pulse'}" id="composer">
-          <textarea id="txt" rows="2" placeholder="What's your read? Who does this hit, and how?">${esc(S.text)}</textarea>
           <div class="reads" id="reads"></div>
           <div class="bar">
-            <button class="suggest" id="suggest">Use an example view</button>
             <span class="hint" id="hint"></span>
             <button class="btn primary enter" id="enter">Find clients →</button>
           </div>
         </div>
+
         <div id="after"></div>
       </div>`;
     const ta = $('#txt');
-    ta.addEventListener('focus', () => { $('#composer').classList.add('focus'); $('#composer').classList.remove('pulse'); });
+    ta.addEventListener('focus', () => {
+      $('#composer').classList.add('focus');
+      $('#composer').classList.remove('pulse');
+      if (!S.text) typeText(SUGGESTED);
+    });
     ta.addEventListener('blur', () => $('#composer').classList.remove('focus'));
-    ta.addEventListener('input', () => { S.text = ta.value; autoGrow(ta); renderReads(); });
+    ta.addEventListener('input', () => {
+      S.text = ta.value;
+      autoGrow(ta);
+      showPending();
+      clearTimeout(detectT);
+      detectT = setTimeout(detect, 800);
+    });
     ta.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); analyze(); } });
-    $('#suggest').addEventListener('click', typeSuggested);
     $('#enter').addEventListener('click', analyze);
     autoGrow(ta);
-    renderReads();
+    if (S.text) renderReads(); else showPending();
+  }
+
+  // While the sentence is still being written: plain text, no chips yet.
+  let detectT = 0;
+  let detecting = false;
+  function showPending() {
+    if (!$('#reads')) return;
+    $('#hl').innerHTML = `${esc(S.text)}\n`;
+    $('#reads').innerHTML = `<span class="label">AI reads</span><span class="reading">${S.text.trim() ? 'Waiting for the full sentence…' : 'Your view will be read as currency, region, industry and need'}</span>`;
+    $('#enter').disabled = true;
+    $('#enter').classList.remove('pulse');
+    $('#hint').textContent = S.text.trim() ? '' : 'Click the box to add your view';
+  }
+  // Sentence done: a short "reading" beat, then highlights and chips appear one by one.
+  async function detect() {
+    if (!$('#reads')) return;
+    if (!S.text.trim()) return showPending();
+    detecting = true;
+    $('#reads').innerHTML = '<span class="label">AI reads</span><span class="reading shimmer"><span class="spin dark"></span>Reading your view…</span>';
+    try {
+      await wait(700);
+      detecting = false;
+      renderReads(true);
+    } catch (e) { detecting = false; }
   }
 
   const autoGrow = (ta) => { ta.style.height = 'auto'; ta.style.height = `${ta.scrollHeight}px`; };
 
-  function renderReads() {
+  // Find keyword hits in the text, expanded to whole words, without overlaps.
+  function findHits(text) {
+    const low = text.toLowerCase();
+    const all = [];
+    Object.keys(IMPACTS).forEach((k) => IMPACTS[k].kw.forEach((w) => {
+      let i = 0;
+      while ((i = low.indexOf(w, i)) !== -1) {
+        let st = i;
+        let en = i + w.length;
+        while (st > 0 && /[a-z]/i.test(text[st - 1])) st--;
+        while (en < text.length && /[a-z]/i.test(text[en])) en++;
+        all.push({ st, en, k });
+        i = en;
+      }
+    }));
+    all.sort((x, y) => x.st - y.st || y.en - x.en);
+    const out = [];
+    let end = -1;
+    all.forEach((m) => { if (m.st >= end) { out.push(m); end = m.en; } });
+    return out;
+  }
+
+  function renderReads(reveal) {
     const box = $('#reads');
     if (!box) return;
-    const prev = new Set($$('.imp-chip.on', box).map((c) => c.dataset.k));
-    box.innerHTML = `<span class="label">AI reads</span>${Object.keys(IMPACTS).map((k) => {
-      const on = isOn(k);
-      const src = srcOf(k);
-      return `<button class="imp-chip ${on ? 'on' : ''} ${on && !prev.has(k) ? 'pop' : ''}" data-k="${k}" title="${on ? 'Click to remove' : 'Click to add'}">${IMPACTS[k].label}${src === 'you' ? '<span class="src">you</span>' : ''}</button>`;
-    }).join('')}`;
-    $$('.imp-chip', box).forEach((c) => c.addEventListener('click', () => {
+    const text = S.text;
+    const hits = findHits(text);
+
+    // colored highlights behind the text
+    let html = '';
+    let pos = 0;
+    hits.forEach((m) => {
+      html += esc(text.slice(pos, m.st));
+      const d = reveal ? ` style="animation-delay:${hits.indexOf(m) * 140}ms"` : '';
+      html += `<mark class="${FACET_CLASS[IMPACTS[m.k].facet]} ${isOn(m.k) ? '' : 'off'} ${reveal ? 'reveal' : ''}"${d}>${esc(text.slice(m.st, m.en))}</mark>`;
+      pos = m.en;
+    });
+    $('#hl').innerHTML = `${html + esc(text.slice(pos))}\n`;
+
+    // one chip per phrase the AI read, labelled with what kind of signal it is
+    const prev = new Set($$('.kchip.on', box).map((c) => c.dataset.k));
+    const keys = Object.keys(IMPACTS).filter((k) => fromText(k) || k in S.ovr);
+    box.innerHTML = `<span class="label">AI reads</span>${keys.map((k, i) => chipHTML(k, !prev.has(k), reveal ? i : -1)).join('')}`;
+    $$('.kchip:not(.fixed)', box).forEach((c) => c.addEventListener('click', () => {
       const k = c.dataset.k;
       S.ovr[k] = !isOn(k);
       if (S.ovr[k] === fromText(k)) delete S.ovr[k];
       renderReads();
     }));
+
     const n = activeKeys().length;
-    const hint = $('#hint');
-    hint.textContent = !S.text.trim() ? 'Type a sentence, or use an example' : n ? `${n} impact${n > 1 ? 's' : ''} · click to add or remove` : 'No impact detected yet: add one';
-    $('#enter').disabled = !S.text.trim() || !n;
+    $('#hint').textContent = !text.trim() ? 'Click the box to add your view' : n ? 'Click a chip to add or remove it' : 'Add an industry or need to match on';
+    const ready = !!text.trim() && n > 0 && !typing && !detecting;
+    $('#enter').disabled = !ready;
+    $('#enter').classList.toggle('pulse', ready);
+  }
+
+  function chipHTML(k, fresh, order = -1) {
+    const t = IMPACTS[k];
+    const on = isOn(k);
+    const cls = `kchip ${FACET_CLASS[t.facet]} ${on ? 'on' : ''} ${t.fixed ? 'fixed' : ''} ${order >= 0 ? 'reveal' : on && fresh ? 'pop' : ''}`;
+    const delay = order >= 0 ? ` style="animation-delay:${200 + order * 110}ms"` : '';
+    const you = srcOf(k) === 'you' ? '<em>added by you</em>' : '';
+    return `<button class="${cls}"${delay} data-k="${k}" ${t.fixed ? 'tabindex="-1"' : `title="${on ? 'Click to remove' : 'Click to add'}"`}><small>${t.facet}</small><b>${t.label}</b>${you}</button>`;
   }
 
   let typing = false;
-  async function typeSuggested() {
-    if (typing) return;
+  async function typeText(full) {
+    if (typing || analyzing) return;
     typing = true;
     const ta = $('#txt');
-    $('#composer').classList.remove('pulse');
     $('#composer').classList.add('focus');
     S.ovr = {};
     const start = performance.now();
-    const dur = 2000;
+    const dur = Math.max(1400, full.length * 14);
     const id = run;
     await new Promise((res) => {
       const tick = (now) => {
-        if (id !== run || !document.body.contains(ta)) return;
-        const n = Math.min(SUGGESTED.length, Math.round(((now - start) / dur) * SUGGESTED.length));
-        ta.value = SUGGESTED.slice(0, n);
+        if (id !== run || !document.body.contains(ta)) return res();
+        const n = Math.min(full.length, Math.round(((now - start) / dur) * full.length));
+        ta.value = full.slice(0, n);
         S.text = ta.value;
         autoGrow(ta);
-        renderReads();
-        if (n < SUGGESTED.length) requestAnimationFrame(tick); else res();
+        showPending();
+        if (n < full.length) requestAnimationFrame(tick); else res();
       };
       requestAnimationFrame(tick);
     });
     typing = false;
-    $('#enter')?.classList.add('pulse');
+    if (document.body.contains(ta)) { $('#composer').classList.remove('focus'); detect(); }
   }
 
   function spark() {
@@ -315,45 +454,68 @@
     return `<svg class="spark" viewBox="0 0 100 28" preserveAspectRatio="none" aria-hidden="true"><path d="${d}" fill="none" stroke="#c82d4c" stroke-width="1.6" vector-effect="non-scaling-stroke"/></svg>`;
   }
 
+  function funnelNums() {
+    const shown = CLIENTS.filter(visible).length;
+    const exposed = Math.round(activeKeys().reduce((n, k) => n + EXPOSED[k], 0) * 0.75);
+    const rest = Math.max(0, exposed - shown - 1);
+    const hedged = Math.round(rest * 0.65);
+    return { shown, exposed, hedged, weak: rest - hedged };
+  }
+
   let analyzing = false;
   async function analyze() {
-    if (analyzing || typing || !S.text.trim() || !activeKeys().length) return;
+    if (analyzing || typing || detecting || $('#enter')?.disabled || !S.text.trim() || !activeKeys().length) return;
     analyzing = true;
     const enter = $('#enter');
     enter.disabled = true;
     enter.classList.remove('pulse');
     $('#txt').disabled = true;
-    const shown = CLIENTS.filter(visible).length;
+    const f = funnelNums();
     const steps = [
-      ['Reading your view', `${activeKeys().length} impacts`],
-      ['Scanning client book', '42 clients'],
+      ['Reading your view', Object.keys(IMPACTS).filter(isOn).map((k) => IMPACTS[k].label).join(' · ')],
+      [`Scanning ${TOTAL} clients`, `${f.exposed} exposed`],
       ['Checking information barriers', '1 restricted'],
-      ['Scoring opportunities', `${shown} match${shown === 1 ? '' : 'es'}`],
+      ['Matching CRM notes and ranking', `${f.shown} worth a call`],
     ];
     const box = document.createElement('div');
-    box.className = 'card loading fade-in';
-    box.innerHTML = steps.map(([t]) => `<div class="ln"><i></i>${t}<span class="n"></span></div>`).join('');
+    box.className = 'card proc fade-in';
+    box.innerHTML = `
+      <div class="proch"><span class="spin dark"></span><b id="proct">Finding clients…</b><span class="procpct" id="procpct">0%</span></div>
+      <div class="procbar"><i id="procfill"></i></div>
+      ${steps.map(([t]) => `<div class="pstep"><i></i><span>${t}</span><b></b></div>`).join('')}`;
     $('#after').replaceChildren(box);
-    const lines = $$('.ln', box);
+    box.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    const lines = $$('.pstep', box);
     try {
       for (let i = 0; i < lines.length; i++) {
         lines[i].classList.add('run');
-        await wait(i === 1 ? 800 : 550);
+        await wait(i === 1 ? 900 : 600);
         lines[i].classList.replace('run', 'ok');
-        $('.n', lines[i]).textContent = steps[i][1];
+        $('b', lines[i]).textContent = steps[i][1];
+        const pct = Math.round(((i + 1) / lines.length) * 100);
+        $('#procfill').style.width = `${pct}%`;
+        $('#procpct').textContent = `${pct}%`;
       }
-      await wait(300);
+      $('.proch .spin', box).replaceWith(Object.assign(document.createElement('span'), { className: 'okdot' }));
+      $('#proct').textContent = `${f.shown} clients worth a call`;
+      await wait(700);
       S.spec = 'map';
       swap(specMap);
     } finally { analyzing = false; }
   }
 
-  // ---- Screen 2: judgment → client → business → RM ----
-  const LANE_STEP = 100;
-  const LANE_TOP = 12;
-  const IMP_TOP = 16;
-  const IMP_STEP = 70;
-  const laneY = {};
+  // ---- Screen 2: funnel + shortlist ----
+  const TOTAL = 700;
+  const EXPOSED = { mfg: 41, logistics: 23, importers: 18, hedging: 30, collections: 17 };
+  const WHY = {
+    A: 'Plans to move 30% of supply to Monterrey',
+    B: 'Bills ~40% of cross-border loads in pesos',
+    C: 'Pays seasonal produce invoices in pesos',
+    D: 'Pays Mexican resin suppliers',
+    E: 'Port fees in Veracruz billed in pesos',
+  };
+  const ACT_COUNT = 4;
+  let topIds = new Set();
 
   function specMap() {
     setStep(S.replied ? 6 : S.target ? (S.approved ? 4 : 3) : 2);
@@ -361,55 +523,23 @@
       <div class="page fade-in">
         <button class="back" id="back">← Edit my view</button>
         <div class="head">
-          <h1>Opportunity map</h1>
-          <span class="sub" id="count"></span>
+          <h1>Who to reach out to</h1>
         </div>
-        <div class="card ctx">
-          <div class="kv"><span class="label">Market</span><div>US tariff on Mexican auto parts · <span class="down">MXN −4.1%</span> · 1M vol 16.8%</div></div>
-          <div class="kv"><span class="label">Your view</span><q>${esc(S.text)}</q></div>
+        <div class="card judge">
+          <span class="label">Matching on</span>
+          <div class="jchips" id="jchips"></div>
         </div>
-        <div class="mapwrap">
-          <div class="card mapcard">
-            <div class="scroll">
-              <div class="maphead"><span>Your judgment</span><span></span><span>Client</span></div>
-              <div class="map" id="map">
-                <svg class="wires" id="wires" aria-hidden="true"></svg>
-                ${Object.keys(IMPACTS).map((k, i) => `
-                  <div class="node imp" data-k="${k}" style="top:${IMP_TOP + i * IMP_STEP}px" role="switch" tabindex="0">
-                    <span class="tg"></span><b>${IMPACTS[k].label}</b><small>${IMPACTS[k].sub}</small>
-                  </div>`).join('')}
-                ${CLIENTS.map(lane).join('')}
-                <div class="empty-map">Switch on a judgment to see clients</div>
-              </div>
-            </div>
-            <div class="mapfoot">
-              <span class="hint2">Click a judgment to switch it · click a client for details</span>
-              <span><i class="solid"></i>Thicker = higher score</span>
-              <span><i class="dash"></i>Urgent, weak evidence</span>
-              <span><i></i>38 not shown · low relevance</span>
-              <span><i class="r"></i>1 restricted · information barrier</span>
-            </div>
-          </div>
-        </div>
+        <div class="funnel" id="funnel"></div>
+        <div id="lists"></div>
       </div>`;
-
     $('#back').addEventListener('click', () => { S.spec = 'brief'; swap(specBrief); });
-    $$('.node.imp').forEach((n) => {
-      const toggle = () => {
-        const k = n.dataset.k;
-        S.ovr[k] = !isOn(k);
-        if (S.ovr[k] === fromText(k)) delete S.ovr[k];
-        update(true);
-      };
-      n.addEventListener('click', toggle);
-      n.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
-    });
-    $$('.lane .client').forEach((n) => n.addEventListener('click', () => openPackage(n.closest('.lane').dataset.id)));
-    $$('.lane .send').forEach((b) => b.addEventListener('click', () => openPackage(b.closest('.lane').dataset.id)));
-    Object.keys(laneY).forEach((k) => delete laneY[k]);
-    update(false);
+    seen = new Set(CLIENTS.filter(visible).map((c) => c.id));
+    update();
   }
 
+  let seen = new Set();
+  let whyOpen = false;
+  let showAll = false;
   const esc = (t) => t.replace(/[&<>"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]));
 
   function actHTML(c) {
@@ -417,80 +547,73 @@
       const label = S.replied ? (S.rejected ? `Rejected · ${S.outcome}` : `${S.outcome} ✓`) : S.approved ? 'Approved ✓' : 'Sent ✓';
       return `<button class="btn sm done" disabled>${label}</button>`;
     }
-    return `<button class="btn sm ${S.target ? '' : 'primary'} send" ${S.target ? 'disabled title="One hand-off per run"' : ''}>Send to ${RMS[c.rm].first}</button>`;
+    return `<button class="btn sm ${S.target || !topIds.has(c.id) ? '' : 'primary'} send" ${S.target ? 'disabled title="One hand-off per run"' : ''}>Send to ${RMS[c.rm].first}</button>`;
   }
 
-  function lane(c) {
+  function item(c, fresh) {
+    const s = score(c);
     return `
-      <div class="lane ${flagged(c) ? 'flag' : ''}" data-id="${c.id}">
-        <div class="node client" title="Open details">
-          <div class="top-row"><b>Client ${c.id}</b><span class="score" data-score></span></div>
-          <small>${c.sector}</small>
-          <div class="tip" data-tip></div>
-        </div>
-        <div class="act">${actHTML(c)}</div>
+      <div class="pick ${fresh ? 'fresh' : ''}" data-id="${c.id}" title="Open details">
+        <span class="pscore ${tier(s)}">${s}</span>
+        <span class="pwho"><b>Client ${c.id}</b><small>${WHY[c.id] || c.why}</small></span>
+        ${breakdown(c)}
+        <span class="prm"><span class="av sm">${c.rm}</span>${RMS[c.rm].name}</span>
+        <span class="act">${actHTML(c)}</span>
       </div>`;
   }
 
-  function update(animate) {
-    if (!$('#map')) return;
-    $$('.node.imp').forEach((n) => {
-      const on = isOn(n.dataset.k);
-      n.classList.toggle('off', !on);
-      n.setAttribute('aria-checked', on);
-    });
-    const shown = CLIENTS.filter(visible);
-    $('#count').textContent = `${shown.length} of 42 clients`;
-    $('#map').classList.toggle('none', !shown.length);
-    const ranked = [...CLIENTS].sort((a, b) => (visible(b) - visible(a)) || (score(b) - score(a)));
-    const target = {};
-    ranked.forEach((c, i) => { target[c.id] = LANE_TOP + i * LANE_STEP; });
-    CLIENTS.forEach((c) => {
-      const ln = $(`.lane[data-id="${c.id}"]`);
-      ln.classList.toggle('off', !visible(c));
-      const s = score(c);
-      const el = $('[data-score]', ln);
-      el.textContent = s;
-      el.className = `score ${tier(s)}`;
-      const f = factors(c);
-      $('[data-tip]', ln).textContent = `Relevance ${f.r} · Urgency ${f.u} · Evidence ${f.e}`;
-    });
-    const from = { ...laneY };
-    const t0 = performance.now();
-    const dur = animate ? 380 : 0;
-    const id = run;
-    const frame = (now) => {
-      if (id !== run || !$('#map')) return;
-      const p = dur ? Math.min(1, (now - t0) / dur) : 1;
-      const e = 1 - Math.pow(1 - p, 3);
-      CLIENTS.forEach((c) => {
-        const a = from[c.id] ?? target[c.id];
-        laneY[c.id] = a + (target[c.id] - a) * e;
-        $(`.lane[data-id="${c.id}"]`).style.top = `${laneY[c.id]}px`;
-      });
-      drawWires();
-      if (p < 1) requestAnimationFrame(frame);
+  function update() {
+    if (!$('#lists')) return;
+    // judgment chips (same controls as screen 1)
+    $('#jchips').innerHTML = Object.keys(IMPACTS).filter((k) => fromText(k) || k in S.ovr).map((k) => chipHTML(k, false)).join('');
+    $$('#jchips .kchip:not(.fixed)').forEach((ch) => ch.addEventListener('click', () => {
+      const k = ch.dataset.k;
+      S.ovr[k] = !isOn(k);
+      if (S.ovr[k] === fromText(k)) delete S.ovr[k];
+      update();
+    }));
+
+    // funnel
+    const shown = CLIENTS.filter(visible).sort((x, y) => score(y) - score(x));
+    const { exposed, hedged, weak } = funnelNums();
+    $('#funnel').innerHTML = `
+      <span><b>${TOTAL}</b> clients</span><i class="farrow"></i><span class="fhi"><b>${shown.length}</b> worth a call</span>
+      <button class="why" id="whyhidden">Why not the others?</button>
+      <div class="fwhy" id="fwhy" ${whyOpen ? '' : 'hidden'}>${TOTAL - exposed} no exposure · ${hedged} already hedged · ${weak} weak evidence · 1 restricted</div>`;
+    $('#whyhidden').addEventListener('click', () => { whyOpen = !whyOpen; $('#fwhy').hidden = !whyOpen; });
+
+    // lists
+    const now = shown.slice(0, ACT_COUNT);
+    const later = shown.slice(ACT_COUNT);
+    topIds = new Set(now.map((c) => c.id));
+    const block = (title, list, cap) => {
+      if (!list.length) return '';
+      const cut = cap && !showAll ? list.slice(0, cap) : list;
+      const more = list.length - cut.length;
+      return `
+      <section class="tier">
+        <div class="tierhead"><b>${title}</b><em>${list.length}</em>${title === 'Act now' ? '<span class="bdlegend">Bar = what each phrase adds to the score</span>' : ''}</div>
+        <div class="card picks">${cut.map((c) => item(c, !seen.has(c.id))).join('')}
+          ${more ? `<button class="showmore" id="showmore">Show ${more} more</button>` : ''}</div>
+      </section>`;
     };
-    if (dur) requestAnimationFrame(frame); else frame(t0);
+    $('#lists').innerHTML = shown.length
+      ? block('Act now', now) + block('Worth a check', later, 6)
+      : '<div class="card empty">No clients match. Switch on a judgment above.</div>';
+    seen = new Set(shown.map((c) => c.id));
+    $('#showmore')?.addEventListener('click', () => { showAll = true; update(); });
+
+    $$('.pick').forEach((r) => r.addEventListener('click', (e) => {
+      if (e.target.closest('.send, .done')) return;
+      openPackage(r.dataset.id);
+    }));
+    bindSends();
   }
 
-  function drawWires() {
-    const keys = Object.keys(IMPACTS);
-    const x1 = 180, x2 = 320;
-    const paths = [];
-    CLIENTS.forEach((c) => {
-      if (!visible(c)) return;
-      const s = score(c);
-      const w = Math.max(1.2, (s - 40) / 12);
-      const col = flagged(c) ? '#b4610e' : s >= 80 ? '#2272b4' : '#9fb6cb';
-      c.imp.filter(isOn).forEach((k) => {
-        const y1 = IMP_TOP + keys.indexOf(k) * IMP_STEP + 29;
-        const y2 = laneY[c.id] + 38;
-        paths.push(`<path d="M${x1} ${y1} C ${x1 + 32} ${y1}, ${x2 - 32} ${y2}, ${x2} ${y2}" fill="none" stroke="${col}" stroke-width="${w}" ${flagged(c) ? 'stroke-dasharray="5 4"' : ''} stroke-linecap="round"/>`);
-      });
-    });
-    $('#wires').innerHTML = paths.join('');
-  }
+  const bindSends = () => $$('.pick .send').forEach((b) => b.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openPackage(b.closest('.pick').dataset.id);
+  }));
 
   // ---- Package drawer (details + send) ----
   function openPackage(id) {
@@ -505,7 +628,7 @@
       <div class="db">
         <div class="kv"><span class="label">Client</span><div><b>Client ${c.id}</b> · ${c.sector}<small>Name shown to ${rm.first} only</small></div></div>
         <div class="kv"><span class="label">Score</span><div class="wts"><span><b>${s}</b></span><span class="tag ${vc}">${v}</span></div></div>
-        <div class="kv"><span class="label">Your judgment</span><div class="chips">${c.imp.map((k) => `<span class="tag ${isOn(k) ? 'inf' : ''}">${isOn(k) ? '✓ ' : ''}${IMPACTS[k].label}</span>`).join('')}</div></div>
+        <div class="kv"><span class="label">Matched on</span><div class="bdlist">${ptKeys(c).map((k) => `<span class="${FACET_CLASS[IMPACTS[k].facet]} ${isOn(k) ? '' : 'off'}"><i></i>${IMPACTS[k].label}<b>${isOn(k) ? '+' : ''}${c.pts[k]}</b></span>`).join('')}</div></div>
         <div class="kv"><span class="label">Business</span><div><b>${c.biz}</b> <span class="tag ${c.ev}">${c.ev === 'doc' ? 'Documented' : 'Inferred'}</span></div></div>
         <div class="kv"><span class="label">Your view</span><q>${esc(S.text)}</q></div>
         <div class="kv"><span class="label">Evidence</span><div class="ev">${c.evid.map((e) => `<div><span class="tag ${e.tag}">${e.label}</span><span class="src">${e.src}${e.quote ? ' · 🔒 RM only' : ''}</span></div>`).join('')}</div></div>
@@ -533,11 +656,11 @@
     closeDrawer();
     S.target = c;
     S.sentScore = score(c);
-    S.sentW = { ...S.w };
+    S.sentOn = new Set(ptKeys(c).filter(isOn));
     S.sentImp = c.imp.filter(isOn);
     setStep(3);
-    CLIENTS.forEach((x) => { const a = $(`.lane[data-id="${x.id}"] .act`); if (a) a.innerHTML = actHTML(x); });
-    $$('.lane .send').forEach((btn) => btn.addEventListener('click', () => openPackage(btn.closest('.lane').dataset.id)));
+    CLIENTS.forEach((x) => { const a = $(`.pick[data-id="${x.id}"] .act`); if (a) a.innerHTML = actHTML(x); });
+    bindSends();
     toast(`Sent to ${RMS[c.rm].name}`);
     const rmBtn = $('[data-mode="rm"]', sw);
     rmBtn.removeAttribute('aria-disabled');
@@ -629,7 +752,7 @@
             <thead><tr><th>Account</th><th>Sector</th><th>Last contact</th><th>SignalBridge</th></tr></thead>
             <tbody>
               <tr class="${pending ? 'new' : ''}" id="acct" style="cursor:pointer"><td><b>${c.name}</b></td><td>${c.industry}</td><td>${c.last}</td><td>${status}</td></tr>
-              ${rm.others.map(([n, s, d]) => `<tr><td>${n}</td><td>${s}</td><td>${d}</td><td><span style="color:var(--faint)">—</span></td></tr>`).join('')}
+              ${rm.others.filter(([n]) => n !== c.name).slice(0, 3).map(([n, s, d]) => `<tr><td>${n}</td><td>${s}</td><td>${d}</td><td><span style="color:var(--faint)">—</span></td></tr>`).join('')}
             </tbody>
           </table>
         </div>
@@ -697,7 +820,6 @@
     setStep(3);
     setNav('accounts');
     const c = T();
-    const f = factors(c);
     const [v, vc] = verdict(c, S.sentScore);
     const quote = c.evid[0].quote;
     view.innerHTML = `
@@ -713,7 +835,7 @@
             <div class="kv"><span class="label">Market</span><div>US tariff on Mexican auto parts · MXN −4.1%</div></div>
             <div class="kv"><span class="label">Jordan's view</span><q>${esc(S.text)}</q></div>
             ${S.note ? `<div class="kv"><span class="label">Jordan's note</span><div class="note-unlock" style="margin:0">${esc(S.note)}</div></div>` : ''}
-            <div class="kv"><span class="label">Judgment</span><div class="chips">${S.sentImp.map((k) => `<span class="tag inf">${IMPACTS[k].label}</span>`).join('')}</div></div>
+            <div class="kv"><span class="label">Matched on</span><div class="chips">${[...S.sentOn].map((k) => `<span class="tag inf">${IMPACTS[k].label}</span>`).join('')}</div></div>
             <div class="kv"><span class="label">Evidence</span>
               <div class="ev">
                 ${c.evid.map((e) => `<div><span class="tag ${e.tag}">${e.label}</span><span class="src">${e.src}</span></div>`).join('')}
@@ -723,7 +845,7 @@
           </div>
           <div class="card decide">
             <div class="big"><strong>${S.sentScore}</strong><span class="tag ${vc}">${v}</span></div>
-            <div class="bars">${bar('Relevance', f.r)}${bar('Urgency', f.u)}${bar('Evidence', f.e)}</div>
+            <div class="bars">${ptKeys(c).filter((k) => S.sentOn.has(k)).map((k) => bar(IMPACTS[k].label, c.pts[k], FACET_CLASS[IMPACTS[k].facet])).join('')}</div>
             <div id="decision">${decisionHTML()}</div>
             <button class="btn msg" id="msgspec"><span class="av sm">JL</span>Message Jordan${S.chat.length ? ` <span class="tag">${S.chat.length}</span>` : ''}</button>
           </div>
@@ -785,7 +907,7 @@
     } finally { replying = false; }
   }
 
-  const bar = (n, v) => `<div class="b"><span>${n}</span><div class="t"><div class="f" data-v="${v}"></div></div><span class="v">${v}</span></div>`;
+  const bar = (n, v, cls = '') => `<div class="b ${cls}"><span>${n}</span><div class="t"><div class="f" data-v="${Math.min(100, v * 3)}"></div></div><span class="v">+${v}</span></div>`;
 
   function decisionHTML() {
     if (S.approved) return '<button class="btn primary" id="tobrief" style="width:100%">Open brief →</button>';
@@ -923,6 +1045,9 @@
     run++;
     analyzing = false;
     typing = false;
+    detecting = false;
+    showAll = false;
+    clearTimeout(detectT);
     replying = false;
     S = fresh();
     document.body.dataset.mode = 'spec';
