@@ -514,7 +514,7 @@
     D: 'Pays Mexican resin suppliers',
     E: 'Port fees in Veracruz billed in pesos',
   };
-  const ACT_COUNT = 4;
+  const ACT_COUNT = 3;
   let topIds = new Set();
 
   function specMap() {
