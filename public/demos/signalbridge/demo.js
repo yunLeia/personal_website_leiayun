@@ -29,10 +29,10 @@
   const NEWS_EV = { tag: '', label: 'News', src: 'Tariff announcement · Nov 11' };
 
   const RMS = {
-    N: { name: 'Nihar', first: 'Nihar', team: 'Mid-market Industrials', others: [['Brightline Tools', 'Machinery', 'Oct 22'], ['Keystone Plastics', 'Packaging', 'Nov 3'], ['Northfield Metals', 'Steel', 'Oct 8']] },
-    M: { name: 'Mykayla', first: 'Mykayla', team: 'Transport & Logistics', others: [['Gulfway Shipping', 'Ports', 'Oct 30'], ['Plainsman Trucking', 'Trucking', 'Nov 5'], ['Delta Cold Chain', 'Storage', 'Oct 12']] },
-    J: { name: 'Jade', first: 'Jade', team: 'Industrials West', others: [['Redwood Valves', 'Valves', 'Oct 17'], ['Mesa Robotics', 'Automation', 'Nov 6'], ['Clearwater Glass', 'Glass', 'Sep 25']] },
-    S: { name: 'Sean', first: 'Sean', team: 'Consumer & Food', others: [['Harvest Table Co.', 'Grocery', 'Oct 19'], ['Pacific Snacks', 'Packaged food', 'Nov 2'], ['Sierra Beverages', 'Beverages', 'Oct 27']] },
+    N: { name: 'Nihar Patel', first: 'Nihar', team: 'Mid-market Industrials', others: [['Brightline Tools', 'Machinery', 'Oct 22'], ['Keystone Plastics', 'Packaging', 'Nov 3'], ['Northfield Metals', 'Steel', 'Oct 8']] },
+    M: { name: 'Mykayla Brooks', first: 'Mykayla', team: 'Transport & Logistics', others: [['Gulfway Shipping', 'Ports', 'Oct 30'], ['Plainsman Trucking', 'Trucking', 'Nov 5'], ['Delta Cold Chain', 'Storage', 'Oct 12']] },
+    J: { name: 'Jade Chen', first: 'Jade', team: 'Industrials West', others: [['Redwood Valves', 'Valves', 'Oct 17'], ['Mesa Robotics', 'Automation', 'Nov 6'], ['Clearwater Glass', 'Glass', 'Sep 25']] },
+    S: { name: 'Sean Miller', first: 'Sean', team: 'Consumer & Food', others: [['Harvest Table Co.', 'Grocery', 'Oct 19'], ['Pacific Snacks', 'Packaged food', 'Nov 2'], ['Sierra Beverages', 'Beverages', 'Oct 27']] },
   };
 
   const CLIENTS = [
@@ -201,7 +201,7 @@
     $('#role-av').textContent = ini;
     $('#role-title').textContent = spec ? 'Specialist\'s view' : 'RM\'s view';
     $('#role-sub').textContent = spec ? 'Jordan · FX Product Specialist' : `${rm.name} · Relationship Manager, ${rm.team}`;
-    $('[data-mode="rm"]', sw).lastChild.textContent = S.target ? rm.first : 'RM';
+    $('[data-mode="rm"]', sw).lastChild.textContent = 'RM';
     const role = $('.role');
     role.classList.remove('flip'); void role.offsetWidth; role.classList.add('flip');
   }
@@ -663,7 +663,7 @@
     toast(`Sent to ${RMS[c.rm].name}`);
     const rmBtn = $('[data-mode="rm"]', sw);
     rmBtn.removeAttribute('aria-disabled');
-    rmBtn.lastChild.textContent = RMS[c.rm].first;
+    rmBtn.lastChild.textContent = 'RM';
     showNudge(`Sent. See ${RMS[c.rm].first}'s side <b>→</b>`, 'ready');
   }
 
