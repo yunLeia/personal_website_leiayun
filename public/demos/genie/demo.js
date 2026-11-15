@@ -70,6 +70,7 @@
     agent: '<svg viewBox="0 0 20 20"><path d="M10 3v4M10 13v4M3 10h4M13 10h4"/><circle cx="10" cy="10" r="2"/></svg>',
     sparkle: '<svg viewBox="0 0 20 20"><defs><linearGradient id="sg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff5f7e"/><stop offset="1" stop-color="#7b4dff"/></linearGradient></defs><path d="M10 2.5c.6 3.6 1.9 4.9 5.5 5.5-3.6.6-4.9 1.9-5.5 5.5C9.4 9.9 8.1 8.6 4.5 8c3.6-.6 4.9-1.9 5.5-5.5Z" transform="translate(0 2)" stroke="url(#sg)" stroke-width="1.5"/></svg>',
     qfile: '<svg viewBox="0 0 20 20"><path d="M11.5 3H5.5v14h9V6z"/><path d="M11.5 3v3h3"/><path d="m7.5 10.5 2 1.5-2 1.5M10.5 14.5h2"/></svg>',
+    tableFill: '<svg viewBox="0 0 24 24" class="solid"><path fill="currentColor" stroke="none" fill-rule="evenodd" d="M3 3h18v18H3zM5 7.6v1h14v-1zM5 10.4V19h3.6v-8.6zM10.2 10.4V19h3.6v-8.6zM15.4 10.4V19H19v-8.6z"/></svg>',
     db: '<svg viewBox="0 0 20 20"><ellipse cx="10" cy="5" rx="6" ry="2.5"/><path d="M4 5v10c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5V5M4 10c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5"/></svg>',
     bigsearch: '<svg viewBox="0 0 20 20"><circle cx="9" cy="9" r="5.5"/><path d="m13 13 4 4"/></svg>',
     lamp: '<svg viewBox="0 0 20 20" style="color:#d6409f"><path d="M3 12c2 0 3-1.5 5-1.5s3 1.5 6 1.5c1.5 0 2.5-1 3-2.5M6 12.5c0 2 1.8 3.5 4 3.5s4-1.5 4-3.5M10 3.5c.4 1.7 1 2.3 2.7 2.7-1.7.4-2.3 1-2.7 2.7-.4-1.7-1-2.3-2.7-2.7 1.7-.4 2.3-1 2.7-2.7Z"/></svg>',
@@ -304,11 +305,11 @@
     const p = post('ai-msg', '');
     const iv = setInterval(feedBottom, 200);
     timers.push(iv);
-    streamInto(p, text.replace(/`/g, ''), 28, () => {
+    streamInto(p, text.replace(/`/g, ''), CHAT_WORD_MS, () => {
       clearInterval(iv);
       p.innerHTML = esc(text).replace(/`([^`]+)`/g, '<code>$1</code>');
       feedBottom();
-      if (done) paced(done, 250);
+      if (done) paced(done, CHAT_PAUSE_MS);
     });
   };
   // A finished tool call row.
@@ -334,7 +335,7 @@
   // - the section being written gets Genie's existing AI border (P1)
   // - edit controls stay hidden until Genie finishes a section
   // - the first question is optional; Genie keeps going
-  // - when setup finishes: summary in Genie Code (P2.1), Chat dot + "Try it in Chat" (P0.3)
+  // - when setup finishes: summary in Genie Code (P2.1), Chat dot + "Try your agent" (P0.3)
   // ======================================================================
   const P_STEPS = [
     { label: 'Define agent details', tab: 'about' },
@@ -383,6 +384,13 @@
     "adding business context, and validating its answers. Let me first gather context and load the tools I need.";
   // Scales both timelines (1 = base speed).
   const PACE = 1.1;
+  // Genie Code messages: ms per word while streaming, and a pause after each message.
+  const CHAT_WORD_MS = 28;
+  const CHAT_PAUSE_MS = 250;
+  // Proposed config filling: description (ms per word), rows (ms each), instruction lines (ms each).
+  const CFG_WORD_MS = 90;
+  const CFG_ROW_MS = 1000;
+  const CFG_LINE_MS = 250;
 
   const NOTE_START = 'You can leave this page or close the agent window anytime and finish setup later.';
   const STATUS = {
@@ -392,7 +400,6 @@
   };
 
   const ph = (text) => `<p class="ph">${text}</p>`; // Proposed: what Genie will do in an unfilled section
-  const emptyState = (icon, text) => `<div class="empty">${icon}<p>${text}</p></div>`; // Current: product empty state
   const cqRow = (q) => `<span>${q}</span>${I.sparkle}${I.plus}`;
   const tableRow = ([t, d]) => `<span class="tname">${t}</span><small>${d}</small>`;
   const exRow = (e) => `<span class="ex-ic">${I.qfile}</span><div class="ex-main"><div class="ex-t"><span>${esc(e.t)}</span><b class="badge k-${e.k.toLowerCase()}">${e.k}</b></div><code>${esc(e.sql)}</code></div>${I.pencil}`;
@@ -460,11 +467,23 @@
                 <div class="cfg-sec"><h3>Common questions</h3>${I.pencil}</div>
                 <div class="rows" id="cqs">${p ? ph('Genie Code will suggest questions after the description.') : CQ_GENERIC.map((q) => `<div class="cq">${cqRow(q)}</div>`).join('')}</div>
               </div>
+              <hr class="sec-div">
+              <div class="sec about">
+                <div class="cfg-sec"><h3>About this agent</h3>${I.pencil}</div>
+                <dl class="meta-list">
+                  <dt>Name</dt><dd>${AGENT_NAME}</dd>
+                  <dt>Owner</dt><dd>${OWNER}@example.com</dd>
+                  <dt>Agent ID</dt><dd>01f1e2a47c3b19d8a6e05f2c7b8d4e91</dd>
+                  <dt>Warehouse</dt><dd><i class="wh-dot"></i>Serverless Starter Warehouse</dd>
+                  <dt>Tags</dt><dd></dd>
+                  <dt>Thumbnail</dt><dd><span class="thumb">${I.genie}</span></dd>
+                </dl>
+              </div>
             </div>
             <div class="pane${p ? ' busy' : ''}" data-pane="sources" hidden>
               <div class="sec" id="sec-sources">
-                <div class="cfg-sec"><h3>Tables</h3>${I.plus}</div>
-                <div class="rows" id="tables">${p ? ph('Genie Code will find tables in step 2.') : emptyState(I.db, 'No sources yet.')}</div>
+                <div class="cfg-sec" id="srchead"${p ? '' : ' hidden'}><h3>Tables</h3>${I.plus}</div>
+                <div class="rows" id="tables">${p ? ph('Genie Code will find tables in step 2.') : `<div class="empty big">${I.tableFill}<b>No sources added yet</b><p>Add tables, metric views, files, and connectors</p><span class="btn-sm">Add</span></div>`}</div>
               </div>
             </div>
             <div class="pane${p ? ' busy' : ''}" data-pane="instructions" hidden>
@@ -480,7 +499,7 @@
                 <div class="cfg-sec flat"><h3>Examples</h3><span class="btn-sm">Add</span></div>
                 <p class="cfg-sub">Teach your agent how to answer questions with curated examples.</p>
                 <div class="ex-search"><span>${I.search}Search examples...</span><span class="ex-all">All (<b id="excount">0</b>) ${I.chevDown}</span></div>
-                <div class="rows" id="examples">${p ? ph('Genie Code will add example queries in step 3.') : emptyState(I.bigsearch, 'No examples yet.')}</div>
+                <div class="rows" id="examples">${p ? ph('Genie Code will add example queries in step 3.') : `<div class="empty">${I.bigsearch}<p>No examples yet.</p></div>`}</div>
               </div>
             </div>
           </div>
@@ -517,6 +536,7 @@
       d.innerHTML = html;
       $(wrap).appendChild(d);
       if (wrap === '#examples') $('#excount').textContent = $('#examples').children.length;
+      if (wrap === '#tables') $('#srchead').hidden = false;
     };
     kit.showSpaceDesc = () => { $('#spacedesc').hidden = false; };
     // Any tab or checklist step can be opened by hand.
@@ -635,6 +655,8 @@
       e.classList.add('active');
       e.textContent = text;
     };
+    // Move the highlight to a section and say what Genie is doing there.
+    const focus = (sec, wrap, text) => { writing(sec, true); working(wrap, text); };
     const addRows = (wrap, rows, cls, gap) => (next) => {
       rows.forEach((html, i) => later(() => { k.addRow(wrap, html, cls); feedBottom(); }, gap * (i + 1)));
       later(next, gap * rows.length + 300);
@@ -671,41 +693,56 @@
     let closeAsk = null;
 
     run([
-      (n) => later(() => { $('#thoughts').hidden = false; startStep(0); streamInto($('#th-text'), THOUGHTS_P, 28, n); }, 300),
-      (n) => tool('Loaded agent setup tools', 900, n),
-      (n) => say("The agent already has a clear purpose and name, so I'll start setting it up. Optionally, pick a question it should answer first and I'll use it as a starting example.", n),
+      // Each section: the highlight moves there first, Genie Code works in chat, then the content lands.
+      // Step 1 · About: the description is in focus as soon as Genie starts.
+      (n) => later(() => {
+        startStep(0);
+        $('#thoughts').hidden = false;
+        streamInto($('#th-text'), THOUGHTS_P, CHAT_WORD_MS, n);
+      }, 300),
+      // The description comes into focus once Genie has introduced itself.
+      (n) => { focus('#sec-desc', '#descwrap', 'Genie Code is writing a description…'); tool('Loaded agent setup tools', 900, n); },
+      (n) => say("The agent already has a clear purpose and name, so I'll start with a description. Optionally, pick a question it should answer first and I'll use it as a starting example.", n),
       (n) => {
         closeAsk = showAsk((ans) => {
           if (ans !== null && ans < FIRST_QS.length - 1) { firstQ = FIRST_QS[ans]; answered = true; }
         });
         later(n, 400);
       },
-      // Step 1 · About
+      (n) => tool('Drafted a description from your prompt', 1200, n),
       (n) => {
-        writing('#sec-desc', true);
         $('#descwrap .ph').remove();
         $('#desc').hidden = false;
-        streamInto($('#desc'), P_DESC, 30, n);
+        streamInto($('#desc'), P_DESC, CFG_WORD_MS, n);
       },
-      (n) => { writing('#sec-desc', false); writing('#sec-cq', true); working('#cqs', 'Genie Code is drafting common questions…'); later(n, 500); },
-      addRows('#cqs', COMMON_QS.map(cqRow), 'cq', 350),
+      (n) => { writing('#sec-desc', false); later(n, 300); },
+      (n) => { focus('#sec-cq', '#cqs', 'Genie Code is drafting common questions…'); say('Next, a few common questions your team is likely to ask.', n); },
+      (n) => tool('Drafted 3 common questions', 1000, n),
+      addRows('#cqs', COMMON_QS.map(cqRow), 'cq', CFG_ROW_MS),
       (n) => { writing('#sec-cq', false); finishStep(0); k.showSpaceDesc(); later(n, 300); },
       // Step 2 · Sources
-      (n) => { startStep(1); working('#tables', 'Genie Code is searching for tables…'); say("Now I'll search for sales tables, dashboards, existing Genie agents, and workspace context that cover orders, revenue, and regions.", n); },
+      (n) => { startStep(1); focus('#sec-sources', '#tables', 'Genie Code is searching for tables…'); say("Now I'll search for sales tables, dashboards, existing Genie agents, and workspace context that cover orders, revenue, and regions.", n); },
       (n) => tool('Searched tables, dashboards and Genie agents', 1400, n),
       (n) => tool('Inspected `sales.orders` and sampled rows', 1200, n),
       (n) => say('`sales.orders` is a strong fit: 48,210 orders with order date, status, and order total. I\'ll join it to `sales.customers` and `sales.regions` for regional views, and `sales.order_items` for product detail. Attaching these tables now.', n),
-      (n) => { writing('#sec-sources', true); n(); },
-      addRows('#tables', TABLES.map(tableRow), 'trow', 500),
+      addRows('#tables', TABLES.map(tableRow), 'trow', CFG_ROW_MS),
       (n) => { writing('#sec-sources', false); finishStep(1); later(n, 300); },
       // Step 3 · Instructions, then example queries
-      (n) => { startStep(2); working('#examples', 'Genie Code will add example queries after the instructions.'); say("Now I'll prepare the business context. First, a quick check on how cancelled and refunded orders show up, so the revenue guidance matches the data.", n); },
+      (n) => {
+        startStep(2);
+        writing('#sec-instructions', true);
+        $('#instr').textContent = 'Genie Code is checking the data to write business context…';
+        $('#instr').classList.add('active');
+        working('#examples', 'Genie Code will add example queries after the instructions.');
+        say("Now I'll prepare the business context. First, a quick check on how cancelled and refunded orders show up, so the revenue guidance matches the data.", n);
+      },
       (n) => tool('Checked order status values and fiscal calendar', 1400, n),
-      (n) => say('About 6% of orders are cancelled or refunded but still carry an order total, so revenue should exclude them. Saving instructions and example queries now.', n),
-      (n) => { writing('#sec-instructions', true); n(); },
-      writeLines(INSTR, 300),
-      (n) => { writing('#sec-instructions', false); unbusy('instructions'); k.showTab('examples'); writing('#sec-examples', true); later(n, 300); },
-      (n) => addRows('#examples', exItems(firstQ).map(exRow), 'exrow', 500)(n),
+      (n) => say('About 6% of orders are cancelled or refunded but still carry an order total, so revenue should exclude them. Saving the instructions now.', n),
+      writeLines(INSTR, CFG_LINE_MS),
+      (n) => { writing('#sec-instructions', false); unbusy('instructions'); later(n, 300); },
+      (n) => { k.showTab('examples'); focus('#sec-examples', '#examples', 'Genie Code is writing example queries…'); say('Next, example queries so the agent answers revenue and region questions the same way every time.', n); },
+      (n) => tool('Wrote example queries for revenue and regions', 1200, n),
+      (n) => addRows('#examples', exItems(firstQ).map(exRow), 'exrow', CFG_ROW_MS)(n),
       (n) => { writing('#sec-examples', false); finishStep(2); unbusy('examples'); later(n, 300); },
       // Step 4 · Benchmarks
       (n) => { startStep(3); say("Business context is saved. Final step: benchmark questions, which are test questions with expected answers that check the agent's accuracy.", n); },
@@ -719,7 +756,7 @@
         $('#gdot').hidden = false;
         $('#setup-title').textContent = 'Genie set up your agent';
         // Stay on the finished setup; the user decides when to test (no auto-close).
-        $('#setup-note').innerHTML = '<span>Your agent is ready. Review any step, or try it now.</span><button type="button" class="btn-primary sm link">Try it in Chat</button>';
+        $('#setup-note').innerHTML = '<span>Your agent is ready. Review any step, or try it now.</span><button type="button" class="btn-primary sm link">Try your agent</button>';
         $('#setup-note').classList.add('ready');
         n();
       },
@@ -729,7 +766,7 @@
           <li><b>Data:</b> <code>sales.orders</code> joined to customers, regions, and order items.</li>
           <li><b>Business context:</b> net revenue excludes cancelled and refunded orders, regions come from the customer record, fiscal quarters start in February, plus 3 example queries.</li>
           <li><b>Benchmarks:</b> 3 of 3 passed${answered ? ', including your first question' : ''}.</li>
-        </ul><p>Try it in Agent Chat whenever you're ready. I've added ${answered ? 'your first question' : 'a starter question'} there.</p>`);
+        </ul><p>Try your agent whenever you're ready. I've added ${answered ? 'your first question' : 'a starter question'} to Agent Chat.</p>`);
       },
     ]);
   };
