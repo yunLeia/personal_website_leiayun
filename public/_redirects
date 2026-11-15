@@ -1,0 +1,4 @@
+# The Genie Agent demo moved from /demos/genie to /demos/databricksapm (old link is in the PRD).
+/demos/genie /demos/databricksapm/ 301
+/demos/genie/ /demos/databricksapm/ 301
+/demos/genie/* /demos/databricksapm/:splat 301
