@@ -384,101 +384,58 @@ td .owner { color: var(--text); }
 .stop { width: 10px; height: 10px; border-radius: 1px; background: #d22e48; margin-right: 4px; }
 .as-foot { margin: 6px 0 8px; text-align: center; font-size: 12px; color: var(--muted); }
 
-/* ---------- Proposed version ---------- */
+/* ---------- Proposed version ----------
+   Only existing Databricks visuals: blue for active, grey for secondary,
+   the checklist's own spinner, and Genie's AI gradient border. */
 .ver { display: flex; padding: 2px; border-radius: 8px; background: #eef0f2; }
 .ver[hidden] { display: none; }
 .ver button { height: 26px; padding: 0 12px; border-radius: 6px; color: var(--muted); font-weight: 500; }
 .ver button.on { background: #fff; color: var(--text); box-shadow: 0 1px 2px rgba(17, 23, 28, .1); }
 
-:root { --ai: #7b4dff; --ai-soft: #f3efff; --ok: #1f7a4d; --ok-soft: #e8f5ee; --need: #c9730a; }
-
-/* Status chips (shared across checklist, tabs, Genie Code) */
-.st-chip {
-  display: inline-flex; align-items: center; gap: 5px;
-  height: 20px; padding: 0 8px; border-radius: 999px;
-  font-size: 11.5px; font-weight: 500; white-space: nowrap;
+/* Checklist: who is handling each step */
+.setup-steps.p li { cursor: pointer; }
+.setup-steps.p li:not(.on):hover { background: #eceff2; }
+.setup-steps.p li.done .n { background: var(--blue); }
+.setup-steps .st {
+  margin-left: auto; display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--muted); white-space: nowrap;
 }
-.st-chip.ai { background: var(--ai-soft); color: var(--ai); }
-.st-chip.ai .mini-spin { width: 10px; height: 10px; border-top-color: var(--ai); }
-.st-chip.ok { color: var(--ok); }
-.st-chip.next { color: var(--faint); }
-.st-chip.rev { background: #eef1f4; color: #4a5a67; margin-bottom: 8px; }
-
-.legend { display: flex; gap: 14px; flex-wrap: wrap; margin: 0 2px 8px; font-size: 11.5px; color: var(--muted); }
-.legend span { display: inline-flex; align-items: center; gap: 5px; }
-.lg { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
-.lg.ai { background: var(--ai); }
-.lg.rev { background: #8a969f; }
-.lg.need { background: var(--need); }
-
-.setup-steps.p li { cursor: pointer; transition: background .2s; }
-.setup-steps.p li:hover { background: #eceff2; }
-.setup-steps.p li.on { background: var(--ai-soft); }
-.setup-steps.p li.on .n { background: var(--ai); }
-.setup-steps.p li.done .n { background: var(--ok); }
-.setup-steps .st { margin-left: auto; }
 .setup-bar i { transition: width .5s ease; }
+.setup-note .link { cursor: pointer; }
 
-/* Tabs with live state */
+/* Tabs: spinner on the tab Genie is updating */
 .tabs .tab {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 12px 0 10px; color: #3c4a55; font-weight: 500;
   border-bottom: 2px solid transparent;
 }
 .tabs .tab.on { color: var(--text); font-weight: 600; border-color: var(--blue); }
-.tabs .tab.pending { color: var(--faint); }
-.tabs .tab.pending.on { color: var(--text); }
-.ts { display: none; width: 8px; height: 8px; border-radius: 50%; }
+.ts { display: none; }
 .tab.working .ts {
-  display: inline-block; width: 10px; height: 10px;
-  border: 1.5px solid transparent; border-top-color: var(--ai);
+  display: inline-block; width: 10px; height: 10px; border-radius: 50%;
+  border: 1.5px solid transparent; border-top-color: var(--muted);
   animation: spin .9s linear infinite;
 }
-.tab.review .ts { display: inline-block; background: #8a969f; }
 
-/* Section currently being written by Genie (P1) */
-.sec { margin: 0 -8px; padding: 0 8px 8px; border-radius: 8px; border: 1px solid transparent; transition: background .3s, border-color .3s; }
-.sec.writing { background: #faf8ff; border-color: #ddd2ff; }
-.sec.writing .cfg-sec h3::after {
-  content: "Genie is writing…"; margin-left: 10px;
-  font-size: 12px; font-weight: 500; color: var(--ai);
+/* Section being filled: Genie's AI gradient border, same as the suggestion card */
+.sec { margin: 0 -8px 8px; padding: 0 8px 4px; border-radius: 8px; border: 1.5px solid transparent; transition: border-color .4s; }
+.sec.writing {
+  background: linear-gradient(#fff, #fff) padding-box, linear-gradient(135deg, #ff5f7e, #c04dff 60%, #7b4dff) border-box;
 }
-.gen { margin: 0; min-height: 20px; line-height: 1.55; }
-.by { display: flex; align-items: center; gap: 4px; margin-top: 6px; font-size: 12px; color: var(--muted); }
-.by svg { width: 14px; height: 14px; }
-.pane:empty::before { content: ""; }
+.suggest[hidden], .suggest-btns[hidden] { display: none; }
 .trow { display: flex; flex-direction: column; padding: 10px 12px; margin-bottom: 8px; border: 1px solid var(--line); border-radius: 6px; }
 .tname { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; }
 .trow small { margin-top: 2px; }
-.from-you { flex: none; padding: 1px 8px; border-radius: 999px; background: var(--blue-soft); color: var(--blue); font-size: 11.5px; }
-.fresh { animation: pop .3s ease-out; }
+.fresh { animation: fade .6s ease-out; }
 
-/* Ready to test (P0 c) */
-.ready {
-  display: flex; align-items: center; gap: 10px; flex: none;
-  padding: 10px 12px; border-radius: 10px;
-  background: var(--ok-soft); border: 1px solid #bfe3cd;
-  animation: pop .3s ease-out;
-}
-.ready[hidden] { display: none; }
-.ready > div { flex: 1; min-width: 0; }
-.ready b { display: block; }
-.ready small { color: #3f6b52; }
-.ready-dot, .gdot { width: 8px; height: 8px; border-radius: 50%; background: #22a35a; flex: none; box-shadow: 0 0 0 3px rgba(34, 163, 90, .2); }
-.btn-test { height: 30px; padding: 0 14px; border-radius: 6px; background: var(--ok); color: #fff; font-weight: 500; white-space: nowrap; }
-.btn-test:hover { background: #17633e; }
+/* Ready to test: a dot on the existing Chat button */
 button.seg { cursor: pointer; }
-.gdot { display: inline-block; margin-left: 2px; }
+.gdot { display: inline-block; width: 7px; height: 7px; margin-left: 2px; border-radius: 50%; background: #277c43; }
 .gdot[hidden] { display: none; }
 .seg.active { border: 2px solid var(--blue); box-shadow: 0 0 0 2px var(--blue-soft); }
 .cfg-pop[hidden] { display: none; }
 .ask.focus { border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-soft); }
 .ask.focus .ask-in { color: var(--text); }
-
-/* Genie Code progress messages */
-.g-msg { display: flex; align-items: flex-start; gap: 8px; margin: 10px 4px 0; font-size: 13px; animation: pop .25s ease-out; }
-.g-ok { flex: none; width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; background: var(--ok-soft); color: var(--ok); font-size: 11px; font-weight: 700; }
-.ask-card.closed { display: flex; align-items: center; gap: 8px; padding: 10px 12px; box-shadow: none; background: #f5f6f7; }
 
 @keyframes slidein { from { opacity: 0; transform: translateX(16px); } }
 

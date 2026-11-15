@@ -341,21 +341,25 @@
   };
 
   // ======================================================================
-  // Proposed version (PRD): one AI-led creation process.
-  // Checklist, config tabs and Genie Code share one status language and move together.
+  // Proposed version (PRD). Same screen as Current; only copy, state and timing change:
+  // - checklist reads as Genie's work, each step says who is handling it (P0.2)
+  // - config tabs fill in live, the tab being updated shows a spinner (P0.1)
+  // - the section being filled gets Genie's existing AI border (P1)
+  // - Chat gets a dot and the checklist note says it's ready to test (P0.3)
+  // Genie Code panel and its question card are unchanged.
   // ======================================================================
   const P_STEPS = [
-    { label: 'Define agent details', tab: 'about', done: 'Drafted the description and common questions' },
-    { label: 'Identify relevant data', tab: 'sources', done: 'Connected 4 tables. Your agent can answer questions now' },
-    { label: 'Prepare business context', tab: 'instructions', done: 'Added 3 business rules' },
-    { label: 'Add initial benchmarks', tab: 'examples', done: 'Added example questions to check answers' },
+    { label: 'Define agent details', tab: 'about' },
+    { label: 'Identify relevant data', tab: 'sources' },
+    { label: 'Prepare business context', tab: 'instructions' },
+    { label: 'Add initial benchmarks', tab: 'examples' },
   ];
   const TABS = [['about', 'About'], ['sources', 'Sources'], ['instructions', 'Instructions'], ['examples', 'Examples']];
   const TABLES = [
-    ['sales.orders', '1.2M rows · order date, status, order total'],
-    ['sales.customers', '48K rows · account, segment, region'],
-    ['sales.order_items', '3.9M rows · product, quantity, price'],
-    ['sales.regions', '12 rows · region and territory names'],
+    ['sales.orders', 'Order date, status, order total'],
+    ['sales.customers', 'Account, segment, region'],
+    ['sales.order_items', 'Product, quantity, price'],
+    ['sales.regions', 'Region and territory names'],
   ];
   const RULES = [
     'Revenue is the sum of order_total, excluding cancelled and refunded orders.',
@@ -368,17 +372,18 @@
     'How does average order value compare across product categories?',
   ];
   const TEST_Q = 'What is our monthly revenue trend over the past year?';
-  // Slows the whole Proposed timeline. 1 = original (~12s), 2.5 = ~30s.
+  // Slows the whole Proposed timeline. 1 = ~12s, 2.5 = ~30s.
   const PACE = 2.5;
 
-  const chip = {
-    ai: '<span class="st-chip ai"><span class="mini-spin"></span>Genie working</span>',
-    done: '<span class="st-chip ok">✓ Done</span>',
-    next: '<span class="st-chip next">Up next</span>',
+  const NOTE_START = 'You can leave this page or close the agent window anytime and finish setup later.';
+  const STATUS = {
+    next: '',
+    ai: '<span class="mini-spin"></span>Genie · In progress',
+    done: 'Optional review',
   };
 
   const pSpacePane = () => `
-    <section class="space p">
+    <section class="space">
       <div class="space-bar">
         <button type="button" class="seg" id="chatseg">${I.bubble}Chat<i class="gdot" id="gdot" hidden></i></button>
         <span class="seg plain">${I.eye}Monitor</span>
@@ -402,36 +407,27 @@
       </div>
 
       <div class="cfg-pop" id="cfgpop">
-        <div class="ready" id="ready" hidden>
-          <span class="ready-dot"></span>
-          <div><b>Your agent is ready to test</b><small id="ready-sub">Genie is still adding business context and examples.</small></div>
-          <button type="button" class="btn-test" id="testbtn">Test agent</button>
-        </div>
-
         <div class="setup">
           <div class="setup-head"><b id="setup-title">Genie is setting up your agent</b><span><span id="setup-count">0</span> of 4 ${I.chevDown}</span></div>
           <div class="setup-bar"><i id="setup-bar"></i></div>
-          <div class="legend" aria-label="Status legend">
-            <span><i class="lg ai"></i>Genie working</span>
-            <span><i class="lg rev"></i>Optional review</span>
-            <span><i class="lg need"></i>Needs your input</span>
-          </div>
           <ol class="setup-steps p" id="psteps">
-            ${P_STEPS.map((s, i) => `<li data-i="${i}" data-tab="${s.tab}"><span class="n">${i + 1}</span><span class="lbl">${s.label}</span><span class="st">${chip.next}</span></li>`).join('')}
+            ${P_STEPS.map((s, i) => `<li data-i="${i}" data-tab="${s.tab}"><span class="n">${i + 1}</span>${s.label}<span class="st"></span></li>`).join('')}
           </ol>
+          <p class="setup-note" id="setup-note">${NOTE_START}</p>
         </div>
 
         <div class="cfg-card">
           <div class="tabs" id="ptabs">
-            ${TABS.map(([k, l]) => `<button type="button" class="tab pending" data-tab="${k}"><i class="ts"></i>${l}</button>`).join('')}
+            ${TABS.map(([k, l]) => `<button type="button" class="tab" data-tab="${k}">${l}<i class="ts"></i></button>`).join('')}
             <span class="tabs-x">${I.x}</span>
           </div>
           <div class="cfg-body" id="pbody">
             <div class="pane" data-pane="about">
-              <div class="sec" id="sec-desc">
-                <div class="cfg-sec"><h3>Description</h3>${I.pencil}</div>
-                <p class="gen" id="desc"></p>
-                <div class="by" id="desc-by" hidden>${I.sparkle}Written by Genie · <span class="link">Edit</span></div>
+              <div class="cfg-sec"><h3>Description</h3>${I.pencil}</div>
+              <div class="suggest" id="suggest" hidden>
+                <div class="suggest-head">${I.sparkle}<span>Genie Suggested Description</span>${I.x}</div>
+                <p id="desc"></p>
+                <div class="suggest-btns" id="desc-btns" hidden><span class="btn-sm">${I.check}Accept</span><span class="btn-sm">${I.pencil}Edit</span></div>
               </div>
               <div class="sec" id="sec-cq">
                 <div class="cfg-sec"><h3>Common questions</h3>${I.pencil}</div>
@@ -446,7 +442,7 @@
             </div>
             <div class="pane" data-pane="instructions" hidden>
               <div class="sec" id="sec-rules">
-                <div class="cfg-sec"><h3>Business rules</h3>${I.pencil}</div>
+                <div class="cfg-sec"><h3>Instructions</h3>${I.pencil}</div>
                 <div id="rules"></div>
               </div>
             </div>
@@ -461,87 +457,45 @@
       </div>
     </section>`;
 
-  const pAssistantPane = (prompt) => `
-    <aside class="assistant" aria-label="Genie Code">
-      <div class="as-head" aria-hidden="true">
-        <span class="ico sm">${I.expand}</span>
-        <span class="as-tab"><span class="mini-spin" id="as-spin"></span><span class="as-title">AI Agent Setup for ${AGENT_NAME}</span>${I.kebab}${I.x}</span>
-        <span class="as-tools"><span class="ico sm">${I.compose}</span><span class="ico sm">${I.history}</span><span class="ico sm">${I.kebab}</span><span class="ico sm">${I.x}</span></span>
-      </div>
-
-      <div class="as-feed" id="feed">
-        <div class="me-msg">Help me finish setting up my Genie agent which does the following: ${esc(prompt)}</div>
-        <div class="thoughts" id="thoughts" hidden><div class="th-label">Thoughts</div><p id="th-text"></p></div>
-
-        <div class="ask-card" id="askcard" hidden>
-          <div class="ask-timer"><i id="timer-bar"></i></div>
-          <span class="st-chip rev">Optional</span>
-          <h4>Which question would you like this agent to answer first?</h4>
-          <div class="opts" role="radiogroup">
-            ${FIRST_QS.slice(0, 4).map((q, i) => `<label class="opt"><input type="radio" name="firstq" value="${i}"><span>${q}</span></label>`).join('')}
-          </div>
-          <p class="ask-foot">Genie keeps building if you skip. Your answer becomes an example question.</p>
-          <div class="ask-actions">
-            <span class="skip-chip" id="skipchip">Auto-skipping in <b id="secs">${SKIP_SECONDS}</b>s <button type="button" id="stopskip" aria-label="Stop auto-skip">${I.x}</button></span>
-            <button type="button" class="btn-sm" id="skipbtn">Skip</button>
-            <button type="button" class="btn-submit" id="submitall" disabled>Submit</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="composer" aria-hidden="true">
-        <div class="cmp-in">Queue follow-ups</div>
-        <div class="cmp-row">${I.plus}<span class="stop"></span></div>
-      </div>
-      <p class="as-foot">Always review the accuracy of responses.</p>
-    </aside>`;
-
   const renderProposed = (prompt) => {
     clearTimers();
     setStep(2);
     screen.classList.add('s2');
     assistBtn.classList.add('on');
-    view.innerHTML = pSpacePane() + pAssistantPane(prompt);
+    view.innerHTML = pSpacePane() + assistantPane(prompt);
 
-    // Paced timers for this screen only.
     const later = (fn, ms) => timers.push(setTimeout(fn, ms * PACE));
-    const feed = $('#feed');
-    const scrollFeed = () => feed.scrollTo({ top: feed.scrollHeight, behavior: 'smooth' });
-    let follow = true; // auto-follow Genie's current tab until the user picks one
+    let follow = true; // follow Genie's current tab until the user picks one
     let doneCount = 0;
-    let examplesReady = false;
-    let answer = null;
 
     const showTab = (k) => {
       document.querySelectorAll('#ptabs .tab').forEach((t) => t.classList.toggle('on', t.dataset.tab === k));
       document.querySelectorAll('#pbody .pane').forEach((p) => { p.hidden = p.dataset.pane !== k; });
     };
-    const tabState = (k, st) => {
-      const t = $(`#ptabs .tab[data-tab="${k}"]`);
-      t.classList.remove('pending', 'working', 'review');
-      t.classList.add(st);
-    };
-    const writing = (id, on) => $(id).classList.toggle('writing', on);
     const stepState = (i, st) => {
       const li = $(`#psteps li[data-i="${i}"]`);
       li.classList.toggle('on', st === 'ai');
       li.classList.toggle('done', st === 'done');
-      $('.st', li).innerHTML = chip[st];
+      $('.st', li).innerHTML = STATUS[st];
       if (st === 'done') $('.n', li).textContent = '✓';
+      $(`#ptabs .tab[data-tab="${P_STEPS[i].tab}"]`).classList.toggle('working', st === 'ai');
     };
-    const addItem = (wrap, html, cls = 'item') => {
+    const startStep = (i) => {
+      stepState(i, 'ai');
+      if (follow) showTab(P_STEPS[i].tab);
+    };
+    const finishStep = (i) => {
+      stepState(i, 'done');
+      doneCount += 1;
+      $('#setup-count').textContent = doneCount;
+      $('#setup-bar').style.width = `${doneCount * 25}%`;
+    };
+    const writing = (id, on) => $(id).classList.toggle('writing', on);
+    const addRow = (wrap, html, cls = 'cq') => {
       const d = document.createElement('div');
       d.className = `${cls} fresh`;
       d.innerHTML = html;
       $(wrap).appendChild(d);
-      return d;
-    };
-    const genieSays = (text) => {
-      const d = document.createElement('div');
-      d.className = 'g-msg';
-      d.innerHTML = `<span class="g-ok">✓</span><span>${text}</span>`;
-      feed.appendChild(d);
-      scrollFeed();
     };
     const streamInto = (el, text, ms, done) => {
       const words = text.split(' ');
@@ -553,45 +507,18 @@
       }, ms * PACE);
       timers.push(iv);
     };
-    const finishStep = (i) => {
-      stepState(i, 'done');
-      tabState(P_STEPS[i].tab, 'review');
-      doneCount += 1;
-      $('#setup-count').textContent = doneCount;
-      $('#setup-bar').style.width = `${doneCount * 25}%`;
-      genieSays(P_STEPS[i].done);
-    };
-    const startStep = (i) => {
-      stepState(i, 'ai');
-      tabState(P_STEPS[i].tab, 'working');
-      if (follow) showTab(P_STEPS[i].tab);
-    };
-    // One row per question; the user's answer re-tags an existing row instead of duplicating it.
-    const addExample = (q, mine) => {
-      const tag = mine ? '<span class="from-you">From your answer</span>' : I.sparkle;
-      const existing = [...document.querySelectorAll('#examples .cq')].find((r) => r.dataset.q === q);
-      if (existing) {
-        if (mine) existing.innerHTML = `<span>${q}</span>${tag}`;
-        return;
-      }
-      addItem('#examples', `<span>${q}</span>${tag}`, 'cq').dataset.q = q;
-    };
 
-    // User can review any tab; that stops auto-follow.
+    // Reviewing a tab or step stops auto-follow.
     $('#ptabs').addEventListener('click', (e) => {
       const t = e.target.closest('.tab');
-      if (!t) return;
-      follow = false;
-      showTab(t.dataset.tab);
+      if (t) { follow = false; showTab(t.dataset.tab); }
     });
     $('#psteps').addEventListener('click', (e) => {
       const li = e.target.closest('li');
-      if (!li) return;
-      follow = false;
-      showTab(li.dataset.tab);
+      if (li) { follow = false; showTab(li.dataset.tab); }
     });
 
-    // Ready to test: collapse config, prefill a question.
+    // Chat ↔ Configure, using the toolbar that's already there.
     const openChat = () => {
       $('#cfgpop').hidden = true;
       $('#cfgseg').classList.remove('cfg');
@@ -605,105 +532,65 @@
       $('#chatseg').classList.remove('active');
       $('#askbox').classList.remove('focus');
     };
-    $('#testbtn').addEventListener('click', openChat);
     $('#chatseg').addEventListener('click', () => { if (!$('#gdot').hidden) openChat(); });
     $('#cfgseg').addEventListener('click', openConfig);
+    $('#setup-note').addEventListener('click', (e) => { if (e.target.closest('.link')) openChat(); });
 
     showTab('about');
 
-    // --- Genie Code thoughts (runs alongside step 1) ---
+    // Genie Code panel: same as Current.
     later(() => {
       $('#thoughts').hidden = false;
-      streamInto($('#th-text'), THOUGHTS, 30);
+      streamInto($('#th-text'), THOUGHTS, 30, showAsk);
     }, 300);
 
-    // --- Step 1: About ---
+    // Step 1: About
     later(() => {
       startStep(0);
-      writing('#sec-desc', true);
+      $('#suggest').hidden = false;
       streamInto($('#desc'), SUGGESTED_DESC, 70, () => {
-        $('#desc-by').hidden = false;
-        writing('#sec-desc', false);
+        $('#desc-btns').hidden = false;
         writing('#sec-cq', true);
-        COMMON_QS.forEach((q, i) => later(() => addItem('#cqs', `<span>${q}</span>${I.sparkle}`, 'cq'), 350 * i));
+        COMMON_QS.forEach((q, i) => later(() => addRow('#cqs', `<span>${q}</span>${I.sparkle}${I.plus}`), 350 * i));
         later(() => { writing('#sec-cq', false); finishStep(0); nextSources(); }, 350 * COMMON_QS.length + 200);
       });
     }, 500);
 
-    // --- Step 2: Sources → ready to test ---
+    // Step 2: Sources, then the agent is testable
     const nextSources = () => later(() => {
       startStep(1);
       writing('#sec-src', true);
-      later(showAsk, 400);
-      TABLES.forEach(([n, d], i) => later(() => addItem('#tables',
+      TABLES.forEach(([n, d], i) => later(() => addRow('#tables',
         `<span class="tname">${n}</span><small>${d}</small>`, 'trow'), 550 * (i + 1)));
       later(() => {
         writing('#sec-src', false);
         finishStep(1);
-        $('#ready').hidden = false;
         $('#gdot').hidden = false;
+        $('#setup-note').innerHTML = 'Your agent is ready to test in <span class="link">Chat</span>. Genie will keep finishing setup.';
         nextRules();
       }, 550 * TABLES.length + 400);
     }, 400);
 
-    // --- Step 3: Instructions ---
+    // Step 3: Instructions
     const nextRules = () => later(() => {
       startStep(2);
       writing('#sec-rules', true);
-      RULES.forEach((r, i) => later(() => addItem('#rules', `<span>${r}</span>`, 'cq'), 600 * (i + 1)));
+      RULES.forEach((r, i) => later(() => addRow('#rules', `<span>${r}</span>`), 600 * (i + 1)));
       later(() => { writing('#sec-rules', false); finishStep(2); nextExamples(); }, 600 * RULES.length + 300);
     }, 600);
 
-    // --- Step 4: Examples ---
+    // Step 4: Examples
     const nextExamples = () => later(() => {
       startStep(3);
       writing('#sec-ex', true);
-      examplesReady = true;
-      if (answer) addExample(answer, true);
-      EXAMPLES.forEach((q, i) => later(() => addExample(q, q === answer), 550 * (i + 1)));
+      EXAMPLES.forEach((q, i) => later(() => addRow('#examples', `<span>${q}</span>${I.sparkle}${I.plus}`), 550 * (i + 1)));
       later(() => {
         writing('#sec-ex', false);
         finishStep(3);
-        $('#setup-title').textContent = 'Setup complete';
-        $('#ready-sub').textContent = 'Setup is complete. Review any tab marked with a dot.';
-        $('#as-spin').hidden = true;
+        $('#setup-title').textContent = 'Genie set up your agent';
+        $('#setup-note').innerHTML = 'Your agent is ready to test in <span class="link">Chat</span>. Review any step whenever you like.';
       }, 550 * EXAMPLES.length + 300);
     }, 600);
-
-    // --- Optional question card ---
-    const showAsk = () => {
-      const card = $('#askcard');
-      card.hidden = false;
-      scrollFeed();
-      const submit = $('#submitall');
-      const bar = $('#timer-bar');
-      const total = 60;
-      let left = SKIP_SECONDS;
-      bar.style.width = `${((total - left) / total) * 100}%`;
-
-      const close = (msg) => {
-        clearInterval(iv);
-        card.classList.add('closed');
-        card.innerHTML = `<span class="g-ok">✓</span><span>${msg}</span>`;
-      };
-      card.addEventListener('change', () => { submit.disabled = false; submit.classList.add('ready'); });
-      const iv = setInterval(() => {
-        left -= 1;
-        $('#secs').textContent = left;
-        bar.style.width = `${((total - left) / total) * 100}%`;
-        if (left <= 0) close('Skipped. Genie continued without it.');
-      }, 1000);
-      timers.push(iv);
-      $('#stopskip').addEventListener('click', () => { clearInterval(iv); $('#skipchip').remove(); });
-      $('#skipbtn').addEventListener('click', () => close('Skipped. Genie continued without it.'));
-      submit.addEventListener('click', () => {
-        const picked = card.querySelector('input:checked');
-        if (!picked) return;
-        answer = FIRST_QS[+picked.value];
-        close('Added to Examples. Genie will check this question first.');
-        if (examplesReady) addExample(answer, true);
-      });
-    };
   };
 
   // ---------- Current / Proposed toggle ----------
